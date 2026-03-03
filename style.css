@@ -34,10 +34,9 @@ body {
 .top-nav-inner { max-width:100%; margin:0 auto; padding:0 48px; height:64px; display:flex; align-items:center; justify-content:space-between; }
 .nav-logo { display:flex; align-items:center; cursor:pointer; }
 .nav-links { display:flex; align-items:center; gap:4px; }
-.nav-link { padding:8px 20px; border-radius:10px; text-decoration:none; color:var(--text-secondary); font-size:14px; font-weight:600; transition:all 0.2s; position:relative; cursor:pointer; }
-.nav-link:hover { color:var(--text-primary); background:rgba(249,98,23,0.1); }
-.nav-link.active { color:#fff; background:rgba(249,98,23,0.15); }
-.nav-link.active::after { content:''; position:absolute; bottom:-1px; left:50%; transform:translateX(-50%); width:20px; height:2px; background:var(--accent-orange); border-radius:1px; }
+.nav-link { padding:6px 18px; border-radius:10px; text-decoration:none; color:var(--text-secondary); font-size:14px; font-weight:500; transition:all 0.2s; cursor:pointer; }
+.nav-link:hover { color:var(--text-primary); background:rgba(249,98,23,0.06); }
+.nav-link.active { color:var(--accent-orange); background:rgba(249,98,23,0.12); font-weight:700; }
 .nav-right { display:flex; align-items:center; gap:12px; }
 .nav-coins { display:flex; align-items:center; gap:6px; background:rgba(245,158,11,0.1); border:1px solid rgba(245,158,11,0.2); padding:6px 14px; border-radius:20px; font-size:13px; font-weight:700; color:var(--accent-gold); }
 .coin-icon { font-size:16px; }
@@ -1108,7 +1107,7 @@ body.light-mode {
 body.light-mode .top-nav { background:rgba(255,255,255,0.92); }
 body.light-mode .logo-text { fill:#1a1a2e; }
 body.light-mode .nav-link.active { color:var(--accent-orange); background:rgba(249,98,23,0.1); }
-body.light-mode .nav-link:hover { background:rgba(249,98,23,0.06); }
+body.light-mode .nav-link:hover { color:var(--text-primary); background:rgba(0,0,0,0.04); }
 body.light-mode .stat-shortcut { background:rgba(0,0,0,0.05); }
 body.light-mode .nav-coins { background:rgba(245,158,11,0.08); border-color:rgba(245,158,11,0.15); }
 /* Banner */
