@@ -16,6 +16,7 @@
   --text-secondary: #9ca3af;
   --text-muted: #6b7280;
   --border-color: #1e1e30;
+  --bg-input: #14141f;
   --glow-orange: rgba(249,98,23,0.3);
   --content-width: 1080px;
 }
@@ -1087,3 +1088,92 @@ body {
 .contact-success { text-align:center; padding:40px 0; }
 .contact-success-icon { width:56px; height:56px; border-radius:50%; background:linear-gradient(135deg, var(--accent-orange), var(--accent-orange-dark)); color:#fff; font-size:28px; font-weight:700; display:flex; align-items:center; justify-content:center; margin:0 auto 16px; }
 .contact-success p { font-size:14px; color:var(--text-secondary); line-height:1.7; }
+
+/* ===================== */
+/* LIGHT MODE            */
+/* ===================== */
+body.light-mode {
+  --bg-dark: #f4f4f8;
+  --bg-card: #ffffff;
+  --bg-card-hover: #f0f0f5;
+  --bg-nav: #ffffff;
+  --bg-input: #f4f4f8;
+  --text-primary: #1a1a2e;
+  --text-secondary: #4b5563;
+  --text-muted: #9ca3af;
+  --border-color: #e5e7eb;
+  --glow-orange: rgba(249,98,23,0.15);
+}
+/* Nav */
+body.light-mode .top-nav { background:rgba(255,255,255,0.92); }
+body.light-mode .logo-text { fill:#1a1a2e; }
+body.light-mode .nav-link.active { color:var(--accent-orange); background:rgba(249,98,23,0.1); }
+body.light-mode .nav-link:hover { background:rgba(249,98,23,0.06); }
+body.light-mode .stat-shortcut { background:rgba(0,0,0,0.05); }
+body.light-mode .nav-coins { background:rgba(245,158,11,0.08); border-color:rgba(245,158,11,0.15); }
+/* Banner */
+body.light-mode .carousel-arrow { background:rgba(0,0,0,0.3); border-color:rgba(255,255,255,0.3); color:#fff; }
+body.light-mode .dot { background:rgba(255,255,255,0.4); }
+/* Cards & Sections */
+body.light-mode .game-card { box-shadow:0 2px 12px rgba(0,0,0,0.06); }
+body.light-mode .game-card:hover { box-shadow:0 8px 30px rgba(249,98,23,0.1); }
+body.light-mode .table-card { box-shadow:0 2px 8px rgba(0,0,0,0.04); }
+body.light-mode .stat-card { box-shadow:0 2px 8px rgba(0,0,0,0.04); }
+body.light-mode .pkg-card { box-shadow:0 2px 12px rgba(0,0,0,0.06); }
+body.light-mode .faq-item { box-shadow:0 1px 4px rgba(0,0,0,0.04); }
+/* Tabs hover */
+body.light-mode .shop-tab:hover,
+body.light-mode .faq-tab:hover,
+body.light-mode .tn-tab:hover,
+body.light-mode .td-tab:hover,
+body.light-mode .gs-tab:hover,
+body.light-mode .tx-tab:hover,
+body.light-mode .mi-tab:hover { background:rgba(0,0,0,0.03); }
+/* Segment */
+body.light-mode .gs-segment-btn.active { background:rgba(0,0,0,0.06); }
+/* Package contents */
+body.light-mode .pkg-contents li { background:rgba(0,0,0,0.03); border-color:rgba(0,0,0,0.05); }
+/* Players & Tables */
+body.light-mode .td-player-item { background:rgba(0,0,0,0.02); }
+body.light-mode .td-player-rank { background:rgba(0,0,0,0.05); }
+body.light-mode .td-blind-table thead,
+body.light-mode .td-payout-table thead,
+body.light-mode .gs-blind-table thead { background:rgba(0,0,0,0.03); }
+body.light-mode .td-blind-table tbody tr:hover,
+body.light-mode .td-payout-table tbody tr:hover,
+body.light-mode .gs-blind-table tbody tr:hover { background:rgba(0,0,0,0.02); }
+/* FAQ hover */
+body.light-mode .faq-question:hover { background:rgba(0,0,0,0.02); }
+/* Modal */
+body.light-mode .modal-card { background:#ffffff; }
+body.light-mode .modal-overlay { background:rgba(0,0,0,0.4); }
+body.light-mode .modal-avatar-badge { background:rgba(0,0,0,0.6); border-color:rgba(255,255,255,0.2); }
+/* Watermark / decorative */
+body.light-mode .tdr-watermark { color:rgba(0,0,0,0.03); }
+/* Purchase preview */
+body.light-mode .sp-item-preview { background:rgba(0,0,0,0.03); border-color:rgba(0,0,0,0.06); }
+/* Item reward */
+body.light-mode .mb-item-reward { background:rgba(0,0,0,0.05); }
+/* Nickname edit */
+body.light-mode .my-nickname-edit { background:rgba(0,0,0,0.05); }
+/* Bottom bar gradient */
+body.light-mode .td-bottom-bar { background:linear-gradient(to top, var(--bg-dark) 60%, transparent); }
+/* Login logo */
+body.light-mode .login-logo { box-shadow:0 8px 30px rgba(0,0,0,0.08); }
+/* Avatar */
+body.light-mode .my-avatar { background:#e5e7eb; box-shadow:0 0 20px rgba(0,0,0,0.1); }
+/* Dropdown */
+body.light-mode .dtp-dropdown-btn:hover { background:rgba(0,0,0,0.04); }
+body.light-mode .dtp-dropdown-list { box-shadow:0 8px 24px rgba(0,0,0,0.12); }
+body.light-mode .dtp-dropdown-list div:hover { background:rgba(0,0,0,0.04); }
+body.light-mode .dtp-day:hover { background:rgba(0,0,0,0.04); }
+
+/* Theme Toggle Button */
+.theme-toggle { display:flex; align-items:center; gap:8px; background:none; border:1px solid var(--border-color); border-radius:20px; padding:6px 12px; cursor:pointer; transition:all 0.3s; color:var(--text-muted); }
+.theme-toggle:hover { border-color:var(--accent-orange); color:var(--accent-orange); }
+.theme-toggle svg { width:16px; height:16px; transition:transform 0.3s; }
+.theme-toggle:hover svg { transform:rotate(20deg); }
+.theme-icon-sun { display:none; }
+.theme-icon-moon { display:block; }
+body.light-mode .theme-icon-sun { display:block; }
+body.light-mode .theme-icon-moon { display:none; }

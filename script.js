@@ -1,3 +1,16 @@
+// === Theme Toggle ===
+(function() {
+  if (localStorage.getItem('lulu_theme') === 'light') {
+    document.body.classList.add('light-mode');
+  }
+})();
+
+function toggleTheme() {
+  document.body.classList.toggle('light-mode');
+  var isLight = document.body.classList.contains('light-mode');
+  localStorage.setItem('lulu_theme', isLight ? 'light' : 'dark');
+}
+
 // === i18n / 다국어 지원 ===
 const i18n = {
   ko: {
@@ -1832,6 +1845,14 @@ function tdUpdateButtons(item) {
   var spectateBtn = document.getElementById('tdSpectateBtn');
   var t = i18n[currentLang] || i18n.ko;
 
+  // 라이브 테이블에서 관전 모드로 진입한 경우
+  if (enterLiveTableSpectateMode) {
+    registerBtn.style.display = 'none';
+    spectateBtn.style.display = '';
+    enterLiveTableSpectateMode = false;
+    return;
+  }
+
   if (item.status === 'finished') {
     registerBtn.style.display = 'none';
     spectateBtn.style.display = '';
@@ -1965,6 +1986,14 @@ function confirmTdRegister() {
   item.players++;
   closeTdRegisterModal();
   tdRenderDetail();
+}
+
+var enterLiveTableSpectateMode = false;
+
+function enterLiveTable(tournamentId) {
+  enterLiveTableSpectateMode = true;
+  currentTnDetailId = tournamentId;
+  switchPage('tn-detail');
 }
 
 function tdSpectate() {
