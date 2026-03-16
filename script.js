@@ -1247,12 +1247,22 @@ function mSyncNavTitle(page) {
     youth: '청소년 보호정책', rating: '게임등급분류',
     company: '회사소개', faq: 'FAQ', contact: '문의하기'
   };
+  var parentMap = {
+    mailbox: 'my', myitems: 'my', transaction: 'my',
+    host: 'my', ticket: 'my', 'account-edit': 'my',
+    tournament: 'lobby', 'tn-history': 'my',
+    'tn-detail': 'tournament', 'game-setup': 'lobby',
+    login: 'lobby',
+    terms: 'lobby', privacy: 'lobby', youth: 'lobby',
+    rating: 'lobby', company: 'lobby', faq: 'lobby', contact: 'lobby'
+  };
   if (titles[page]) {
     logo.style.display = 'none';
     title.style.display = '';
     var isSub = mainTabs.indexOf(page) === -1;
     if (isSub) {
-      title.innerHTML = '<svg class="m-nav-back" onclick="history.back()" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>' + titles[page];
+      var parent = parentMap[page] || 'lobby';
+      title.innerHTML = '<svg class="m-nav-back" onclick="switchPage(\'' + parent + '\')" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>' + titles[page];
     } else {
       title.textContent = titles[page];
     }
