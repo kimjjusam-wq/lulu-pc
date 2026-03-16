@@ -1195,6 +1195,8 @@ function switchPage(p) {
   if (navLink) navLink.classList.add('active');
   // 모바일 탭바 active 동기화
   mSyncTabbar(p);
+  // 모바일 nav 로고/타이틀 전환
+  mSyncNavTitle(p);
   window.scrollTo({ top: 0, behavior: 'smooth' });
   if (p === 'game-setup') { gsInitDefaults(); }
   if (p === 'tournament') { tnRenderList(); switchTournamentTab('all'); }
@@ -1225,6 +1227,39 @@ function mSyncTabbar(page) {
   document.querySelectorAll('.m-tab').forEach(function(t) {
     t.classList.toggle('active', t.getAttribute('data-tab') === tabName);
   });
+}
+
+// 모바일 nav 로고/타이틀 전환
+function mSyncNavTitle(page) {
+  var logo = document.getElementById('mNavLogo');
+  var title = document.getElementById('mNavTitle');
+  if (!logo || !title) return;
+  var mainTabs = ['lobby', 'shop', 'analytics', 'my'];
+  var titles = {
+    shop: '상점', my: 'MY 룰루', analytics: '통계',
+    mailbox: '우편함', myitems: '내 아이템',
+    transaction: '거래 내역', host: '호스트',
+    ticket: '티켓', tournament: '토너먼트',
+    'tn-history': '히스토리', 'tn-detail': '토너먼트',
+    'game-setup': '사용자 게임', login: '로그인',
+    'account-edit': '회원정보 수정',
+    terms: '이용약관', privacy: '개인정보처리방침',
+    youth: '청소년 보호정책', rating: '게임등급분류',
+    company: '회사소개', faq: 'FAQ', contact: '문의하기'
+  };
+  if (titles[page]) {
+    logo.style.display = 'none';
+    title.style.display = '';
+    var isSub = mainTabs.indexOf(page) === -1;
+    if (isSub) {
+      title.innerHTML = '<svg class="m-nav-back" onclick="history.back()" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>' + titles[page];
+    } else {
+      title.textContent = titles[page];
+    }
+  } else {
+    logo.style.display = '';
+    title.style.display = 'none';
+  }
 }
 
 // 모바일 네비 골드/다이아 동기화

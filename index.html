@@ -24,9 +24,10 @@
 
 <!-- 모바일 상단 네비게이션 -->
 <nav class="m-nav">
-  <div class="m-nav-logo" onclick="switchPage('lobby')">
+  <div class="m-nav-logo" id="mNavLogo" onclick="switchPage('lobby')">
     <img src="images/logo_mobile.svg" alt="LULU" style="height:42px;width:auto;">
   </div>
+  <span class="m-nav-title" id="mNavTitle" style="display:none;"></span>
   <div class="m-nav-right">
     <div class="m-nav-coins" onclick="switchPage('shop')"><span class="m-coin-icon">🪙</span><span id="mNavGold">0</span></div>
     <div class="m-nav-coins diamond" onclick="switchPage('shop')"><span class="m-coin-icon">💎</span><span id="mNavDiamond">0</span></div>
@@ -42,8 +43,8 @@
     </div>
     <div class="nav-links">
       <a class="nav-link active" data-page="lobby" onclick="switchPage('lobby')" data-i18n="nav_lobby">로비</a>
-      <a class="nav-link" data-page="analytics" onclick="switchPage('analytics')" data-i18n="nav_analytics">통계</a>
       <a class="nav-link" data-page="shop" onclick="switchPage('shop')" data-i18n="nav_shop">상점</a>
+      <a class="nav-link" data-page="analytics" onclick="switchPage('analytics')" data-i18n="nav_analytics">통계</a>
       <a class="nav-link" data-page="my" onclick="switchPage('my')" data-i18n="nav_my">MY 룰루</a>
     </div>
     <div class="nav-right">
@@ -142,10 +143,10 @@
 
     <!-- 상점 탭 메뉴 -->
     <div class="shop-tabs">
-      <button class="shop-tab active" data-shop-tab="recommend" onclick="switchShopTab('recommend')" data-i18n="shop_tab_recommend">⭐ 추천 상품</button>
-      <button class="shop-tab" data-shop-tab="gems" onclick="switchShopTab('gems')" data-i18n="shop_tab_gems">💎 보석</button>
-      <button class="shop-tab" data-shop-tab="avatar" onclick="switchShopTab('avatar')" data-i18n="shop_tab_avatar">👤 아바타</button>
-      <button class="shop-tab" data-shop-tab="items" onclick="switchShopTab('items')" data-i18n="shop_tab_items">🎁 아이템</button>
+      <button class="shop-tab active" data-shop-tab="recommend" onclick="switchShopTab('recommend')" data-i18n="shop_tab_recommend"><span class="shop-tab-emoji">⭐ </span>추천 상품</button>
+      <button class="shop-tab" data-shop-tab="gems" onclick="switchShopTab('gems')" data-i18n="shop_tab_gems"><span class="shop-tab-emoji">💎 </span>보석</button>
+      <button class="shop-tab" data-shop-tab="avatar" onclick="switchShopTab('avatar')" data-i18n="shop_tab_avatar"><span class="shop-tab-emoji">👤 </span>아바타</button>
+      <button class="shop-tab" data-shop-tab="items" onclick="switchShopTab('items')" data-i18n="shop_tab_items"><span class="shop-tab-emoji">🎁 </span>아이템</button>
     </div>
 
     <!-- 추천 상품 탭 -->
@@ -547,20 +548,138 @@
 
     <!-- 아이템 탭 -->
     <div class="shop-tab-content" id="shop-items">
-      <div class="shop-grid">
-        <div class="shop-item" data-item-id="101"><div class="shop-item-visual" style="background:linear-gradient(135deg,#0a200a,#0d300d)">🟢</div><div class="shop-item-info"><div class="shop-item-name" data-i18n="skin_classic_green">클래식 그린</div><div class="shop-item-desc" data-i18n="skin_classic_green_desc">전통적인 포커 테이블</div><div class="shop-item-price"><span>🪙</span> 2,000</div></div></div>
-        <div class="shop-item" data-item-id="102"><div class="shop-item-visual" style="background:linear-gradient(135deg,#200a0a,#300d0d)">🔴</div><div class="shop-item-info"><div class="shop-item-name" data-i18n="skin_royal_red">로열 레드</div><div class="shop-item-desc" data-i18n="skin_royal_red_desc">프리미엄 레드 테이블</div><div class="shop-item-price"><span>🪙</span> 5,000</div></div></div>
-        <div class="shop-item" data-item-id="103"><div class="shop-item-visual" style="background:linear-gradient(135deg,#1a0533,#2d1058)">🌌</div><div class="shop-item-info"><div class="shop-item-tag hot">NEW</div><div class="shop-item-name" data-i18n="skin_cosmic_black">코스믹 블랙</div><div class="shop-item-desc" data-i18n="skin_cosmic_black_desc">우주 컨셉 한정 스킨</div><div class="shop-item-price"><span>🪙</span> 10,000</div></div></div>
-      </div>
-      <div class="shop-grid">
-        <div class="shop-item" data-item-id="104"><div class="shop-item-visual" style="background:linear-gradient(135deg,#1a1500,#2d2200)">🃏</div><div class="shop-item-info"><div class="shop-item-name" data-i18n="skin_gold_card">골드 카드</div><div class="shop-item-desc" data-i18n="skin_gold_card_desc">고급 골드 카드 뒷면</div><div class="shop-item-price"><span>💎</span> 80</div></div></div>
-        <div class="shop-item" data-item-id="105"><div class="shop-item-visual" style="background:linear-gradient(135deg,#78350f,#b45309)">🧱</div><div class="shop-item-info"><div class="shop-item-name" data-i18n="skin_brick_pattern">벽돌 패턴</div><div class="shop-item-desc" data-i18n="skin_brick_pattern_desc">클래식 벽돌 패턴 카드</div><div class="shop-item-price"><span>💎</span> 120</div></div></div>
-        <div class="shop-item" data-item-id="106"><div class="shop-item-visual" style="background:linear-gradient(135deg,#200510,#350a1a)">🎆</div><div class="shop-item-info"><div class="shop-item-tag vip">PREMIUM</div><div class="shop-item-name" data-i18n="skin_diamond_card">다이아몬드 카드</div><div class="shop-item-desc" data-i18n="skin_diamond_card_desc">VIP 한정 다이아몬드 디자인</div><div class="shop-item-price"><span>💎</span> 300</div></div></div>
-      </div>
-      <div class="shop-grid" style="margin-bottom:40px">
-        <div class="shop-item" data-item-id="107"><div class="shop-item-visual" style="background:linear-gradient(135deg,#1a1000,#2a1a00)">😎</div><div class="shop-item-info"><div class="shop-item-name" data-i18n="emote_pokerface">포커페이스 팩</div><div class="shop-item-desc" data-i18n="emote_pokerface_desc">기본 이모티콘 8종</div><div class="shop-item-price"><span>🪙</span> 1,500</div></div></div>
-        <div class="shop-item" data-item-id="108"><div class="shop-item-visual" style="background:linear-gradient(135deg,#100a1a,#1a102a)">🎭</div><div class="shop-item-info"><div class="shop-item-tag sale">30% OFF</div><div class="shop-item-name" data-i18n="emote_drama">드라마 팩</div><div class="shop-item-desc" data-i18n="emote_drama_desc">연기파 이모티콘 12종</div><div class="shop-item-price"><span>🪙</span> 3,000</div></div></div>
-        <div class="shop-item" data-item-id="109"><div class="shop-item-visual" style="background:linear-gradient(135deg,#1a050a,#2d0a15)">💥</div><div class="shop-item-info"><div class="shop-item-tag hot">NEW</div><div class="shop-item-name" data-i18n="emote_allin">올인 팩</div><div class="shop-item-desc" data-i18n="emote_allin_desc">시즌3 한정 이모티콘 6종</div><div class="shop-item-price"><span>💎</span> 60</div></div></div>
+      <div class="pkg-grid item-grid">
+
+        <div class="pkg-card" data-item-id="101">
+          <div class="pkg-image" style="background:linear-gradient(135deg,#0a200a,#0d300d);display:flex;align-items:center;justify-content:center;font-size:56px;">🟢</div>
+          <div class="pkg-body">
+            <div class="pkg-name" data-i18n="skin_classic_green">클래식 그린</div>
+            <ul class="pkg-contents">
+              <li><span class="pkg-icon">🎯</span><span data-i18n="skin_classic_green_desc">전통적인 포커 테이블</span></li>
+            </ul>
+            <div class="pkg-bottom">
+              <div class="pkg-price">🪙 2,000</div>
+              <button class="pkg-buy-btn" data-i18n="shop_buy">구매하기</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="pkg-card" data-item-id="102">
+          <div class="pkg-image" style="background:linear-gradient(135deg,#200a0a,#300d0d);display:flex;align-items:center;justify-content:center;font-size:56px;">🔴</div>
+          <div class="pkg-body">
+            <div class="pkg-name" data-i18n="skin_royal_red">로열 레드</div>
+            <ul class="pkg-contents">
+              <li><span class="pkg-icon">🎯</span><span data-i18n="skin_royal_red_desc">프리미엄 레드 테이블</span></li>
+            </ul>
+            <div class="pkg-bottom">
+              <div class="pkg-price">🪙 5,000</div>
+              <button class="pkg-buy-btn" data-i18n="shop_buy">구매하기</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="pkg-card" data-item-id="103">
+          <div class="pkg-image" style="background:linear-gradient(135deg,#1a0533,#2d1058);display:flex;align-items:center;justify-content:center;font-size:56px;">🌌</div>
+          <div class="pkg-body">
+            <div class="shop-item-tag hot">NEW</div>
+            <div class="pkg-name" data-i18n="skin_cosmic_black">코스믹 블랙</div>
+            <ul class="pkg-contents">
+              <li><span class="pkg-icon">🎯</span><span data-i18n="skin_cosmic_black_desc">우주 컨셉 한정 스킨</span></li>
+            </ul>
+            <div class="pkg-bottom">
+              <div class="pkg-price">🪙 10,000</div>
+              <button class="pkg-buy-btn" data-i18n="shop_buy">구매하기</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="pkg-card" data-item-id="104">
+          <div class="pkg-image" style="background:linear-gradient(135deg,#1a1500,#2d2200);display:flex;align-items:center;justify-content:center;font-size:56px;">🃏</div>
+          <div class="pkg-body">
+            <div class="pkg-name" data-i18n="skin_gold_card">골드 카드</div>
+            <ul class="pkg-contents">
+              <li><span class="pkg-icon">🃏</span><span data-i18n="skin_gold_card_desc">고급 골드 카드 뒷면</span></li>
+            </ul>
+            <div class="pkg-bottom">
+              <div class="pkg-price">💎 80</div>
+              <button class="pkg-buy-btn" data-i18n="shop_buy">구매하기</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="pkg-card" data-item-id="105">
+          <div class="pkg-image" style="background:linear-gradient(135deg,#78350f,#b45309);display:flex;align-items:center;justify-content:center;font-size:56px;">🧱</div>
+          <div class="pkg-body">
+            <div class="pkg-name" data-i18n="skin_brick_pattern">벽돌 패턴</div>
+            <ul class="pkg-contents">
+              <li><span class="pkg-icon">🃏</span><span data-i18n="skin_brick_pattern_desc">클래식 벽돌 패턴 카드</span></li>
+            </ul>
+            <div class="pkg-bottom">
+              <div class="pkg-price">💎 120</div>
+              <button class="pkg-buy-btn" data-i18n="shop_buy">구매하기</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="pkg-card" data-item-id="106">
+          <div class="pkg-image" style="background:linear-gradient(135deg,#200510,#350a1a);display:flex;align-items:center;justify-content:center;font-size:56px;">🎆</div>
+          <div class="pkg-body">
+            <div class="shop-item-tag vip">PREMIUM</div>
+            <div class="pkg-name" data-i18n="skin_diamond_card">다이아몬드 카드</div>
+            <ul class="pkg-contents">
+              <li><span class="pkg-icon">🃏</span><span data-i18n="skin_diamond_card_desc">VIP 한정 다이아몬드 디자인</span></li>
+            </ul>
+            <div class="pkg-bottom">
+              <div class="pkg-price">💎 300</div>
+              <button class="pkg-buy-btn" data-i18n="shop_buy">구매하기</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="pkg-card" data-item-id="107">
+          <div class="pkg-image" style="background:linear-gradient(135deg,#1a1000,#2a1a00);display:flex;align-items:center;justify-content:center;font-size:56px;">😎</div>
+          <div class="pkg-body">
+            <div class="pkg-name" data-i18n="emote_pokerface">포커페이스 팩</div>
+            <ul class="pkg-contents">
+              <li><span class="pkg-icon">😎</span><span data-i18n="emote_pokerface_desc">기본 이모티콘 8종</span></li>
+            </ul>
+            <div class="pkg-bottom">
+              <div class="pkg-price">🪙 1,500</div>
+              <button class="pkg-buy-btn" data-i18n="shop_buy">구매하기</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="pkg-card" data-item-id="108">
+          <div class="pkg-image" style="background:linear-gradient(135deg,#100a1a,#1a102a);display:flex;align-items:center;justify-content:center;font-size:56px;">🎭</div>
+          <div class="pkg-body">
+            <div class="shop-item-tag sale">30% OFF</div>
+            <div class="pkg-name" data-i18n="emote_drama">드라마 팩</div>
+            <ul class="pkg-contents">
+              <li><span class="pkg-icon">🎭</span><span data-i18n="emote_drama_desc">연기파 이모티콘 12종</span></li>
+            </ul>
+            <div class="pkg-bottom">
+              <div class="pkg-price">🪙 3,000</div>
+              <button class="pkg-buy-btn" data-i18n="shop_buy">구매하기</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="pkg-card" data-item-id="109">
+          <div class="pkg-image" style="background:linear-gradient(135deg,#1a050a,#2d0a15);display:flex;align-items:center;justify-content:center;font-size:56px;">💥</div>
+          <div class="pkg-body">
+            <div class="shop-item-tag hot">NEW</div>
+            <div class="pkg-name" data-i18n="emote_allin">올인 팩</div>
+            <ul class="pkg-contents">
+              <li><span class="pkg-icon">💥</span><span data-i18n="emote_allin_desc">시즌3 한정 이모티콘 6종</span></li>
+            </ul>
+            <div class="pkg-bottom">
+              <div class="pkg-price">💎 60</div>
+              <button class="pkg-buy-btn" data-i18n="shop_buy">구매하기</button>
+            </div>
+          </div>
+        </div>
+
       </div>
     </div>
 
@@ -2088,7 +2207,7 @@
   </div>
   <div class="m-tab" data-tab="ranking" onclick="mTabSwitch(this,'analytics')">
     <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
-    <span>랭킹</span>
+    <span>통계</span>
   </div>
   <div class="m-tab" data-tab="my" onclick="mTabSwitch(this,'my')">
     <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
@@ -2442,6 +2561,6 @@
   </div>
 </div>
 
-<script src="script.js?v=20"></script>
+<script src="script.js?v=21"></script>
 </body>
 </html>
