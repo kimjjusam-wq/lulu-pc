@@ -1193,6 +1193,8 @@ function switchPage(p) {
   document.querySelectorAll('.nav-link').forEach(e => e.classList.remove('active'));
   const navLink = document.querySelector('.nav-link[data-page="' + p + '"]');
   if (navLink) navLink.classList.add('active');
+  // 모바일 탭바 active 동기화
+  mSyncTabbar(p);
   window.scrollTo({ top: 0, behavior: 'smooth' });
   if (p === 'game-setup') { gsInitDefaults(); }
   if (p === 'tournament') { tnRenderList(); switchTournamentTab('all'); }
@@ -1204,6 +1206,35 @@ function switchPage(p) {
   if (p === 'transaction') { txRenderList(); }
   if (p === 'myitems') { miRenderList(); }
   if (p === 'tn-detail') { tdRenderDetail(); }
+}
+
+// === 모바일 하단 탭바 ===
+function mTabSwitch(el, page) {
+  document.querySelectorAll('.m-tab').forEach(t => t.classList.remove('active'));
+  el.classList.add('active');
+  switchPage(page);
+}
+
+function mSyncTabbar(page) {
+  var tabMap = { lobby:'lobby', shop:'shop', analytics:'ranking', my:'my' };
+  var tabName = null;
+  for (var key in tabMap) {
+    if (key === page) { tabName = tabMap[key]; break; }
+  }
+  if (!tabName) return; // 서브 페이지면 탭바 변경 안함
+  document.querySelectorAll('.m-tab').forEach(function(t) {
+    t.classList.toggle('active', t.getAttribute('data-tab') === tabName);
+  });
+}
+
+// 모바일 네비 골드/다이아 동기화
+function mSyncNavCoins() {
+  var goldEl = document.getElementById('navGold');
+  var diaEl = document.getElementById('navDiamond');
+  var mGold = document.getElementById('mNavGold');
+  var mDia = document.getElementById('mNavDiamond');
+  if (goldEl && mGold) mGold.textContent = goldEl.textContent;
+  if (diaEl && mDia) mDia.textContent = diaEl.textContent;
 }
 
 // === 인증 시스템 ===
@@ -1449,6 +1480,7 @@ function updateAuthUI() {
     if (goldEl) goldEl.textContent = '0';
     if (diamondEl) diamondEl.textContent = '0';
   }
+  mSyncNavCoins();
 }
 
 function updateMyPage() {
@@ -2922,3 +2954,10 @@ document.querySelectorAll('.pkg-buy-btn').forEach(function(btn) {
     openPackagePayModal(name, price);
   });
 });
+
+// URL 파라미터로 페이지 자동 전환 (예: ?page=shop)
+setTimeout(function() {
+  var params = new URLSearchParams(window.location.search);
+  var page = params.get('page');
+  if (page) { switchPage(page); }
+}, 100);

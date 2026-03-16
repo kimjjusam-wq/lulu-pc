@@ -9,6 +9,17 @@
 </head>
 <body>
 
+<!-- 모바일 상단 네비게이션 -->
+<nav class="m-nav">
+  <div class="m-nav-logo" onclick="switchPage('lobby')">
+    <svg width="80" height="20" viewBox="0 0 161 32" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M2.00925 16.7435C1.60916 16.9749 1.28516 17.4869 1.28516 17.8881C1.28516 18.2869 1.60425 18.794 2.00188 19.0278L7.85352 22.4149C8.25361 22.6463 8.57761 22.5084 8.57761 22.1072V12.9404L2.0117 16.741L2.00925 16.7435Z" fill="#B74325"/><path d="M17.3722 1.16677L2.00925 10.0603C1.60916 10.2917 1.28516 10.8037 1.28516 11.2049V17.888C1.28516 17.4868 1.60916 16.9748 2.00925 16.7434L8.57516 12.9403L17.3673 7.84985C17.7674 7.61846 18.0914 7.10647 18.0914 6.70523V1.47446C18.0914 1.0757 17.7699 0.937849 17.3722 1.16677Z" fill="#F96217"/><path d="M25.1074 15.2568C25.5075 15.0254 25.8315 14.5134 25.8315 14.1122C25.8315 13.7134 25.5124 13.2063 25.1148 12.9725L19.2632 9.58539C18.8631 9.35401 18.5391 9.49185 18.5391 9.89309V19.0599L25.105 15.2592L25.1074 15.2568Z" fill="#B74325"/><path d="M25.1056 15.2564L18.5397 19.0595L9.74753 24.15C9.34744 24.3813 9.02344 24.8933 9.02344 25.2946V30.5278C9.02344 30.9266 9.34498 31.0644 9.74262 30.8355L25.1032 21.942C25.5033 21.7106 25.8273 21.1986 25.8273 20.7973V14.1143C25.8273 14.5155 25.5033 15.0275 25.1032 15.2589L25.1056 15.2564Z" fill="#F96217"/><path d="M15.1258 18.4418C15.4547 18.4418 15.7615 18.3458 16.0217 18.1809C16.3457 17.9889 16.5739 17.6861 16.6918 17.3464C16.758 17.1667 16.7924 16.9723 16.7924 16.7704C16.7924 16.4775 16.7163 16.1993 16.5838 15.9606C16.2278 15.2492 15.462 14.6559 14.7723 13.9495C13.9451 13.1027 13.5622 12.3643 13.5622 12.3643C13.5622 12.3643 13.1793 13.1027 12.3521 13.9495C11.6624 14.6559 10.8966 15.2492 10.5407 15.9606C10.4081 16.2018 10.332 16.4775 10.332 16.7704C10.332 16.9723 10.3688 17.1667 10.4327 17.3464C10.5505 17.6886 10.7788 17.9889 11.1028 18.1809C11.3605 18.3458 11.6673 18.4418 11.9987 18.4418C12.5534 18.4418 13.0443 18.171 13.3487 17.7526C13.248 18.9169 12.5608 19.6135 12.5608 19.6135H14.5612C14.5612 19.6135 13.8764 18.9218 13.7733 17.76C13.7733 17.76 13.7733 17.755 13.7733 17.7526C14.0777 18.171 14.5686 18.4443 15.1233 18.4443L15.1258 18.4418Z" fill="#F96217"/><path d="M54.0332 8C56.0017 8 57.5841 8.61833 58.7803 9.85742C59.9765 11.0967 60.5742 12.6782 60.5742 14.6006H60.5762V17.3994C60.5762 19.3281 59.9811 20.9114 58.7891 22.1465C57.5971 23.3815 56.0019 24 54.0459 24C52.09 24 50.5224 23.3813 49.3408 22.1465C48.1592 20.9114 47.5684 19.3281 47.5684 17.3994V14.6006C47.5684 12.6782 48.1566 11.0967 49.334 9.85742C50.5114 8.61823 52.0647 8.00002 54.0332 8ZM124.356 18.541C124.357 19.5884 124.628 20.3607 125.171 20.8584C125.714 21.3562 126.452 21.6064 127.45 21.6064C128.448 21.6064 129.221 21.3562 129.768 20.8584C130.312 20.3607 130.586 19.5883 130.586 18.541V13.6914H133.724V18.541C133.724 20.3195 133.158 21.6756 132.022 22.6045C130.887 23.5334 129.348 23.9971 127.45 23.9971C125.553 23.9971 124.039 23.5332 122.912 22.6045C121.785 21.6756 121.221 20.3216 121.221 18.541V13.6914H124.356V18.541ZM151.16 18.541C151.16 19.5883 151.432 20.3607 151.975 20.8584C152.517 21.3561 153.256 21.6064 154.254 21.6064C155.252 21.6064 156.024 21.3562 156.571 20.8584C157.116 20.3607 157.39 19.5884 157.39 18.541V13.6914H160.527V18.541C160.527 20.3195 159.962 21.6756 158.826 22.6045C157.691 23.5333 156.151 23.9971 154.254 23.9971C152.357 23.997 150.843 23.5333 149.716 22.6045C148.589 21.6756 148.024 20.3216 148.024 18.541V13.6914H151.16V18.541ZM39.8799 8.22656C41.7065 8.22656 43.1244 8.67458 44.1348 9.57227C45.145 10.4678 45.6504 11.6762 45.6504 13.1924C45.6503 14.7085 45.1451 15.9125 44.1348 16.8018C43.1265 17.6911 41.7065 18.1367 39.8799 18.1367H36.7969V23.7764H33.6719V8.22656H39.8799ZM95.9775 8.22266C97.7747 8.22266 99.1299 8.60761 100.04 9.37598C100.95 10.1466 101.405 11.2757 101.405 12.7627C101.405 13.6333 101.178 14.3443 100.725 14.9004C100.272 15.4562 99.6059 15.9037 98.7295 16.2451V16.2764C99.65 16.5617 100.302 17.0115 100.684 17.6279C101.066 18.2444 101.255 19.032 101.255 19.9941V21.1377C101.255 21.573 101.312 22.0151 101.427 22.4629C101.54 22.9104 101.744 23.2496 102.036 23.4766V23.7764H98.8359C98.5437 23.541 98.3532 23.16 98.2676 22.6289C98.182 22.098 98.1387 21.594 98.1387 21.1172V20.0176C98.1387 19.2199 97.944 18.6112 97.5557 18.1904C97.1653 17.7699 96.5787 17.5596 95.7939 17.5596L95.7959 17.5576H92.9805V23.7725H89.8545V8.22266H95.9775ZM66.2275 14.5801H67.5869L71.7178 8.22559H75.54L70.4023 15.498L75.958 23.7754H72.1475L67.9619 17.2812H66.2275V23.7754H63.1025V8.22559H66.2275V14.5801ZM112.771 21.3818H119.709V23.7744H109.646V8.22461H112.771V21.3818ZM139.576 21.3818H146.514V23.7744H136.451V8.22461H139.576V21.3818ZM87.915 10.626H80.3896V14.5352H86.8447L86.8467 14.5332V16.9365H80.3916V21.3799H87.9385V23.7725H77.2646V8.22266H87.915V10.626ZM54.0332 10.4346C52.954 10.4346 52.1271 10.8203 51.5488 11.5889C50.9708 12.3573 50.6827 13.3547 50.6826 14.5791V17.3994C50.6826 18.6386 50.9733 19.6443 51.5557 20.417C52.136 21.1897 52.9584 21.5752 54.0439 21.5752C55.1294 21.5751 55.9667 21.1897 56.5596 20.417C57.1522 19.6443 57.4482 18.6385 57.4482 17.3994V14.5771C57.4482 13.3609 57.1479 12.3654 56.5488 11.5928C55.9497 10.8201 55.1125 10.4346 54.0332 10.4346ZM36.7969 15.7334H39.8799C40.7713 15.7334 41.4376 15.4997 41.876 15.0332C42.3143 14.5667 42.5332 13.9751 42.5332 13.2129C42.5332 12.4506 42.3143 11.8297 41.876 11.3486C41.4376 10.8675 40.7713 10.6279 39.8799 10.6279H36.7969V15.7334ZM92.9775 15.1582H95.6748C96.5662 15.1582 97.2266 14.9747 97.6504 14.6123C98.0739 14.2479 98.287 13.6898 98.2871 12.957C98.2871 12.2239 98.0862 11.6525 97.6875 11.2422C97.2888 10.8321 96.6647 10.628 95.8154 10.6279H92.9775V15.1582ZM129.347 10.8828C130.282 8.23767 133.293 8.7168 133.293 8.7168C131.798 9.04171 131.32 10.0957 131.32 10.0957C132.742 10.3866 133.218 11.7243 133.228 11.751C131.85 10.4205 129.347 10.8828 129.347 10.8828ZM156.204 10.8828C157.139 8.23767 160.15 8.7168 160.15 8.7168C158.656 9.04171 158.178 10.0957 158.178 10.0957C159.599 10.3865 160.075 11.7236 160.085 11.751C158.707 10.4205 156.204 10.8828 156.204 10.8828ZM123.774 8.64551C124.532 8.64555 125.144 9.33931 125.144 10.1953C125.143 11.0511 124.53 11.7441 123.774 11.7441C123.019 11.7441 122.405 11.0512 122.405 10.1953C122.405 9.33929 123.019 8.64551 123.774 8.64551ZM150.63 8.64551C151.386 8.64551 151.999 9.33929 151.999 10.1953C151.999 11.0512 151.385 11.7441 150.63 11.7441C149.874 11.7441 149.261 11.0511 149.261 10.1953C149.261 9.33932 149.874 8.64556 150.63 8.64551Z" fill="white" class="logo-text"/></svg>
+  </div>
+  <div class="m-nav-right">
+    <div class="m-nav-coins" onclick="switchPage('shop')"><span class="m-coin-icon">🪙</span><span id="mNavGold">0</span></div>
+    <div class="m-nav-coins diamond" onclick="switchPage('shop')"><span class="m-coin-icon">💎</span><span id="mNavDiamond">0</span></div>
+  </div>
+</nav>
+
 <nav class="top-nav">
   <div class="top-nav-inner">
     <div class="nav-logo" onclick="switchPage('lobby')">
@@ -23,7 +34,7 @@
     <div class="nav-right">
       <div class="nav-coins" style="cursor:pointer" onclick="switchPage('shop');setTimeout(()=>switchShopTab('recommend'),50)"><span class="coin-icon">🪙</span><span id="navGold">0</span></div>
       <div class="nav-coins" style="cursor:pointer;background:rgba(96,165,250,0.1);border-color:rgba(96,165,250,0.2);color:#60a5fa;" onclick="switchPage('shop');setTimeout(()=>switchShopTab('gems'),50)"><span class="coin-icon">💎</span><span id="navDiamond">0</span></div>
-      <select id="langSelect" onchange="changeLang(this.value)" style="padding:6px 12px;border-radius:20px;border:1px solid var(--border-color);background:var(--bg-card);color:var(--text-secondary);font-size:13px;font-weight:600;cursor:pointer;outline:none;">
+      <select id="langSelect" onchange="changeLang(this.value)" style="display:none;padding:6px 12px;border-radius:20px;border:1px solid var(--border-color);background:var(--bg-card);color:var(--text-secondary);font-size:13px;font-weight:600;cursor:pointer;outline:none;">
         <option value="ko">한국어</option><option value="en">English</option><option value="ja">日本語</option>
       </select>
       <button id="navLoginBtn" data-i18n="nav_login" onclick="switchPage('login')" style="padding:7px 18px;border-radius:20px;border:none;background:linear-gradient(135deg,var(--accent-orange),var(--accent-orange-dark));color:#fff;font-size:13px;font-weight:700;cursor:pointer;">로그인</button>
@@ -50,8 +61,19 @@
     <section>
       <div class="section-header"><h2 class="section-title" data-i18n="lobby_game_modes">게임 모드</h2><span class="section-more" data-i18n="lobby_view_all">전체보기 →</span></div>
       <div class="game-modes">
+        <div class="game-card" onclick="switchPage('lobby')"><div class="game-card-visual"><div class="card-visual-glow"></div><div class="card-visual-icon">🃏</div></div><div class="game-card-info"><div class="game-card-badge">🃏 TEXAS</div><div class="game-card-name" data-i18n="game_holdem">홀덤</div><div class="game-card-desc" data-i18n="game_holdem_desc">텍사스 홀덤의 정석. 전략과 심리전으로 승부하세요.</div><div class="game-card-players"><div class="player-dot"></div> <span data-i18n="game_holdem_players">3,521명 플레이 중</span></div></div></div>
+        <div class="game-card" onclick="switchPage('lobby')"><div class="game-card-visual"><div class="card-visual-glow"></div><div class="card-visual-icon">🦑</div></div><div class="game-card-info"><div class="game-card-badge">🦑 SPECIAL</div><div class="game-card-name" data-i18n="game_squid">오징어게임</div><div class="game-card-desc" data-i18n="game_squid_desc">서바이벌 포커! 탈락 없이 끝까지 살아남으세요.</div><div class="game-card-players"><div class="player-dot"></div> <span data-i18n="game_squid_players">2,108명 참가 중</span></div></div></div>
+        <div class="game-card" onclick="switchPage('lobby')"><div class="game-card-visual"><div class="card-visual-glow"></div><div class="card-visual-icon">🎲</div></div><div class="game-card-info"><div class="game-card-badge">🎲 CLASSIC</div><div class="game-card-name" data-i18n="game_7poker">7포커</div><div class="game-card-desc" data-i18n="game_7poker_desc">한국식 세븐 포커. 친숙한 룰로 즐기세요.</div><div class="game-card-players"><div class="player-dot"></div> <span data-i18n="game_7poker_players">1,892명 플레이 중</span></div></div></div>
         <div class="game-card" onclick="switchPage('tournament')"><div class="game-card-visual"><div class="card-visual-glow"></div><div class="card-visual-icon">🏆</div></div><div class="game-card-info"><div class="game-card-badge">🏆 COMPETITIVE</div><div class="game-card-name" data-i18n="game_tournament">토너먼트</div><div class="game-card-desc" data-i18n="game_tournament_desc">실력을 겨루는 정식 토너먼트. 순위에 따른 보상을 획득하세요.</div><div class="game-card-players"><div class="player-dot"></div> <span data-i18n="game_tournament_players">1,247명 참가 중</span></div></div></div>
         <div class="game-card" onclick="switchPage('game-setup')"><div class="game-card-visual"><div class="card-visual-glow"></div><div class="card-visual-icon">⚙️</div></div><div class="game-card-info"><div class="game-card-badge">⚙️ CUSTOM</div><div class="game-card-name" data-i18n="game_custom">사용자 게임</div><div class="game-card-desc" data-i18n="game_custom_desc">나만의 룰로 방을 만들고, 친구를 초대해서 즐기세요.</div><div class="game-card-players"><div class="player-dot"></div> <span data-i18n="game_custom_players">856개 방 운영 중</span></div></div></div>
+      </div>
+      <!-- 모바일 게임 모드 그리드 -->
+      <div class="m-game-grid">
+        <div class="m-game-item" onclick="switchPage('lobby')"><div class="m-game-icon" style="background:linear-gradient(135deg,#1a0533,#2d1058)">🃏</div><span class="m-game-name">홀덤</span></div>
+        <div class="m-game-item" onclick="switchPage('lobby')"><div class="m-game-icon" style="background:linear-gradient(135deg,#0a2020,#103535)">🦑</div><span class="m-game-name">오징어게임</span></div>
+        <div class="m-game-item" onclick="switchPage('lobby')"><div class="m-game-icon" style="background:linear-gradient(135deg,#1a1500,#2d2200)">🎲</div><span class="m-game-name">7포커</span></div>
+        <div class="m-game-item" onclick="switchPage('tournament')"><div class="m-game-icon" style="background:linear-gradient(135deg,#2a1500,#3d2000)">🏆</div><span class="m-game-name">토너먼트</span></div>
+        <div class="m-game-item" onclick="switchPage('game-setup')"><div class="m-game-icon" style="background:linear-gradient(135deg,#0c2a4a,#0a1a3a)">⚙️</div><span class="m-game-name">사용자 게임</span></div>
       </div>
     </section>
     <section class="live-tables">
@@ -2038,6 +2060,26 @@
   </div>
 </div>
 
+<!-- 모바일 하단 탭바 -->
+<nav class="m-tabbar">
+  <div class="m-tab active" data-tab="lobby" onclick="mTabSwitch(this,'lobby')">
+    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+    <span>로비</span>
+  </div>
+  <div class="m-tab" data-tab="shop" onclick="mTabSwitch(this,'shop')">
+    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
+    <span>상점</span>
+  </div>
+  <div class="m-tab" data-tab="ranking" onclick="mTabSwitch(this,'analytics')">
+    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
+    <span>랭킹</span>
+  </div>
+  <div class="m-tab" data-tab="my" onclick="mTabSwitch(this,'my')">
+    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+    <span>MY 룰루</span>
+  </div>
+</nav>
+
 <footer class="footer">
   <div class="footer-inner">
     <div class="footer-top">
@@ -2383,6 +2425,6 @@
   </div>
 </div>
 
-<script src="script.js?v=15"></script>
+<script src="script.js?v=16"></script>
 </body>
 </html>
