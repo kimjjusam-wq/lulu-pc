@@ -1662,6 +1662,29 @@ resetAutoPlay();
   });
 })();
 
+// === SLIDE MENU ===
+function toggleSlideMenu() {
+  var menu = document.getElementById('slideMenu');
+  var overlay = document.getElementById('slideMenuOverlay');
+  var isOpen = menu.classList.contains('open');
+  menu.classList.toggle('open');
+  overlay.classList.toggle('open');
+  if (!isOpen) {
+    var session = getSession();
+    if (session) {
+      document.getElementById('slideMenuAvatarImg').src = document.getElementById('mNavAvatarImg').src;
+      document.getElementById('slideMenuName').textContent = session.nickname || session.id || 'Guest';
+      document.getElementById('slideMenuId').textContent = 'ID: ' + (session.id || '-');
+    }
+    var badge = document.getElementById('slideMenuMailBadge');
+    if (typeof demoMails !== 'undefined' && demoMails) {
+      var count = demoMails.filter(function(m) { return !m.read; }).length;
+      badge.textContent = count > 0 ? count : '';
+      badge.style.display = count > 0 ? '' : 'none';
+    }
+  }
+}
+
 // === SHOP TABS ===
 function switchShopTab(tab) {
   document.querySelectorAll('.shop-tab').forEach(e => e.classList.remove('active'));

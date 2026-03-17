@@ -31,7 +31,7 @@
   <div class="m-nav-right">
     <div class="m-nav-coins" onclick="switchPage('shop')"><span class="m-coin-icon">🪙</span><span id="mNavGold">0</span></div>
     <div class="m-nav-coins diamond" onclick="switchPage('shop')"><span class="m-coin-icon">💎</span><span id="mNavDiamond">0</span></div>
-    <div class="m-nav-avatar" id="mNavAvatar" onclick="switchPage('mailbox')"><img src="images/avatar_o.png" alt="MY" id="mNavAvatarImg"><span class="avatar-reddot" id="mNavAvatarDot" style="display:none;"></span></div>
+    <div class="m-nav-avatar" id="mNavAvatar" onclick="toggleSlideMenu()"><img src="images/avatar_o.png" alt="MY" id="mNavAvatarImg"><span class="avatar-reddot" id="mNavAvatarDot" style="display:none;"></span></div>
     <button class="m-nav-login" id="mNavLoginBtn" onclick="switchPage('login')">로그인</button>
   </div>
 </nav>
@@ -2195,6 +2195,36 @@
         <p data-i18n="contact_success">문의가 성공적으로 접수되었습니다. 빠른 시일 내에 답변 드리겠습니다.</p>
       </div>
     </div>
+  </div>
+</div>
+
+<!-- 모바일 슬라이드 메뉴 -->
+<div class="slide-menu-overlay" id="slideMenuOverlay" onclick="toggleSlideMenu()"></div>
+<div class="slide-menu" id="slideMenu">
+  <div class="slide-menu-header">
+    <div class="slide-menu-avatar"><img src="images/avatar_o.png" alt="MY" id="slideMenuAvatarImg"></div>
+    <div class="slide-menu-user">
+      <span class="slide-menu-name" id="slideMenuName">Guest</span>
+      <span class="slide-menu-id" id="slideMenuId">ID: -</span>
+    </div>
+    <button class="slide-menu-close" onclick="toggleSlideMenu()">&times;</button>
+  </div>
+  <div class="slide-menu-section">
+    <a class="slide-menu-item" onclick="toggleSlideMenu();switchPage('lobby')"><span class="slide-menu-icon">🃏</span>홀덤</a>
+    <a class="slide-menu-item" onclick="toggleSlideMenu();switchPage('lobby')"><span class="slide-menu-icon">🦑</span>오징어게임</a>
+    <a class="slide-menu-item" onclick="toggleSlideMenu();switchPage('lobby')"><span class="slide-menu-icon">🎲</span>7포커</a>
+    <a class="slide-menu-item" onclick="toggleSlideMenu();switchPage('tournament')"><span class="slide-menu-icon">🏆</span>토너먼트</a>
+    <a class="slide-menu-item" onclick="toggleSlideMenu();switchPage('game-setup')"><span class="slide-menu-icon">⚙️</span>사용자 게임</a>
+  </div>
+  <div class="slide-menu-divider"></div>
+  <div class="slide-menu-section">
+    <a class="slide-menu-item" onclick="toggleSlideMenu();switchPage('my')"><span class="slide-menu-icon">👤</span>MY 룰루<span class="slide-menu-badge" id="slideMenuMailBadge"></span></a>
+    <a class="slide-menu-item" onclick="toggleSlideMenu();switchPage('support')"><span class="slide-menu-icon">💬</span>Support</a>
+  </div>
+  <div class="slide-menu-divider"></div>
+  <div class="slide-menu-section">
+    <a class="slide-menu-item slide-menu-item-muted" onclick="toggleSlideMenu()"><span class="slide-menu-icon">🔒</span>Privacy Policy</a>
+    <a class="slide-menu-item slide-menu-item-muted" onclick="toggleSlideMenu()"><span class="slide-menu-icon">📄</span>Terms of Service</a>
   </div>
 </div>
 
