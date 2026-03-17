@@ -1534,6 +1534,8 @@ function updateAuthUI() {
   var mAvatar = document.getElementById('mNavAvatar');
   var mLoginBtn = document.getElementById('mNavLoginBtn');
   var mAvatarImg = document.getElementById('mNavAvatarImg');
+  var mGoldWrap = document.getElementById('mNavGoldWrap');
+  var mDiaWrap = document.getElementById('mNavDiamondWrap');
   if (session) {
     if (loginBtn) loginBtn.style.display = 'none';
     if (goldEl) goldEl.textContent = session.gold || '1,250억';
@@ -1543,6 +1545,8 @@ function updateAuthUI() {
     if (mAvatar) mAvatar.style.display = '';
     if (mLoginBtn) mLoginBtn.style.display = 'none';
     if (mAvatarImg && session.avatar) mAvatarImg.src = 'images/' + session.avatar;
+    if (mGoldWrap) mGoldWrap.style.display = '';
+    if (mDiaWrap) mDiaWrap.style.display = '';
   } else {
     if (loginBtn) loginBtn.style.display = '';
     if (goldEl) goldEl.textContent = '0';
@@ -1550,6 +1554,8 @@ function updateAuthUI() {
     if (pcAvatar) pcAvatar.style.display = 'none';
     if (mAvatar) mAvatar.style.display = 'none';
     if (mLoginBtn) mLoginBtn.style.display = '';
+    if (mGoldWrap) mGoldWrap.style.display = 'none';
+    if (mDiaWrap) mDiaWrap.style.display = 'none';
   }
   mSyncNavCoins();
   updateAvatarReddot();
