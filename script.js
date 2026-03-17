@@ -1609,6 +1609,8 @@ function goSlide(n) {
   dots[currentSlide].classList.add('active');
   if (isMobile()) {
     bannerTrack.style.transform = 'translateX(-' + (currentSlide * 100 / TOTAL_SLIDES) + '%)';
+  } else {
+    bannerTrack.style.transform = '';
   }
   resetAutoPlay();
 }
@@ -1627,6 +1629,16 @@ function resetAutoPlay() {
 }
 
 resetAutoPlay();
+
+// === RESIZE: 모바일↔PC 전환 시 캐러셀 상태 리셋 ===
+window.addEventListener('resize', function() {
+  if (!isMobile()) {
+    bannerTrack.style.transform = '';
+    bannerTrack.classList.remove('swiping');
+  } else {
+    bannerTrack.style.transform = 'translateX(-' + (currentSlide * 100 / TOTAL_SLIDES) + '%)';
+  }
+});
 
 // === TOUCH SWIPE (mobile only) ===
 (function() {
