@@ -3117,14 +3117,25 @@ document.getElementById('purchaseModal').addEventListener('click', function(e) {
 document.getElementById('packagePayModal').addEventListener('click', function(e) { if (e.target === this) closePackagePayModal(); });
 document.getElementById('tdRegisterModal').addEventListener('click', function(e) { if (e.target === this) closeTdRegisterModal(); });
 
-document.querySelectorAll('#shop-items .shop-item').forEach(function(el) {
+// 아이템 탭: 게임 재화(골드/다이아)로 구매
+document.querySelectorAll('#shop-items .pkg-card').forEach(function(el) {
   el.addEventListener('click', function() {
     var id = parseInt(this.dataset.itemId, 10);
     if (id) openPurchaseModal(id);
   });
 });
+document.querySelectorAll('#shop-items .pkg-buy-btn').forEach(function(btn) {
+  btn.addEventListener('click', function(e) {
+    e.stopPropagation();
+    var card = this.closest('.pkg-card');
+    var id = parseInt(card.dataset.itemId, 10);
+    if (id) openPurchaseModal(id);
+  });
+});
 
+// 보석/추천 탭: PG사 결제
 document.querySelectorAll('.pkg-buy-btn').forEach(function(btn) {
+  if (btn.closest('#shop-items')) return; // 아이템 탭은 제외
   btn.addEventListener('click', function(e) {
     e.stopPropagation();
     var card = this.closest('.pkg-card');
