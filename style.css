@@ -119,6 +119,7 @@ body {
 .game-card:nth-child(4) .game-card-visual { background:linear-gradient(135deg,#2a1500,#3d2000); }
 .game-card:nth-child(5) .game-card-visual { background:linear-gradient(135deg,#0c2a4a,#0a1a3a); }
 .card-visual-icon { font-size:64px; opacity:0.8; }
+.card-visual-icon img { width:160px; height:160px; object-fit:contain; }
 .card-visual-glow { position:absolute; width:200px; height:200px; border-radius:50%; filter:blur(60px); opacity:0.4; }
 .game-card:nth-child(1) .card-visual-glow { background:var(--accent-purple); }
 .game-card:nth-child(2) .card-visual-glow { background:#14b8a6; }
@@ -1453,19 +1454,25 @@ body.light-mode .theme-icon-moon { display:none; }
   .m-game-grid {
     display:grid !important;
     grid-template-columns:repeat(3,1fr);
-    gap:12px;
+    column-gap:12px;
+    row-gap:12px;
     margin-bottom:24px;
   }
   .m-game-item {
-    display:flex; flex-direction:column; align-items:center; gap:8px;
+    display:flex; flex-direction:column; align-items:center; gap:0;
+  }
+  .m-game-name { margin-top:-2px;
     cursor:pointer; -webkit-tap-highlight-color:transparent;
   }
   .m-game-item:active .m-game-icon { transform:scale(0.93); }
   .m-game-icon {
-    width:72px; height:72px; border-radius:18px;
+    width:80px; height:80px; border-radius:20px;
     display:flex; align-items:center; justify-content:center;
-    font-size:32px; border:1px solid var(--border-color); transition:transform 0.15s;
+    font-size:32px; transition:transform 0.15s;
+    background:none;
+    overflow:hidden;
   }
+  .m-game-icon img { width:100%; height:100%; object-fit:cover; }
   .m-game-name { font-size:12px; font-weight:600; color:var(--text-secondary); }
 
   /* --- Section headers mobile --- */
