@@ -11,7 +11,10 @@
 
 <!-- 모바일 상태바 (샘플) -->
 <div class="m-statusbar">
-  <span class="m-statusbar-time" id="mStatusTime">9:41</span>
+  <div class="m-statusbar-left">
+    <span class="m-statusbar-time" id="mStatusTime">9:41</span>
+  </div>
+  <img class="m-dynamic-island" src="images/test_Island.png" alt="Dynamic Island">
   <div class="m-statusbar-right">
     <svg class="m-sb-signal" width="17" height="12" viewBox="0 0 17 12" fill="currentColor"><rect x="0" y="9" width="3" height="3" rx="0.5"/><rect x="4.5" y="6" width="3" height="6" rx="0.5"/><rect x="9" y="3" width="3" height="9" rx="0.5"/><rect x="13.5" y="0" width="3" height="12" rx="0.5"/></svg>
     <svg class="m-sb-wifi" width="16" height="12" viewBox="0 0 16 12" fill="currentColor"><path d="M8 9.8a1.2 1.2 0 1 1 0 2.4 1.2 1.2 0 0 1 0-2.4ZM4.7 8.1a4.6 4.6 0 0 1 6.6 0l-1.1 1.1a3 3 0 0 0-4.4 0L4.7 8.1ZM2.5 5.9a7.6 7.6 0 0 1 11 0L12.4 7a6 6 0 0 0-8.8 0L2.5 5.9ZM.3 3.7a10.6 10.6 0 0 1 15.4 0L14.6 4.8a9 9 0 0 0-13.2 0L.3 3.7Z"/></svg>
@@ -2231,19 +2234,19 @@
 <!-- 모바일 하단 탭바 -->
 <nav class="m-tabbar">
   <div class="m-tab active" data-tab="lobby" onclick="mTabSwitch(this,'lobby')">
-    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+    <svg width="28" height="28" viewBox="0 0 24 24" fill="currentColor"><path d="M12 3L2 12h3v8a1 1 0 0 0 1 1h4v-6h4v6h4a1 1 0 0 0 1-1v-8h3L12 3z"/></svg>
     <span>로비</span>
   </div>
   <div class="m-tab" data-tab="shop" onclick="mTabSwitch(this,'shop')">
-    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
+    <svg width="28" height="28" viewBox="0 0 24 24" fill="currentColor"><path d="M7 18c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm10 0c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zM7.16 6.34l-.8-4H1v2h3.84l3.42 12.2A1 1 0 0 0 9.23 17h8.54a1 1 0 0 0 .97-.76L21 8H5.21l1.95 6.34z"/><path d="M5.21 8h15.79l-2.26 8H9.23L5.21 8z"/></svg>
     <span>상점</span>
   </div>
   <div class="m-tab" data-tab="ranking" onclick="mTabSwitch(this,'analytics')">
-    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
+    <svg width="28" height="28" viewBox="0 0 24 24" fill="currentColor"><path d="M5 12h4v10H5V12zm5-8h4v18h-4V4zm5 4h4v14h-4V8z"/></svg>
     <span>통계</span>
   </div>
   <div class="m-tab" data-tab="my" onclick="mTabSwitch(this,'my')">
-    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+    <svg width="28" height="28" viewBox="0 0 24 24" fill="currentColor"><circle cx="12" cy="8" r="4"/><path d="M12 14c-4.42 0-8 2.24-8 5v1a1 1 0 0 0 1 1h14a1 1 0 0 0 1-1v-1c0-2.76-3.58-5-8-5z"/></svg>
     <span>MY 룰루</span>
   </div>
   <div class="m-home-indicator"><div class="m-home-bar"></div></div>
