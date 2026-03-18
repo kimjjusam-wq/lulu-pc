@@ -32,8 +32,8 @@
   </div>
   <span class="m-nav-title" id="mNavTitle" style="display:none;"></span>
   <div class="m-nav-right">
-    <div class="m-nav-coins" id="mNavGoldWrap" onclick="switchPage('shop')"><span class="m-coin-icon">🪙</span><span id="mNavGold">0</span></div>
-    <div class="m-nav-coins diamond" id="mNavDiamondWrap" onclick="switchPage('shop')"><span class="m-coin-icon">💎</span><span id="mNavDiamond">0</span></div>
+    <div class="m-nav-coins" id="mNavGoldWrap" onclick="switchPage('shop')"><span class="m-coin-icon"><img src="images/icon_gold.png" alt="gold"></span><span id="mNavGold">0</span></div>
+    <div class="m-nav-coins diamond" id="mNavDiamondWrap" onclick="switchPage('shop')"><span class="m-coin-icon"><img src="images/icon_diamond.png" alt="diamond"></span><span id="mNavDiamond">0</span></div>
     <div class="m-nav-menu" id="mNavMenu" onclick="toggleSlideMenu()"><svg width="26" height="26" viewBox="0 0 24 24" fill="currentColor"><path d="M3 6h18v2H3V6zm0 5h18v2H3v-2zm0 5h18v2H3v-2z"/></svg><span class="avatar-reddot" id="mNavAvatarDot" style="display:none;"></span></div>
     <button class="m-nav-login" id="mNavLoginBtn" onclick="switchPage('login')">로그인</button>
   </div>
@@ -51,8 +51,8 @@
       <a class="nav-link" data-page="my" onclick="switchPage('my')" data-i18n="nav_my">MY 룰루</a>
     </div>
     <div class="nav-right">
-      <div class="nav-coins" style="cursor:pointer" onclick="switchPage('shop');setTimeout(()=>switchShopTab('recommend'),50)"><span class="coin-icon">🪙</span><span id="navGold">0</span></div>
-      <div class="nav-coins" style="cursor:pointer;background:rgba(96,165,250,0.1);border-color:rgba(96,165,250,0.2);color:#60a5fa;" onclick="switchPage('shop');setTimeout(()=>switchShopTab('gems'),50)"><span class="coin-icon">💎</span><span id="navDiamond">0</span></div>
+      <div class="nav-coins" style="cursor:pointer" onclick="switchPage('shop');setTimeout(()=>switchShopTab('recommend'),50)"><span class="coin-icon"><img src="images/icon_gold.png" alt="gold"></span><span id="navGold">0</span></div>
+      <div class="nav-coins" style="cursor:pointer;background:rgba(96,165,250,0.1);border-color:rgba(96,165,250,0.2);color:#60a5fa;" onclick="switchPage('shop');setTimeout(()=>switchShopTab('gems'),50)"><span class="coin-icon"><img src="images/icon_diamond.png" alt="diamond"></span><span id="navDiamond">0</span></div>
       <select id="langSelect" onchange="changeLang(this.value)" style="display:none;padding:6px 12px;border-radius:20px;border:1px solid var(--border-color);background:var(--bg-card);color:var(--text-secondary);font-size:13px;font-weight:600;cursor:pointer;outline:none;">
         <option value="ko">한국어</option><option value="en">English</option><option value="ja">日本語</option>
       </select>
@@ -72,7 +72,7 @@
           <div class="banner-slide"><div class="banner-content"><div class="banner-badge">🎁 Bonus</div><div class="banner-title"><span class="glow">FREE CHIPS<br>10,000 BONUS</span></div><div class="banner-sub" data-i18n="banner3_sub">지금 가입하면 무료 칩 10,000개 즉시 지급!</div></div></div>
           <div class="banner-slide"><div class="banner-content"><div class="banner-badge">👥 Social</div><div class="banner-title"><span class="glow">FRIENDS<br>PRIVATE ROOM</span></div><div class="banner-sub" data-i18n="banner4_sub">친구를 초대하고 프라이빗 룸에서 자유롭게 즐기세요</div></div></div>
           <div class="banner-slide"><div class="banner-content"><div class="banner-badge">❤️ Valentine's</div><div class="banner-title"><span class="glow">VALENTINE<br>SPECIAL EVENT</span></div><div class="banner-sub" data-i18n="banner5_sub">발렌타인 시즌 한정 보상과 특별 테이블 오픈!</div></div></div>
-          <div class="banner-slide"><div class="banner-content"><div class="banner-badge">💎 VIP</div><div class="banner-title"><span class="glow">VIP DIAMOND<br>MEMBERSHIP</span></div><div class="banner-sub" data-i18n="banner6_sub">다이아몬드 멤버십으로 독점 혜택을 누리세요</div></div></div>
+          <div class="banner-slide"><div class="banner-content"><div class="banner-badge"><img src="images/icon_diamond.png" class="currency-icon" alt="diamond"> VIP</div><div class="banner-title"><span class="glow">VIP DIAMOND<br>MEMBERSHIP</span></div><div class="banner-sub" data-i18n="banner6_sub">다이아몬드 멤버십으로 독점 혜택을 누리세요</div></div></div>
         </div>
         <div class="banner-particles"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></div>
         <div class="carousel-arrow left" onclick="prevSlide()">‹</div>
@@ -112,9 +112,9 @@
     <section class="live-tables">
       <div class="section-header"><h2 class="section-title" data-i18n="lobby_live_tables">라이브 테이블</h2><span class="section-more" data-i18n="lobby_more" onclick="switchPage('tournament')" style="cursor:pointer">더보기 →</span></div>
       <div class="tables-grid">
-        <div class="table-card"><div class="table-header"><span class="table-name" data-i18n="table_rookie">🃏 루키 테이블</span><span class="table-live"><span class="table-live-dot"></span> LIVE</span></div><div class="table-meta"><div class="table-meta-row"><span class="table-meta-label" data-i18n="table_blind">블라인드</span><span class="table-meta-value">10/20</span></div><div class="table-meta-row"><span class="table-meta-label" data-i18n="table_players">플레이어</span><span class="table-meta-value">4/9</span></div><div class="table-meta-row"><span class="table-meta-label" data-i18n="table_buyin">바이인</span><span class="table-meta-value">🪙 500</span></div></div><button class="table-join-btn" onclick="enterLiveTable(4)" data-i18n="table_join">입장하기</button></div>
-        <div class="table-card"><div class="table-header"><span class="table-name" data-i18n="table_highroller">♠️ 하이롤러</span><span class="table-live"><span class="table-live-dot"></span> LIVE</span></div><div class="table-meta"><div class="table-meta-row"><span class="table-meta-label" data-i18n="table_blind">블라인드</span><span class="table-meta-value">100/200</span></div><div class="table-meta-row"><span class="table-meta-label" data-i18n="table_players">플레이어</span><span class="table-meta-value">7/9</span></div><div class="table-meta-row"><span class="table-meta-label" data-i18n="table_buyin">바이인</span><span class="table-meta-value">🪙 10,000</span></div></div><button class="table-join-btn" onclick="enterLiveTable(7)" data-i18n="table_join">입장하기</button></div>
-        <div class="table-card"><div class="table-header"><span class="table-name" data-i18n="table_vip">💎 VIP 라운지</span><span class="table-live"><span class="table-live-dot"></span> LIVE</span></div><div class="table-meta"><div class="table-meta-row"><span class="table-meta-label" data-i18n="table_blind">블라인드</span><span class="table-meta-value">500/1000</span></div><div class="table-meta-row"><span class="table-meta-label" data-i18n="table_players">플레이어</span><span class="table-meta-value">5/6</span></div><div class="table-meta-row"><span class="table-meta-label" data-i18n="table_buyin">바이인</span><span class="table-meta-value">🪙 50,000</span></div></div><button class="table-join-btn" onclick="enterLiveTable(4)" data-i18n="table_join">입장하기</button></div>
+        <div class="table-card"><div class="table-header"><span class="table-name" data-i18n="table_rookie">🃏 루키 테이블</span><span class="table-live"><span class="table-live-dot"></span> LIVE</span></div><div class="table-meta"><div class="table-meta-row"><span class="table-meta-label" data-i18n="table_blind">블라인드</span><span class="table-meta-value">10/20</span></div><div class="table-meta-row"><span class="table-meta-label" data-i18n="table_players">플레이어</span><span class="table-meta-value">4/9</span></div><div class="table-meta-row"><span class="table-meta-label" data-i18n="table_buyin">바이인</span><span class="table-meta-value"><img src="images/icon_gold.png" class="currency-icon" alt="gold"> 500</span></div></div><button class="table-join-btn" onclick="enterLiveTable(4)" data-i18n="table_join">입장하기</button></div>
+        <div class="table-card"><div class="table-header"><span class="table-name" data-i18n="table_highroller">♠️ 하이롤러</span><span class="table-live"><span class="table-live-dot"></span> LIVE</span></div><div class="table-meta"><div class="table-meta-row"><span class="table-meta-label" data-i18n="table_blind">블라인드</span><span class="table-meta-value">100/200</span></div><div class="table-meta-row"><span class="table-meta-label" data-i18n="table_players">플레이어</span><span class="table-meta-value">7/9</span></div><div class="table-meta-row"><span class="table-meta-label" data-i18n="table_buyin">바이인</span><span class="table-meta-value"><img src="images/icon_gold.png" class="currency-icon" alt="gold"> 10,000</span></div></div><button class="table-join-btn" onclick="enterLiveTable(7)" data-i18n="table_join">입장하기</button></div>
+        <div class="table-card"><div class="table-header"><span class="table-name" data-i18n="table_vip"><img src="images/icon_diamond.png" class="currency-icon" alt="diamond"> VIP 라운지</span><span class="table-live"><span class="table-live-dot"></span> LIVE</span></div><div class="table-meta"><div class="table-meta-row"><span class="table-meta-label" data-i18n="table_blind">블라인드</span><span class="table-meta-value">500/1000</span></div><div class="table-meta-row"><span class="table-meta-label" data-i18n="table_players">플레이어</span><span class="table-meta-value">5/6</span></div><div class="table-meta-row"><span class="table-meta-label" data-i18n="table_buyin">바이인</span><span class="table-meta-value"><img src="images/icon_gold.png" class="currency-icon" alt="gold"> 50,000</span></div></div><button class="table-join-btn" onclick="enterLiveTable(4)" data-i18n="table_join">입장하기</button></div>
       </div>
     </section>
     <section class="stats-section">
@@ -161,7 +161,7 @@
     <!-- 상점 탭 메뉴 -->
     <div class="shop-tabs">
       <button class="shop-tab active" data-shop-tab="recommend" onclick="switchShopTab('recommend')" data-i18n="shop_tab_recommend"><span class="shop-tab-emoji">⭐ </span>추천 상품</button>
-      <button class="shop-tab" data-shop-tab="gems" onclick="switchShopTab('gems')" data-i18n="shop_tab_gems"><span class="shop-tab-emoji">💎 </span>보석</button>
+      <button class="shop-tab" data-shop-tab="gems" onclick="switchShopTab('gems')" data-i18n="shop_tab_gems"><span class="shop-tab-emoji"><img src="images/icon_diamond.png" class="currency-icon" alt="diamond"> </span>보석</button>
       <button class="shop-tab" data-shop-tab="avatar" onclick="switchShopTab('avatar')" data-i18n="shop_tab_avatar"><span class="shop-tab-emoji">👤 </span>아바타</button>
       <button class="shop-tab" data-shop-tab="items" onclick="switchShopTab('items')" data-i18n="shop_tab_items"><span class="shop-tab-emoji">🎁 </span>아이템</button>
     </div>
@@ -176,7 +176,7 @@
             <div class="pkg-name" data-i18n="pkg_a_name">스타터 패키지 A</div>
             <ul class="pkg-contents">
               <li><span class="pkg-icon">👤</span><span data-i18n="pkg_a_item1">아바타 A (15일)</span></li>
-              <li><span class="pkg-icon">🪙</span><span data-i18n="pkg_a_item2">5억 골드</span></li>
+              <li><span class="pkg-icon"><img src="images/icon_gold.png" alt="gold"></span><span data-i18n="pkg_a_item2">5억 골드</span></li>
             </ul>
             <div class="pkg-bottom">
               <div class="pkg-price">₩1,000</div>
@@ -191,7 +191,7 @@
             <div class="pkg-name" data-i18n="pkg_b_name">스타터 패키지 B</div>
             <ul class="pkg-contents">
               <li><span class="pkg-icon">👤</span><span data-i18n="pkg_b_item1">아바타 B (15일)</span></li>
-              <li><span class="pkg-icon">🪙</span><span data-i18n="pkg_b_item2">15억 골드</span></li>
+              <li><span class="pkg-icon"><img src="images/icon_gold.png" alt="gold"></span><span data-i18n="pkg_b_item2">15억 골드</span></li>
             </ul>
             <div class="pkg-bottom">
               <div class="pkg-price">₩3,000</div>
@@ -207,7 +207,7 @@
             <ul class="pkg-contents">
               <li><span class="pkg-icon">👤</span><span data-i18n="pkg_c_item1">아바타 C (15일)</span></li>
               <li><span class="pkg-icon">🎫</span><span data-i18n="pkg_c_item2">바이인 티켓 10억</span></li>
-              <li><span class="pkg-icon">🪙</span><span data-i18n="pkg_c_item3">15억 골드</span></li>
+              <li><span class="pkg-icon"><img src="images/icon_gold.png" alt="gold"></span><span data-i18n="pkg_c_item3">15억 골드</span></li>
             </ul>
             <div class="pkg-bottom">
               <div class="pkg-price">₩5,000</div>
@@ -223,7 +223,7 @@
             <ul class="pkg-contents">
               <li><span class="pkg-icon">👤</span><span data-i18n="pkg_d_item1">아바타 D (15일)</span></li>
               <li><span class="pkg-icon">🎫</span><span data-i18n="pkg_d_item2">바이인 티켓 20억</span></li>
-              <li><span class="pkg-icon">🪙</span><span data-i18n="pkg_d_item3">30억 골드</span></li>
+              <li><span class="pkg-icon"><img src="images/icon_gold.png" alt="gold"></span><span data-i18n="pkg_d_item3">30억 골드</span></li>
             </ul>
             <div class="pkg-bottom">
               <div class="pkg-price">₩10,000</div>
@@ -240,7 +240,7 @@
             <ul class="pkg-contents">
               <li><span class="pkg-icon">👤</span><span data-i18n="pkg_e_item1">아바타 E (15일)</span></li>
               <li><span class="pkg-icon">🎫</span><span data-i18n="pkg_e_item2">바이인 티켓 60억</span></li>
-              <li><span class="pkg-icon">🪙</span><span data-i18n="pkg_e_item3">90억 골드</span></li>
+              <li><span class="pkg-icon"><img src="images/icon_gold.png" alt="gold"></span><span data-i18n="pkg_e_item3">90억 골드</span></li>
             </ul>
             <div class="pkg-bottom">
               <div class="pkg-price">₩30,000</div>
@@ -257,7 +257,7 @@
             <ul class="pkg-contents">
               <li><span class="pkg-icon">👤</span><span data-i18n="pkg_f_item1">아바타 F (15일)</span></li>
               <li><span class="pkg-icon">🎫</span><span data-i18n="pkg_f_item2">바이인 티켓 100억</span></li>
-              <li><span class="pkg-icon">🪙</span><span data-i18n="pkg_f_item3">150억 골드</span></li>
+              <li><span class="pkg-icon"><img src="images/icon_gold.png" alt="gold"></span><span data-i18n="pkg_f_item3">150억 골드</span></li>
             </ul>
             <div class="pkg-bottom">
               <div class="pkg-price">₩50,000</div>
@@ -278,7 +278,7 @@
           <div class="pkg-body">
             <div class="pkg-name" data-i18n="gem_1_name">보석 10개</div>
             <ul class="pkg-contents">
-              <li><span class="pkg-icon">💎</span><span data-i18n="gem_1_item1">보석 10개</span></li>
+              <li><span class="pkg-icon"><img src="images/icon_diamond.png" alt="diamond"></span><span data-i18n="gem_1_item1">보석 10개</span></li>
             </ul>
             <div class="pkg-bottom">
               <div class="pkg-price">₩1,000</div>
@@ -292,7 +292,7 @@
           <div class="pkg-body">
             <div class="pkg-name" data-i18n="gem_2_name">보석 30개</div>
             <ul class="pkg-contents">
-              <li><span class="pkg-icon">💎</span><span data-i18n="gem_2_item1">보석 30개</span></li>
+              <li><span class="pkg-icon"><img src="images/icon_diamond.png" alt="diamond"></span><span data-i18n="gem_2_item1">보석 30개</span></li>
               <li><span class="pkg-icon">🎁</span><span data-i18n="gem_2_item2">보너스 보석 +2개</span></li>
             </ul>
             <div class="pkg-bottom">
@@ -307,7 +307,7 @@
           <div class="pkg-body">
             <div class="pkg-name" data-i18n="gem_3_name">보석 50개</div>
             <ul class="pkg-contents">
-              <li><span class="pkg-icon">💎</span><span data-i18n="gem_3_item1">보석 50개</span></li>
+              <li><span class="pkg-icon"><img src="images/icon_diamond.png" alt="diamond"></span><span data-i18n="gem_3_item1">보석 50개</span></li>
               <li><span class="pkg-icon">🎁</span><span data-i18n="gem_3_item2">보너스 보석 +5개</span></li>
             </ul>
             <div class="pkg-bottom">
@@ -322,7 +322,7 @@
           <div class="pkg-body">
             <div class="pkg-name" data-i18n="gem_4_name">보석 100개</div>
             <ul class="pkg-contents">
-              <li><span class="pkg-icon">💎</span><span data-i18n="gem_4_item1">보석 100개</span></li>
+              <li><span class="pkg-icon"><img src="images/icon_diamond.png" alt="diamond"></span><span data-i18n="gem_4_item1">보석 100개</span></li>
               <li><span class="pkg-icon">🎁</span><span data-i18n="gem_4_item2">보너스 보석 +15개</span></li>
             </ul>
             <div class="pkg-bottom">
@@ -338,9 +338,9 @@
             <div class="shop-item-tag sale">+20%</div>
             <div class="pkg-name" data-i18n="gem_5_name">보석 300개</div>
             <ul class="pkg-contents">
-              <li><span class="pkg-icon">💎</span><span data-i18n="gem_5_item1">보석 300개</span></li>
+              <li><span class="pkg-icon"><img src="images/icon_diamond.png" alt="diamond"></span><span data-i18n="gem_5_item1">보석 300개</span></li>
               <li><span class="pkg-icon">🎁</span><span data-i18n="gem_5_item2">보너스 보석 +60개</span></li>
-              <li><span class="pkg-icon">🪙</span><span data-i18n="gem_5_item3">5억 골드</span></li>
+              <li><span class="pkg-icon"><img src="images/icon_gold.png" alt="gold"></span><span data-i18n="gem_5_item3">5억 골드</span></li>
             </ul>
             <div class="pkg-bottom">
               <div class="pkg-price">₩30,000</div>
@@ -355,9 +355,9 @@
             <div class="shop-item-tag sale">+25%</div>
             <div class="pkg-name" data-i18n="gem_6_name">보석 500개</div>
             <ul class="pkg-contents">
-              <li><span class="pkg-icon">💎</span><span data-i18n="gem_6_item1">보석 500개</span></li>
+              <li><span class="pkg-icon"><img src="images/icon_diamond.png" alt="diamond"></span><span data-i18n="gem_6_item1">보석 500개</span></li>
               <li><span class="pkg-icon">🎁</span><span data-i18n="gem_6_item2">보너스 보석 +125개</span></li>
-              <li><span class="pkg-icon">🪙</span><span data-i18n="gem_6_item3">10억 골드</span></li>
+              <li><span class="pkg-icon"><img src="images/icon_gold.png" alt="gold"></span><span data-i18n="gem_6_item3">10억 골드</span></li>
             </ul>
             <div class="pkg-bottom">
               <div class="pkg-price">₩50,000</div>
@@ -372,9 +372,9 @@
             <div class="shop-item-tag hot">HOT</div>
             <div class="pkg-name" data-i18n="gem_7_name">보석 1,000개</div>
             <ul class="pkg-contents">
-              <li><span class="pkg-icon">💎</span><span data-i18n="gem_7_item1">보석 1,000개</span></li>
+              <li><span class="pkg-icon"><img src="images/icon_diamond.png" alt="diamond"></span><span data-i18n="gem_7_item1">보석 1,000개</span></li>
               <li><span class="pkg-icon">🎁</span><span data-i18n="gem_7_item2">보너스 보석 +300개</span></li>
-              <li><span class="pkg-icon">🪙</span><span data-i18n="gem_7_item3">30억 골드</span></li>
+              <li><span class="pkg-icon"><img src="images/icon_gold.png" alt="gold"></span><span data-i18n="gem_7_item3">30억 골드</span></li>
               <li><span class="pkg-icon">🎫</span><span data-i18n="gem_7_item4">바이인 티켓 10억</span></li>
             </ul>
             <div class="pkg-bottom">
@@ -390,9 +390,9 @@
             <div class="shop-item-tag hot">BEST</div>
             <div class="pkg-name" data-i18n="gem_8_name">보석 3,000개</div>
             <ul class="pkg-contents">
-              <li><span class="pkg-icon">💎</span><span data-i18n="gem_8_item1">보석 3,000개</span></li>
+              <li><span class="pkg-icon"><img src="images/icon_diamond.png" alt="diamond"></span><span data-i18n="gem_8_item1">보석 3,000개</span></li>
               <li><span class="pkg-icon">🎁</span><span data-i18n="gem_8_item2">보너스 보석 +1,000개</span></li>
-              <li><span class="pkg-icon">🪙</span><span data-i18n="gem_8_item3">100억 골드</span></li>
+              <li><span class="pkg-icon"><img src="images/icon_gold.png" alt="gold"></span><span data-i18n="gem_8_item3">100억 골드</span></li>
               <li><span class="pkg-icon">🎫</span><span data-i18n="gem_8_item4">바이인 티켓 30억</span></li>
             </ul>
             <div class="pkg-bottom">
@@ -408,9 +408,9 @@
             <div class="shop-item-tag vip">PREMIUM</div>
             <div class="pkg-name" data-i18n="gem_9_name">보석 5,000개</div>
             <ul class="pkg-contents">
-              <li><span class="pkg-icon">💎</span><span data-i18n="gem_9_item1">보석 5,000개</span></li>
+              <li><span class="pkg-icon"><img src="images/icon_diamond.png" alt="diamond"></span><span data-i18n="gem_9_item1">보석 5,000개</span></li>
               <li><span class="pkg-icon">🎁</span><span data-i18n="gem_9_item2">보너스 보석 +2,000개</span></li>
-              <li><span class="pkg-icon">🪙</span><span data-i18n="gem_9_item3">200억 골드</span></li>
+              <li><span class="pkg-icon"><img src="images/icon_gold.png" alt="gold"></span><span data-i18n="gem_9_item3">200억 골드</span></li>
               <li><span class="pkg-icon">🎫</span><span data-i18n="gem_9_item4">바이인 티켓 50억</span></li>
               <li><span class="pkg-icon">👤</span><span data-i18n="gem_9_item5">VIP 아바타 (30일)</span></li>
             </ul>
@@ -434,8 +434,8 @@
             <div class="pkg-name" data-i18n="avatar_g_name">아바타 세트 G</div>
             <ul class="pkg-contents">
               <li><span class="pkg-icon">👤</span><span data-i18n="avatar_g_item1">아바타 G (15일)</span></li>
-              <li><span class="pkg-icon">💎</span><span data-i18n="avatar_g_item2">보석 10개</span></li>
-              <li><span class="pkg-icon">🪙</span><span data-i18n="avatar_g_item3">5억 골드</span></li>
+              <li><span class="pkg-icon"><img src="images/icon_diamond.png" alt="diamond"></span><span data-i18n="avatar_g_item2">보석 10개</span></li>
+              <li><span class="pkg-icon"><img src="images/icon_gold.png" alt="gold"></span><span data-i18n="avatar_g_item3">5억 골드</span></li>
             </ul>
             <div class="pkg-bottom">
               <div class="pkg-price">₩1,000</div>
@@ -450,8 +450,8 @@
             <div class="pkg-name" data-i18n="avatar_h_name">아바타 세트 H</div>
             <ul class="pkg-contents">
               <li><span class="pkg-icon">👤</span><span data-i18n="avatar_h_item1">아바타 H (15일)</span></li>
-              <li><span class="pkg-icon">💎</span><span data-i18n="avatar_h_item2">보석 30개</span></li>
-              <li><span class="pkg-icon">🪙</span><span data-i18n="avatar_h_item3">15억 골드</span></li>
+              <li><span class="pkg-icon"><img src="images/icon_diamond.png" alt="diamond"></span><span data-i18n="avatar_h_item2">보석 30개</span></li>
+              <li><span class="pkg-icon"><img src="images/icon_gold.png" alt="gold"></span><span data-i18n="avatar_h_item3">15억 골드</span></li>
             </ul>
             <div class="pkg-bottom">
               <div class="pkg-price">₩3,000</div>
@@ -466,8 +466,8 @@
             <div class="pkg-name" data-i18n="avatar_i_name">아바타 세트 I</div>
             <ul class="pkg-contents">
               <li><span class="pkg-icon">👤</span><span data-i18n="avatar_i_item1">아바타 I (15일)</span></li>
-              <li><span class="pkg-icon">💎</span><span data-i18n="avatar_i_item2">보석 50개</span></li>
-              <li><span class="pkg-icon">🪙</span><span data-i18n="avatar_i_item3">25억 골드</span></li>
+              <li><span class="pkg-icon"><img src="images/icon_diamond.png" alt="diamond"></span><span data-i18n="avatar_i_item2">보석 50개</span></li>
+              <li><span class="pkg-icon"><img src="images/icon_gold.png" alt="gold"></span><span data-i18n="avatar_i_item3">25억 골드</span></li>
             </ul>
             <div class="pkg-bottom">
               <div class="pkg-price">₩5,000</div>
@@ -482,8 +482,8 @@
             <div class="pkg-name" data-i18n="avatar_j_name">아바타 세트 J</div>
             <ul class="pkg-contents">
               <li><span class="pkg-icon">👤</span><span data-i18n="avatar_j_item1">아바타 J (15일)</span></li>
-              <li><span class="pkg-icon">💎</span><span data-i18n="avatar_j_item2">보석 100개</span></li>
-              <li><span class="pkg-icon">🪙</span><span data-i18n="avatar_j_item3">50억 골드</span></li>
+              <li><span class="pkg-icon"><img src="images/icon_diamond.png" alt="diamond"></span><span data-i18n="avatar_j_item2">보석 100개</span></li>
+              <li><span class="pkg-icon"><img src="images/icon_gold.png" alt="gold"></span><span data-i18n="avatar_j_item3">50억 골드</span></li>
             </ul>
             <div class="pkg-bottom">
               <div class="pkg-price">₩10,000</div>
@@ -499,8 +499,8 @@
             <div class="pkg-name" data-i18n="avatar_k_name">아바타 세트 K</div>
             <ul class="pkg-contents">
               <li><span class="pkg-icon">👤</span><span data-i18n="avatar_k_item1">아바타 K (15일)</span></li>
-              <li><span class="pkg-icon">💎</span><span data-i18n="avatar_k_item2">보석 300개</span></li>
-              <li><span class="pkg-icon">🪙</span><span data-i18n="avatar_k_item3">150억 골드</span></li>
+              <li><span class="pkg-icon"><img src="images/icon_diamond.png" alt="diamond"></span><span data-i18n="avatar_k_item2">보석 300개</span></li>
+              <li><span class="pkg-icon"><img src="images/icon_gold.png" alt="gold"></span><span data-i18n="avatar_k_item3">150억 골드</span></li>
             </ul>
             <div class="pkg-bottom">
               <div class="pkg-price">₩30,000</div>
@@ -516,8 +516,8 @@
             <div class="pkg-name" data-i18n="avatar_l_name">아바타 세트 L</div>
             <ul class="pkg-contents">
               <li><span class="pkg-icon">👤</span><span data-i18n="avatar_l_item1">아바타 L (15일)</span></li>
-              <li><span class="pkg-icon">💎</span><span data-i18n="avatar_l_item2">보석 500개</span></li>
-              <li><span class="pkg-icon">🪙</span><span data-i18n="avatar_l_item3">250억 골드</span></li>
+              <li><span class="pkg-icon"><img src="images/icon_diamond.png" alt="diamond"></span><span data-i18n="avatar_l_item2">보석 500개</span></li>
+              <li><span class="pkg-icon"><img src="images/icon_gold.png" alt="gold"></span><span data-i18n="avatar_l_item3">250억 골드</span></li>
             </ul>
             <div class="pkg-bottom">
               <div class="pkg-price">₩50,000</div>
@@ -533,8 +533,8 @@
             <div class="pkg-name" data-i18n="avatar_m_name">아바타 세트 M</div>
             <ul class="pkg-contents">
               <li><span class="pkg-icon">👤</span><span data-i18n="avatar_m_item1">아바타 M (15일)</span></li>
-              <li><span class="pkg-icon">💎</span><span data-i18n="avatar_m_item2">보석 1,000개</span></li>
-              <li><span class="pkg-icon">🪙</span><span data-i18n="avatar_m_item3">500억 골드</span></li>
+              <li><span class="pkg-icon"><img src="images/icon_diamond.png" alt="diamond"></span><span data-i18n="avatar_m_item2">보석 1,000개</span></li>
+              <li><span class="pkg-icon"><img src="images/icon_gold.png" alt="gold"></span><span data-i18n="avatar_m_item3">500억 골드</span></li>
             </ul>
             <div class="pkg-bottom">
               <div class="pkg-price">₩100,000</div>
@@ -550,8 +550,8 @@
             <div class="pkg-name" data-i18n="avatar_n_name">아바타 세트 N</div>
             <ul class="pkg-contents">
               <li><span class="pkg-icon">👤</span><span data-i18n="avatar_n_item1">아바타 N (15일)</span></li>
-              <li><span class="pkg-icon">💎</span><span data-i18n="avatar_n_item2">보석 3,000개</span></li>
-              <li><span class="pkg-icon">🪙</span><span data-i18n="avatar_n_item3">1,500억 골드</span></li>
+              <li><span class="pkg-icon"><img src="images/icon_diamond.png" alt="diamond"></span><span data-i18n="avatar_n_item2">보석 3,000개</span></li>
+              <li><span class="pkg-icon"><img src="images/icon_gold.png" alt="gold"></span><span data-i18n="avatar_n_item3">1,500억 골드</span></li>
             </ul>
             <div class="pkg-bottom">
               <div class="pkg-price">₩300,000</div>
@@ -575,7 +575,7 @@
               <li><span class="pkg-icon">🎯</span><span data-i18n="skin_classic_green_desc">전통적인 포커 테이블</span></li>
             </ul>
             <div class="pkg-bottom">
-              <div class="pkg-price">🪙 2,000</div>
+              <div class="pkg-price"><img src="images/icon_gold.png" class="currency-icon" alt="gold"> 2,000</div>
               <button class="pkg-buy-btn" data-i18n="shop_buy">구매하기</button>
             </div>
           </div>
@@ -589,7 +589,7 @@
               <li><span class="pkg-icon">🎯</span><span data-i18n="skin_royal_red_desc">프리미엄 레드 테이블</span></li>
             </ul>
             <div class="pkg-bottom">
-              <div class="pkg-price">🪙 5,000</div>
+              <div class="pkg-price"><img src="images/icon_gold.png" class="currency-icon" alt="gold"> 5,000</div>
               <button class="pkg-buy-btn" data-i18n="shop_buy">구매하기</button>
             </div>
           </div>
@@ -604,7 +604,7 @@
               <li><span class="pkg-icon">🎯</span><span data-i18n="skin_cosmic_black_desc">우주 컨셉 한정 스킨</span></li>
             </ul>
             <div class="pkg-bottom">
-              <div class="pkg-price">🪙 10,000</div>
+              <div class="pkg-price"><img src="images/icon_gold.png" class="currency-icon" alt="gold"> 10,000</div>
               <button class="pkg-buy-btn" data-i18n="shop_buy">구매하기</button>
             </div>
           </div>
@@ -618,7 +618,7 @@
               <li><span class="pkg-icon">🃏</span><span data-i18n="skin_gold_card_desc">고급 골드 카드 뒷면</span></li>
             </ul>
             <div class="pkg-bottom">
-              <div class="pkg-price">💎 80</div>
+              <div class="pkg-price"><img src="images/icon_diamond.png" class="currency-icon" alt="diamond"> 80</div>
               <button class="pkg-buy-btn" data-i18n="shop_buy">구매하기</button>
             </div>
           </div>
@@ -632,7 +632,7 @@
               <li><span class="pkg-icon">🃏</span><span data-i18n="skin_brick_pattern_desc">클래식 벽돌 패턴 카드</span></li>
             </ul>
             <div class="pkg-bottom">
-              <div class="pkg-price">💎 120</div>
+              <div class="pkg-price"><img src="images/icon_diamond.png" class="currency-icon" alt="diamond"> 120</div>
               <button class="pkg-buy-btn" data-i18n="shop_buy">구매하기</button>
             </div>
           </div>
@@ -647,7 +647,7 @@
               <li><span class="pkg-icon">🃏</span><span data-i18n="skin_diamond_card_desc">VIP 한정 다이아몬드 디자인</span></li>
             </ul>
             <div class="pkg-bottom">
-              <div class="pkg-price">💎 300</div>
+              <div class="pkg-price"><img src="images/icon_diamond.png" class="currency-icon" alt="diamond"> 300</div>
               <button class="pkg-buy-btn" data-i18n="shop_buy">구매하기</button>
             </div>
           </div>
@@ -661,7 +661,7 @@
               <li><span class="pkg-icon">😎</span><span data-i18n="emote_pokerface_desc">기본 이모티콘 8종</span></li>
             </ul>
             <div class="pkg-bottom">
-              <div class="pkg-price">🪙 1,500</div>
+              <div class="pkg-price"><img src="images/icon_gold.png" class="currency-icon" alt="gold"> 1,500</div>
               <button class="pkg-buy-btn" data-i18n="shop_buy">구매하기</button>
             </div>
           </div>
@@ -676,7 +676,7 @@
               <li><span class="pkg-icon">🎭</span><span data-i18n="emote_drama_desc">연기파 이모티콘 12종</span></li>
             </ul>
             <div class="pkg-bottom">
-              <div class="pkg-price">🪙 3,000</div>
+              <div class="pkg-price"><img src="images/icon_gold.png" class="currency-icon" alt="gold"> 3,000</div>
               <button class="pkg-buy-btn" data-i18n="shop_buy">구매하기</button>
             </div>
           </div>
@@ -691,7 +691,7 @@
               <li><span class="pkg-icon">💥</span><span data-i18n="emote_allin_desc">시즌3 한정 이모티콘 6종</span></li>
             </ul>
             <div class="pkg-bottom">
-              <div class="pkg-price">💎 60</div>
+              <div class="pkg-price"><img src="images/icon_diamond.png" class="currency-icon" alt="diamond"> 60</div>
               <button class="pkg-buy-btn" data-i18n="shop_buy">구매하기</button>
             </div>
           </div>
@@ -1157,8 +1157,8 @@
     </div>
     <div class="tx-tabs" style="max-width:700px;margin:0 auto 16px;">
       <button class="tx-tab active" data-filter="all" onclick="txSwitchTab('all')" data-i18n="tx_tab_all">전체</button>
-      <button class="tx-tab" data-filter="gold" onclick="txSwitchTab('gold')">🪙 <span data-i18n="tx_tab_gold">골드</span></button>
-      <button class="tx-tab" data-filter="diamond" onclick="txSwitchTab('diamond')">💎 <span data-i18n="tx_tab_diamond">다이아</span></button>
+      <button class="tx-tab" data-filter="gold" onclick="txSwitchTab('gold')"><img src="images/icon_gold.png" class="currency-icon" alt="gold"> <span data-i18n="tx_tab_gold">골드</span></button>
+      <button class="tx-tab" data-filter="diamond" onclick="txSwitchTab('diamond')"><img src="images/icon_diamond.png" class="currency-icon" alt="diamond"> <span data-i18n="tx_tab_diamond">다이아</span></button>
     </div>
     <div class="tx-list" id="txList" style="max-width:700px;margin:0 auto;padding-bottom:48px;"></div>
   </div>

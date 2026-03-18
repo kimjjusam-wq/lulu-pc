@@ -43,7 +43,9 @@ body {
 .nav-avatar img { width:100%; height:100%; object-fit:cover; }
 .avatar-reddot { position:absolute; top:0; right:0; width:8px; height:8px; background:#ef4444; border-radius:50%; border:1.5px solid var(--bg-nav); }
 .nav-coins { display:flex; align-items:center; gap:6px; background:rgba(245,158,11,0.1); border:1px solid rgba(245,158,11,0.2); padding:6px 14px; border-radius:20px; font-size:13px; font-weight:700; color:var(--accent-gold); }
-.coin-icon { font-size:16px; }
+.coin-icon { font-size:16px; display:inline-flex; align-items:center; }
+.coin-icon img { width:16px; height:16px; object-fit:contain; }
+.currency-icon { width:16px; height:16px; object-fit:contain; vertical-align:middle; }
 .content-wrapper { max-width:var(--content-width); margin:0 auto; padding:0 24px; }
 
 .slide-menu, .slide-menu-overlay { display:none; }
@@ -337,11 +339,12 @@ body {
   border: 1px solid rgba(255,255,255,0.04);
 }
 .pkg-icon {
-  font-size: 16px;
+  font-size: 16px; display:inline-flex; align-items:center; justify-content:center;
   flex-shrink: 0;
   width: 22px;
   text-align: center;
 }
+.pkg-icon img { width:16px; height:16px; object-fit:contain; }
 .pkg-bottom {
   display: flex;
   align-items: center;
@@ -1352,7 +1355,9 @@ body.light-mode .theme-icon-moon { display:none; }
     font-size:13px; font-weight:700; color:var(--accent-gold); cursor:pointer;
   }
   .m-nav-coins.diamond { background:rgba(96,165,250,0.1); border-color:rgba(96,165,250,0.2); color:#60a5fa; }
-  .m-coin-icon { font-size:13px; }
+  .m-coin-icon { font-size:13px; display:inline-flex; align-items:center; }
+  .m-coin-icon img { width:14px; height:14px; object-fit:contain; }
+  .currency-icon { width:14px; height:14px; }
   .m-nav-menu {
     width:30px; height:30px; position:relative;
     display:flex; align-items:center; justify-content:center;
