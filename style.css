@@ -1479,6 +1479,7 @@ body.light-mode .theme-icon-moon { display:none; }
   .slide-menu-item-muted { color:var(--text-muted); font-size:13px; }
   .slide-menu-icon { font-size:18px; width:24px; text-align:center; flex-shrink:0; }
   .slide-menu-badge { background:var(--accent-orange); color:#fff; font-size:11px; font-weight:700; padding:2px 8px; border-radius:10px; margin-left:auto; }
+  .slide-menu-subtitle { padding:10px 20px 4px; font-size:11px; font-weight:700; color:var(--text-muted); letter-spacing:0.5px; }
   .slide-menu-divider { height:1px; background:var(--border-color); margin:4px 16px; }
 
   /* --- Mobile game grid --- */
