@@ -5,6 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>POKER LULU - Play Poker with Friends</title>
 <link rel="icon" type="image/svg+xml" href="images/login_icon.svg">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
 <link rel="stylesheet" href="style.css?v=16">
 </head>
 <body>
@@ -112,11 +113,11 @@
       </div>
     </section>
     <section class="live-tables">
-      <div class="section-header"><h2 class="section-title" data-i18n="lobby_live_tables">라이브 테이블</h2><span class="section-more" data-i18n="lobby_more" onclick="switchPage('tournament')" style="cursor:pointer">더보기 →</span></div>
+      <div class="section-header"><h2 class="section-title" data-i18n="lobby_live_tables">나의 게임</h2><span class="section-more" data-i18n="lobby_more" onclick="switchPage('tournament')" style="cursor:pointer">더보기 →</span></div>
       <div class="tables-grid">
-        <div class="table-card"><div class="table-header"><span class="table-name" data-i18n="table_rookie">🃏 루키 테이블</span><span class="table-live"><span class="table-live-dot"></span> LIVE</span></div><div class="table-meta"><div class="table-meta-row"><span class="table-meta-label" data-i18n="table_blind">블라인드</span><span class="table-meta-value">10/20</span></div><div class="table-meta-row"><span class="table-meta-label" data-i18n="table_players">플레이어</span><span class="table-meta-value">4/9</span></div><div class="table-meta-row"><span class="table-meta-label" data-i18n="table_buyin">바이인</span><span class="table-meta-value"><img src="images/icon_gold.png" class="currency-icon" alt="gold"> 500</span></div></div><button class="table-join-btn" onclick="enterLiveTable(4)" data-i18n="table_join">입장하기</button></div>
-        <div class="table-card"><div class="table-header"><span class="table-name" data-i18n="table_highroller">♠️ 하이롤러</span><span class="table-live"><span class="table-live-dot"></span> LIVE</span></div><div class="table-meta"><div class="table-meta-row"><span class="table-meta-label" data-i18n="table_blind">블라인드</span><span class="table-meta-value">100/200</span></div><div class="table-meta-row"><span class="table-meta-label" data-i18n="table_players">플레이어</span><span class="table-meta-value">7/9</span></div><div class="table-meta-row"><span class="table-meta-label" data-i18n="table_buyin">바이인</span><span class="table-meta-value"><img src="images/icon_gold.png" class="currency-icon" alt="gold"> 10,000</span></div></div><button class="table-join-btn" onclick="enterLiveTable(7)" data-i18n="table_join">입장하기</button></div>
-        <div class="table-card"><div class="table-header"><span class="table-name" data-i18n="table_vip"><img src="images/icon_diamond.png" class="currency-icon" alt="diamond"> VIP 라운지</span><span class="table-live"><span class="table-live-dot"></span> LIVE</span></div><div class="table-meta"><div class="table-meta-row"><span class="table-meta-label" data-i18n="table_blind">블라인드</span><span class="table-meta-value">500/1000</span></div><div class="table-meta-row"><span class="table-meta-label" data-i18n="table_players">플레이어</span><span class="table-meta-value">5/6</span></div><div class="table-meta-row"><span class="table-meta-label" data-i18n="table_buyin">바이인</span><span class="table-meta-value"><img src="images/icon_gold.png" class="currency-icon" alt="gold"> 50,000</span></div></div><button class="table-join-btn" onclick="enterLiveTable(4)" data-i18n="table_join">입장하기</button></div>
+        <div class="table-card"><div class="table-header"><span class="table-name" data-i18n="table_rookie"><img src="images/menu_holdem.png" class="currency-icon" alt="홀덤"> 홀덤</span><span class="table-live"><span class="table-live-dot"></span> LIVE</span></div><div class="table-meta"><div class="table-meta-row"><span class="table-meta-label" data-i18n="table_blind">블라인드</span><span class="table-meta-value">10/20</span></div><div class="table-meta-row"><span class="table-meta-label" data-i18n="table_players">플레이어</span><span class="table-meta-value">4/9</span></div><div class="table-meta-row"><span class="table-meta-label">스택</span><span class="table-meta-value"><img src="images/icon_gold.png" class="currency-icon" alt="gold"> 32,450</span></div></div><button class="table-join-btn" onclick="enterLiveTable(4)" data-i18n="table_join">입장하기</button></div>
+        <div class="table-card"><div class="table-header"><span class="table-name" data-i18n="table_highroller"><img src="images/menu_squid.png" class="currency-icon" alt="오징어게임"> 오징어게임</span><span class="table-live"><span class="table-live-dot"></span> LIVE</span></div><div class="table-meta"><div class="table-meta-row"><span class="table-meta-label" data-i18n="table_blind">블라인드</span><span class="table-meta-value">100/200</span></div><div class="table-meta-row"><span class="table-meta-label" data-i18n="table_players">플레이어</span><span class="table-meta-value">7/9</span></div><div class="table-meta-row"><span class="table-meta-label">스택</span><span class="table-meta-value"><img src="images/icon_gold.png" class="currency-icon" alt="gold"> 8,200</span></div></div><button class="table-join-btn" onclick="enterLiveTable(7)" data-i18n="table_join">입장하기</button></div>
+        <div class="table-card"><div class="table-header"><span class="table-name" data-i18n="table_vip"><img src="images/menu_tournament.png" class="currency-icon" alt="토너먼트"> 주말 챔피언십</span><span class="table-live"><span class="table-live-dot"></span> LIVE</span></div><div class="table-meta"><div class="table-meta-row"><span class="table-meta-label" data-i18n="table_blind">블라인드</span><span class="table-meta-value">400/800</span></div><div class="table-meta-row"><span class="table-meta-label" data-i18n="table_players">플레이어</span><span class="table-meta-value">12/48</span></div><div class="table-meta-row"><span class="table-meta-label" data-i18n="table_buyin">바이인</span><span class="table-meta-value"><img src="images/icon_gold.png" class="currency-icon" alt="gold"> 50,000</span></div></div><button class="table-join-btn" onclick="enterLiveTable(4)" data-i18n="table_join">입장하기</button></div>
       </div>
     </section>
     <section class="stats-section">
@@ -136,10 +137,6 @@
         <svg class="m-footer-arrow" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
       </div>
       <div class="m-footer-content">
-        <div class="m-footer-brand">
-          <div class="m-footer-brand-name">POKER LULU</div>
-          <div class="m-footer-company">주식회사 룰루닷에이아이</div>
-        </div>
         <div class="m-footer-links">
           <a class="m-footer-link" onclick="switchPage('company')" data-i18n="footer_company">회사정보</a>
           <span class="m-footer-sep">·</span>
@@ -155,6 +152,7 @@
           <span class="m-footer-sep">·</span>
           <a class="m-footer-link" onclick="switchPage('contact')" data-i18n="footer_contact">문의하기</a>
         </div>
+        <div class="m-footer-notice">19세 이상 전용 (유료 구매 포함). 현금 도박/경품 미제공.<br>소셜 게임의 성공이 실제 도박 성공을 보장하지 않음. (중독 상담: 1336)</div>
         <div class="m-footer-copy">© 2026 Poker Lulu. All rights reserved.</div>
       </div>
     </div>
