@@ -36,7 +36,7 @@ const i18n = {
     lobby_game_modes: '게임 모드',
     lobby_view_all: '전체보기 →',
     lobby_live_tables: '라이브 테이블',
-    lobby_more: '더보기 →',
+    lobby_more: '재입장 →',
     lobby_my_stats: '내 통계 요약',
     lobby_detail: '자세히 →',
 
