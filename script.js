@@ -1661,7 +1661,7 @@ function updateBuyBtnPrice() {
     if (isMobile()) {
       btn.innerHTML = price.innerHTML;
     } else {
-      btn.textContent = btn.getAttribute('data-i18n') ? (translations[currentLang] || {})[btn.getAttribute('data-i18n')] || '구매하기' : '구매하기';
+      btn.textContent = btn.getAttribute('data-i18n') ? (i18n[currentLang] || {})[btn.getAttribute('data-i18n')] || '구매하기' : '구매하기';
     }
   });
 }
