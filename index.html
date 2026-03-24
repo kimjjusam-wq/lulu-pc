@@ -980,24 +980,41 @@
       <h2 data-i18n="tn_title">토너먼트</h2>
       <p data-i18n="tn_desc">다양한 토너먼트에 참가하고 보상을 획득하세요</p>
     </div>
-    <div class="tn-tabs">
-      <button class="tn-tab active" data-tn-tab="all" onclick="switchTournamentTab('all')" data-i18n="tn_tab_all">전체</button>
-      <button class="tn-tab" data-tn-tab="my" onclick="switchTournamentTab('my')" data-i18n="tn_tab_my">내 토너먼트</button>
-      <button class="tn-tab" onclick="switchPage('tn-history')"><span data-i18n="tn_tab_history">히스토리</span> <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7"/><path d="M7 7h10v10"/></svg></button>
-    </div>
-    <div class="tn-tab-content active" id="tn-all">
-      <div class="tn-list" id="tnAllList"></div>
-    </div>
-    <div class="tn-tab-content" id="tn-my">
-      <div class="tn-list" id="tnMyList"></div>
+    <div class="tn-split-layout">
+      <!-- 왼쪽: 토너먼트 리스트 -->
+      <div class="tn-split-left">
+        <div class="tn-tabs">
+          <button class="tn-tab active" data-tn-tab="all" onclick="switchTournamentTab('all')">전체</button>
+          <button class="tn-tab" data-tn-tab="eventA" onclick="switchTournamentTab('eventA')">이벤트A</button>
+          <button class="tn-tab" data-tn-tab="eventB" onclick="switchTournamentTab('eventB')">이벤트B</button>
+          <button class="tn-tab" onclick="switchPage('tn-history')"><span data-i18n="tn_tab_history">히스토리</span> <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7"/><path d="M7 7h10v10"/></svg></button>
+        </div>
+        <div class="tn-tab-content active" id="tn-all">
+          <div class="tn-list" id="tnAllList"></div>
+        </div>
+        <div class="tn-tab-content" id="tn-eventA">
+          <div class="tn-list" id="tnEventAList"></div>
+        </div>
+        <div class="tn-tab-content" id="tn-eventB">
+          <div class="tn-list" id="tnEventBList"></div>
+        </div>
+      </div>
+      <!-- 오른쪽: 토너먼트 상세 (PC에서만 인라인 표시) -->
+      <div class="tn-split-right" id="tnSplitRight">
+        <div class="tn-split-placeholder" id="tnSplitPlaceholder">
+          <div class="tn-split-placeholder-icon">📋</div>
+          <p>토너먼트를 선택하면 상세 정보가 여기에 표시됩니다</p>
+        </div>
+        <div class="tn-split-detail" id="tnSplitDetail" style="display:none;"></div>
+      </div>
     </div>
   </div>
 </div>
 
-<!-- Tournament Detail Page -->
+<!-- Tournament Detail (embedded as right panel on PC, standalone on mobile) -->
 <div class="page-container" id="page-tn-detail">
   <div class="content-wrapper">
-    <div class="gs-back" onclick="switchPage('tournament')"><span>←</span> <span data-i18n="gs_back">돌아가기</span></div>
+    <div class="gs-back td-mobile-only" onclick="switchPage('tournament')"><span>←</span> <span data-i18n="gs_back">돌아가기</span></div>
     <div class="td-header">
       <h2 id="tdTournamentName"></h2>
       <span class="tn-badge" id="tdStatusBadge"></span>

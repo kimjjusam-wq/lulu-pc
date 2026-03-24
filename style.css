@@ -772,6 +772,32 @@ img.shop-tab-emoji { width:24px; height:24px; object-fit:contain; }
 /* ===================== */
 /* Tournament Page       */
 /* ===================== */
+/* Tournament split layout (PC: 50/50, Mobile: list only) */
+.tn-split-layout { display:flex; gap:24px; }
+.tn-split-left { flex:1; min-width:0; }
+.tn-split-right { flex:1; min-width:0; position:sticky; top:24px; align-self:flex-start; max-height:calc(100vh - 48px); overflow-y:auto; border-radius:18px; border:1px solid var(--border-color); background:var(--bg-card); margin-bottom:48px; }
+.tn-split-right::-webkit-scrollbar { width:4px; }
+.tn-split-right::-webkit-scrollbar-thumb { background:rgba(255,255,255,0.1); border-radius:4px; }
+.tn-split-placeholder { display:flex; flex-direction:column; align-items:center; justify-content:center; padding:80px 24px; color:var(--text-muted); text-align:center; }
+.tn-split-placeholder-icon { font-size:48px; margin-bottom:16px; opacity:0.4; }
+.tn-split-placeholder p { font-size:14px; }
+.tn-split-detail { padding:24px; }
+.tn-split-detail .content-wrapper { max-width:none; padding:0; }
+.tn-split-detail .td-tabs { margin-left:0; margin-right:0; max-width:none; }
+.tn-split-detail .td-tab-content { max-width:none; }
+.tn-split-detail .td-bottom-bar { max-width:none; position:static; background:none; padding:16px 0 0; }
+.tn-card-active { border-color:rgba(249,98,23,0.5); background:rgba(249,98,23,0.05); }
+.td-mobile-only { display:block; }
+
+@media (max-width:1023px) {
+  .tn-split-layout { flex-direction:column; }
+  .tn-split-right { display:none; }
+}
+@media (min-width:1024px) {
+  .td-mobile-only { display:none; }
+  .tn-tab-content { max-width:none; }
+}
+
 .tn-tabs { display:flex; gap:6px; margin-bottom:24px; background:var(--bg-card); border:1px solid var(--border-color); border-radius:14px; padding:5px; }
 .tn-tab { flex:1; padding:10px 16px; border:none; border-radius:10px; font-size:14px; font-weight:700; cursor:pointer; background:transparent; color:var(--text-muted); transition:all 0.25s; font-family:'Pretendard Variable',Pretendard,sans-serif; position:relative; display:inline-flex; align-items:center; justify-content:center; gap:6px; }
 .tn-tab:hover { color:var(--text-secondary); background:rgba(255,255,255,0.03); }
@@ -1223,6 +1249,8 @@ body.light-mode .mb-item-reward { background:rgba(0,0,0,0.05); }
 body.light-mode .my-nickname-edit { background:rgba(0,0,0,0.05); }
 /* Bottom bar gradient */
 body.light-mode .td-bottom-bar { background:linear-gradient(to top, var(--bg-dark) 60%, transparent); }
+body.light-mode .tn-split-right { border-color:rgba(0,0,0,0.1); background:var(--bg-card); }
+body.light-mode .tn-card-active { border-color:rgba(249,98,23,0.4); background:rgba(249,98,23,0.04); }
 /* Login logo */
 body.light-mode .login-logo { box-shadow:0 8px 30px rgba(0,0,0,0.08); }
 /* Avatar */

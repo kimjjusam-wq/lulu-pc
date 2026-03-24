@@ -1854,22 +1854,22 @@ document.getElementById('dtpModal').addEventListener('click', function(e) {
 
 // === TOURNAMENT ===
 const demoTournaments = [
-  { id:1,  name:'POKER LULU Weekly Championship', status:'registering', startType:'manual', fee:'free', players:3, maxPlayers:10, prize:'500,000G', registered:true, details:{ blindLevel:1, unique:3, reentry:0, startChips:'10000', tableSize:8, rebuyCount:0, timebankSec:10, extraTimeSec:5, extraTimeHands:10, actionTimeSec:15, anteRate:'0.1BB', anteType:'All', cancelReg:'불가', lateRegLevel:8, blindMin:10, breakMin:5 } },
-  { id:2,  name:'Friday Night Holdem', status:'registering', startType:'manual', fee:'free', players:1, maxPlayers:6, prize:'-', registered:false, details:{ blindLevel:1, unique:1, reentry:0, startChips:'5000', tableSize:6, rebuyCount:0, timebankSec:10, extraTimeSec:5, extraTimeHands:10, actionTimeSec:15, anteRate:'0.1BB', anteType:'All', cancelReg:'허용', lateRegLevel:6, blindMin:8, breakMin:4 } },
-  { id:3,  name:'POKER LULU User Custom Game', status:'registering', startType:'manual', fee:'free', players:0, maxPlayers:8, prize:'-', registered:false, details:{ blindLevel:1, unique:0, reentry:0, startChips:'10000', tableSize:8, rebuyCount:0, timebankSec:10, extraTimeSec:5, extraTimeHands:10, actionTimeSec:15, anteRate:'0.1BB', anteType:'All', cancelReg:'허용', lateRegLevel:8, blindMin:10, breakMin:5 } },
-  { id:4,  name:'High Roller Tournament', status:'ongoing', startType:'2025-02-24 20:00', fee:'10,000G', players:8, maxPlayers:10, prize:'1,000,000G', registered:true, details:{ blindLevel:5, unique:8, reentry:2, startChips:'50000', tableSize:9, rebuyCount:3, timebankSec:30, extraTimeSec:10, extraTimeHands:15, actionTimeSec:20, anteRate:'0.2BB', anteType:'All', cancelReg:'불가', lateRegLevel:5, blindMin:12, breakMin:5 } },
-  { id:5,  name:'Beginner Friendly Open', status:'registering', startType:'manual', fee:'free', players:5, maxPlayers:12, prize:'100,000G', registered:false, details:{ blindLevel:1, unique:5, reentry:0, startChips:'8000', tableSize:9, rebuyCount:0, timebankSec:15, extraTimeSec:5, extraTimeHands:10, actionTimeSec:15, anteRate:'0.1BB', anteType:'All', cancelReg:'허용', lateRegLevel:8, blindMin:10, breakMin:5 } },
-  { id:6,  name:'POKER LULU Daily Freeroll', status:'registering', startType:'2025-02-25 12:00', fee:'free', players:12, maxPlayers:50, prize:'200,000G', registered:true, details:{ blindLevel:1, unique:12, reentry:0, startChips:'10000', tableSize:9, rebuyCount:0, timebankSec:10, extraTimeSec:5, extraTimeHands:10, actionTimeSec:15, anteRate:'0.1BB', anteType:'All', cancelReg:'불가', lateRegLevel:10, blindMin:10, breakMin:5 } },
-  { id:7,  name:'VIP Invitational', status:'ongoing', startType:'2025-02-24 19:00', fee:'50,000G', players:6, maxPlayers:6, prize:'5,000,000G', registered:false, details:{ blindLevel:7, unique:6, reentry:3, startChips:'100000', tableSize:6, rebuyCount:5, timebankSec:60, extraTimeSec:15, extraTimeHands:20, actionTimeSec:25, anteRate:'0.5BB', anteType:'All', cancelReg:'불가', lateRegLevel:4, blindMin:15, breakMin:5 } },
-  { id:8,  name:'POKER LULU User Custom Game', status:'registering', startType:'manual', fee:'free', players:2, maxPlayers:6, prize:'-', registered:false },
-  { id:9,  name:'Sunday Special MTT', status:'finished', startType:'2025-02-23 18:00', fee:'5,000G', players:20, maxPlayers:20, prize:'2,000,000G', registered:true },
-  { id:10, name:'Turbo Knockout Bounty', status:'registering', startType:'2025-02-26 21:00', fee:'20,000G', players:0, maxPlayers:16, prize:'3,000,000G', registered:false },
-  { id:11, name:'Saturday Night Showdown', status:'finished', startType:'2025-02-22 20:00', fee:'10,000G', players:16, maxPlayers:16, prize:'1,500,000G', registered:true },
-  { id:12, name:'POKER LULU Grand Prix #3', status:'finished', startType:'2025-02-20 19:00', fee:'25,000G', players:32, maxPlayers:32, prize:'8,000,000G', registered:false },
-  { id:13, name:'Mini Freeroll Championship', status:'finished', startType:'2025-02-19 12:00', fee:'free', players:50, maxPlayers:50, prize:'500,000G', registered:true },
-  { id:14, name:'High Stakes Deep Stack', status:'finished', startType:'2025-02-18 21:00', fee:'50,000G', players:10, maxPlayers:10, prize:'5,000,000G', registered:false },
-  { id:15, name:'Weekday Express Turbo', status:'finished', startType:'2025-02-17 18:00', fee:'3,000G', players:24, maxPlayers:24, prize:'600,000G', registered:true },
-  { id:16, name:'POKER LULU Monthly Final', status:'finished', startType:'2025-02-15 19:00', fee:'100,000G', players:64, maxPlayers:64, prize:'20,000,000G', registered:false },
+  { id:1,  event:'A', name:'POKER LULU Weekly Championship', status:'registering', startType:'manual', fee:'free', players:3, maxPlayers:10, prize:'500,000G', registered:true, details:{ blindLevel:1, unique:3, reentry:0, startChips:'10000', tableSize:8, rebuyCount:0, timebankSec:10, extraTimeSec:5, extraTimeHands:10, actionTimeSec:15, anteRate:'0.1BB', anteType:'All', cancelReg:'불가', lateRegLevel:8, blindMin:10, breakMin:5 } },
+  { id:2,  event:'A', name:'Friday Night Holdem', status:'registering', startType:'manual', fee:'free', players:1, maxPlayers:6, prize:'-', registered:false, details:{ blindLevel:1, unique:1, reentry:0, startChips:'5000', tableSize:6, rebuyCount:0, timebankSec:10, extraTimeSec:5, extraTimeHands:10, actionTimeSec:15, anteRate:'0.1BB', anteType:'All', cancelReg:'허용', lateRegLevel:6, blindMin:8, breakMin:4 } },
+  { id:3,  event:'A', name:'POKER LULU User Custom Game', status:'registering', startType:'manual', fee:'free', players:0, maxPlayers:8, prize:'-', registered:false, details:{ blindLevel:1, unique:0, reentry:0, startChips:'10000', tableSize:8, rebuyCount:0, timebankSec:10, extraTimeSec:5, extraTimeHands:10, actionTimeSec:15, anteRate:'0.1BB', anteType:'All', cancelReg:'허용', lateRegLevel:8, blindMin:10, breakMin:5 } },
+  { id:4,  event:'A', name:'High Roller Tournament', status:'ongoing', startType:'2025-02-24 20:00', fee:'10,000G', players:8, maxPlayers:10, prize:'1,000,000G', registered:true, details:{ blindLevel:5, unique:8, reentry:2, startChips:'50000', tableSize:9, rebuyCount:3, timebankSec:30, extraTimeSec:10, extraTimeHands:15, actionTimeSec:20, anteRate:'0.2BB', anteType:'All', cancelReg:'불가', lateRegLevel:5, blindMin:12, breakMin:5 } },
+  { id:5,  event:'A', name:'Beginner Friendly Open', status:'registering', startType:'manual', fee:'free', players:5, maxPlayers:12, prize:'100,000G', registered:false, details:{ blindLevel:1, unique:5, reentry:0, startChips:'8000', tableSize:9, rebuyCount:0, timebankSec:15, extraTimeSec:5, extraTimeHands:10, actionTimeSec:15, anteRate:'0.1BB', anteType:'All', cancelReg:'허용', lateRegLevel:8, blindMin:10, breakMin:5 } },
+  { id:6,  event:'B', name:'POKER LULU Daily Freeroll', status:'registering', startType:'2025-02-25 12:00', fee:'free', players:12, maxPlayers:50, prize:'200,000G', registered:true, details:{ blindLevel:1, unique:12, reentry:0, startChips:'10000', tableSize:9, rebuyCount:0, timebankSec:10, extraTimeSec:5, extraTimeHands:10, actionTimeSec:15, anteRate:'0.1BB', anteType:'All', cancelReg:'불가', lateRegLevel:10, blindMin:10, breakMin:5 } },
+  { id:7,  event:'B', name:'VIP Invitational', status:'ongoing', startType:'2025-02-24 19:00', fee:'50,000G', players:6, maxPlayers:6, prize:'5,000,000G', registered:false, details:{ blindLevel:7, unique:6, reentry:3, startChips:'100000', tableSize:6, rebuyCount:5, timebankSec:60, extraTimeSec:15, extraTimeHands:20, actionTimeSec:25, anteRate:'0.5BB', anteType:'All', cancelReg:'불가', lateRegLevel:4, blindMin:15, breakMin:5 } },
+  { id:8,  event:'B', name:'POKER LULU User Custom Game', status:'registering', startType:'manual', fee:'free', players:2, maxPlayers:6, prize:'-', registered:false },
+  { id:9,  event:'B', name:'Sunday Special MTT', status:'finished', startType:'2025-02-23 18:00', fee:'5,000G', players:20, maxPlayers:20, prize:'2,000,000G', registered:true },
+  { id:10, event:'B', name:'Turbo Knockout Bounty', status:'registering', startType:'2025-02-26 21:00', fee:'20,000G', players:0, maxPlayers:16, prize:'3,000,000G', registered:false },
+  { id:11, event:'A', name:'Saturday Night Showdown', status:'finished', startType:'2025-02-22 20:00', fee:'10,000G', players:16, maxPlayers:16, prize:'1,500,000G', registered:true },
+  { id:12, event:'B', name:'POKER LULU Grand Prix #3', status:'finished', startType:'2025-02-20 19:00', fee:'25,000G', players:32, maxPlayers:32, prize:'8,000,000G', registered:false },
+  { id:13, event:'A', name:'Mini Freeroll Championship', status:'finished', startType:'2025-02-19 12:00', fee:'free', players:50, maxPlayers:50, prize:'500,000G', registered:true },
+  { id:14, event:'B', name:'High Stakes Deep Stack', status:'finished', startType:'2025-02-18 21:00', fee:'50,000G', players:10, maxPlayers:10, prize:'5,000,000G', registered:false },
+  { id:15, event:'A', name:'Weekday Express Turbo', status:'finished', startType:'2025-02-17 18:00', fee:'3,000G', players:24, maxPlayers:24, prize:'600,000G', registered:true },
+  { id:16, event:'B', name:'POKER LULU Monthly Final', status:'finished', startType:'2025-02-15 19:00', fee:'100,000G', players:64, maxPlayers:64, prize:'20,000,000G', registered:false },
 ];
 
 function switchTournamentTab(tab) {
@@ -1879,50 +1879,57 @@ function switchTournamentTab(tab) {
   document.getElementById('tn-' + tab).classList.add('active');
 }
 
-function tnRenderList() {
+function tnBuildCard(item) {
   const lang = currentLang || 'ko';
   const t = i18n[lang] || i18n.ko;
-
   const statusMap = {
     registering: { label: t.tn_status_registering || '등록중', cls: 'registering' },
     ongoing:     { label: t.tn_status_ongoing || '진행중', cls: 'ongoing' },
     finished:    { label: t.tn_status_finished || '종료', cls: 'finished' },
   };
-  const feeLabel = t.tn_fee_free || '무료';
+  const s = statusMap[item.status] || statusMap.registering;
+  const fee = item.fee === 'free' ? (t.tn_fee_free || '무료') : item.fee;
+  const startVal = item.startType === 'manual' ? (t.tn_manual_start || '수동 시작') : item.startType;
   const startsLabel = t.tn_starts_in || 'Starts In';
-  const manualLabel = t.tn_manual_start || '수동 시작';
+  const activeClass = (currentTnDetailId === item.id) ? ' tn-card-active' : '';
+  return `<div class="tn-card${activeClass}" onclick="openTnDetail(${item.id})">
+    <div class="tn-card-left">
+      <span class="tn-badge ${s.cls}">${s.label}</span>
+      <span class="tn-starts-label">${startsLabel}</span>
+      <span class="tn-starts-value">${startVal}</span>
+    </div>
+    <div class="tn-card-right">
+      <div class="tn-name">${item.name}</div>
+      <div class="tn-meta">
+        <span class="tn-meta-item"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg></span>
+        <span class="tn-meta-item">${fee}</span>
+        <span class="tn-meta-item"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg> ${item.players}/${item.maxPlayers}</span>
+        <span class="tn-meta-item"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M6 9H4.5a2.5 2.5 0 0 1 0-5C7 4 7 7 7 7"/><path d="M18 9h1.5a2.5 2.5 0 0 0 0-5C17 4 17 7 17 7"/><path d="M4 22h16"/><path d="M10 14.66V17c0 .55-.47.98-.97 1.21C7.85 18.75 7 20.24 7 22"/><path d="M14 14.66V17c0 .55.47.98.97 1.21C16.15 18.75 17 20.24 17 22"/><path d="M18 2H6v7a6 6 0 0 0 12 0V2Z"/></svg> ${item.prize}</span>
+      </div>
+    </div>
+  </div>`;
+}
 
-  function buildCard(item) {
-    const s = statusMap[item.status] || statusMap.registering;
-    const fee = item.fee === 'free' ? feeLabel : item.fee;
-    const startVal = item.startType === 'manual' ? manualLabel : item.startType;
-    return `<div class="tn-card" onclick="openTnDetail(${item.id})">
-      <div class="tn-card-left">
-        <span class="tn-badge ${s.cls}">${s.label}</span>
-        <span class="tn-starts-label">${startsLabel}</span>
-        <span class="tn-starts-value">${startVal}</span>
-      </div>
-      <div class="tn-card-right">
-        <div class="tn-name">${item.name}</div>
-        <div class="tn-meta">
-          <span class="tn-meta-item"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg></span>
-          <span class="tn-meta-item">${fee}</span>
-          <span class="tn-meta-item"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg> ${item.players}/${item.maxPlayers}</span>
-          <span class="tn-meta-item"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M6 9H4.5a2.5 2.5 0 0 1 0-5C7 4 7 7 7 7"/><path d="M18 9h1.5a2.5 2.5 0 0 0 0-5C17 4 17 7 17 7"/><path d="M4 22h16"/><path d="M10 14.66V17c0 .55-.47.98-.97 1.21C7.85 18.75 7 20.24 7 22"/><path d="M14 14.66V17c0 .55.47.98.97 1.21C16.15 18.75 17 20.24 17 22"/><path d="M18 2H6v7a6 6 0 0 0 12 0V2Z"/></svg> ${item.prize}</span>
-        </div>
-      </div>
-    </div>`;
-  }
+function tnRenderList() {
+  const t = i18n[currentLang] || i18n.ko;
+  const emptyMsg = t.tn_empty || '등록된 토너먼트가 없습니다';
 
   // 전체 리스트
-  const allHtml = demoTournaments.map(buildCard).join('');
-  document.getElementById('tnAllList').innerHTML = allHtml;
+  var allEl = document.getElementById('tnAllList');
+  if (allEl) allEl.innerHTML = demoTournaments.length ? demoTournaments.map(tnBuildCard).join('') : '<div class="tn-empty">' + emptyMsg + '</div>';
 
-  // 내 토너먼트 리스트
-  const myItems = demoTournaments.filter(item => item.registered);
-  const emptyMsg = t.tn_empty || '등록된 토너먼트가 없습니다';
-  const myHtml = myItems.length ? myItems.map(buildCard).join('') : `<div class="tn-empty">${emptyMsg}</div>`;
-  document.getElementById('tnMyList').innerHTML = myHtml;
+  // 이벤트별 리스트
+  ['A', 'B'].forEach(function(ev) {
+    var items = demoTournaments.filter(function(item) { return item.event === ev; });
+    var el = document.getElementById('tnEvent' + ev + 'List');
+    if (el) {
+      el.innerHTML = items.length ? items.map(tnBuildCard).join('') : '<div class="tn-empty">' + emptyMsg + '</div>';
+    }
+  });
+}
+
+function tnIsPcSplit() {
+  return window.innerWidth >= 1024 && document.getElementById('tnSplitRight');
 }
 
 // === TOURNAMENT DETAIL PAGE ===
@@ -1931,7 +1938,23 @@ let currentTnDetailId = null;
 
 function openTnDetail(tournamentId) {
   currentTnDetailId = tournamentId;
-  switchPage('tn-detail');
+  if (tnIsPcSplit()) {
+    // PC: 오른쪽 패널에 상세 표시
+    var detailPage = document.getElementById('page-tn-detail');
+    var splitDetail = document.getElementById('tnSplitDetail');
+    var placeholder = document.getElementById('tnSplitPlaceholder');
+    if (detailPage && splitDetail) {
+      splitDetail.innerHTML = detailPage.querySelector('.content-wrapper').innerHTML;
+      splitDetail.style.display = 'block';
+      if (placeholder) placeholder.style.display = 'none';
+      tdRenderDetailInline(splitDetail);
+    }
+    // 리스트에서 선택 카드 하이라이트
+    tnRenderList();
+  } else {
+    // 모바일: 기존 페이지 전환
+    switchPage('tn-detail');
+  }
 }
 
 function tdRenderDetail() {
@@ -1996,6 +2019,124 @@ function tdRenderDetail() {
 
   // 첫 번째 탭으로 리셋
   switchTnDetailTab('info');
+}
+
+// PC 분할뷰용: 오른쪽 패널 안에서 상세 렌더링
+function tdRenderDetailInline(container) {
+  var t = i18n[currentLang] || i18n.ko;
+  var item = demoTournaments.find(function(tn) { return tn.id === currentTnDetailId; });
+  if (!item) return;
+
+  // 모바일 전용 뒤로가기 숨기기
+  var backBtn = container.querySelector('.td-mobile-only');
+  if (backBtn) backBtn.style.display = 'none';
+
+  // 헤더
+  container.querySelector('#tdTournamentName').textContent = item.name;
+  var statusMap = {
+    registering: { label: t.tn_status_registering || '등록중', cls: 'registering' },
+    ongoing: { label: t.tn_status_ongoing || '진행중', cls: 'ongoing' },
+    finished: { label: t.tn_status_finished || '종료', cls: 'finished' },
+  };
+  var s = statusMap[item.status] || statusMap.registering;
+  var badge = container.querySelector('#tdStatusBadge');
+  badge.textContent = s.label;
+  badge.className = 'tn-badge ' + s.cls;
+
+  var details = item.details || {};
+  var blindLv = details.blindLevel || 1;
+  var bl = defaultBlindLevels[blindLv - 1] || defaultBlindLevels[0];
+  var nextLv = blindLv + 1;
+  var nextBl = defaultBlindLevels[blindLv] || defaultBlindLevels[defaultBlindLevels.length - 1];
+  container.querySelector('#tdBlinds').textContent = 'Lv.' + blindLv + ' ' + bl.sb.toLocaleString() + '/' + bl.bb.toLocaleString() + '(' + bl.ante + ')[-]';
+  container.querySelector('#tdNext').textContent = 'Lv.' + nextLv + ' ' + nextBl.sb.toLocaleString() + '/' + nextBl.bb.toLocaleString() + '(' + nextBl.ante + ')';
+  container.querySelector('#tdPlayersInfo').textContent = item.players + ' / ' + item.maxPlayers;
+  container.querySelector('#tdUniqueReentry').textContent = (details.unique || item.players) + ' | ' + (details.reentry || 0);
+
+  var feeLabel = item.fee === 'free' ? (t.tn_fee_free || '무료') : item.fee;
+  container.querySelector('#tdBuyin').textContent = feeLabel;
+  var startVal = item.startType === 'manual' ? (t.tn_manual_start || '호스트 수동시작') : item.startType;
+  container.querySelector('#tdStartTime').textContent = startVal;
+  var startChipsNum = parseInt(String(details.startChips || '10000').replace(/,/g, ''));
+  var bbCount = Math.round(startChipsNum / bl.bb);
+  container.querySelector('#tdStartChips').textContent = (startChipsNum >= 10000 ? (startChipsNum / 10000) + '만' : startChipsNum.toLocaleString()) + ' (' + bbCount + 'BB)';
+  container.querySelector('#tdLateReg').textContent = (details.lateRegLevel || 8) + (t.td_late_reg_suffix || '레벨 이전');
+  container.querySelector('#tdTableType').textContent = (details.tableSize || item.maxPlayers) + (t.td_table_size_suffix || '인');
+  container.querySelector('#tdRebuy').textContent = String(details.rebuyCount != null ? details.rebuyCount : 0);
+  container.querySelector('#tdTimebank').textContent = (details.timebankSec || 10) + ' ' + (t.td_sec || '초');
+  container.querySelector('#tdExtraTime').textContent = (details.extraTimeSec || 5) + ' ' + (t.td_sec || '초') + ' / ' + (details.extraTimeHands || 10) + ' ' + (t.td_hands || '핸드 수');
+  container.querySelector('#tdActionTime').textContent = (details.actionTimeSec || 15) + ' ' + (t.td_sec || '초');
+  container.querySelector('#tdAnte').textContent = (details.anteRate || '0.1BB') + ' / ' + (details.anteType || 'All');
+  container.querySelector('#tdCancelReg').textContent = details.cancelReg || (t.td_not_allowed || '불가');
+  container.querySelector('#tdBlindInterval').textContent = (details.blindMin || 10) + ' / ' + (details.breakMin || 5);
+
+  // 플레이어
+  var playersText = (t.td_players_label || '참가자') + ' ' + item.players + '/' + item.maxPlayers;
+  container.querySelector('#tdPlayersCount').textContent = playersText;
+  tdRenderPlayerListIn(container, item);
+  tdRenderBlindTableIn(container);
+  tdRenderPayoutTableIn(container, item);
+  tdUpdateButtonsIn(container, item);
+
+  // 컨테이너 내부 렌더링 헬퍼
+  function tdRenderPlayerListIn(ct, itm) {
+    var playerNames = ['Player_Kim','LuckyAce77','PokerKing','BluffMaster','RoyalFlush',
+      'CardShark99','AllInHero','ChipLeader','NightOwl','HighRoller_J','ProPlayer_X','SmartBet'];
+    var demoPlayers = [];
+    for (var i = 0; i < itm.players; i++) {
+      demoPlayers.push({ name: playerNames[i % playerNames.length], level: Math.floor(Math.random()*20)+5, chips: (Math.floor(Math.random()*50)+10)*1000 });
+    }
+    var list = ct.querySelector('#tdPlayerList');
+    if (!list) return;
+    if (demoPlayers.length === 0) { list.innerHTML = '<div class="tn-empty">' + (t.td_no_players || '아직 참가자가 없습니다') + '</div>'; return; }
+    list.innerHTML = demoPlayers.map(function(p, idx) {
+      return '<div class="td-player-item"><div class="td-player-rank">'+(idx+1)+'</div><div class="td-player-avatar">👤</div><div class="td-player-info"><div class="td-player-name">'+p.name+'</div><div class="td-player-level">Lv.'+p.level+'</div></div><div class="td-player-chips">'+p.chips.toLocaleString()+'</div></div>';
+    }).join('');
+  }
+  function tdRenderBlindTableIn(ct) {
+    var tbody = ct.querySelector('#tdBlindTableBody');
+    if (!tbody) return;
+    tbody.innerHTML = defaultBlindLevels.map(function(row) {
+      return '<tr><td>'+row.lv+'</td><td>'+row.sb.toLocaleString()+' / '+row.bb.toLocaleString()+'</td><td>'+row.ante.toLocaleString()+'</td><td>'+row.time+'min</td></tr>';
+    }).join('');
+  }
+  function tdRenderPayoutTableIn(ct, itm) {
+    var totalEl = ct.querySelector('#tdPayoutTotal');
+    if (totalEl) totalEl.innerHTML = '<span class="td-payout-total-label">'+(t.td_total_prize||'총 상금')+'</span><span class="td-payout-total-value">'+itm.prize+'</span>';
+    var payouts = [{rank:'1st',percent:50},{rank:'2nd',percent:30},{rank:'3rd',percent:20}];
+    var prizeNum = parseInt(itm.prize.replace(/[^0-9]/g,''))||0;
+    var tbody = ct.querySelector('#tdPayoutTableBody');
+    if (tbody) tbody.innerHTML = payouts.map(function(p) {
+      return '<tr><td class="td-rank-cell">'+p.rank+'</td><td class="td-amount-cell">'+(prizeNum*p.percent/100).toLocaleString()+'G</td><td class="td-percent-cell">'+p.percent+'%</td></tr>';
+    }).join('');
+  }
+  function tdUpdateButtonsIn(ct, itm) {
+    var registerBtn = ct.querySelector('#tdRegisterBtn');
+    var spectateBtn = ct.querySelector('#tdSpectateBtn');
+    if (!registerBtn || !spectateBtn) return;
+    if (itm.status === 'finished') { registerBtn.style.display='none'; spectateBtn.style.display=''; return; }
+    registerBtn.style.display=''; spectateBtn.style.display='';
+    registerBtn.textContent = itm.registered ? (t.td_sit_down||'착석하기') : (t.td_register||'등록');
+  }
+
+  // 인라인 탭 전환 이벤트 바인딩
+  container.querySelectorAll('.td-tab').forEach(function(btn) {
+    btn.onclick = function() {
+      container.querySelectorAll('.td-tab').forEach(function(e) { e.classList.remove('active'); });
+      container.querySelectorAll('.td-tab-content').forEach(function(e) { e.classList.remove('active'); });
+      btn.classList.add('active');
+      var tabId = btn.getAttribute('data-td-tab');
+      container.querySelector('#td-' + tabId).classList.add('active');
+    };
+  });
+
+  // 첫 번째 탭 활성화
+  container.querySelectorAll('.td-tab').forEach(function(e) { e.classList.remove('active'); });
+  container.querySelectorAll('.td-tab-content').forEach(function(e) { e.classList.remove('active'); });
+  var firstTab = container.querySelector('.td-tab[data-td-tab="info"]');
+  var firstContent = container.querySelector('#td-info');
+  if (firstTab) firstTab.classList.add('active');
+  if (firstContent) firstContent.classList.add('active');
 }
 
 function switchTnDetailTab(tab) {
