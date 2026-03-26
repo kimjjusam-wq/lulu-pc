@@ -1499,7 +1499,7 @@ body.light-mode .theme-icon-moon { display:none; }
     font-size:11px;
     font-weight:700;
     letter-spacing:0.5px;
-    box-shadow:0 2px 12px rgba(0,0,0,0.3), inset 0 0 0 1px rgba(255,255,255,0.05);
+    box-shadow:0 2px 12px rgba(0,0,0,0.3), inset 0 0 0 1px rgba(255,255,255,0.07);
     cursor:pointer;
     -webkit-tap-highlight-color:transparent;
     transition:background 0.2s, transform 0.15s;
