@@ -1328,7 +1328,7 @@ body.light-mode .theme-icon-moon { display:none; }
     justify-content:center;
     gap:6px;
   }
-  .m-sb-app-icon { height:18px; width:18px; border-radius:50%; margin-left:4px; }
+  .m-sb-app-icon { height:18px; width:18px; border-radius:50%; margin-left:1px; }
   .m-sb-signal { height:12px; width:auto; }
   .m-sb-wifi { height:12px; width:auto; }
   .m-sb-battery { height:14px; width:auto; }
