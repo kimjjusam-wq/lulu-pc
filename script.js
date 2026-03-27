@@ -1305,10 +1305,15 @@ function toggleMobileStatusbar() {
   var sb = document.querySelector('.m-statusbar');
   var nav = document.querySelector('.m-nav');
   var fab = document.getElementById('mFabStatus');
+  var overlay = document.querySelector('.slide-menu-overlay');
+  var slide = document.querySelector('.slide-menu');
   if (!sb || !fab) return;
   var hidden = sb.style.display === 'none';
   sb.style.display = hidden ? '' : 'none';
   if (nav) nav.style.top = hidden ? '' : '0';
+  var slideTop = hidden ? '' : '64px';
+  if (overlay) overlay.style.top = slideTop;
+  if (slide) slide.style.top = slideTop;
   fab.classList.toggle('active', hidden);
   fab.textContent = hidden ? 'ON' : 'OFF';
 }
