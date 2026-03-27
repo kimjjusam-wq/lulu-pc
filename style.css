@@ -140,7 +140,7 @@ body {
 @keyframes pulse { 0%,100%{opacity:1;} 50%{opacity:0.4;} }
 
 .live-tables { margin-bottom:40px; }
-.tables-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:16px; }
+.tables-grid { display:grid; grid-template-columns:repeat(4,1fr); gap:16px; }
 .table-card { background:var(--bg-card); border:1px solid var(--border-color); border-radius:16px; padding:20px; cursor:pointer; transition:all 0.25s; }
 .table-card:hover { border-color:rgba(249,98,23,0.3); background:var(--bg-card-hover); transform:translateY(-2px); }
 .table-header { display:flex; align-items:center; justify-content:space-between; margin-bottom:14px; }
