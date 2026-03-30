@@ -54,7 +54,7 @@ body {
 /* BANNER */
 .hero-section { padding-top:32px; margin-bottom:20px; display:flex; align-items:center; justify-content:center; gap:8px; }
 .banner-carousel { position:relative; width:100%; max-width:calc(var(--content-width) - 48px); height:360px; border-radius:0; overflow:hidden; }
-.banner-carousel::after { content:''; position:absolute; inset:0; border-radius:0; border:2px solid transparent; background:linear-gradient(135deg,rgba(60,130,240,0.15),rgba(120,180,255,0.5),rgba(60,130,240,0.15)) border-box; -webkit-mask:linear-gradient(#fff 0 0) padding-box,linear-gradient(#fff 0 0) border-box; -webkit-mask-composite:xor; mask-composite:exclude; z-index:5; pointer-events:none; }
+.banner-carousel::after { content:''; position:absolute; inset:0; border-radius:0; border:1.5px solid transparent; background:linear-gradient(135deg,rgba(60,130,240,0.15),rgba(120,180,255,0.5),rgba(60,130,240,0.15)) border-box; -webkit-mask:linear-gradient(#fff 0 0) padding-box,linear-gradient(#fff 0 0) border-box; -webkit-mask-composite:xor; mask-composite:exclude; z-index:5; pointer-events:none; }
 .banner-track { position:relative; width:100%; height:100%; }
 .banner-slide { position:absolute; inset:0; opacity:0; transition:opacity 0.8s ease; background-size:cover; background-position:center; }
 .banner-slide.active { opacity:1; }
