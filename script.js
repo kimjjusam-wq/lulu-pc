@@ -1620,7 +1620,7 @@ function updateMyPage() {
 })();
 
 // === CAROUSEL ===
-const TOTAL_SLIDES = 6;
+const TOTAL_SLIDES = 5;
 let currentSlide = 0;
 let autoTimer;
 

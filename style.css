@@ -65,13 +65,11 @@ body {
 .banner-slide:nth-child(3) { background-image:url('images/banner3.png'); }
 .banner-slide:nth-child(4) { background-image:url('images/banner4.png'); }
 .banner-slide:nth-child(5) { background-image:url('images/banner5.png'); }
-.banner-slide:nth-child(6) { background-image:url('images/banner6.png'); }
 .banner-slide:nth-child(1)::before { background:rgba(15,5,32,0.6); }
 .banner-slide:nth-child(2)::before { background:rgba(10,22,40,0.6); }
 .banner-slide:nth-child(3)::before { background:rgba(26,10,0,0.55); }
 .banner-slide:nth-child(4)::before { background:rgba(5,10,21,0.6); }
 .banner-slide:nth-child(5)::before { background:rgba(21,5,10,0.55); }
-.banner-slide:nth-child(6)::before { background:rgba(5,8,16,0.6); }
 .banner-content { position:absolute; inset:0; display:flex; align-items:center; justify-content:center; flex-direction:column; gap:6px; padding:20px 80px 50px; z-index:2; }
 .banner-badge { margin-top:8px; background:rgba(249,98,23,0.2); border:1px solid rgba(249,98,23,0.4); padding:6px 16px; border-radius:20px; font-size:12px; font-weight:700; color:#fb923c; letter-spacing:1px; text-transform:uppercase; }
 .banner-title { font-size:56px; font-weight:900; text-align:center; line-height:1.15; letter-spacing:-1px; }
@@ -1468,9 +1466,9 @@ body.light-mode .theme-icon-moon { display:none; }
   .hero-section { padding-top:0; margin-bottom:0; gap:0; }
   .banner-carousel { width:100%; height:200px; border-radius:0; }
   .banner-carousel::after { inset:auto 0 0 0; border:none; border-bottom:1px solid transparent; border-radius:0; background:linear-gradient(90deg,rgba(60,130,240,0.15),rgba(120,180,255,0.5),rgba(60,130,240,0.15)) border-box; }
-  .banner-carousel .banner-track { display:flex; width:600%; height:100%; transition:transform 0.3s ease; }
+  .banner-carousel .banner-track { display:flex; width:500%; height:100%; transition:transform 0.3s ease; }
   .banner-carousel .banner-track.swiping { transition:none; }
-  .banner-slide { position:relative; flex:0 0 calc(100%/6); opacity:1 !important; transition:none; }
+  .banner-slide { position:relative; flex:0 0 calc(100%/5); opacity:1 !important; transition:none; }
   .banner-slide::before { backdrop-filter:none; -webkit-backdrop-filter:none; }
   .banner-slide, .banner-content { -webkit-backface-visibility:hidden; backface-visibility:hidden; will-change:transform; }
   .banner-content { padding:16px; gap:4px; }
