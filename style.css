@@ -58,7 +58,7 @@ body {
 .banner-slide { position:absolute; inset:0; opacity:0; transition:opacity 0.8s ease; background-size:cover; background-position:center; }
 .banner-slide.active { opacity:1; }
 .banner-slide::before { content:''; position:absolute; inset:0; z-index:1; }
-.banner-slide::after { content:''; position:absolute; inset:0; z-index:1; background:radial-gradient(ellipse at center, transparent 20%, rgba(0,0,0,0.6) 100%); }
+.banner-slide::after { content:''; position:absolute; inset:0; z-index:1; background:radial-gradient(ellipse at center, transparent 33%, rgba(10,10,18,1) 100%); }
 .banner-slide:nth-child(1) { background-image:url('images/banner1.png'); }
 .banner-slide:nth-child(2) { background-image:url('images/banner2.png'); }
 .banner-slide:nth-child(3) { background-image:url('images/banner3.png'); }
@@ -1273,7 +1273,7 @@ body.light-mode .theme-icon-moon { display:none; }
 /* ===================== */
 /* TABLET (769~930px)    */
 /* ===================== */
-@media (min-width: 769px) and (max-width: 930px) {
+@media (min-width: 769px) and (max-width: 960px) {
   .nav-logo svg { display:none; }
   .nav-logo::before { content:''; display:block; width:32px; height:32px; background:url('images/login_icon.svg') no-repeat center/contain; }
   .nav-coins { display:none !important; }
