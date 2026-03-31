@@ -1186,7 +1186,7 @@ function changeLang(lang) {
 
 // === 페이지 전환 ===
 function switchPage(p) {
-  if (p === 'my' && !getSession()) { p = 'login'; }
+  if ((p === 'my' || p === 'analytics') && !getSession()) { p = 'login'; }
   if (p === 'login') { showLogin(); }
   document.querySelectorAll('.page-container').forEach(e => e.classList.remove('active'));
   document.getElementById('page-' + p).classList.add('active');
