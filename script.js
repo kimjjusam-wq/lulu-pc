@@ -1627,6 +1627,10 @@ function updateAuthUI() {
     // 탭바 MY 아이콘을 아바타로 전환
     if (tabMyIcon) tabMyIcon.style.display = 'none';
     if (tabMyAvatar) { tabMyAvatar.style.display = ''; if (session.avatar) tabMyAvatar.src = 'images/' + session.avatar; }
+    var lobbyLive = document.getElementById('lobbyLiveTables');
+    var lobbyStats = document.getElementById('lobbyStats');
+    if (lobbyLive) lobbyLive.style.display = '';
+    if (lobbyStats) lobbyStats.style.display = '';
   } else {
     if (loginBtn) loginBtn.style.display = '';
     if (goldEl) goldEl.textContent = '0';
@@ -1639,6 +1643,10 @@ function updateAuthUI() {
     // 탭바 MY 아이콘을 기본 사람 아이콘으로
     if (tabMyIcon) tabMyIcon.style.display = '';
     if (tabMyAvatar) tabMyAvatar.style.display = 'none';
+    var lobbyLive = document.getElementById('lobbyLiveTables');
+    var lobbyStats = document.getElementById('lobbyStats');
+    if (lobbyLive) lobbyLive.style.display = 'none';
+    if (lobbyStats) lobbyStats.style.display = 'none';
   }
   mSyncNavCoins();
   updateAvatarReddot();

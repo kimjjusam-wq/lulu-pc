@@ -118,7 +118,7 @@
         <div class="m-game-item" role="button" tabindex="0" onclick="switchPage('tournament')"><div class="m-game-icon"><img loading="lazy" src="images/game_tournament.png" alt="토너먼트"></div><span class="m-game-name">토너먼트</span></div>
       </div>
     </section>
-    <section class="live-tables">
+    <section class="live-tables" id="lobbyLiveTables">
       <div class="section-header"><h2 class="section-title" data-i18n="lobby_live_tables">나의 게임</h2><span class="section-more" data-i18n="lobby_more" role="button" tabindex="0" onclick="switchPage('tournament')" style="cursor:pointer">재입장 →</span></div>
       <div class="tables-grid">
         <div class="table-card"><div class="table-header"><span class="table-name" data-i18n="table_rookie">홀덤</span><span class="table-live"><span class="table-live-dot"></span> LIVE</span></div><div class="table-meta"><div class="table-meta-row"><span class="table-meta-label" data-i18n="table_blind">블라인드</span><span class="table-meta-value">10/20</span></div><div class="table-meta-row"><span class="table-meta-label" data-i18n="table_players">플레이어</span><span class="table-meta-value">4/9</span></div><div class="table-meta-row"><span class="table-meta-label">스택</span><span class="table-meta-value"><img loading="lazy" src="images/icon_gold.png" class="currency-icon" alt="gold"> 32,450</span></div></div><button class="table-join-btn" onclick="enterLiveTable(4)" data-i18n="table_join">입장하기</button></div>
@@ -126,7 +126,7 @@
         <div class="table-card"><div class="table-header"><span class="table-name" data-i18n="table_vip">주말 챔피언십</span><span class="table-live"><span class="table-live-dot"></span> LIVE</span></div><div class="table-meta"><div class="table-meta-row"><span class="table-meta-label" data-i18n="table_blind">블라인드</span><span class="table-meta-value">400/800</span></div><div class="table-meta-row"><span class="table-meta-label" data-i18n="table_players">플레이어</span><span class="table-meta-value">12/48</span></div><div class="table-meta-row"><span class="table-meta-label" data-i18n="table_buyin">바이인</span><span class="table-meta-value"><img loading="lazy" src="images/icon_gold.png" class="currency-icon" alt="gold"> 50,000</span></div></div><button class="table-join-btn" onclick="enterLiveTable(4)" data-i18n="table_join">입장하기</button></div>
       </div>
     </section>
-    <section class="stats-section">
+    <section class="stats-section" id="lobbyStats">
       <div class="section-header"><h2 class="section-title" data-i18n="lobby_my_stats">내 통계 요약</h2><span class="section-more" role="button" tabindex="0" onclick="switchPage('analytics')" data-i18n="lobby_detail">자세히 →</span></div>
       <div class="stats-grid">
         <div class="stat-card" role="button" tabindex="0" onclick="switchPage('analytics')" style="cursor:pointer"><div class="stat-icon"><img loading="lazy" src="images/stat_games.png" alt="games"></div><div class="stat-info"><div class="stat-value">128</div><div class="stat-label" data-i18n="stat_total_games">총 게임</div></div></div>
