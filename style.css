@@ -1323,7 +1323,7 @@ body.light-mode .theme-icon-moon { display:none; }
   }
   .m-statusbar-time {
     font-size:17px;
-    font-weight:700;
+    font-weight:600;
     color:#fff;
     letter-spacing:0.3px;
   }

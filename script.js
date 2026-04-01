@@ -1326,7 +1326,8 @@ function toggleMobileStatusbar() {
     var now = new Date();
     var h = now.getHours();
     var m = now.getMinutes();
-    el.textContent = h + ':' + (m < 10 ? '0' : '') + m;
+    var h12 = h % 12 || 12;
+    el.textContent = h12 + ':' + (m < 10 ? '0' : '') + m;
   }
   updateStatusTime();
   setInterval(updateStatusTime, 30000);
