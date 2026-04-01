@@ -1248,6 +1248,34 @@ body.light-mode .theme-icon-moon { display:none; }
 .m-nav { display:none; }
 .m-tabbar { display:none; }
 .m-fab-status { display:none; }
+.m-fab-login {
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  position:fixed;
+  right:16px;
+  bottom:24px;
+  z-index:101;
+  width:44px;
+  height:44px;
+  border:none;
+  border-radius:50%;
+  background:rgba(30,30,50,0.65);
+  backdrop-filter:blur(12px);
+  -webkit-backdrop-filter:blur(12px);
+  color:#fff;
+  font-size:11px;
+  font-weight:700;
+  letter-spacing:0.5px;
+  box-shadow:0 2px 12px rgba(0,0,0,0.3), inset 0 0 0 1px rgba(255,255,255,0.07);
+  cursor:pointer;
+  -webkit-tap-highlight-color:transparent;
+  transition:background 0.2s, transform 0.15s;
+}
+.m-fab-login:active { transform:scale(0.9); }
+.m-fab-login.active { background:var(--accent-orange); box-shadow:0 2px 16px rgba(249,98,23,0.4); }
+body.light-mode .m-fab-login { background:rgba(255,255,255,0.8); color:#1a1a2e; box-shadow:0 2px 12px rgba(0,0,0,0.12); }
+body.light-mode .m-fab-login.active { background:var(--accent-orange); color:#fff; }
 .m-game-grid { display:none; }
 
 /* ===================== */
@@ -1462,6 +1490,9 @@ body.light-mode .theme-icon-moon { display:none; }
   .m-fab-status.active { background:var(--accent-orange); box-shadow:0 2px 16px rgba(249,98,23,0.4); }
   body.light-mode .m-fab-status { background:rgba(255,255,255,0.8); color:#1a1a2e; box-shadow:0 2px 12px rgba(0,0,0,0.12); }
   body.light-mode .m-fab-status.active { background:var(--accent-orange); color:#fff; }
+
+  /* --- Mobile: reposition login FAB above ON button --- */
+  .m-fab-login { bottom:162px; }
 
   /* --- Body padding for fixed tabbar --- */
   body { padding-bottom:94px; }

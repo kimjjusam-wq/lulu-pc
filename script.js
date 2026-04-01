@@ -1300,6 +1300,30 @@ function mSyncNavCoins() {
   if (diaEl && mDia) mDia.textContent = diaEl.textContent;
 }
 
+// === 가상 로그인 토글 FAB ===
+function toggleFakeLogin() {
+  var fab = document.getElementById('mFabLogin');
+  var session = getSession();
+  var loggedIn = !!session;
+  if (loggedIn) {
+    clearSession();
+  } else {
+    saveSession({
+      id: 'lulu_test',
+      nickname: '룰루Player',
+      email: 'test@lulu.com',
+      avatar: 'avatar_o.png',
+      joinDate: '2026-04-01',
+      gold: '1,250억',
+      diamond: '300'
+    });
+  }
+  fab.classList.toggle('active', !loggedIn);
+  fab.textContent = loggedIn ? 'OUT' : 'IN';
+  updateAuthUI();
+  updateMyPage();
+}
+
 // === 모바일 상태바 토글 FAB ===
 function toggleMobileStatusbar() {
   var sb = document.querySelector('.m-statusbar');
