@@ -1,16 +1,3 @@
-// === Theme Toggle ===
-(function() {
-  if (localStorage.getItem('lulu_theme') === 'light') {
-    document.body.classList.add('light-mode');
-  }
-})();
-
-function toggleTheme() {
-  document.body.classList.toggle('light-mode');
-  var isLight = document.body.classList.contains('light-mode');
-  localStorage.setItem('lulu_theme', isLight ? 'light' : 'dark');
-}
-
 // === i18n / 다국어 지원 ===
 const i18n = {
   ko: {
