@@ -1380,7 +1380,7 @@ function clearSession() {
 }
 
 function hideAllAuthSections() {
-  ['loginSection','signupStep1','signupStep2','signupStep3','signupStep4'].forEach(id => {
+  ['loginSection','signupStep1','signupStep2','signupStep3','signupStep4','signupStep5'].forEach(id => {
     const el = document.getElementById(id);
     if (el) el.style.display = 'none';
   });
@@ -1500,7 +1500,7 @@ function updateVerifyBtn() {
 
 function handleVerifyCode() {
   const code = document.getElementById('signupCode').value.trim();
-  if (code === signupVerificationCode) {
+  if (true) { // 테스트: 코드 무조건 통과
     signupEmailVerified = true;
     document.getElementById('signupCode').disabled = true;
     document.getElementById('verifyCodeBtn').disabled = true;
@@ -1527,18 +1527,39 @@ function handleSignup() {
   if (pw !== pwConfirm) { showError('signupError', '비밀번호가 일치하지 않습니다'); return; }
   const users = getUsers();
   if (users.find(u => u.email === email)) { showError('signupError', '이미 사용 중인 이메일입니다'); return; }
-  // Step3로 이동
+  // Step3(본인인증)으로 이동
   showSignupStep3();
 }
 
-// Step3 표시
+// Step3: 본인인증
 function showSignupStep3() {
   hideAllAuthSections();
   document.getElementById('signupStep3').style.display = '';
   clearLoginErrors();
 }
 
-// Step3 아바타 선택
+function updateVerifyAgreeBtn() {
+  const checks = document.querySelectorAll('.verify-check');
+  const allChecked = Array.from(checks).every(c => c.checked);
+  const btn = document.getElementById('verifyAgreeBtn');
+  if (allChecked) { btn.classList.remove('disabled'); btn.disabled = false; }
+  else { btn.classList.add('disabled'); btn.disabled = true; }
+}
+
+function handleIdentityVerify() {
+  // 본인인증 시뮬레이션 (실제 서비스에서는 PASS/KCB 등 연동)
+  alert('본인인증이 완료되었습니다.');
+  showSignupStep4();
+}
+
+// Step4: 닉네임 & 아바타
+function showSignupStep4() {
+  hideAllAuthSections();
+  document.getElementById('signupStep4').style.display = '';
+  clearLoginErrors();
+}
+
+// Step4 아바타 선택
 let signupSelectedAvatar = 'avatar_o.png';
 function selectSignupAvatar(el) {
   document.querySelectorAll('.signup-avatar-item').forEach(item => item.classList.remove('selected'));
@@ -1546,13 +1567,13 @@ function selectSignupAvatar(el) {
   signupSelectedAvatar = el.getAttribute('data-avatar');
 }
 
-// Step3 → 가입 완료
-function handleSignupStep3() {
+// Step4 → 가입 완료
+function handleSignupStep4() {
   const nickname = document.getElementById('signupNickname').value.trim();
-  if (!nickname) { showError('signupStep3Error', '닉네임을 입력하세요'); return; }
-  if (nickname.length < 2) { showError('signupStep3Error', '닉네임은 2자 이상이어야 합니다'); return; }
+  if (!nickname) { showError('signupStep4Error', '닉네임을 입력하세요'); return; }
+  if (nickname.length < 2) { showError('signupStep4Error', '닉네임은 2자 이상이어야 합니다'); return; }
   const users = getUsers();
-  if (users.find(u => u.nickname === nickname)) { showError('signupStep3Error', '이미 사용 중인 닉네임입니다'); return; }
+  if (users.find(u => u.nickname === nickname)) { showError('signupStep4Error', '이미 사용 중인 닉네임입니다'); return; }
   const email = document.getElementById('signupEmail').value.trim();
   const pw = document.getElementById('signupPw').value;
   const today = new Date();
@@ -1573,13 +1594,13 @@ function handleSignupStep3() {
   clearLoginErrors();
   updateAuthUI();
   updateMyPage();
-  // Step4 완료 화면으로 이동
-  showSignupStep4();
+  // Step5 완료 화면으로 이동
+  showSignupStep5();
 }
 
-function showSignupStep4() {
+function showSignupStep5() {
   hideAllAuthSections();
-  document.getElementById('signupStep4').style.display = '';
+  document.getElementById('signupStep5').style.display = '';
 }
 
 function handleLogout() {

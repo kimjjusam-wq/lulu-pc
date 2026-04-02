@@ -707,7 +707,18 @@ img.shop-tab-emoji { width:24px; height:24px; object-fit:contain; }
 .signup-avatar-check { display:none; position:absolute; bottom:0; right:0; width:18px; height:18px; border-radius:50%; background:var(--accent-emerald); align-items:center; justify-content:center; }
 .signup-avatar-item.selected .signup-avatar-check { display:flex; }
 
-/* Signup Step4 - Complete */
+/* Signup Step3 - Identity Verify */
+.verify-icon { text-align:center; margin-bottom:16px; padding-top:8px; }
+.verify-info { text-align:center; margin-bottom:20px; }
+.verify-desc { font-size:13px; color:var(--text-secondary); line-height:1.7; margin-bottom:12px; }
+.verify-notice { font-size:13px; color:var(--text-primary); line-height:1.7; font-weight:600; }
+.verify-divider { height:1px; background:var(--border-color); margin:16px 0; }
+.verify-agree-item { display:flex; align-items:center; gap:10px; padding:10px 0; font-size:13px; color:var(--text-secondary); cursor:pointer; user-select:none; }
+.verify-agree-item input[type="checkbox"] { display:none; }
+.verify-agree-item input[type="checkbox"]:checked + .term-check { background:var(--accent-orange); border-color:var(--accent-orange); }
+.verify-agree-item input[type="checkbox"]:checked + .term-check::after { display:block; }
+
+/* Signup Step5 - Complete */
 .signup-complete { display:flex; flex-direction:column; align-items:center; gap:12px; margin-bottom:32px; padding-top:8px; }
 .signup-complete-icon { margin-bottom:8px; }
 .signup-complete-title { font-size:22px; font-weight:800; color:var(--text-primary); }
