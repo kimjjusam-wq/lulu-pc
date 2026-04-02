@@ -121,8 +121,10 @@ body {
 .game-card-badge { display:none; }
 .game-card-name { font-size:18px; font-weight:800; margin-bottom:8px; }
 .game-card-desc { font-size:12px; color:var(--text-muted); line-height:1.5; margin-bottom:12px; }
-.game-card-players { display:inline-flex; align-items:center; gap:5px; font-size:11px; color:var(--accent-emerald); background:rgba(52,211,153,0.08); padding:4px 12px; border-radius:20px; }
-.player-dot { width:6px; height:6px; border-radius:50%; background:var(--accent-emerald); animation:pulse 2s infinite; }
+.game-card-players { display:inline-flex; align-items:center; gap:5px; font-size:10px; font-weight:800; color:var(--accent-orange); letter-spacing:0.5px; padding:0; background:none; }
+.player-dot { position:relative; width:6px; height:6px; border-radius:50%; background:var(--accent-orange); }
+.player-dot::after { content:''; position:absolute; inset:-3px; border-radius:50%; background:var(--accent-orange); opacity:0; animation:live-pulse 2s ease-out infinite; }
+.game-card-coming { font-size:10px; font-weight:600; color:var(--text-muted); letter-spacing:0.3px; }
 @keyframes pulse { 0%,100%{opacity:1;} 50%{opacity:0.4;} }
 
 .live-tables { margin-bottom:40px; }
@@ -132,8 +134,10 @@ body {
 .table-header { display:flex; align-items:center; justify-content:space-between; margin-bottom:14px; }
 .table-name { font-size:17px; font-weight:500; display:inline-flex; align-items:center; gap:12px; }
 .table-name .currency-icon { width:24px; height:24px; }
-.table-live { display:flex; align-items:center; gap:4px; font-size:11px; font-weight:600; color:var(--accent-emerald); background:rgba(16,185,129,0.1); padding:3px 8px; border-radius:10px; }
-.table-live-dot { width:5px; height:5px; border-radius:50%; background:var(--accent-emerald); }
+.table-live { display:flex; align-items:center; gap:5px; font-size:10px; font-weight:800; color:var(--accent-orange); letter-spacing:0.5px; padding:0; background:none; }
+.table-live-dot { position:relative; width:6px; height:6px; border-radius:50%; background:var(--accent-orange); }
+.table-live-dot::after { content:''; position:absolute; inset:-3px; border-radius:50%; background:var(--accent-orange); opacity:0; animation:live-pulse 2s ease-out infinite; }
+@keyframes live-pulse { 0% { opacity:0.5; transform:scale(0.8); } 70% { opacity:0; transform:scale(2.2); } 100% { opacity:0; transform:scale(2.2); } }
 .table-meta { display:flex; flex-direction:column; gap:8px; }
 .table-meta-row { display:flex; align-items:center; justify-content:space-between; font-size:13px; }
 .table-meta-label { color:var(--text-muted); }
