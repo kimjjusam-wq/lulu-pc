@@ -1569,14 +1569,25 @@ img.shop-tab-emoji { width:24px; height:24px; object-fit:contain; }
     border-bottom:1px solid var(--border-color) !important;
   }
   .shop-tabs .tab-slider, .tn-tabs .tab-slider, .td-tabs .tab-slider,
-  .gs-tabs .tab-slider, .tx-tabs .tab-slider, .mi-tabs .tab-slider, .faq-tabs .tab-slider { display:none; }
+  .gs-tabs .tab-slider, .tx-tabs .tab-slider, .mi-tabs .tab-slider, .faq-tabs .tab-slider {
+    background:transparent !important; border:none !important; border-radius:0 !important;
+    height:2px !important; top:auto !important; bottom:0 !important;
+    background:var(--accent-orange) !important;
+  }
   .shop-tab, .tn-tab, .td-tab, .gs-tab, .tx-tab, .mi-tab, .faq-tab {
     height:auto !important; padding:12px 0 !important; font-size:13px; border:none !important; border-radius:0 !important;
   }
+  .shop-tab:hover, .tn-tab:hover, .td-tab:hover, .gs-tab:hover,
+  .tx-tab:hover, .mi-tab:hover, .faq-tab:hover { background:transparent !important; }
   .shop-tab.active, .tn-tab.active, .td-tab.active, .gs-tab.active,
   .tx-tab.active, .mi-tab.active, .faq-tab.active {
     color:var(--accent-orange) !important; background:transparent !important;
     border-bottom:2px solid var(--accent-orange) !important;
+  }
+  .has-slider .shop-tab.active, .has-slider .tn-tab.active, .has-slider .td-tab.active,
+  .has-slider .gs-tab.active, .has-slider .tx-tab.active, .has-slider .mi-tab.active,
+  .has-slider .faq-tab.active {
+    border-bottom:2px solid transparent !important;
   }
   .shop-tabs { margin-bottom:16px; }
   .gs-tab { padding:12px 0 !important; }
