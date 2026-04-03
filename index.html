@@ -235,10 +235,10 @@
 
     <!-- 상점 탭 메뉴 -->
     <div class="shop-tabs">
-      <button class="shop-tab active" data-shop-tab="recommend" onclick="switchShopTab('recommend')" data-i18n="shop_tab_recommend"><img loading="lazy" class="shop-tab-emoji" src="images/shop_recommend.png" alt="추천"> 추천 상품</button>
-      <button class="shop-tab" data-shop-tab="gems" onclick="switchShopTab('gems')" data-i18n="shop_tab_gems"><img loading="lazy" class="shop-tab-emoji" src="images/icon_diamond_tab.png" alt="보석"> 보석</button>
-      <button class="shop-tab" data-shop-tab="avatar" onclick="switchShopTab('avatar')" data-i18n="shop_tab_avatar"><img loading="lazy" class="shop-tab-emoji" src="images/shop_avatar.png" alt="아바타"> 아바타</button>
-      <button class="shop-tab" data-shop-tab="items" onclick="switchShopTab('items')" data-i18n="shop_tab_items"><img loading="lazy" class="shop-tab-emoji" src="images/shop_item.png" alt="아이템"> 아이템</button>
+      <button class="shop-tab active" data-shop-tab="recommend" onclick="switchShopTab('recommend')">추천<span class="hide-mobile"> 상품</span></button>
+      <button class="shop-tab" data-shop-tab="gems" onclick="switchShopTab('gems')" data-i18n="shop_tab_gems">보석</button>
+      <button class="shop-tab" data-shop-tab="avatar" onclick="switchShopTab('avatar')" data-i18n="shop_tab_avatar">아바타</button>
+      <button class="shop-tab" data-shop-tab="items" onclick="switchShopTab('items')" data-i18n="shop_tab_items">아이템</button>
     </div>
 
     <!-- 추천 상품 탭 -->
@@ -1111,7 +1111,7 @@
           <button class="tn-tab active" data-tn-tab="all" onclick="switchTournamentTab('all')">전체</button>
           <button class="tn-tab" data-tn-tab="eventA" onclick="switchTournamentTab('eventA')">이벤트A</button>
           <button class="tn-tab" data-tn-tab="eventB" onclick="switchTournamentTab('eventB')">이벤트B</button>
-          <button class="tn-tab" onclick="switchPage('tn-history')"><span data-i18n="tn_tab_history">히스토리</span> <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7"/><path d="M7 7h10v10"/></svg></button>
+          <button class="tn-tab" data-tn-tab="eventC" onclick="switchTournamentTab('eventC')">이벤트C</button>
         </div>
         <div class="tn-tab-content active" id="tn-all">
           <div class="tn-list" id="tnAllList"></div>
@@ -1121,6 +1121,9 @@
         </div>
         <div class="tn-tab-content" id="tn-eventB">
           <div class="tn-list" id="tnEventBList"></div>
+        </div>
+        <div class="tn-tab-content" id="tn-eventC">
+          <div class="tn-list" id="tnEventCList"></div>
         </div>
       </div>
       <!-- 오른쪽: 토너먼트 상세 (PC에서만 인라인 표시) -->
@@ -1326,8 +1329,8 @@
     </div>
     <div class="tx-tabs" style="max-width:700px;margin:0 auto 16px;">
       <button class="tx-tab active" data-filter="all" onclick="txSwitchTab('all')" data-i18n="tx_tab_all">전체</button>
-      <button class="tx-tab" data-filter="gold" onclick="txSwitchTab('gold')"><img loading="lazy" src="images/icon_gold.png" class="currency-icon" alt="gold"> <span data-i18n="tx_tab_gold">골드</span></button>
-      <button class="tx-tab" data-filter="diamond" onclick="txSwitchTab('diamond')"><img loading="lazy" src="images/icon_diamond.png" class="currency-icon" alt="diamond"> <span data-i18n="tx_tab_diamond">다이아</span></button>
+      <button class="tx-tab" data-filter="gold" onclick="txSwitchTab('gold')" data-i18n="tx_tab_gold">골드</button>
+      <button class="tx-tab" data-filter="diamond" onclick="txSwitchTab('diamond')" data-i18n="tx_tab_diamond">다이아</button>
     </div>
     <div class="tx-list" id="txList" style="max-width:700px;margin:0 auto;padding-bottom:48px;"></div>
   </div>
@@ -1343,9 +1346,9 @@
     </div>
     <div class="mi-tabs" style="max-width:700px;margin:0 auto 16px;">
       <button class="mi-tab active" data-filter="all" onclick="miSwitchTab('all')" data-i18n="mi_tab_all">전체</button>
-      <button class="mi-tab" data-filter="table" onclick="miSwitchTab('table')"><img loading="lazy" class="mi-tab-emoji" src="images/emoji_table.png" alt="테이블"> <span data-i18n="mi_tab_table">테이블</span></button>
-      <button class="mi-tab" data-filter="card" onclick="miSwitchTab('card')"><img loading="lazy" class="mi-tab-emoji" src="images/emoji_card.png" alt="카드"> <span data-i18n="mi_tab_card">카드</span></button>
-      <button class="mi-tab" data-filter="emote" onclick="miSwitchTab('emote')"><img loading="lazy" class="mi-tab-emoji" src="images/emoji_emote.png" alt="이모티콘"> <span data-i18n="mi_tab_emote">이모티콘</span></button>
+      <button class="mi-tab" data-filter="table" onclick="miSwitchTab('table')" data-i18n="mi_tab_table">테이블</button>
+      <button class="mi-tab" data-filter="card" onclick="miSwitchTab('card')" data-i18n="mi_tab_card">카드</button>
+      <button class="mi-tab" data-filter="emote" onclick="miSwitchTab('emote')" data-i18n="mi_tab_emote">이모티콘</button>
     </div>
     <div class="mi-grid" id="miGrid" style="max-width:700px;margin:0 auto;padding-bottom:48px;"></div>
   </div>

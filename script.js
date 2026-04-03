@@ -1,3 +1,33 @@
+// === Tab Slider Animation ===
+function moveSlider(container, activeEl, prevActiveEl) {
+  if (!container || !activeEl) return;
+  var slider = container.querySelector('.tab-slider');
+  var isNew = !slider;
+  if (isNew) {
+    slider = document.createElement('div');
+    slider.className = 'tab-slider';
+    container.appendChild(slider);
+    container.classList.add('has-slider');
+    // 첫 클릭: 이전 활성 탭 위치에서 시작
+    var startEl = prevActiveEl || activeEl;
+    var cRect = container.getBoundingClientRect();
+    var sRect = startEl.getBoundingClientRect();
+    slider.style.transition = 'none';
+    slider.style.width = sRect.width + 'px';
+    slider.style.height = sRect.height + 'px';
+    slider.style.left = (sRect.left - cRect.left) + 'px';
+    slider.style.top = (sRect.top - cRect.top) + 'px';
+    slider.offsetHeight;
+    slider.style.transition = '';
+  }
+  var cRect = container.getBoundingClientRect();
+  var aRect = activeEl.getBoundingClientRect();
+  slider.style.width = aRect.width + 'px';
+  slider.style.height = aRect.height + 'px';
+  slider.style.left = (aRect.left - cRect.left) + 'px';
+  slider.style.top = (aRect.top - cRect.top) + 'px';
+}
+
 // === i18n / 다국어 지원 ===
 const i18n = {
   ko: {
@@ -1177,9 +1207,11 @@ function switchPage(p) {
   if (p === 'login') { showLogin(); }
   document.querySelectorAll('.page-container').forEach(e => e.classList.remove('active'));
   document.getElementById('page-' + p).classList.add('active');
+  const navLinks = document.querySelector('.nav-links');
+  const prevNav = navLinks && navLinks.querySelector('.nav-link.active');
   document.querySelectorAll('.nav-link').forEach(e => e.classList.remove('active'));
   const navLink = document.querySelector('.nav-link[data-page="' + p + '"]');
-  if (navLink) navLink.classList.add('active');
+  if (navLink) { navLink.classList.add('active'); moveSlider(navLinks, navLink, prevNav); }
   // 모바일 탭바 active 동기화
   mSyncTabbar(p);
   // 모바일 nav 로고/타이틀 전환
@@ -1822,10 +1854,14 @@ function toggleSlideMenu() {
 
 // === SHOP TABS ===
 function switchShopTab(tab) {
+  var container = document.querySelector('.shop-tabs');
+  var prev = container.querySelector('.shop-tab.active');
   document.querySelectorAll('.shop-tab').forEach(e => e.classList.remove('active'));
   document.querySelectorAll('.shop-tab-content').forEach(e => e.classList.remove('active'));
-  document.querySelector('.shop-tab[data-shop-tab="' + tab + '"]').classList.add('active');
+  const activeTab = document.querySelector('.shop-tab[data-shop-tab="' + tab + '"]');
+  activeTab.classList.add('active');
   document.getElementById('shop-' + tab).classList.add('active');
+  moveSlider(container, activeTab, prev);
 }
 
 // === AVATAR MODAL ===
@@ -1950,10 +1986,14 @@ const demoTournaments = [
 ];
 
 function switchTournamentTab(tab) {
+  var container = document.querySelector('.tn-tabs');
+  var prev = container.querySelector('.tn-tab.active');
   document.querySelectorAll('.tn-tab').forEach(e => e.classList.remove('active'));
   document.querySelectorAll('.tn-tab-content').forEach(e => e.classList.remove('active'));
-  document.querySelector('.tn-tab[data-tn-tab="' + tab + '"]').classList.add('active');
+  const activeTab = document.querySelector('.tn-tab[data-tn-tab="' + tab + '"]');
+  activeTab.classList.add('active');
   document.getElementById('tn-' + tab).classList.add('active');
+  moveSlider(container, activeTab, prev);
 }
 
 function tnBuildCard(item) {
@@ -2374,9 +2414,13 @@ function toggleFaq(el) {
 }
 
 function switchFaqTab(tab) {
+  var container = document.querySelector('.faq-tabs');
+  var prev = container.querySelector('.faq-tab.active');
   currentFaqTab = tab;
   document.querySelectorAll('.faq-tab').forEach(function(e) { e.classList.remove('active'); });
-  document.querySelector('.faq-tab[data-faq-tab="' + tab + '"]').classList.add('active');
+  const activeTab = document.querySelector('.faq-tab[data-faq-tab="' + tab + '"]');
+  activeTab.classList.add('active');
+  moveSlider(container, activeTab, prev);
   document.getElementById('faqSearchInput').value = '';
   faqFilter();
 }
@@ -2555,10 +2599,14 @@ function tkRenderList() {
 // === GAME SETUP ===
 
 function switchGameSetupTab(tab) {
+  var container = document.querySelector('.gs-tabs');
+  var prev = container.querySelector('.gs-tab.active');
   document.querySelectorAll('.gs-tab').forEach(e => e.classList.remove('active'));
   document.querySelectorAll('.gs-tab-content').forEach(e => e.classList.remove('active'));
-  document.querySelector('.gs-tab[data-gs-tab="' + tab + '"]').classList.add('active');
+  const activeTab = document.querySelector('.gs-tab[data-gs-tab="' + tab + '"]');
+  activeTab.classList.add('active');
   document.getElementById('gs-' + tab).classList.add('active');
+  moveSlider(container, activeTab, prev);
 }
 
 function gsStep(id, delta) {
@@ -3077,10 +3125,14 @@ const demoTransactions = [
 let txCurrentFilter = 'all';
 
 function txSwitchTab(filter) {
+  var container = document.querySelector('.tx-tabs');
+  var prev = container.querySelector('.tx-tab.active');
   txCurrentFilter = filter;
   document.querySelectorAll('.tx-tab').forEach(btn => {
     btn.classList.toggle('active', btn.dataset.filter === filter);
   });
+  const activeTab = document.querySelector('.tx-tab.active');
+  if (activeTab) moveSlider(container, activeTab, prev);
   txRenderList();
 }
 
@@ -3142,10 +3194,14 @@ const demoMyItems = [
 let miCurrentFilter = 'all';
 
 function miSwitchTab(filter) {
+  var container = document.querySelector('.mi-tabs');
+  var prev = container.querySelector('.mi-tab.active');
   miCurrentFilter = filter;
   document.querySelectorAll('.mi-tab').forEach(btn => {
     btn.classList.toggle('active', btn.dataset.filter === filter);
   });
+  const activeTab = document.querySelector('.mi-tab.active');
+  if (activeTab) moveSlider(container, activeTab, prev);
   miRenderList();
 }
 
