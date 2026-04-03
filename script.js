@@ -8,24 +8,19 @@ function moveSlider(container, activeEl, prevActiveEl) {
     slider.className = 'tab-slider';
     container.appendChild(slider);
     container.classList.add('has-slider');
-    // 첫 클릭: 이전 활성 탭 위치에서 시작
     var startEl = prevActiveEl || activeEl;
-    var cRect = container.getBoundingClientRect();
-    var sRect = startEl.getBoundingClientRect();
     slider.style.transition = 'none';
-    slider.style.width = sRect.width + 'px';
-    slider.style.height = sRect.height + 'px';
-    slider.style.left = (sRect.left - cRect.left) + 'px';
-    slider.style.top = (sRect.top - cRect.top) + 'px';
+    slider.style.width = startEl.offsetWidth + 'px';
+    slider.style.height = startEl.offsetHeight + 'px';
+    slider.style.left = startEl.offsetLeft + 'px';
+    slider.style.top = startEl.offsetTop + 'px';
     slider.offsetHeight;
     slider.style.transition = '';
   }
-  var cRect = container.getBoundingClientRect();
-  var aRect = activeEl.getBoundingClientRect();
-  slider.style.width = aRect.width + 'px';
-  slider.style.height = aRect.height + 'px';
-  slider.style.left = (aRect.left - cRect.left) + 'px';
-  slider.style.top = (aRect.top - cRect.top) + 'px';
+  slider.style.width = activeEl.offsetWidth + 'px';
+  slider.style.height = activeEl.offsetHeight + 'px';
+  slider.style.left = activeEl.offsetLeft + 'px';
+  slider.style.top = activeEl.offsetTop + 'px';
 }
 
 // === i18n / 다국어 지원 ===

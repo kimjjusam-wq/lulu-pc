@@ -196,7 +196,7 @@ body {
 
 /* Shop Tabs */
 .shop-tabs { display:flex; gap:12px; margin-bottom:28px; background:#030308; border:1px solid #1a1a2a; border-radius:14px; padding:7px; align-items:center; position:relative; }
-.shop-tab { flex:1; padding:10px 16px; border:1px solid transparent; border-radius:10px; font-size:14px; font-weight:700; cursor:pointer; background:transparent; color:var(--text-muted); transition:color 0.25s, font-weight 0.25s; height:43px; position:relative; z-index:1; display:flex; align-items:center; justify-content:center; gap:6px; }
+.shop-tab { flex:1; padding:0 16px; border:1px solid transparent; border-radius:10px; font-size:14px; font-weight:700; cursor:pointer; background:transparent; color:var(--text-muted); transition:color 0.25s, font-weight 0.25s; height:43px; position:relative; z-index:1; display:flex; align-items:center; justify-content:center; box-sizing:border-box; display:flex; align-items:center; justify-content:center; gap:6px; }
 .shop-tab:hover { color:var(--text-secondary); background:rgba(255,255,255,0.03); }
 .shop-tab.active { background:#1f1f35; color:#fff; border:1px solid #2a2a44; border-radius:10px; box-shadow:none; position:relative; z-index:1; }
 img.shop-tab-emoji { width:24px; height:24px; object-fit:contain; }
@@ -807,7 +807,7 @@ img.shop-tab-emoji { width:24px; height:24px; object-fit:contain; }
 }
 
 .tn-tabs { display:flex; gap:12px; margin-bottom:24px; background:#030308; border:1px solid #1a1a2a; border-radius:14px; padding:7px; align-items:center; position:relative; }
-.tn-tab { flex:1; padding:10px 16px; border:1px solid transparent; border-radius:10px; font-size:14px; font-weight:700; cursor:pointer; background:transparent; color:var(--text-muted); transition:color 0.25s, font-weight 0.25s; height:43px; position:relative; z-index:1; font-family:'Pretendard Variable',Pretendard,sans-serif; position:relative; display:inline-flex; align-items:center; justify-content:center; gap:6px; }
+.tn-tab { flex:1; padding:0 16px; border:1px solid transparent; border-radius:10px; font-size:14px; font-weight:700; cursor:pointer; background:transparent; color:var(--text-muted); transition:color 0.25s, font-weight 0.25s; height:43px; position:relative; z-index:1; display:flex; align-items:center; justify-content:center; box-sizing:border-box; font-family:'Pretendard Variable',Pretendard,sans-serif; position:relative; display:inline-flex; align-items:center; justify-content:center; gap:6px; }
 .tn-tab:hover { color:var(--text-secondary); background:rgba(255,255,255,0.03); }
 .tn-tab.active { background:#1f1f35; color:#fff; border:1px solid #2a2a44; border-radius:10px; box-shadow:none; position:relative; z-index:1; }
 .tn-tab-dot { width:8px; height:8px; border-radius:50%; background:#ef4444; display:none; }
@@ -838,7 +838,7 @@ img.shop-tab-emoji { width:24px; height:24px; object-fit:contain; }
 .td-header h2 { font-size:22px; font-weight:800; margin:0; text-align:center; }
 
 .td-tabs { display:flex; gap:12px; margin-bottom:24px; background:#030308; border:1px solid #1a1a2a; border-radius:14px; padding:7px; align-items:center; position:relative; max-width:700px; margin-left:auto; margin-right:auto; }
-.td-tab { flex:1; padding:10px 16px; border:1px solid transparent; border-radius:10px; font-size:14px; font-weight:700; cursor:pointer; background:transparent; color:var(--text-muted); transition:color 0.25s, font-weight 0.25s; height:43px; position:relative; z-index:1; font-family:'Pretendard Variable',Pretendard,sans-serif; }
+.td-tab { flex:1; padding:0 16px; border:1px solid transparent; border-radius:10px; font-size:14px; font-weight:700; cursor:pointer; background:transparent; color:var(--text-muted); transition:color 0.25s, font-weight 0.25s; height:43px; position:relative; z-index:1; display:flex; align-items:center; justify-content:center; box-sizing:border-box; font-family:'Pretendard Variable',Pretendard,sans-serif; }
 .td-tab:hover { color:var(--text-secondary); background:rgba(255,255,255,0.03); }
 .td-tab.active { background:#1f1f35; color:#fff; border:1px solid #2a2a44; border-radius:10px; box-shadow:none; position:relative; z-index:1; }
 
@@ -924,7 +924,7 @@ img.shop-tab-emoji { width:24px; height:24px; object-fit:contain; }
 
 /* Tabs */
 .gs-tabs { display:flex; gap:12px; margin-bottom:24px; background:#030308; border:1px solid #1a1a2a; border-radius:14px; padding:7px; align-items:center; position:relative; }
-.gs-tab { flex:1; padding:10px 16px; border:1px solid transparent; border-radius:10px; font-size:14px; font-weight:700; cursor:pointer; background:transparent; color:var(--text-muted); transition:color 0.25s, font-weight 0.25s; height:43px; position:relative; z-index:1; font-family:'Pretendard Variable',Pretendard,sans-serif; }
+.gs-tab { flex:1; padding:0 16px; border:1px solid transparent; border-radius:10px; font-size:14px; font-weight:700; cursor:pointer; background:transparent; color:var(--text-muted); transition:color 0.25s, font-weight 0.25s; height:43px; position:relative; z-index:1; display:flex; align-items:center; justify-content:center; box-sizing:border-box; font-family:'Pretendard Variable',Pretendard,sans-serif; }
 .gs-tab:hover { color:var(--text-secondary); background:rgba(255,255,255,0.03); }
 .gs-tab.active { background:#1f1f35; color:#fff; border:1px solid #2a2a44; border-radius:10px; box-shadow:none; position:relative; z-index:1; }
 
@@ -1053,7 +1053,7 @@ img.shop-tab-emoji { width:24px; height:24px; object-fit:contain; }
 
 /* Transaction History */
 .tx-tabs { display:flex; gap:12px; background:#030308; border:1px solid #1a1a2a; border-radius:14px; padding:7px; align-items:center; position:relative; }
-.tx-tab { flex:1; padding:10px 16px; border:1px solid transparent; border-radius:10px; font-size:14px; font-weight:700; cursor:pointer; background:transparent; color:var(--text-muted); transition:color 0.25s, font-weight 0.25s; height:43px; position:relative; z-index:1; }
+.tx-tab { flex:1; padding:0 16px; border:1px solid transparent; border-radius:10px; font-size:14px; font-weight:700; cursor:pointer; background:transparent; color:var(--text-muted); transition:color 0.25s, font-weight 0.25s; height:43px; position:relative; z-index:1; display:flex; align-items:center; justify-content:center; box-sizing:border-box; }
 .tx-tab:hover { color:var(--text-secondary); background:rgba(255,255,255,0.03); }
 .tx-tab.active { background:#1f1f35; color:#fff; border:1px solid #2a2a44; border-radius:10px; box-shadow:none; position:relative; z-index:1; }
 .tx-list { display:flex; flex-direction:column; gap:10px; }
@@ -1073,7 +1073,7 @@ img.shop-tab-emoji { width:24px; height:24px; object-fit:contain; }
 
 /* My Items */
 .mi-tabs { display:flex; gap:12px; background:#030308; border:1px solid #1a1a2a; border-radius:14px; padding:7px; align-items:center; position:relative; }
-.mi-tab { flex:1; padding:10px 16px; border:1px solid transparent; border-radius:10px; font-size:14px; font-weight:700; cursor:pointer; background:transparent; color:var(--text-muted); transition:color 0.25s, font-weight 0.25s; height:43px; position:relative; z-index:1; display:flex; align-items:center; justify-content:center; gap:6px; }
+.mi-tab { flex:1; padding:0 16px; border:1px solid transparent; border-radius:10px; font-size:14px; font-weight:700; cursor:pointer; background:transparent; color:var(--text-muted); transition:color 0.25s, font-weight 0.25s; height:43px; position:relative; z-index:1; display:flex; align-items:center; justify-content:center; box-sizing:border-box; display:flex; align-items:center; justify-content:center; gap:6px; }
 .mi-tab:hover { color:var(--text-secondary); background:rgba(255,255,255,0.03); }
 .mi-tab.active { background:#1f1f35; color:#fff; border:1px solid #2a2a44; border-radius:10px; box-shadow:none; position:relative; z-index:1; }
 .mi-tab-emoji { width:24px; height:24px; object-fit:contain; }
@@ -1163,7 +1163,7 @@ img.shop-tab-emoji { width:24px; height:24px; object-fit:contain; }
 
 /* FAQ Tabs */
 .faq-tabs { display:flex; gap:12px; margin-bottom:24px; background:#030308; border:1px solid #1a1a2a; border-radius:14px; padding:7px; align-items:center; position:relative; }
-.faq-tab { flex:1; padding:10px 16px; border:1px solid transparent; border-radius:10px; font-size:14px; font-weight:700; cursor:pointer; background:transparent; color:var(--text-muted); transition:color 0.25s, font-weight 0.25s; height:43px; position:relative; z-index:1; }
+.faq-tab { flex:1; padding:0 16px; border:1px solid transparent; border-radius:10px; font-size:14px; font-weight:700; cursor:pointer; background:transparent; color:var(--text-muted); transition:color 0.25s, font-weight 0.25s; height:43px; position:relative; z-index:1; display:flex; align-items:center; justify-content:center; box-sizing:border-box; }
 .faq-tab:hover { color:var(--text-secondary); background:rgba(255,255,255,0.03); }
 .faq-tab.active { background:#1f1f35; color:#fff; border:1px solid #2a2a44; border-radius:10px; box-shadow:none; position:relative; z-index:1; }
 .faq-empty { text-align:center; padding:40px 0; color:var(--text-muted); font-size:14px; }
