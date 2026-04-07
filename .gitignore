@@ -1,9 +1,1 @@
 .claude/
-node_modules/
-storybook-static/
-storybook/
-debug-storybook.log
-.storybook/
-stories/
-package.json
-package-lock.json
