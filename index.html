@@ -208,10 +208,12 @@
   <div class="content-wrapper">
     <div class="analytics-hero"><h2 data-i18n="analytics_title">내 통계</h2><p data-i18n="analytics_desc">게임 기록과 성과를 한눈에 확인하세요</p></div>
     <div class="chart-container" style="margin-bottom:24px"><div class="chart-title" data-i18n="analytics_summary">내 통계 요약</div>
-    <div class="date-range-fields" style="margin-bottom:16px">
-      <input type="date" id="dateFrom" class="date-input">
-      <span class="date-range-separator">~</span>
-      <input type="date" id="dateTo" class="date-input">
+    <div class="date-range-fields" style="margin-bottom:20px">
+      <div class="date-range-box" id="dateRangeBox">
+        <span id="dateRangeText">2026.03.17 ~ 2026.03.24</span>
+        <input type="date" id="dateFrom" class="date-picker-hidden" tabindex="-1">
+        <input type="date" id="dateTo" class="date-picker-hidden" tabindex="-1">
+      </div>
       <button class="date-range-btn" onclick="searchDateRange()" data-i18n="date_range_btn">조회</button>
     </div>
     <div class="stats-grid stats-grid-detail">

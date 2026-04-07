@@ -445,6 +445,15 @@ function changeLang(lang) {
 }
 
 // === 날짜 범위 조회 ===
+function formatDateDot(str) {
+  return str ? str.replace(/-/g, '.') : '';
+}
+function updateDateRangeText() {
+  var f = document.getElementById('dateFrom');
+  var t = document.getElementById('dateTo');
+  var el = document.getElementById('dateRangeText');
+  if (f && t && el) el.textContent = formatDateDot(f.value) + ' ~ ' + formatDateDot(t.value);
+}
 function initDateRange() {
   var today = new Date();
   var weekAgo = new Date(today);
@@ -453,6 +462,14 @@ function initDateRange() {
   var t = document.getElementById('dateTo');
   if (f) f.value = weekAgo.toISOString().split('T')[0];
   if (t) t.value = today.toISOString().split('T')[0];
+  updateDateRangeText();
+  // 날짜 박스 클릭 → 시작일 picker, 시작일 선택 후 → 종료일 picker
+  var box = document.getElementById('dateRangeBox');
+  if (box && f && t) {
+    box.addEventListener('click', function() { f.showPicker(); });
+    f.addEventListener('change', function() { updateDateRangeText(); t.showPicker(); });
+    t.addEventListener('change', function() { updateDateRangeText(); });
+  }
 }
 function searchDateRange() {
   var from = document.getElementById('dateFrom').value;

@@ -156,6 +156,12 @@ body {
 .stat-card { background:var(--bg-card); border:1px solid var(--border-color); border-radius:16px; padding:16px 20px; display:flex; align-items:center; gap:14px; text-align:left; transition:all 0.25s; position:relative; }
 .stat-card:hover { border-color:rgba(249,98,23,0.2); }
 .stat-card-static, .stat-card-static:hover, .stat-card-static:focus { border-color:transparent; cursor:default; transition:none; }
+.stats-grid-detail { grid-template-columns:repeat(7,1fr); gap:12px; }
+.stats-grid-detail .stat-card { flex-direction:column; text-align:center; padding:14px 8px; gap:8px; }
+.stats-grid-detail .stat-icon img { width:36px; height:36px; }
+.stats-grid-detail .stat-info { align-items:center; }
+.stats-grid-detail .stat-value { font-size:18px; justify-content:center; }
+.stats-grid-detail .stat-label { font-size:10px; }
 .stat-card-link { cursor:pointer; }
 .stat-card-link:hover { border-color:rgba(249,98,23,0.4); background:var(--bg-card-hover); }
 .stat-shortcut { display:flex; align-items:center; justify-content:center; width:20px; height:20px; border-radius:6px; background:rgba(255,255,255,0.08); font-size:11px; color:var(--text-secondary); font-weight:600; flex-shrink:0; transition:all 0.2s; }
@@ -193,12 +199,13 @@ body {
 .chart-bar-col { display:flex; flex-direction:column; align-items:center; gap:4px; justify-content:flex-end; width:24px; height:100%; }
 .chart-bar-label { font-size:11px; color:var(--text-muted); font-weight:600; padding:8px 0 4px; width:100%; text-align:center; }
 .chart-bar-value { font-size:12px; font-weight:700; color:var(--text-secondary); }
-.date-range-fields { display:flex; align-items:center; gap:10px; }
-.date-input { flex:1; padding:10px 12px; border-radius:10px; border:1px solid var(--border-color); background:var(--bg-body); color:var(--text-primary); font-size:14px; font-weight:600; outline:none; }
-.date-input:focus { border-color:var(--accent-orange); }
-.date-range-separator { color:var(--text-muted); font-weight:600; font-size:14px; }
-.date-range-btn { padding:10px 20px; border-radius:10px; border:none; background:var(--accent-orange); color:#fff; font-size:14px; font-weight:700; cursor:pointer; white-space:nowrap; }
-.date-range-btn:hover { opacity:0.9; }
+.date-range-fields { display:inline-flex; gap:8px; align-items:center; }
+.date-range-box { position:relative; padding:14px 24px; border-radius:12px; border:1px solid var(--border-color); background:var(--bg-dark); cursor:pointer; transition:all 0.2s; }
+.date-range-box:hover { border-color:rgba(249,98,23,0.3); }
+.date-range-box #dateRangeText { color:var(--text-primary); font-family:'Pretendard Variable',Pretendard,-apple-system,sans-serif; font-size:14px; font-weight:500; white-space:nowrap; letter-spacing:0.5px; }
+.date-picker-hidden { position:absolute; top:0; left:0; width:100%; height:100%; opacity:0; pointer-events:none; }
+.date-range-btn { flex-shrink:0; padding:15px 16px 14px; border:none; border-radius:12px; font-size:13px; font-weight:700; font-family:'Pretendard Variable',Pretendard,sans-serif; cursor:pointer; white-space:nowrap; background:linear-gradient(135deg, var(--accent-orange), var(--accent-orange-dark)); color:#fff; transition:all 0.2s; line-height:1; }
+.date-range-btn:hover { box-shadow:0 4px 24px var(--glow-orange); transform:translateY(-1px); }
 .shop-hero { padding:40px 0 16px; text-align:center; }
 .shop-hero h2 { font-size:28px; font-weight:800; margin-bottom:8px; }
 .shop-hero p { color:var(--text-secondary); font-size:14px; }
@@ -1271,10 +1278,11 @@ img.shop-tab-emoji { width:24px; height:24px; object-fit:contain; }
 /* ===================== */
 @media (max-width: 768px) {
   /* --- Date range mobile --- */
-  .date-range-fields { flex-wrap:wrap; gap:8px; }
-  .date-range-fields .date-input { flex:1 1 40%; }
-  .date-range-separator { display:none; }
-  .date-range-btn { width:100%; }
+  .date-range-fields { display:flex; width:100%; gap:6px; }
+  .date-range-box { flex:1; text-align:center; }
+  .date-range-box { padding:12px 12px; }
+  .date-range-box #dateRangeText { font-size:15px; }
+  .date-range-btn { padding:13px 14px; font-size:12px; }
   /* --- Chart bars mobile --- */
   .chart-bar-group { gap:4px; height:120px; padding:0 4px; }
   .chart-bar-pair { gap:3px; }
@@ -1567,11 +1575,11 @@ img.shop-tab-emoji { width:24px; height:24px; object-fit:contain; }
 
   /* --- Stats: 2x2 grid --- */
   .stats-grid { grid-template-columns:1fr 1fr; gap:10px; }
-  .stats-grid-detail { grid-template-columns:1fr; }
-  .stats-grid-detail .stat-card { flex-direction:row; justify-content:space-between; }
-  .stats-grid-detail .stat-info { flex-direction:row; align-items:center; flex:1; }
-  .stats-grid-detail .stat-label { order:-1; font-size:14px; }
-  .stats-grid-detail .stat-value { margin-left:auto; }
+  .stats-grid-detail { grid-template-columns:repeat(3,1fr); }
+  .stats-grid-detail .stat-card { flex-direction:column; text-align:center; padding:8px 8px; gap:6px; min-height:100px; justify-content:center; }
+  .stats-grid-detail .stat-info { align-items:center; }
+  .stats-grid-detail .stat-value { font-size:16px; justify-content:center; }
+  .stats-grid-detail .stat-label { font-size:10px; word-break:keep-all; }
   .stat-card { padding:12px 14px; border-radius:14px; gap:10px; }
   .stat-icon { font-size:22px; }
   .stat-icon img { width:36px; height:36px; }
