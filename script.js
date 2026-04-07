@@ -444,38 +444,135 @@ function changeLang(lang) {
   document.title = 'POKER LULU - 친구와 함께하는 포커';
 }
 
-// === 날짜 범위 조회 ===
-function formatDateDot(str) {
-  return str ? str.replace(/-/g, '.') : '';
+// === 커스텀 달력 날짜 범위 조회 ===
+var calState = { year: 0, month: 0, start: null, end: null, step: 'start' };
+
+function formatDateDot(d) {
+  if (!d) return '';
+  if (typeof d === 'string') return d.replace(/-/g, '.');
+  var y = d.getFullYear(), m = String(d.getMonth()+1).padStart(2,'0'), dd = String(d.getDate()).padStart(2,'0');
+  return y+'.'+m+'.'+dd;
 }
+function toDateStr(d) {
+  var y = d.getFullYear(), m = String(d.getMonth()+1).padStart(2,'0'), dd = String(d.getDate()).padStart(2,'0');
+  return y+'-'+m+'-'+dd;
+}
+function sameDay(a,b) { return a && b && a.getFullYear()===b.getFullYear() && a.getMonth()===b.getMonth() && a.getDate()===b.getDate(); }
+
 function updateDateRangeText() {
-  var f = document.getElementById('dateFrom');
-  var t = document.getElementById('dateTo');
   var el = document.getElementById('dateRangeText');
-  if (f && t && el) el.textContent = formatDateDot(f.value) + ' ~ ' + formatDateDot(t.value);
+  if (el && calState.start && calState.end) el.textContent = formatDateDot(calState.start) + ' ~ ' + formatDateDot(calState.end);
 }
+
 function initDateRange() {
   var today = new Date();
   var weekAgo = new Date(today);
   weekAgo.setDate(today.getDate() - 6);
-  var f = document.getElementById('dateFrom');
-  var t = document.getElementById('dateTo');
-  if (f) f.value = weekAgo.toISOString().split('T')[0];
-  if (t) t.value = today.toISOString().split('T')[0];
+  calState.start = weekAgo;
+  calState.end = today;
+  calState.year = today.getFullYear();
+  calState.month = today.getMonth();
   updateDateRangeText();
-  // 날짜 박스 클릭 → 시작일 picker, 시작일 선택 후 → 종료일 picker
-  var box = document.getElementById('dateRangeBox');
-  if (box && f && t) {
-    box.addEventListener('click', function() { f.showPicker(); });
-    f.addEventListener('change', function() { updateDateRangeText(); t.showPicker(); });
-    t.addEventListener('change', function() { updateDateRangeText(); });
+  document.addEventListener('click', function(e) {
+    var popup = document.getElementById('calPopup');
+    var fields = document.querySelector('.date-range-fields');
+    if (popup && popup.classList.contains('open') && fields && !fields.contains(e.target)) {
+      popup.classList.remove('open');
+    }
+  });
+}
+
+function toggleCalendar(e) {
+  var popup = document.getElementById('calPopup');
+  if (!popup) return;
+  if (popup.contains(e.target)) return;
+  calState.step = 'start';
+  if (calState.start) { calState.year = calState.start.getFullYear(); calState.month = calState.start.getMonth(); }
+  popup.classList.toggle('open');
+  if (popup.classList.contains('open')) renderCalendar();
+}
+
+function calNav(dir) {
+  calState.month += dir;
+  if (calState.month < 0) { calState.month = 11; calState.year--; }
+  if (calState.month > 11) { calState.month = 0; calState.year++; }
+  renderCalendar();
+}
+
+function renderCalendar() {
+  var monthEl = document.getElementById('calMonth');
+  var daysEl = document.getElementById('calDays');
+  var selEl = document.getElementById('calSelection');
+  if (!monthEl || !daysEl) return;
+  var y = calState.year, m = calState.month;
+  monthEl.textContent = y + '년 ' + (m+1) + '월';
+  var firstDay = new Date(y, m, 1).getDay();
+  var lastDate = new Date(y, m+1, 0).getDate();
+  var prevLast = new Date(y, m, 0).getDate();
+  var today = new Date();
+  var html = '';
+  // previous month days
+  for (var i = firstDay - 1; i >= 0; i--) {
+    html += '<div class="cal-day other">' + (prevLast - i) + '</div>';
+  }
+  // current month days
+  for (var d = 1; d <= lastDate; d++) {
+    var date = new Date(y, m, d);
+    var cls = 'cal-day';
+    if (sameDay(date, today)) cls += ' today';
+    if (calState.start && calState.end) {
+      if (sameDay(date, calState.start) && sameDay(date, calState.end)) cls += ' start end';
+      else if (sameDay(date, calState.start)) cls += ' start';
+      else if (sameDay(date, calState.end)) cls += ' end';
+      else if (calState.start && calState.end && date > calState.start && date < calState.end) cls += ' in-range';
+    } else if (calState.start && sameDay(date, calState.start)) {
+      cls += ' start end';
+    }
+    html += '<div class="' + cls + '" onclick="calPickDay(' + d + ',event)">' + d + '</div>';
+  }
+  // next month days
+  var total = firstDay + lastDate;
+  var remain = (7 - total % 7) % 7;
+  for (var n = 1; n <= remain; n++) {
+    html += '<div class="cal-day other">' + n + '</div>';
+  }
+  daysEl.innerHTML = html;
+  // selection info
+  if (selEl) {
+    if (calState.step === 'start') selEl.textContent = '시작 날짜를 선택하세요';
+    else if (calState.step === 'end') selEl.textContent = '종료 날짜를 선택하세요';
+    else if (calState.start && calState.end) selEl.textContent = formatDateDot(calState.start) + ' ~ ' + formatDateDot(calState.end);
   }
 }
+
+function calPickDay(d, e) {
+  if (e) e.stopPropagation();
+  var picked = new Date(calState.year, calState.month, d);
+  if (calState.step === 'start') {
+    calState.start = picked;
+    calState.end = null;
+    calState.step = 'end';
+  } else {
+    if (picked < calState.start) {
+      calState.end = calState.start;
+      calState.start = picked;
+    } else {
+      calState.end = picked;
+    }
+    calState.step = 'done';
+  }
+  renderCalendar();
+}
+
+function calConfirm() {
+  if (!calState.start || !calState.end) return;
+  updateDateRangeText();
+  document.getElementById('calPopup').classList.remove('open');
+}
+
 function searchDateRange() {
-  var from = document.getElementById('dateFrom').value;
-  var to = document.getElementById('dateTo').value;
-  if (!from || !to) return;
-  console.log('조회 기간:', from, '~', to);
+  if (!calState.start || !calState.end) return;
+  console.log('조회 기간:', toDateStr(calState.start), '~', toDateStr(calState.end));
 }
 
 // === 페이지 전환 ===

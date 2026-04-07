@@ -204,7 +204,36 @@ body {
 .date-range-box { position:relative; padding:14px 24px; border-radius:12px; border:1px solid var(--border-color); background:var(--bg-dark); cursor:pointer; transition:all 0.2s; }
 .date-range-box:hover { border-color:rgba(249,98,23,0.3); }
 .date-range-box #dateRangeText { color:var(--text-primary); font-family:'Pretendard Variable',Pretendard,-apple-system,sans-serif; font-size:14px; font-weight:500; white-space:nowrap; letter-spacing:0.5px; }
-.date-picker-hidden { position:absolute; top:0; left:0; width:100%; height:100%; opacity:0; pointer-events:none; }
+/* Calendar popup */
+.cal-popup { display:none; position:absolute; top:100%; right:0; margin-top:8px; width:320px; background:#0f0f1a; border:1px solid var(--border-color); border-radius:16px; padding:20px; z-index:200; box-shadow:0 12px 40px rgba(0,0,0,0.6); }
+.cal-popup.open { display:block; }
+.cal-header { display:flex; align-items:center; justify-content:space-between; margin-bottom:16px; }
+.cal-month { font-size:15px; font-weight:700; color:var(--text-primary); }
+.cal-nav { width:32px; height:32px; border:1px solid var(--border-color); border-radius:8px; background:transparent; color:var(--text-secondary); font-size:14px; cursor:pointer; transition:all 0.15s; display:flex; align-items:center; justify-content:center; }
+.cal-nav:hover { border-color:var(--accent-orange); color:var(--accent-orange); }
+.cal-weekdays { display:grid; grid-template-columns:repeat(7,1fr); text-align:center; margin-bottom:8px; }
+.cal-weekdays span { font-size:11px; font-weight:600; color:var(--text-muted); padding:4px 0; }
+.cal-days { display:grid; grid-template-columns:repeat(7,1fr); gap:0; }
+.cal-day { aspect-ratio:1; display:flex; align-items:center; justify-content:center; font-size:13px; font-weight:500; color:var(--text-secondary); border-radius:8px; cursor:pointer; transition:all 0.15s; position:relative; }
+.cal-day:hover { background:rgba(255,255,255,0.06); color:var(--text-primary); }
+.cal-day.other { color:var(--text-muted); opacity:0.3; }
+.cal-day.today { color:var(--accent-orange); font-weight:700; }
+.cal-day.start, .cal-day.end { color:#fff; font-weight:700; background:transparent; position:relative; z-index:1; }
+.cal-day.start::before, .cal-day.end::before { content:''; position:absolute; left:0; right:0; top:2px; bottom:2px; background:rgba(249,98,23,0.15); z-index:-2; }
+.cal-day.start::after, .cal-day.end::after { content:''; position:absolute; inset:2px; background:var(--accent-orange); border-radius:50%; z-index:-1; }
+.cal-day.in-range { background:transparent; color:var(--accent-orange); border-radius:0; position:relative; }
+.cal-day.in-range::before { content:''; position:absolute; left:0; right:0; top:2px; bottom:2px; background:rgba(249,98,23,0.15); z-index:-1; }
+.cal-day.start { border-radius:0; }
+.cal-day.start::before { border-radius:50% 0 0 50%; }
+.cal-day.end { border-radius:0; }
+.cal-day.end::before { border-radius:0 50% 50% 0; }
+.cal-day.start.end { border-radius:0; }
+.cal-day.start.end::before { display:none; }
+.cal-footer { display:flex; align-items:center; justify-content:space-between; margin-top:16px; padding-top:12px; border-top:1px solid var(--border-color); }
+.cal-selection { font-size:12px; color:var(--text-muted); }
+.cal-confirm { padding:8px 20px; border:none; border-radius:8px; background:linear-gradient(135deg,var(--accent-orange),var(--accent-orange-dark)); color:#fff; font-size:13px; font-weight:700; cursor:pointer; transition:all 0.2s; }
+.cal-confirm:hover { box-shadow:0 2px 12px var(--glow-orange); }
+.date-range-fields { display:inline-flex; gap:8px; align-items:center; position:relative; }
 .date-range-btn { flex-shrink:0; padding:15px 16px 14px; border:none; border-radius:12px; font-size:13px; font-weight:700; font-family:'Pretendard Variable',Pretendard,sans-serif; cursor:pointer; white-space:nowrap; background:linear-gradient(135deg, var(--accent-orange), var(--accent-orange-dark)); color:#fff; transition:all 0.2s; line-height:1; }
 .date-range-btn:hover { box-shadow:0 4px 24px var(--glow-orange); transform:translateY(-1px); }
 .shop-hero { padding:40px 0 16px; text-align:center; }
@@ -348,7 +377,7 @@ img.shop-tab-emoji { width:24px; height:24px; object-fit:contain; }
 .pkg-contents li {
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: 5px;
   font-size: 13px;
   color: var(--text-secondary);
   padding: 7px 12px;
@@ -461,7 +490,7 @@ img.shop-tab-emoji { width:24px; height:24px; object-fit:contain; }
 .shop-item { background:var(--bg-card); border:1px solid var(--border-color); border-radius:20px; overflow:hidden; cursor:pointer; transition:all 0.25s; }
 .shop-item:hover { transform:translateY(-4px); border-color:rgba(249,98,23,0.3); box-shadow:0 8px 30px rgba(249,98,23,0.1); }
 .shop-item-visual { height:140px; display:flex; align-items:center; justify-content:center; font-size:56px; }
-.shop-item-info { padding:18px 20px; }
+.shop-item-info { padding:9px 20px 18px; }
 .shop-item-name { font-size:16px; font-weight:700; margin-bottom:4px; }
 .shop-item-desc { font-size:12px; color:var(--text-muted); margin-bottom:12px; }
 .shop-item-price { display:flex; align-items:center; gap:6px; font-size:18px; font-weight:800; color:var(--accent-gold); }
@@ -1286,6 +1315,7 @@ img.shop-tab-emoji { width:24px; height:24px; object-fit:contain; }
   .date-range-box { padding:12px 12px; }
   .date-range-box #dateRangeText { font-size:15px; }
   .date-range-btn { padding:13px 14px; font-size:12px; }
+  .cal-popup { width:320px; max-width:calc(100vw - 32px); right:auto; left:50%; transform:translateX(-50%); }
   /* --- Chart bars mobile --- */
   .chart-bar-group { gap:4px; height:120px; padding:0 4px; }
   .chart-bar-pair { gap:3px; }

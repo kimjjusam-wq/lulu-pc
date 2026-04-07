@@ -209,10 +209,21 @@
     <div class="analytics-hero"><h2 data-i18n="analytics_title">내 통계</h2><p data-i18n="analytics_desc">게임 기록과 성과를 한눈에 확인하세요</p></div>
     <div class="chart-container" style="margin-bottom:24px"><div class="analytics-summary-header"><div class="chart-title" data-i18n="analytics_summary" style="margin-bottom:0;">내 통계 요약</div>
     <div class="date-range-fields">
-      <div class="date-range-box" id="dateRangeBox">
+      <div class="date-range-box" id="dateRangeBox" onclick="toggleCalendar(event)">
         <span id="dateRangeText">2026.03.17 ~ 2026.03.24</span>
-        <input type="date" id="dateFrom" class="date-picker-hidden" tabindex="-1">
-        <input type="date" id="dateTo" class="date-picker-hidden" tabindex="-1">
+      </div>
+      <div class="cal-popup" id="calPopup">
+        <div class="cal-header">
+          <button class="cal-nav" onclick="calNav(-1)">&lt;</button>
+          <span class="cal-month" id="calMonth"></span>
+          <button class="cal-nav" onclick="calNav(1)">&gt;</button>
+        </div>
+        <div class="cal-weekdays"><span>일</span><span>월</span><span>화</span><span>수</span><span>목</span><span>금</span><span>토</span></div>
+        <div class="cal-days" id="calDays"></div>
+        <div class="cal-footer">
+          <span class="cal-selection" id="calSelection"></span>
+          <button class="cal-confirm" onclick="calConfirm()">확인</button>
+        </div>
       </div>
       <button class="date-range-btn" onclick="searchDateRange()" data-i18n="date_range_btn">조회</button>
     </div></div>
@@ -648,7 +659,7 @@
           <div class="pkg-body">
             <div class="pkg-name" data-i18n="skin_classic_green">클래식 그린</div>
             <ul class="pkg-contents">
-              <li><span class="pkg-icon"><img src="images/emoji_table.png" alt="테이블"></span><span data-i18n="skin_classic_green_desc">전통적인 포커 테이블</span></li>
+              <li><span data-i18n="skin_classic_green_desc">전통적인 포커 테이블</span></li>
             </ul>
             <div class="pkg-bottom">
               <div class="pkg-price"><img loading="lazy" src="images/icon_gold.png" class="currency-icon" alt="gold"> 2,000</div>
@@ -662,7 +673,7 @@
           <div class="pkg-body">
             <div class="pkg-name" data-i18n="skin_royal_red">로열 레드</div>
             <ul class="pkg-contents">
-              <li><span class="pkg-icon"><img src="images/emoji_table.png" alt="테이블"></span><span data-i18n="skin_royal_red_desc">프리미엄 레드 테이블</span></li>
+              <li><span data-i18n="skin_royal_red_desc">프리미엄 레드 테이블</span></li>
             </ul>
             <div class="pkg-bottom">
               <div class="pkg-price"><img loading="lazy" src="images/icon_gold.png" class="currency-icon" alt="gold"> 5,000</div>
@@ -676,7 +687,7 @@
           <div class="pkg-body">
             <div class="pkg-name" data-i18n="skin_ocean_blue">오션 블루</div>
             <ul class="pkg-contents">
-              <li><span class="pkg-icon"><img src="images/emoji_table.png" alt="테이블"></span><span data-i18n="skin_ocean_blue_desc">시원한 블루 톤 테이블</span></li>
+              <li><span data-i18n="skin_ocean_blue_desc">시원한 블루 톤 테이블</span></li>
             </ul>
             <div class="pkg-bottom">
               <div class="pkg-price"><img loading="lazy" src="images/icon_gold.png" class="currency-icon" alt="gold"> 3,000</div>
@@ -690,7 +701,7 @@
           <div class="pkg-body">
             <div class="pkg-name"><span class="shop-item-tag hot">NEW</span> <span data-i18n="skin_cosmic_black">코스믹 블랙</span></div>
             <ul class="pkg-contents">
-              <li><span class="pkg-icon"><img src="images/emoji_table.png" alt="테이블"></span><span data-i18n="skin_cosmic_black_desc">우주 컨셉 한정 스킨</span></li>
+              <li><span data-i18n="skin_cosmic_black_desc">우주 컨셉 한정 스킨</span></li>
             </ul>
             <div class="pkg-bottom">
               <div class="pkg-price"><img loading="lazy" src="images/icon_gold.png" class="currency-icon" alt="gold"> 10,000</div>
@@ -704,7 +715,7 @@
           <div class="pkg-body">
             <div class="pkg-name" data-i18n="skin_vintage_table">오래된 테이블</div>
             <ul class="pkg-contents">
-              <li><span class="pkg-icon"><img src="images/emoji_table.png" alt="테이블"></span><span data-i18n="skin_vintage_table_desc">세월의 흔적이 담긴 빈티지 테이블</span></li>
+              <li><span data-i18n="skin_vintage_table_desc">빈티지 테이블</span></li>
             </ul>
             <div class="pkg-bottom">
               <div class="pkg-price"><img loading="lazy" src="images/icon_gold.png" class="currency-icon" alt="gold"> 1,500</div>
@@ -718,7 +729,7 @@
           <div class="pkg-body">
             <div class="pkg-name" data-i18n="skin_gold_card">골드 카드</div>
             <ul class="pkg-contents">
-              <li><span class="pkg-icon"><img src="images/emoji_card.png" alt="카드"></span><span data-i18n="skin_gold_card_desc">고급 골드 카드 뒷면</span></li>
+              <li><span data-i18n="skin_gold_card_desc">고급 골드 카드 뒷면</span></li>
             </ul>
             <div class="pkg-bottom">
               <div class="pkg-price"><img loading="lazy" src="images/icon_diamond.png" class="currency-icon" alt="diamond"> 80</div>
@@ -732,7 +743,7 @@
           <div class="pkg-body">
             <div class="pkg-name" data-i18n="skin_silver_card">실버 카드</div>
             <ul class="pkg-contents">
-              <li><span class="pkg-icon"><img src="images/emoji_card.png" alt="카드"></span><span data-i18n="skin_silver_card_desc">세련된 실버 카드 뒷면</span></li>
+              <li><span data-i18n="skin_silver_card_desc">세련된 실버 카드 뒷면</span></li>
             </ul>
             <div class="pkg-bottom">
               <div class="pkg-price"><img loading="lazy" src="images/icon_diamond.png" class="currency-icon" alt="diamond"> 80</div>
@@ -746,7 +757,7 @@
           <div class="pkg-body">
             <div class="pkg-name" data-i18n="skin_brick_pattern">벽돌 패턴</div>
             <ul class="pkg-contents">
-              <li><span class="pkg-icon"><img src="images/emoji_card.png" alt="카드"></span><span data-i18n="skin_brick_pattern_desc">클래식 벽돌 패턴 카드</span></li>
+              <li><span data-i18n="skin_brick_pattern_desc">클래식 벽돌 패턴 카드</span></li>
             </ul>
             <div class="pkg-bottom">
               <div class="pkg-price"><img loading="lazy" src="images/icon_diamond.png" class="currency-icon" alt="diamond"> 120</div>
@@ -760,7 +771,7 @@
           <div class="pkg-body">
             <div class="pkg-name" data-i18n="skin_honeycomb">벌집 패턴</div>
             <ul class="pkg-contents">
-              <li><span class="pkg-icon"><img src="images/emoji_card.png" alt="카드"></span><span data-i18n="skin_honeycomb_desc">벌집 헥사곤 패턴 카드</span></li>
+              <li><span data-i18n="skin_honeycomb_desc">벌집 헥사곤 패턴 카드</span></li>
             </ul>
             <div class="pkg-bottom">
               <div class="pkg-price"><img loading="lazy" src="images/icon_diamond.png" class="currency-icon" alt="diamond"> 150</div>
@@ -774,7 +785,7 @@
           <div class="pkg-body">
             <div class="pkg-name" data-i18n="emote_pokerface">포커페이스 팩</div>
             <ul class="pkg-contents">
-              <li><span class="pkg-icon"><img src="images/emoji_emote.png" alt="이모티콘"></span><span data-i18n="emote_pokerface_desc">기본 이모티콘 8종</span></li>
+              <li><span data-i18n="emote_pokerface_desc">기본 이모티콘 8종</span></li>
             </ul>
             <div class="pkg-bottom">
               <div class="pkg-price"><img loading="lazy" src="images/icon_gold.png" class="currency-icon" alt="gold"> 1,500</div>
@@ -788,7 +799,7 @@
           <div class="pkg-body">
             <div class="pkg-name"><span class="shop-item-tag sale">30% OFF</span> <span data-i18n="emote_drama">드라마 팩</span></div>
             <ul class="pkg-contents">
-              <li><span class="pkg-icon"><img src="images/emoji_emote.png" alt="이모티콘"></span><span data-i18n="emote_drama_desc">연기파 이모티콘 12종</span></li>
+              <li><span data-i18n="emote_drama_desc">연기파 이모티콘 12종</span></li>
             </ul>
             <div class="pkg-bottom">
               <div class="pkg-price"><img loading="lazy" src="images/icon_gold.png" class="currency-icon" alt="gold"> 3,000</div>
@@ -802,7 +813,7 @@
           <div class="pkg-body">
             <div class="pkg-name"><span class="shop-item-tag hot">NEW</span> <span data-i18n="emote_allin">올인 팩</span></div>
             <ul class="pkg-contents">
-              <li><span class="pkg-icon"><img src="images/emoji_emote.png" alt="이모티콘"></span><span data-i18n="emote_allin_desc">시즌3 한정 이모티콘 6종</span></li>
+              <li><span data-i18n="emote_allin_desc">시즌3 한정 이모티콘 6종</span></li>
             </ul>
             <div class="pkg-bottom">
               <div class="pkg-price"><img loading="lazy" src="images/icon_diamond.png" class="currency-icon" alt="diamond"> 60</div>
