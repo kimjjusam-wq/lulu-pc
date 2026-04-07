@@ -199,6 +199,7 @@ body {
 .chart-bar-col { display:flex; flex-direction:column; align-items:center; gap:4px; justify-content:flex-end; width:24px; height:100%; }
 .chart-bar-label { font-size:11px; color:var(--text-muted); font-weight:600; padding:8px 0 4px; width:100%; text-align:center; }
 .chart-bar-value { font-size:12px; font-weight:700; color:var(--text-secondary); }
+.analytics-summary-header { display:flex; align-items:center; justify-content:space-between; margin-bottom:20px; }
 .date-range-fields { display:inline-flex; gap:8px; align-items:center; }
 .date-range-box { position:relative; padding:14px 24px; border-radius:12px; border:1px solid var(--border-color); background:var(--bg-dark); cursor:pointer; transition:all 0.2s; }
 .date-range-box:hover { border-color:rgba(249,98,23,0.3); }
@@ -1277,7 +1278,9 @@ img.shop-tab-emoji { width:24px; height:24px; object-fit:contain; }
 /* MOBILE RESPONSIVE     */
 /* ===================== */
 @media (max-width: 768px) {
-  /* --- Date range mobile --- */
+  /* --- Analytics mobile --- */
+  .chart-container { padding:20px 16px; }
+  .analytics-summary-header { flex-direction:column; align-items:flex-start; gap:12px; }
   .date-range-fields { display:flex; width:100%; gap:6px; }
   .date-range-box { flex:1; text-align:center; }
   .date-range-box { padding:12px 12px; }
