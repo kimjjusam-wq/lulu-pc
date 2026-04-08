@@ -2424,15 +2424,6 @@ function switchMbTab(tab) {
   document.querySelectorAll('.mb-tab-content').forEach(function(c) { c.classList.remove('active'); c.style.display = 'none'; });
   var el = document.getElementById('mb-' + tab);
   if (el) { el.classList.add('active'); el.style.display = 'block'; }
-  // PC: 메시지 탭이면 탭바 너비 제한 해제
-  var tabs = document.querySelector('.mb-tabs');
-  if (tabs) {
-    if (tab === 'message' && mbIsPcSplit()) {
-      tabs.style.maxWidth = 'none';
-    } else {
-      tabs.style.maxWidth = '700px';
-    }
-  }
 }
 
 var demoNotifs = [
@@ -2479,7 +2470,6 @@ var chatData = {
 function mbIsPcSplit() {
   return window.innerWidth >= 1024 && document.getElementById('mbSplitRight');
 }
-
 
 function openChat(name) {
   chatTarget = name;
