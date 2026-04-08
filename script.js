@@ -584,7 +584,10 @@ function switchPage(p) {
   const navLinks = document.querySelector('.nav-links');
   const prevNav = navLinks && navLinks.querySelector('.nav-link.active');
   document.querySelectorAll('.nav-link').forEach(e => e.classList.remove('active'));
-  const navLink = document.querySelector('.nav-link[data-page="' + p + '"]');
+  var navPage = p;
+  var navParentMap = { mailbox:'my', chat:'my', myitems:'my', transaction:'my', host:'my', ticket:'my', 'account-edit':'my', 'tn-history':'my', 'tn-detail':'tournament', 'game-setup':'lobby' };
+  if (!document.querySelector('.nav-link[data-page="' + navPage + '"]') && navParentMap[navPage]) { navPage = navParentMap[navPage]; }
+  const navLink = document.querySelector('.nav-link[data-page="' + navPage + '"]');
   if (navLink) { navLink.classList.add('active'); moveSlider(navLinks, navLink, prevNav); }
   // 모바일: 탭 유무에 따라 nav 보더 토글
   var pageEl = document.getElementById('page-' + p);
