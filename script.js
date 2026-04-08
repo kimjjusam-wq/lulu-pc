@@ -2478,7 +2478,8 @@ function mbResizeRight() {
   var el = document.getElementById('mbSplitRight');
   if (!el || !mbIsPcSplit()) return;
   var rect = el.getBoundingClientRect();
-  el.style.height = Math.max(300, window.innerHeight - rect.top - 20) + 'px';
+  var maxH = window.innerHeight * 0.7;
+  el.style.height = Math.min(maxH, Math.max(300, window.innerHeight - rect.top - 20)) + 'px';
 }
 window.addEventListener('resize', mbResizeRight);
 window.addEventListener('scroll', mbResizeRight);
