@@ -643,7 +643,7 @@ function mSyncNavTitle(page) {
   var mainTabs = ['lobby', 'shop', 'analytics', 'my', 'login'];
   var titles = {
     shop: '상점', my: 'MY 룰루', analytics: '통계',
-    mailbox: '우편함', myitems: '내 아이템',
+    mailbox: '우편함', chat: '채팅', myitems: '내 아이템',
     transaction: '거래 내역', host: '호스트',
     ticket: '티켓', tournament: '토너먼트',
     'tn-history': '히스토리', 'tn-detail': '토너먼트',
@@ -654,7 +654,7 @@ function mSyncNavTitle(page) {
     company: '회사소개', faq: 'FAQ', contact: '문의하기'
   };
   var parentMap = {
-    mailbox: 'my', myitems: 'my', transaction: 'my',
+    mailbox: 'my', chat: 'mailbox', myitems: 'my', transaction: 'my',
     host: 'my', ticket: 'my', 'account-edit': 'my',
     tournament: 'lobby', 'tn-history': 'my',
     'tn-detail': 'tournament', 'game-setup': 'lobby',
@@ -742,6 +742,12 @@ function toggleMobileStatusbar() {
   });
   fab.classList.toggle('active', hidden);
   fab.textContent = hidden ? 'ON' : 'OFF';
+  // 채팅 페이지 열려있으면 chat-wrap 위치 조정
+  var chatWrap = document.querySelector('.chat-wrap');
+  if (chatWrap && document.body.classList.contains('chat-open')) {
+    chatWrap.style.top = hidden ? '52px' : '0';
+    chatWrap.style.height = hidden ? 'calc(100vh - 52px)' : '100vh';
+  }
 }
 
 // === 로비 아바타 캐러셀 자동 스크롤 ===
@@ -2426,6 +2432,91 @@ var demoMessages = [
   { avatar: 'images/avatar_j.png', name: '블러프왕', preview: 'GG! 다음에 또 해요', time: '1일 전', unread: false, unreadCount: 0 },
 ];
 
+// === 채팅 ===
+var chatTarget = null;
+var chatAvatar = null;
+var chatData = {
+  '포커마스터': [
+    { who: 'them', text: '오늘 토너먼트 참가하실 건가요?', time: '오후 7:30' },
+    { who: 'me', text: '네! 8시 시작이죠?', time: '오후 7:31' },
+    { who: 'them', text: '맞아요 프라이빗 룸에서 봐요', time: '오후 7:32' },
+    { who: 'them', text: '내일 저녁 8시에 프라이빗 룸 하실래요?', time: '오후 7:45' },
+  ],
+  '올인김치': [
+    { who: 'them', text: '아까 AA로 올인 받아주셔서 감사합니다 ㅋㅋ', time: '오후 3:10' },
+    { who: 'me', text: 'ㅋㅋㅋ 저도 재밌었어요', time: '오후 3:12' },
+    { who: 'them', text: '아까 그 핸드 대박이었어요 ㅋㅋ', time: '오후 3:15' },
+  ],
+  '블러프왕': [
+    { who: 'me', text: '좋은 게임이었습니다', time: '오후 9:00' },
+    { who: 'them', text: 'GG! 다음에 또 해요', time: '오후 9:01' },
+  ]
+};
+
+function openChat(name) {
+  chatTarget = name;
+  var found = demoMessages.find(function(m) { return m.name === name; });
+  chatAvatar = found ? found.avatar : 'images/avatar_o.png';
+  document.body.classList.add('chat-open');
+  switchPage('chat');
+  document.getElementById('chatNavName').textContent = name;
+  // 상태바 표시 여부에 따라 chat-wrap 위치 조정
+  var sb = document.querySelector('.m-statusbar');
+  var chatWrap = document.querySelector('.chat-wrap');
+  if (chatWrap && sb && sb.style.display !== 'none') {
+    chatWrap.style.top = '52px';
+    chatWrap.style.height = 'calc(100vh - 52px)';
+  }
+  renderChat();
+}
+
+function renderChat() {
+  var el = document.getElementById('chatMessages');
+  if (!el || !chatTarget) return;
+  var msgs = chatData[chatTarget] || [];
+  el.innerHTML = '<div class="chat-date-sep">오늘</div>' + msgs.map(function(m) {
+    if (m.who === 'them') {
+      return '<div class="chat-row them"><img class="chat-avatar" src="' + chatAvatar + '" alt="">' +
+        '<div><div class="chat-bubble them">' + m.text + '</div>' +
+        '<div class="chat-time them">' + m.time + '</div></div></div>';
+    }
+    return '<div class="chat-row me"><div><div class="chat-bubble me">' + m.text + '</div>' +
+      '<div class="chat-time me">' + m.time + '</div></div></div>';
+  }).join('');
+  el.scrollTop = el.scrollHeight;
+}
+
+function sendChat() {
+  var input = document.getElementById('chatInput');
+  if (!input || !input.value.trim() || !chatTarget) return;
+  if (!chatData[chatTarget]) chatData[chatTarget] = [];
+  var now = new Date();
+  var h = now.getHours(), mm = String(now.getMinutes()).padStart(2,'0');
+  var ampm = h >= 12 ? '오후' : '오전';
+  if (h > 12) h -= 12;
+  if (h === 0) h = 12;
+  chatData[chatTarget].push({ who: 'me', text: input.value.trim(), time: ampm + ' ' + h + ':' + mm });
+  input.value = '';
+  renderChat();
+}
+
+function toggleChatMenu(e) {
+  if (e) e.stopPropagation();
+  var popup = document.getElementById('chatMenuPopup');
+  popup.classList.toggle('open');
+}
+document.addEventListener('click', function() {
+  var popup = document.getElementById('chatMenuPopup');
+  if (popup) popup.classList.remove('open');
+});
+
+function chatAction(action) {
+  document.getElementById('chatMenuPopup').classList.remove('open');
+  if (action === 'block') alert(chatTarget + '님을 차단했습니다.');
+  if (action === 'report') alert(chatTarget + '님을 신고했습니다.');
+  if (action === 'manage') alert('차단한 사용자 관리 페이지로 이동합니다.');
+}
+
 function mbRenderList() {
   mbRenderNotifs();
   mbRenderMessages();
@@ -2458,7 +2549,7 @@ function mbRenderMessages() {
   }
   el.innerHTML = demoMessages.map(function(m) {
     var badge = m.unreadCount > 0 ? '<span class="mb-msg-badge">' + m.unreadCount + '</span>' : '';
-    return '<div class="mb-msg-item' + (m.unread ? ' unread' : '') + '">' +
+    return '<div class="mb-msg-item' + (m.unread ? ' unread' : '') + '" onclick="openChat(\'' + m.name + '\')">' +
       '<img class="mb-msg-avatar" src="' + m.avatar + '" alt="' + m.name + '">' +
       '<div class="mb-msg-body">' +
         '<div class="mb-msg-name">' + m.name + '</div>' +

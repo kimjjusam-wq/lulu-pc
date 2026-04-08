@@ -1400,6 +1400,28 @@
   </div>
 </div>
 
+<!-- Chat Page -->
+<div class="page-container" id="page-chat">
+  <div class="chat-wrap">
+    <nav class="m-nav">
+      <div class="m-nav-title"><svg class="m-nav-back" onclick="document.body.classList.remove('chat-open');switchPage('mailbox');setTimeout(function(){switchMbTab('message')},50)" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg><span id="chatNavName"></span></div>
+      <div class="m-nav-right" style="position:relative;">
+        <button class="chat-menu-btn" id="chatMenuBtn" onclick="toggleChatMenu(event)">&#8942;</button>
+        <div class="chat-menu-popup" id="chatMenuPopup">
+          <button onclick="chatAction('block')">차단</button>
+          <button onclick="chatAction('report')">신고</button>
+          <button onclick="chatAction('manage')">차단한 사용자 관리</button>
+        </div>
+      </div>
+    </nav>
+    <div class="chat-messages" id="chatMessages"></div>
+    <div class="chat-input-bar">
+      <input type="text" class="chat-input" id="chatInput" placeholder="메시지를 입력하세요" onkeydown="if(event.key==='Enter')sendChat()">
+      <button class="chat-send-btn" onclick="sendChat()">전송</button>
+    </div>
+  </div>
+</div>
+
 <!-- Account Edit Page -->
 <div class="page-container" id="page-account-edit">
   <div class="content-wrapper">
