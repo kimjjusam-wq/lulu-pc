@@ -2422,6 +2422,7 @@ function switchMbTab(tab) {
   if (tabs) {
     if (tab === 'message' && mbIsPcSplit()) {
       tabs.style.maxWidth = 'none';
+      setTimeout(mbResizeRight, 50);
     } else {
       tabs.style.maxWidth = '700px';
     }
@@ -2473,6 +2474,15 @@ function mbIsPcSplit() {
   return window.innerWidth >= 1024 && document.getElementById('mbSplitRight');
 }
 
+function mbResizeRight() {
+  var el = document.getElementById('mbSplitRight');
+  if (!el || !mbIsPcSplit()) return;
+  var rect = el.getBoundingClientRect();
+  el.style.height = Math.max(300, window.innerHeight - rect.top - 20) + 'px';
+}
+window.addEventListener('resize', mbResizeRight);
+window.addEventListener('scroll', mbResizeRight);
+
 function openChat(name) {
   chatTarget = name;
   var found = demoMessages.find(function(m) { return m.name === name; });
@@ -2486,6 +2496,7 @@ function openChat(name) {
     if (chatPanel) chatPanel.style.display = 'flex';
     document.getElementById('mbChatName').textContent = name;
     document.getElementById('mbChatAvatar').src = chatAvatar;
+    mbResizeRight();
     // 선택 하이라이트
     document.querySelectorAll('.mb-msg-item').forEach(function(el) { el.classList.remove('mb-msg-selected'); });
     var items = document.querySelectorAll('.mb-msg-item');
