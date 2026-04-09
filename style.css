@@ -144,6 +144,9 @@ body {
 .table-live-dot { position:relative; width:6px; height:6px; border-radius:50%; background:var(--accent-orange); }
 .table-live-dot::after { content:''; position:absolute; inset:-3px; border-radius:50%; background:var(--accent-orange); opacity:0; animation:live-pulse 2s ease-out infinite; }
 @keyframes live-pulse { 0% { opacity:0.5; transform:scale(0.8); } 70% { opacity:0; transform:scale(2.2); } 100% { opacity:0; transform:scale(2.2); } }
+.table-open { display:flex; align-items:center; gap:5px; font-size:10px; font-weight:800; color:#2dd4bf; letter-spacing:0.5px; padding:0; background:none; }
+.table-open-dot { position:relative; width:6px; height:6px; border-radius:50%; background:#2dd4bf; animation:open-blink 1.5s ease-in-out infinite; }
+@keyframes open-blink { 0%,100% { opacity:1; } 50% { opacity:0.3; } }
 .table-meta { display:flex; flex-direction:column; gap:8px; }
 .table-meta-row { display:flex; align-items:center; justify-content:space-between; font-size:13px; }
 .table-meta-label { color:var(--text-muted); }
