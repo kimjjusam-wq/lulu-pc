@@ -670,7 +670,7 @@ function mSyncNavTitle(page) {
     var isSub = mainTabs.indexOf(page) === -1;
     if (isSub) {
       var parent = parentMap[page] || 'lobby';
-      title.innerHTML = '<svg class="m-nav-back" onclick="switchPage(\'' + parent + '\')" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>' + titles[page];
+      title.innerHTML = '<svg class="m-nav-back" onclick="switchPage(\'' + parent + '\')" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg><span class="m-nav-title-text">' + titles[page] + '</span>';
     } else {
       title.textContent = titles[page];
     }
@@ -678,13 +678,24 @@ function mSyncNavTitle(page) {
     logo.style.display = '';
     title.style.display = 'none';
   }
-  // 법적고지 페이지에서 골드/다이아 숨김
+  // 법적고지 페이지 및 토너먼트 상세에서 골드/다이아/메뉴 숨김
   var legalPages = ['terms','privacy','youth','rating','company','faq','contact'];
   var isLegal = legalPages.indexOf(page) !== -1;
+  var hideCurrency = isLegal || page === 'tn-detail';
   var mGoldWrap = document.getElementById('mNavGoldWrap');
   var mDiaWrap = document.getElementById('mNavDiamondWrap');
-  if (mGoldWrap) mGoldWrap.style.display = isLegal ? 'none' : '';
-  if (mDiaWrap) mDiaWrap.style.display = isLegal ? 'none' : '';
+  var mMenu = document.getElementById('mNavMenu');
+  if (mGoldWrap) mGoldWrap.style.display = hideCurrency ? 'none' : '';
+  if (mDiaWrap) mDiaWrap.style.display = hideCurrency ? 'none' : '';
+  if (mMenu) mMenu.style.display = (page === 'tn-detail') ? 'none' : '';
+  // 토너먼트 상세: 제목을 토너먼트명으로 변경
+  if (page === 'tn-detail' && currentTnDetailId) {
+    var tnItem = demoTournaments.find(function(tn) { return tn.id === currentTnDetailId; });
+    if (tnItem && title) {
+      var parent = parentMap[page] || 'tournament';
+      title.innerHTML = '<svg class="m-nav-back" onclick="switchPage(\'' + parent + '\')" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg><span class="m-nav-title-text">' + tnItem.name + '</span>';
+    }
+  }
   // 로그인 페이지이거나 로그인 상태면 로그인 버튼 숨김
   var loginBtn = document.getElementById('mNavLoginBtn');
   if (loginBtn) loginBtn.style.display = (page === 'login' || getSession()) ? 'none' : '';
@@ -1382,12 +1393,40 @@ const demoTournaments = [
 ];
 
 function switchTournamentTab(tab) {
-  document.querySelectorAll('.tn-tab').forEach(function(e) { e.classList.remove('active'); });
-  document.querySelectorAll('.tn-tab-content').forEach(function(e) { e.classList.remove('active'); });
-  var activeTab = document.querySelector('.tn-tab[data-tn-tab="' + tab + '"]');
-  if (activeTab) activeTab.classList.add('active');
-  var content = document.getElementById('tn-' + tab);
-  if (content) content.classList.add('active');
+  var allTab = document.querySelector('.tn-tab[data-tn-tab="all"]');
+  var eventTabs = document.querySelectorAll('.tn-tab[data-tn-tab^="event"]');
+  if (tab === 'all') {
+    // 전체 클릭: 이벤트 전부 해제, 전체만 활성
+    eventTabs.forEach(function(e) { e.classList.remove('active'); });
+    if (allTab) allTab.classList.add('active');
+  } else {
+    // 이벤트 클릭: 전체 해제, 해당 이벤트 토글
+    if (allTab) allTab.classList.remove('active');
+    var clicked = document.querySelector('.tn-tab[data-tn-tab="' + tab + '"]');
+    if (clicked) clicked.classList.toggle('active');
+    // 이벤트 아무것도 선택 안 되면 전체로 복귀
+    var anyActive = document.querySelector('.tn-tab[data-tn-tab^="event"].active');
+    if (!anyActive && allTab) allTab.classList.add('active');
+  }
+  tnRenderFiltered();
+}
+
+function tnRenderFiltered() {
+  var t = i18n[currentLang] || i18n.ko;
+  var emptyMsg = t.tn_empty || '등록된 토너먼트가 없습니다';
+  var el = document.getElementById('tnFilteredList');
+  if (!el) return;
+  var allTab = document.querySelector('.tn-tab[data-tn-tab="all"]');
+  if (allTab && allTab.classList.contains('active')) {
+    el.innerHTML = demoTournaments.length ? demoTournaments.map(tnBuildCard).join('') : '<div class="tn-empty">' + emptyMsg + '</div>';
+    return;
+  }
+  var activeEvents = [];
+  document.querySelectorAll('.tn-tab[data-tn-tab^="event"].active').forEach(function(e) {
+    activeEvents.push(e.getAttribute('data-tn-tab').replace('event', ''));
+  });
+  var filtered = demoTournaments.filter(function(item) { return activeEvents.indexOf(item.event) !== -1; });
+  el.innerHTML = filtered.length ? filtered.map(tnBuildCard).join('') : '<div class="tn-empty">' + emptyMsg + '</div>';
 }
 
 function tnBuildCard(item) {
@@ -1422,21 +1461,7 @@ function tnBuildCard(item) {
 }
 
 function tnRenderList() {
-  const t = i18n[currentLang] || i18n.ko;
-  const emptyMsg = t.tn_empty || '등록된 토너먼트가 없습니다';
-
-  // 전체 리스트
-  var allEl = document.getElementById('tnAllList');
-  if (allEl) allEl.innerHTML = demoTournaments.length ? demoTournaments.map(tnBuildCard).join('') : '<div class="tn-empty">' + emptyMsg + '</div>';
-
-  // 이벤트별 리스트
-  ['A', 'B', 'C'].forEach(function(ev) {
-    var items = demoTournaments.filter(function(item) { return item.event === ev; });
-    var el = document.getElementById('tnEvent' + ev + 'List');
-    if (el) {
-      el.innerHTML = items.length ? items.map(tnBuildCard).join('') : '<div class="tn-empty">' + emptyMsg + '</div>';
-    }
-  });
+  tnRenderFiltered();
 }
 
 function tnIsPcSplit() {
@@ -1457,9 +1482,15 @@ function openTnDetail(tournamentId) {
     if (detailPage && splitDetail) {
       var cw = detailPage.querySelector('.content-wrapper');
       splitDetail.innerHTML = '<div class="td-detail-scroll">' + cw.innerHTML + '</div>';
-      // tabs를 scroll 밖으로 이동 (상단 고정)
+      // 방 제목을 탭 위에 삽입
+      var tnItem = demoTournaments.find(function(tn) { return tn.id === tournamentId; });
+      var titleEl = document.createElement('div');
+      titleEl.className = 'tn-split-detail-title';
+      titleEl.textContent = tnItem ? tnItem.name : '';
+      splitDetail.insertBefore(titleEl, splitDetail.firstChild);
+      // tabs를 scroll 밖으로 이동 (제목 아래)
       var tabs = splitDetail.querySelector('.td-detail-scroll > .td-tabs');
-      if (tabs) splitDetail.insertBefore(tabs, splitDetail.firstChild);
+      if (tabs) splitDetail.insertBefore(tabs, titleEl.nextSibling);
       // bottom-bar를 scroll 밖으로 이동 (하단 고정)
       var bar = splitDetail.querySelector('.td-bottom-bar');
       if (bar) splitDetail.appendChild(bar);
@@ -1480,17 +1511,28 @@ function tdRenderDetail() {
   const item = demoTournaments.find(function(tn) { return tn.id === currentTnDetailId; });
   if (!item) return;
 
-  // 헤더
-  document.getElementById('tdTournamentName').textContent = item.name;
-  var statusMap = {
-    registering: { label: t.tn_status_registering || '등록중', cls: 'registering' },
-    ongoing: { label: t.tn_status_ongoing || '진행중', cls: 'ongoing' },
-    finished: { label: t.tn_status_finished || '종료', cls: 'finished' },
-  };
-  var s = statusMap[item.status] || statusMap.registering;
-  var badge = document.getElementById('tdStatusBadge');
-  badge.textContent = s.label;
-  badge.className = 'tn-badge ' + s.cls;
+  // 요약 카드
+  var prizeEl = document.getElementById('tdPrizeValue');
+  if (prizeEl) prizeEl.textContent = item.prize ? item.prize.replace(/G$/, '') : '-';
+  var feeLabel0 = item.fee === 'free' ? (t.tn_fee_free || '무료') : item.fee;
+  var buyinEl = document.getElementById('tdBuyinValue');
+  if (buyinEl) buyinEl.textContent = feeLabel0;
+  var remainEl = document.getElementById('tdRemainPlayers');
+  if (remainEl) remainEl.textContent = item.players + '/' + item.maxPlayers;
+  if (window._tdElapsedTimer) clearInterval(window._tdElapsedTimer);
+  var elapsedEl = document.getElementById('tdElapsed');
+  if (elapsedEl) {
+    var _tdStartMs = Date.now();
+    function updateElapsed() {
+      var diff = Math.floor((Date.now() - _tdStartMs) / 1000);
+      var h = String(Math.floor(diff / 3600)).padStart(2, '0');
+      var m = String(Math.floor((diff % 3600) / 60)).padStart(2, '0');
+      var s2 = String(diff % 60).padStart(2, '0');
+      elapsedEl.textContent = h + ':' + m + ':' + s2;
+    }
+    updateElapsed();
+    window._tdElapsedTimer = setInterval(updateElapsed, 1000);
+  }
 
   // 자세히 탭 - 상단 현황
   var details = item.details || {};
@@ -1549,17 +1591,29 @@ function tdRenderDetailInline(container) {
   var backBtn = container.querySelector('.td-mobile-only');
   if (backBtn) backBtn.style.display = 'none';
 
-  // 헤더
-  container.querySelector('#tdTournamentName').textContent = item.name;
-  var statusMap = {
-    registering: { label: t.tn_status_registering || '등록중', cls: 'registering' },
-    ongoing: { label: t.tn_status_ongoing || '진행중', cls: 'ongoing' },
-    finished: { label: t.tn_status_finished || '종료', cls: 'finished' },
-  };
-  var s = statusMap[item.status] || statusMap.registering;
-  var badge = container.querySelector('#tdStatusBadge');
-  badge.textContent = s.label;
-  badge.className = 'tn-badge ' + s.cls;
+  // 요약 카드
+  var prizeEl = container.querySelector('#tdPrizeValue');
+  if (prizeEl) prizeEl.textContent = item.prize ? item.prize.replace(/G$/, '') : '-';
+  var feeLabel = item.fee === 'free' ? (t.tn_fee_free || '무료') : item.fee;
+  var buyinEl = container.querySelector('#tdBuyinValue');
+  if (buyinEl) buyinEl.textContent = feeLabel;
+  var remainEl = container.querySelector('#tdRemainPlayers');
+  if (remainEl) remainEl.textContent = item.players + '/' + item.maxPlayers;
+  // 진행 타이머
+  if (window._tdElapsedTimer) clearInterval(window._tdElapsedTimer);
+  var elapsedEl = container.querySelector('#tdElapsed');
+  if (elapsedEl) {
+    var _tdStartMs = Date.now();
+    function updateElapsed() {
+      var diff = Math.floor((Date.now() - _tdStartMs) / 1000);
+      var h = String(Math.floor(diff / 3600)).padStart(2, '0');
+      var m = String(Math.floor((diff % 3600) / 60)).padStart(2, '0');
+      var s2 = String(diff % 60).padStart(2, '0');
+      elapsedEl.textContent = h + ':' + m + ':' + s2;
+    }
+    updateElapsed();
+    window._tdElapsedTimer = setInterval(updateElapsed, 1000);
+  }
 
   var details = item.details || {};
   var blindLv = details.blindLevel || 1;

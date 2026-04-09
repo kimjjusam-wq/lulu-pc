@@ -1133,21 +1133,13 @@
       <div class="tn-split-left">
         <div class="tn-tabs">
           <button class="tn-tab active" data-tn-tab="all" onclick="switchTournamentTab('all')">전체</button>
+          <span class="tn-tab-divider"></span>
           <button class="tn-tab" data-tn-tab="eventA" onclick="switchTournamentTab('eventA')">이벤트A</button>
           <button class="tn-tab" data-tn-tab="eventB" onclick="switchTournamentTab('eventB')">이벤트B</button>
           <button class="tn-tab" data-tn-tab="eventC" onclick="switchTournamentTab('eventC')">이벤트C</button>
         </div>
-        <div class="tn-tab-content active" id="tn-all">
-          <div class="tn-list" id="tnAllList"></div>
-        </div>
-        <div class="tn-tab-content" id="tn-eventA">
-          <div class="tn-list" id="tnEventAList"></div>
-        </div>
-        <div class="tn-tab-content" id="tn-eventB">
-          <div class="tn-list" id="tnEventBList"></div>
-        </div>
-        <div class="tn-tab-content" id="tn-eventC">
-          <div class="tn-list" id="tnEventCList"></div>
+        <div class="tn-tab-content active" id="tn-filtered">
+          <div class="tn-list" id="tnFilteredList"></div>
         </div>
       </div>
       <!-- 오른쪽: 토너먼트 상세 (PC에서만 인라인 표시) -->
@@ -1172,9 +1164,13 @@
       <button class="td-tab" data-td-tab="blinds" onclick="switchTnDetailTab('blinds')" data-i18n="td_tab_blinds">블라인드</button>
       <button class="td-tab" data-td-tab="payout" onclick="switchTnDetailTab('payout')" data-i18n="td_tab_payout">지급</button>
     </div>
-    <div class="td-header">
-      <h2 id="tdTournamentName"></h2>
-      <span class="tn-badge" id="tdStatusBadge"></span>
+    <div class="td-summary-card">
+      <div class="td-summary-prize"><span class="td-summary-label">상금</span><span class="td-summary-value" id="tdPrizeValue">500,000</span><span class="td-summary-unit">골드</span></div>
+      <div class="td-summary-row">
+        <div class="td-summary-item"><span class="td-summary-label">진행</span><span class="td-summary-data" id="tdElapsed">00:00:00</span></div>
+        <div class="td-summary-item"><span class="td-summary-label">바이인</span><span class="td-summary-data" id="tdBuyinValue">무료</span></div>
+        <div class="td-summary-item"><span class="td-summary-label">참가자</span><span class="td-summary-data" id="tdRemainPlayers">3/10</span></div>
+      </div>
     </div>
 
     <!-- 자세히 탭 -->
@@ -1197,10 +1193,6 @@
             <span class="td-info-label" data-i18n="td_unique_reentry">유니크 | 리엔트리</span>
             <span class="td-info-value" id="tdUniqueReentry"></span>
           </div>
-        </div>
-      </div>
-      <div class="td-section">
-        <div class="td-info-grid">
           <div class="td-info-row">
             <span class="td-info-label" data-i18n="td_start_time">시작 시간</span>
             <span class="td-info-value" id="tdStartTime"></span>
