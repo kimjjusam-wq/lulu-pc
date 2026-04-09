@@ -1251,7 +1251,7 @@ img.shop-tab-emoji { width:24px; height:24px; object-fit:contain; }
 .mb-split-chat .chat-input-bar { flex-shrink:0; }
 
 /* Chat */
-.chat-wrap { display:flex; flex-direction:column; height:100vh; background:var(--bg-dark); position:fixed; top:0; left:0; right:0; bottom:0; z-index:150; }
+.chat-wrap { display:flex; flex-direction:column; height:100dvh; background:var(--bg-dark); position:fixed; top:0; left:0; right:0; bottom:0; z-index:150; }
 .chat-wrap .m-nav { position:sticky; top:0; display:flex !important; height:56px; align-items:center; justify-content:space-between; padding:0 16px; background:#0d0d18; border-bottom:1px solid var(--border-color); z-index:100; }
 .chat-menu-btn { background:none; border:none; color:var(--text-secondary); font-size:22px; cursor:pointer; padding:0 8px; letter-spacing:2px; }
 .chat-menu-popup { display:none; position:absolute; top:48px; right:12px; background:#1a1a2e; border:1px solid var(--border-color); border-radius:12px; overflow:hidden; z-index:200; min-width:180px; box-shadow:0 8px 30px rgba(0,0,0,0.5); }
@@ -1270,7 +1270,7 @@ img.shop-tab-emoji { width:24px; height:24px; object-fit:contain; }
 .chat-time { font-size:10px; color:var(--text-muted); padding:2px 4px 0; }
 .chat-time.me { text-align:right; }
 .chat-date-sep { text-align:center; font-size:11px; color:var(--text-muted); padding:12px 0 4px; }
-.chat-input-bar { display:flex; gap:8px; padding:12px; background:#0d0d18; border-top:1px solid var(--border-color); flex-shrink:0; }
+.chat-input-bar { display:flex; gap:8px; padding:12px; padding-bottom:calc(12px + env(safe-area-inset-bottom, 0)); background:#0d0d18; border-top:1px solid var(--border-color); flex-shrink:0; }
 .chat-input { flex:1; padding:10px 14px; border-radius:20px; border:1px solid var(--border-color); background:var(--bg-input); color:var(--text-primary); font-size:14px; outline:none; font-family:'Pretendard Variable',Pretendard,sans-serif; }
 .chat-input:focus { border-color:var(--accent-orange); }
 .chat-send-btn { padding:10px 18px; border-radius:20px; border:none; background:linear-gradient(135deg,var(--accent-orange),var(--accent-orange-dark)); color:#fff; font-size:14px; font-weight:700; cursor:pointer; white-space:nowrap; flex-shrink:0; transition:all 0.2s; }

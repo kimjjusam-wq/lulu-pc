@@ -749,7 +749,7 @@ function toggleMobileStatusbar() {
   var chatWrap = document.querySelector('.chat-wrap');
   if (chatWrap && document.body.classList.contains('chat-open')) {
     chatWrap.style.top = hidden ? '52px' : '0';
-    chatWrap.style.height = hidden ? 'calc(100vh - 52px)' : '100vh';
+    chatWrap.style.height = hidden ? 'calc(100dvh - 52px)' : '100dvh';
   }
 }
 
@@ -2520,7 +2520,7 @@ function openChat(name) {
     var chatWrap = document.querySelector('.chat-wrap');
     if (chatWrap && sb && sb.style.display !== 'none') {
       chatWrap.style.top = '52px';
-      chatWrap.style.height = 'calc(100vh - 52px)';
+      chatWrap.style.height = 'calc(100dvh - 52px)';
     }
     renderChat();
   }
