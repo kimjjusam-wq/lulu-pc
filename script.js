@@ -1457,6 +1457,9 @@ function openTnDetail(tournamentId) {
     if (detailPage && splitDetail) {
       var cw = detailPage.querySelector('.content-wrapper');
       splitDetail.innerHTML = '<div class="td-detail-scroll">' + cw.innerHTML + '</div>';
+      // tabs를 scroll 밖으로 이동 (상단 고정)
+      var tabs = splitDetail.querySelector('.td-detail-scroll > .td-tabs');
+      if (tabs) splitDetail.insertBefore(tabs, splitDetail.firstChild);
       // bottom-bar를 scroll 밖으로 이동 (하단 고정)
       var bar = splitDetail.querySelector('.td-bottom-bar');
       if (bar) splitDetail.appendChild(bar);
