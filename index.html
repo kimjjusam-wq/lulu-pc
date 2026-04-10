@@ -839,7 +839,7 @@
       <div class="stat-card stat-card-link" role="button" tabindex="0" onclick="switchPage('myitems')"><div class="stat-icon"><img loading="lazy" src="images/stat_item.png" alt="item"></div><div class="stat-value">6 <span class="stat-shortcut">→</span></div><div class="stat-label" data-i18n="stat_item">내 아이템</div></div>
     </div>
     <div class="my-menu">
-      <div class="my-menu-item" role="button" tabindex="0" onclick="switchPage('mailbox')"><div class="my-menu-left"><div class="my-menu-icon" style="background:rgba(96,165,250,0.15)"><img loading="lazy" src="images/my_mailbox.png" alt="우편함"></div><span class="my-menu-text" data-i18n="my_message">우편함</span><span class="my-mail-badge" id="myMailBadge" style="display:none"></span></div><span class="my-menu-arrow">›</span></div>
+      <div class="my-menu-item" role="button" tabindex="0" onclick="switchPage('mailbox')"><div class="my-menu-left"><div class="my-menu-icon" style="background:rgba(96,165,250,0.15)"><img loading="lazy" src="images/my_mailbox.png" alt="보관함"></div><span class="my-menu-text" data-i18n="my_message">보관함</span><span class="my-mail-badge" id="myMailBadge" style="display:none"></span></div><span class="my-menu-arrow">›</span></div>
       <div class="my-menu-item" role="button" tabindex="0" onclick="switchPage('host')"><div class="my-menu-left"><div class="my-menu-icon" style="background:rgba(168,85,247,0.15)"><img loading="lazy" src="images/my_host.png" alt="호스트"></div><span class="my-menu-text" data-i18n="my_host">호스트</span></div><span class="my-menu-arrow">›</span></div>
       <div class="my-menu-item" role="button" tabindex="0" onclick="switchPage('tn-history')"><div class="my-menu-left"><div class="my-menu-icon" style="background:rgba(20,184,166,0.15)"><img loading="lazy" src="images/menu_terms.png" alt="히스토리"></div><span class="my-menu-text" data-i18n="my_tn_history">히스토리</span></div><span class="my-menu-arrow">›</span></div>
       <div class="my-menu-item" role="button" tabindex="0" onclick="switchPage('transaction')"><div class="my-menu-left"><div class="my-menu-icon" style="background:rgba(245,158,11,0.15)"><img loading="lazy" src="images/my_transaction.png" alt="거래내역"></div><span class="my-menu-text" data-i18n="my_history">거래 내역</span></div><span class="my-menu-arrow">›</span></div>
@@ -883,8 +883,8 @@
         </div>
         <div class="login-links">
           <a data-i18n="login_find_id">아이디 찾기</a>
-          <span class="login-sep">|</span>
-          <a data-i18n="login_reset_pw">비밀번호 재설정</a>
+          <!-- <span class="login-sep">|</span>
+          <a data-i18n="login_reset_pw">비밀번호 재설정</a> -->
           <span class="login-sep">|</span>
           <a onclick="showSignup()" data-i18n="login_signup" style="cursor:pointer;">회원가입</a>
         </div>
@@ -1375,7 +1375,7 @@
   <div class="content-wrapper">
     <div class="gs-back" role="button" tabindex="0" onclick="switchPage('my')"><span>←</span> <span data-i18n="gs_back">돌아가기</span></div>
     <div class="gs-hero">
-      <h2 data-i18n="mb_title">우편함</h2>
+      <h2 data-i18n="mb_title">보관함</h2>
       <p data-i18n="mb_desc">받은 알림과 메시지를 확인하세요</p>
     </div>
     <div class="mb-split-layout">
@@ -2488,7 +2488,7 @@
   </div>
   <div class="slide-menu-divider"></div>
   <div class="slide-menu-section">
-    <a class="slide-menu-item" onclick="toggleSlideMenu();switchPage('mailbox')"><img loading="lazy" class="slide-menu-icon" src="images/my_mailbox.png" alt="우편함">우편함<span class="slide-menu-badge" id="slideMenuMailBadge"></span></a>
+    <a class="slide-menu-item" onclick="toggleSlideMenu();switchPage('mailbox')"><img loading="lazy" class="slide-menu-icon" src="images/my_mailbox.png" alt="보관함">보관함<span class="slide-menu-badge" id="slideMenuMailBadge"></span></a>
     <a class="slide-menu-item" onclick="toggleSlideMenu();switchPage('faq')"><img loading="lazy" class="slide-menu-icon" src="images/menu_support.png" alt="자주묻는 질문">자주묻는 질문</a>
   </div>
   <div class="slide-menu-divider"></div>

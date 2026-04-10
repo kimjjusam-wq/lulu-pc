@@ -226,7 +226,7 @@ const i18n = {
     my_friends: '친구 관리',
     my_items: '내 아이템',
     my_settings: '설정',
-    my_message: '우편함',
+    my_message: '보관함',
     my_host: '호스트',
     my_tn_history: '히스토리',
     host_title: '호스트',
@@ -268,7 +268,7 @@ const i18n = {
     tx_tab_diamond: '다이아',
     tx_empty: '거래 내역이 없습니다',
     tx_after: '잔액',
-    mb_title: '우편함',
+    mb_title: '보관함',
     mb_desc: '받은 우편을 확인하세요',
     mb_btn_claim: '아이템 받기',
     mb_btn_done: '받기 완료',
@@ -646,7 +646,7 @@ function mSyncNavTitle(page) {
   var mainTabs = ['lobby', 'shop', 'analytics', 'my', 'login'];
   var titles = {
     shop: '상점', my: 'MY 룰루', analytics: '통계',
-    mailbox: '우편함', chat: '채팅', myitems: '내 아이템',
+    mailbox: '보관함', chat: '채팅', myitems: '내 아이템',
     transaction: '거래 내역', host: '호스트',
     ticket: '티켓', tournament: '토너먼트',
     'tn-history': '히스토리', 'tn-detail': '토너먼트',
