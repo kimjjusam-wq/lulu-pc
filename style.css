@@ -714,6 +714,21 @@ img.shop-tab-emoji { width:24px; height:24px; object-fit:contain; }
 .login-links a:hover { color: var(--accent-orange); }
 .login-sep { color: var(--border-color); }
 
+/* Find Account */
+.find-account-header { margin-bottom:28px; }
+.find-account-header h3 { font-size:20px; font-weight:800; color:var(--text-primary); line-height:1.5; margin-bottom:12px; }
+.find-account-header p { font-size:13px; color:var(--text-muted); line-height:1.6; }
+.find-account-terms { display:flex; flex-direction:column; gap:0; margin-bottom:28px; }
+.find-account-term-item { display:flex; align-items:center; gap:12px; padding:18px 0; border-bottom:1px solid var(--border-color); cursor:pointer; transition:background 0.15s; }
+.find-account-term-item:first-child { border-top:1px solid var(--border-color); }
+.find-account-check { width:20px; height:20px; border-radius:50%; border:2px solid var(--border-color); flex-shrink:0; transition:all 0.2s; position:relative; }
+.find-account-check.checked { border-color:var(--accent-orange); background:var(--accent-orange); }
+.find-account-check.checked::after { content:''; position:absolute; top:4px; left:6px; width:5px; height:9px; border:solid #fff; border-width:0 2px 2px 0; transform:rotate(45deg); }
+.find-account-term-text { flex:1; font-size:14px; color:var(--text-primary); }
+.find-account-term-text strong { color:var(--accent-orange); }
+.find-account-arrow { font-size:18px; color:var(--text-muted); }
+.find-account-btn.disabled { opacity:0.4; cursor:not-allowed; }
+
 /* Signup Progress Bar */
 .signup-progress { display:flex; align-items:center; width:100%; max-width:420px; padding:0 20px; margin-top:4px; margin-bottom:16px; }
 .progress-step { display:flex; flex-direction:column; align-items:center; gap:6px; flex-shrink:0; }
@@ -1614,7 +1629,7 @@ body.chat-open > .m-nav { display:none !important; }
   .m-nav-title-text { overflow:hidden; white-space:nowrap; text-overflow:ellipsis; min-width:0; }
   .m-nav-back { cursor:pointer; color:var(--text-secondary); -webkit-tap-highlight-color:transparent; flex-shrink:0; }
   .shop-hero, .my-page-hero, .gs-hero, .analytics-hero { display:none; }
-  .gs-back, .login-back { display:none; }
+  .gs-back, .login-back, .find-account-pc-header { display:none; }
   .shop-tab-emoji { display:none; }
   .m-nav-right { display:flex; align-items:center; gap:8px; }
   .m-nav-coins {

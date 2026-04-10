@@ -882,12 +882,39 @@
           </button>
         </div>
         <div class="login-links">
-          <a data-i18n="login_find_id">계정 찾기</a>
+          <a data-i18n="login_find_id" onclick="showFindAccount()" style="cursor:pointer;">계정 찾기</a>
           <!-- <span class="login-sep">|</span>
           <a data-i18n="login_reset_pw">비밀번호 재설정</a> -->
           <span class="login-sep">|</span>
           <a onclick="showSignup()" data-i18n="login_signup" style="cursor:pointer;">회원가입</a>
         </div>
+      </div>
+    </div>
+    <!-- 계정 찾기: 본인 인증 약관 동의 -->
+    <div id="findAccountSection" style="display:none;">
+      <div class="login-header find-account-pc-header">
+        <h2>계정 찾기</h2>
+        <p>본인 인증을 통해 계정을 찾을 수 있습니다</p>
+      </div>
+      <div class="login-card find-account-card">
+        <div class="login-logo find-account-pc-header"><img loading="lazy" src="images/login_icon.svg" alt="Poker Lulu"></div>
+        <div class="find-account-header">
+          <h3>본인 인증을 위해<br>약관에 동의해 주세요</h3>
+          <p>PASS 본인인증 서비스 이용을 위한<br>약관 동의가 필요합니다.</p>
+        </div>
+        <div class="find-account-terms">
+          <div class="find-account-term-item" role="button" tabindex="0" onclick="toggleFindTerm(this.querySelector('.find-account-check'))">
+            <span class="find-account-check" id="findTermService"></span>
+            <span class="find-account-term-text"><strong>[필수]</strong> 서비스 이용약관 동의</span>
+            <span class="find-account-arrow">›</span>
+          </div>
+          <div class="find-account-term-item" role="button" tabindex="0" onclick="toggleFindTerm(this.querySelector('.find-account-check'))">
+            <span class="find-account-check" id="findTermPrivacy"></span>
+            <span class="find-account-term-text"><strong>[필수]</strong> 개인정보 수집 및 이용 동의</span>
+            <span class="find-account-arrow">›</span>
+          </div>
+        </div>
+        <button class="login-btn find-account-btn disabled" id="findAccountBtn" onclick="submitFindAccount()">동의 및 계속</button>
       </div>
     </div>
     <!-- 회원가입 Step1: 약관 동의 -->

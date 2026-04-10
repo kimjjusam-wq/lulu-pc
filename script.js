@@ -832,7 +832,7 @@ function clearSession() {
 }
 
 function hideAllAuthSections() {
-  ['loginSection','signupStep1','signupStep2','signupStep3','signupStep4','signupStep5'].forEach(id => {
+  ['loginSection','findAccountSection','signupStep1','signupStep2','signupStep3','signupStep4','signupStep5'].forEach(id => {
     const el = document.getElementById(id);
     if (el) el.style.display = 'none';
   });
@@ -842,6 +842,38 @@ function showLogin() {
   const loginSec = document.getElementById('loginSection');
   if (loginSec) loginSec.style.display = '';
   clearLoginErrors();
+  mSyncNavTitle('login');
+}
+function showFindAccount() {
+  hideAllAuthSections();
+  document.getElementById('findAccountSection').style.display = '';
+  // 모바일 nav 타이틀 변경
+  var title = document.getElementById('mNavTitle');
+  var logo = document.getElementById('mNavLogo');
+  if (title && logo) {
+    logo.style.display = 'none';
+    title.style.display = '';
+    title.innerHTML = '<svg class="m-nav-back" onclick="showLogin()" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg><span class="m-nav-title-text">계정 찾기</span>';
+  }
+  // 체크 초기화
+  document.querySelectorAll('.find-account-check').forEach(function(el) { el.classList.remove('checked'); });
+  updateFindAccountBtn();
+}
+function toggleFindTerm(el) {
+  el.classList.toggle('checked');
+  updateFindAccountBtn();
+}
+function updateFindAccountBtn() {
+  var checks = document.querySelectorAll('.find-account-check');
+  var allChecked = true;
+  checks.forEach(function(c) { if (!c.classList.contains('checked')) allChecked = false; });
+  var btn = document.getElementById('findAccountBtn');
+  if (allChecked) { btn.classList.remove('disabled'); } else { btn.classList.add('disabled'); }
+}
+function submitFindAccount() {
+  var btn = document.getElementById('findAccountBtn');
+  if (btn.classList.contains('disabled')) return;
+  alert('본인 인증 서비스로 이동합니다.');
 }
 function showSignup() {
   hideAllAuthSections();
