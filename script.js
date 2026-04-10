@@ -770,14 +770,31 @@ function toggleMobileStatusbar() {
   if (!carousel) return;
   var items = carousel.children;
   var idx = 0;
+  var dotsEl = document.getElementById('lobbyCarouselDots');
+  var totalPages = items.length - 2; // 6 items, 3 visible = 4 pages (0,1,2,3)
+  if (dotsEl) {
+    for (var d = 0; d < totalPages; d++) {
+      var dot = document.createElement('div');
+      dot.className = 'lobby-carousel-dot' + (d === 0 ? ' active' : '');
+      dotsEl.appendChild(dot);
+    }
+  }
+  function updateDots() {
+    if (!dotsEl) return;
+    var dots = dotsEl.children;
+    for (var d = 0; d < dots.length; d++) {
+      dots[d].classList.toggle('active', d === idx);
+    }
+  }
   function scroll() {
-    if (window.innerWidth > 768) { carousel.style.transform = ''; idx = 0; return; }
+    if (window.innerWidth > 768) { carousel.style.transform = ''; idx = 0; updateDots(); return; }
     var max = items.length - 3;
     idx++;
     if (idx > max) idx = 0;
     var gap = 16;
     var itemW = items[0].offsetWidth + gap;
     carousel.style.transform = 'translateX(-' + (idx * itemW) + 'px)';
+    updateDots();
   }
   setInterval(scroll, 3000);
 })();
@@ -2527,11 +2544,13 @@ var chatData = {
     { who: 'them', text: '오늘 토너먼트 참가하실 건가요?', time: '오후 7:30' },
     { who: 'me', text: '네! 8시 시작이죠?', time: '오후 7:31' },
     { who: 'them', text: '맞아요 프라이빗 룸에서 봐요', time: '오후 7:32' },
+    { who: 'me', text: '좋아요 그때 봐요!', time: '오후 7:33', failed: true },
     { who: 'them', text: '내일 저녁 8시에 프라이빗 룸 하실래요?', time: '오후 7:45' },
   ],
   '올인김치': [
     { who: 'them', text: '아까 AA로 올인 받아주셔서 감사합니다 ㅋㅋ', time: '오후 3:10' },
     { who: 'me', text: 'ㅋㅋㅋ 저도 재밌었어요', time: '오후 3:12' },
+    { who: 'me', text: '다음에 또 같이 해요', time: '오후 3:13', failed: true },
     { who: 'them', text: '아까 그 핸드 대박이었어요 ㅋㅋ', time: '오후 3:15' },
   ],
   '블러프왕': [
@@ -2593,6 +2612,10 @@ function renderChat() {
       return '<div class="chat-row them"><img class="chat-avatar" src="' + chatAvatar + '" alt="">' +
         '<div><div class="chat-bubble them">' + m.text + '</div>' +
         '<div class="chat-time them">' + m.time + '</div></div></div>';
+    }
+    if (m.failed) {
+      return '<div class="chat-row me"><div><div class="chat-bubble me failed">' + m.text + '</div>' +
+        '<div class="chat-time me failed">전송 실패 · ' + m.time + '</div></div></div>';
     }
     return '<div class="chat-row me"><div><div class="chat-bubble me">' + m.text + '</div>' +
       '<div class="chat-time me">' + m.time + '</div></div></div>';

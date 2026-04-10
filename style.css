@@ -262,6 +262,9 @@ img.shop-tab-emoji { width:24px; height:24px; object-fit:contain; }
 .lobby-carousel-img img { width:80px; height:80px; object-fit:contain; }
 .lobby-carousel-name { font-size:13px; font-weight:700; color:var(--text-primary); margin-bottom:6px; }
 .lobby-carousel-price { font-size:13px; font-weight:700; color:var(--accent-orange); }
+.lobby-carousel-dots { display:none; justify-content:center; gap:6px; padding-top:12px; }
+.lobby-carousel-dot { width:6px; height:6px; border-radius:50%; background:var(--border-color); transition:all 0.3s; }
+.lobby-carousel-dot.active { background:var(--accent-orange); width:18px; border-radius:3px; }
 
 /* Package Card Grid */
 .pkg-grid {
@@ -1294,6 +1297,8 @@ img.shop-tab-emoji { width:24px; height:24px; object-fit:contain; }
 .chat-bubble.me { background:linear-gradient(135deg,var(--accent-orange),var(--accent-orange-dark)); color:#fff; border-bottom-right-radius:4px; }
 .chat-time { font-size:10px; color:var(--text-muted); padding:2px 4px 0; }
 .chat-time.me { text-align:right; }
+.chat-bubble.me.failed { background:var(--bg-card); border:1px solid #ef4444; color:var(--text-secondary); opacity:0.7; }
+.chat-time.me.failed { color:#ef4444; }
 .chat-date-sep { text-align:center; font-size:11px; color:var(--text-muted); padding:12px 0 4px; }
 .chat-input-bar { display:flex; gap:8px; padding:12px; padding-bottom:calc(12px + env(safe-area-inset-bottom, 0)); background:#0d0d18; border-top:1px solid var(--border-color); flex-shrink:0; }
 .chat-input { flex:1; padding:10px 14px; border-radius:20px; border:1px solid var(--border-color); background:var(--bg-input); color:var(--text-primary); font-size:14px; outline:none; font-family:'Pretendard Variable',Pretendard,sans-serif; }
@@ -1874,6 +1879,7 @@ body.chat-open > .m-nav { display:none !important; }
 
   /* --- Lobby carousel mobile: 3 visible --- */
   .lobby-recommend { margin-bottom:24px; }
+  .lobby-carousel-dots { display:flex; }
   .lobby-carousel-item { flex:0 0 calc(33.333% - 11px); }
   .lobby-carousel-img img { width:60px; height:60px; }
   .lobby-carousel-name { font-size:12px; font-weight:600; }
