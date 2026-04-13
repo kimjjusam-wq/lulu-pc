@@ -1,3 +1,22 @@
+// === iOS 핀치/더블탭 줌 차단 ===
+(function() {
+  // 핀치 줌 차단 (iOS Safari gesture 이벤트)
+  document.addEventListener('gesturestart', function(e) { e.preventDefault(); }, { passive: false });
+  document.addEventListener('gesturechange', function(e) { e.preventDefault(); }, { passive: false });
+  document.addEventListener('gestureend', function(e) { e.preventDefault(); }, { passive: false });
+  // 두 손가락 touchmove 차단 (핀치 줌)
+  document.addEventListener('touchmove', function(e) {
+    if (e.touches && e.touches.length > 1) e.preventDefault();
+  }, { passive: false });
+  // 더블탭 줌 차단
+  var lastTouchEnd = 0;
+  document.addEventListener('touchend', function(e) {
+    var now = Date.now();
+    if (now - lastTouchEnd <= 350) e.preventDefault();
+    lastTouchEnd = now;
+  }, { passive: false });
+})();
+
 // === Tab Slider Animation ===
 function moveSlider(container, activeEl, prevActiveEl) {
   if (!container || !activeEl) return;
