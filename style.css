@@ -1175,7 +1175,7 @@ img.shop-tab-emoji { width:24px; height:24px; object-fit:contain; }
 .gs-hero p { color:var(--text-secondary); font-size:14px; }
 
 /* Tabs */
-.gs-tabs { display:flex; gap:12px; margin-bottom:24px; background:#010104; border:1px solid #1a1a2a; border-radius:14px; padding:7px; align-items:center; position:relative; }
+.gs-tabs { display:flex; gap:12px; max-width:700px; margin:0 auto 24px; background:#010104; border:1px solid #1a1a2a; border-radius:14px; padding:7px; align-items:center; position:relative; }
 .gs-tab { flex:1; padding:0 16px; border:1px solid transparent; border-radius:10px; font-size:14px; font-weight:700; cursor:pointer; background:transparent; color:var(--text-muted); transition:color 0.25s, font-weight 0.25s; height:43px; position:relative; z-index:1; display:flex; align-items:center; justify-content:center; box-sizing:border-box; font-family:'Pretendard Variable',Pretendard,sans-serif; }
 .gs-tab:hover { color:var(--text-secondary); background:rgba(255,255,255,0.03); }
 .gs-tab.active { background:#1f1f35; color:#fff; border:1px solid #2a2a44; border-radius:10px; box-shadow:none; position:relative; z-index:1; }

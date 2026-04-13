@@ -597,6 +597,16 @@ function searchDateRange() {
   console.log('조회 기간:', toDateStr(calState.start), '~', toDateStr(calState.end));
 }
 
+// === 로그인 필요 게임 진입 ===
+function enterGame(page) {
+  if (!getSession()) {
+    alert('로그인이 필요합니다.');
+    showLogin();
+    return;
+  }
+  switchPage(page);
+}
+
 // === 페이지 전환 ===
 function switchPage(p) {
   if ((p === 'my' || p === 'analytics') && !getSession()) { p = 'login'; }
@@ -700,16 +710,18 @@ function mSyncNavTitle(page) {
     logo.style.display = '';
     title.style.display = 'none';
   }
-  // 법적고지 페이지 및 토너먼트 상세에서 골드/다이아/메뉴 숨김
+  // 법적고지 페이지 및 토너먼트 상세에서 골드/다이아/메뉴 숨김 + 비로그인 시 숨김
   var legalPages = ['terms','privacy','youth','rating','company','faq','contact'];
   var isLegal = legalPages.indexOf(page) !== -1;
-  var hideCurrency = isLegal || page === 'tn-detail';
+  var isLoggedIn = !!getSession();
+  var hideCurrency = isLegal || page === 'tn-detail' || !isLoggedIn;
+  var hideMenu = (page === 'tn-detail') || !isLoggedIn;
   var mGoldWrap = document.getElementById('mNavGoldWrap');
   var mDiaWrap = document.getElementById('mNavDiamondWrap');
   var mMenu = document.getElementById('mNavMenu');
   if (mGoldWrap) mGoldWrap.style.display = hideCurrency ? 'none' : '';
   if (mDiaWrap) mDiaWrap.style.display = hideCurrency ? 'none' : '';
-  if (mMenu) mMenu.style.display = (page === 'tn-detail') ? 'none' : '';
+  if (mMenu) mMenu.style.display = hideMenu ? 'none' : '';
   // 토너먼트 상세: 제목을 토너먼트명으로 변경
   if (page === 'tn-detail' && currentTnDetailId) {
     var tnItem = demoTournaments.find(function(tn) { return tn.id === currentTnDetailId; });
@@ -1371,10 +1383,15 @@ function updateAuthUI() {
   var tabMyIcon = document.querySelector('.m-tab-my-icon');
   var tabMyAvatar = document.getElementById('mTabMyAvatar');
   var mNavMenu = document.getElementById('mNavMenu');
+  // PC 골드/다이아 래퍼
+  var pcGoldWrap = goldEl ? goldEl.closest('.nav-coins') : null;
+  var pcDiaWrap = diamondEl ? diamondEl.closest('.nav-coins') : null;
   if (session) {
     if (loginBtn) loginBtn.style.display = 'none';
     if (goldEl) goldEl.textContent = session.gold || '1,250억';
     if (diamondEl) diamondEl.textContent = session.diamond || '300';
+    if (pcGoldWrap) pcGoldWrap.style.display = '';
+    if (pcDiaWrap) pcDiaWrap.style.display = '';
     if (pcAvatar) pcAvatar.style.display = '';
     if (pcAvatarImg && session.avatar) pcAvatarImg.src = 'images/' + session.avatar;
     if (mLoginBtn) mLoginBtn.style.display = 'none';
@@ -1392,6 +1409,8 @@ function updateAuthUI() {
     if (loginBtn) loginBtn.style.display = '';
     if (goldEl) goldEl.textContent = '0';
     if (diamondEl) diamondEl.textContent = '0';
+    if (pcGoldWrap) pcGoldWrap.style.display = 'none';
+    if (pcDiaWrap) pcDiaWrap.style.display = 'none';
     if (pcAvatar) pcAvatar.style.display = 'none';
     if (mLoginBtn) mLoginBtn.style.display = '';
     if (mNavMenu) mNavMenu.style.display = 'none';
