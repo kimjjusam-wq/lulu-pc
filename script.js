@@ -832,7 +832,7 @@ function clearSession() {
 }
 
 function hideAllAuthSections() {
-  ['loginSection','findAccountSection','signupStep1','signupStep2','signupStep3','signupStep4','signupStep5'].forEach(id => {
+  ['loginSection','findAccountSection','findAccountPassSection','signupStep1','signupStep2','signupStep3','signupStep4','signupStep5'].forEach(id => {
     const el = document.getElementById(id);
     if (el) el.style.display = 'none';
   });
@@ -859,6 +859,61 @@ function showFindAccount() {
   document.querySelectorAll('.find-account-check').forEach(function(el) { el.classList.remove('checked'); });
   updateFindAccountBtn();
 }
+var currentTermsType = null;
+
+var termsContent = {
+  service: '<h4>제1조 (목적)</h4><p>이 약관은 포커룰루(이하 "회사")가 제공하는 서비스의 이용과 관련하여 회사와 이용자 간의 권리, 의무 및 책임사항, 기타 필요한 사항을 규정함을 목적으로 합니다.</p>' +
+    '<h4>제2조 (정의)</h4><p>① "서비스"란 회사가 제공하는 모든 온라인 게임 및 이에 부수하는 일체의 서비스를 의미합니다.<br>② "이용자"란 이 약관에 따라 회사가 제공하는 서비스를 이용하는 회원 및 비회원을 말합니다.<br>③ "회원"이란 회사에 개인정보를 제공하여 회원 등록을 한 자로서, 회사의 정보를 지속적으로 제공받으며 서비스를 이용할 수 있는 자를 말합니다.</p>' +
+    '<h4>제3조 (약관의 효력 및 변경)</h4><p>① 이 약관은 서비스를 이용하고자 하는 모든 이용자에게 그 효력이 발생합니다.<br>② 회사는 합리적인 사유가 발생할 경우 관련 법령에 위배되지 않는 범위 내에서 이 약관을 변경할 수 있으며, 약관이 변경된 경우에는 지체 없이 이를 공지합니다.</p>' +
+    '<h4>제4조 (서비스의 제공)</h4><p>① 회사는 다음과 같은 서비스를 제공합니다.<br>- 온라인 포커 게임 서비스<br>- 토너먼트 및 이벤트 서비스<br>- 커뮤니티 및 소셜 기능<br>- 기타 회사가 정하는 서비스</p>' +
+    '<h4>제5조 (서비스의 중단)</h4><p>① 회사는 컴퓨터 등 정보통신설비의 보수점검, 교체 및 고장, 통신의 두절 등의 사유가 발생한 경우에는 서비스의 제공을 일시적으로 중단할 수 있습니다.<br>② 회사는 제1항의 사유로 서비스의 제공이 일시적으로 중단됨으로 인하여 이용자 또는 제3자가 입은 손해에 대하여 배상합니다.</p>' +
+    '<h4>제6조 (회원가입)</h4><p>① 이용자는 회사가 정한 가입 양식에 따라 회원 정보를 기입한 후 이 약관에 동의한다는 의사표시를 함으로써 회원가입을 신청합니다.<br>② 회사는 제1항과 같이 회원으로 가입할 것을 신청한 이용자 중 다음 각 호에 해당하지 않는 한 회원으로 등록합니다.</p>' +
+    '<h4>제7조 (회원 탈퇴 및 자격 상실)</h4><p>① 회원은 회사에 언제든지 탈퇴를 요청할 수 있으며, 회사는 즉시 회원 탈퇴를 처리합니다.<br>② 회원이 다음 각 호의 사유에 해당하는 경우, 회사는 회원 자격을 제한 및 정지시킬 수 있습니다.<br>- 가입 신청 시 허위 내용을 등록한 경우<br>- 다른 사람의 서비스 이용을 방해하거나 정보를 도용한 경우<br>- 서비스를 이용하여 법령 또는 이 약관이 금지하는 행위를 하는 경우</p>' +
+    '<h4>제8조 (개인정보 보호)</h4><p>회사는 이용자의 개인정보를 보호하기 위해 개인정보처리방침을 수립하고 이를 준수합니다. 자세한 사항은 개인정보처리방침을 참고하시기 바랍니다.</p>',
+  privacy: '<h4>제1조 (개인정보의 수집 및 이용 목적)</h4><p>회사는 다음의 목적을 위하여 개인정보를 처리합니다. 처리하고 있는 개인정보는 다음의 목적 이외의 용도로는 이용되지 않으며, 이용 목적이 변경되는 경우에는 별도의 동의를 받는 등 필요한 조치를 이행할 예정입니다.<br><br>① 회원 가입 및 관리: 회원 가입 의사 확인, 회원제 서비스 제공에 따른 본인 식별·인증, 회원 자격 유지·관리, 서비스 부정 이용 방지, 각종 고지·통지<br>② 서비스 제공: 게임 서비스 제공, 콘텐츠 제공, 맞춤 서비스 제공, 본인 인증</p>' +
+    '<h4>제2조 (수집하는 개인정보의 항목)</h4><p>회사는 서비스 제공을 위해 다음과 같은 개인정보를 수집합니다.<br><br>① 필수 항목: 이름, 생년월일, 성별, 휴대폰 번호, 이메일 주소, 아이디, 비밀번호<br>② 선택 항목: 프로필 사진, 닉네임<br>③ 서비스 이용 과정에서 자동 수집: IP 주소, 쿠키, 접속 로그, 기기 정보, 서비스 이용 기록</p>' +
+    '<h4>제3조 (개인정보의 보유 및 이용 기간)</h4><p>① 회사는 법령에 따른 개인정보 보유·이용 기간 또는 정보주체로부터 개인정보를 수집 시에 동의 받은 개인정보 보유·이용 기간 내에서 개인정보를 처리·보유합니다.<br>② 각각의 개인정보 처리 및 보유 기간은 다음과 같습니다.<br>- 회원 가입 및 관리: 회원 탈퇴 시까지<br>- 전자상거래 관련 기록: 5년<br>- 접속에 관한 기록: 3개월</p>' +
+    '<h4>제4조 (개인정보의 제3자 제공)</h4><p>회사는 원칙적으로 이용자의 개인정보를 제3자에게 제공하지 않습니다. 다만, 다음의 경우에는 예외로 합니다.<br><br>① 이용자가 사전에 동의한 경우<br>② 법령의 규정에 의거하거나 수사 목적으로 법령에 정해진 절차와 방법에 따라 수사기관의 요구가 있는 경우</p>' +
+    '<h4>제5조 (개인정보의 파기)</h4><p>① 회사는 개인정보 보유 기간의 경과, 처리 목적 달성 등 개인정보가 불필요하게 되었을 때에는 지체 없이 해당 개인정보를 파기합니다.<br>② 파기의 절차 및 방법은 다음과 같습니다.<br>- 전자적 파일 형태의 정보는 기록을 재생할 수 없는 기술적 방법을 사용합니다.<br>- 종이에 출력된 개인정보는 분쇄기로 분쇄하거나 소각을 통하여 파기합니다.</p>' +
+    '<h4>제6조 (정보주체의 권리·의무)</h4><p>① 정보주체는 회사에 대해 언제든지 다음 각 호의 개인정보 보호 관련 권리를 행사할 수 있습니다.<br>- 개인정보 열람 요구<br>- 오류 등이 있을 경우 정정 요구<br>- 삭제 요구<br>- 처리 정지 요구</p>' +
+    '<h4>제7조 (개인정보 보호책임자)</h4><p>회사는 개인정보 처리에 관한 업무를 총괄해서 책임지고, 개인정보 처리와 관련한 정보주체의 불만 처리 및 피해 구제 등을 위하여 아래와 같이 개인정보 보호책임자를 지정하고 있습니다.<br><br>개인정보 보호책임자: 포커룰루 보안팀<br>연락처: privacy@pokerlulu.com</p>'
+};
+
+function openTermsPopup(type) {
+  currentTermsType = type;
+  var modal = document.getElementById('termsModal');
+  var title = document.getElementById('termsModalTitle');
+  var body = document.getElementById('termsModalBody');
+  var btn = document.getElementById('termsAgreeBtn');
+  title.textContent = type === 'service' ? '서비스 이용약관' : '개인정보 수집 및 이용 동의';
+  body.innerHTML = termsContent[type];
+  body.scrollTop = 0;
+  btn.classList.add('disabled');
+  modal.classList.add('active');
+}
+
+function closeTermsPopup() {
+  document.getElementById('termsModal').classList.remove('active');
+  currentTermsType = null;
+}
+
+function checkTermsScroll() {
+  var body = document.getElementById('termsModalBody');
+  var btn = document.getElementById('termsAgreeBtn');
+  if (body.scrollTop + body.clientHeight >= body.scrollHeight - 10) {
+    btn.classList.remove('disabled');
+  }
+}
+
+function agreeTerms() {
+  var btn = document.getElementById('termsAgreeBtn');
+  if (btn.classList.contains('disabled')) return;
+  var checkId = currentTermsType === 'service' ? 'findTermService' : 'findTermPrivacy';
+  document.getElementById(checkId).classList.add('checked');
+  updateFindAccountBtn();
+  closeTermsPopup();
+}
+
 function toggleFindTerm(el) {
   el.classList.toggle('checked');
   updateFindAccountBtn();
@@ -873,7 +928,22 @@ function updateFindAccountBtn() {
 function submitFindAccount() {
   var btn = document.getElementById('findAccountBtn');
   if (btn.classList.contains('disabled')) return;
-  alert('본인 인증 서비스로 이동합니다.');
+  showFindAccountPass();
+}
+function showFindAccountPass() {
+  hideAllAuthSections();
+  document.getElementById('findAccountPassSection').style.display = '';
+  // 모바일 nav 타이틀 변경 (뒤로가기는 약관 동의 페이지로)
+  var title = document.getElementById('mNavTitle');
+  var logo = document.getElementById('mNavLogo');
+  if (title && logo) {
+    logo.style.display = 'none';
+    title.style.display = '';
+    title.innerHTML = '<svg class="m-nav-back" onclick="showFindAccount()" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg><span class="m-nav-title-text">계정 찾기</span>';
+  }
+}
+function startPassAuth() {
+  alert('PASS 앱으로 이동합니다.');
 }
 function showSignup() {
   hideAllAuthSections();
