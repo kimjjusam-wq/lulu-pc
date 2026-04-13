@@ -922,7 +922,7 @@ function openTermsPopup(type) {
   title.textContent = type === 'service' ? '서비스 이용약관' : '개인정보 수집 및 이용 동의';
   body.innerHTML = termsContent[type];
   body.scrollTop = 0;
-  btn.classList.add('disabled');
+  btn.classList.remove('disabled');
   modal.classList.add('active');
 }
 

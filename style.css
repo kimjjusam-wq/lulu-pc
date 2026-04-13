@@ -951,6 +951,34 @@ img.shop-tab-emoji { width:24px; height:24px; object-fit:contain; }
   .mb-split-layout { flex-direction:column; }
   .mb-split-right { display:none !important; }
 }
+@media (min-width:769px) and (max-width:1023px) {
+  /* 토너먼트 라벨 탭 - 타블릿 */
+  .tn-tabs {
+    background:#0d0d18 !important; border:1px solid var(--border-color) !important; border-radius:14px !important;
+    padding:0 12px !important; gap:8px !important;
+    height:56px !important;
+    margin:0 auto 16px !important; max-width:700px;
+    justify-content:flex-start !important;
+    overflow-x:auto;
+  }
+  .tn-tab {
+    flex:none !important; height:32px !important; padding:0 14px !important;
+    font-size:13px !important; font-weight:500 !important;
+    border:1px solid var(--border-color) !important; border-radius:16px !important;
+    background:rgba(255,255,255,0.04) !important; color:var(--text-muted) !important;
+  }
+  .tn-tab:hover { background:rgba(255,255,255,0.06) !important; }
+  .tn-tab.active {
+    color:#000 !important; background:#E0E0E0 !important;
+    border:1px solid #FEFEFE !important; font-weight:700 !important;
+    border-radius:16px !important;
+  }
+  .tn-tab-divider { display:inline-block; width:1px; height:20px; background:var(--border-color); flex-shrink:0; }
+  .tn-tabs .tab-slider { display:none !important; }
+}
+@media (max-width:399px) {
+  .login-divider { display:none; }
+}
 @media (min-width:1024px) {
   .td-mobile-only { display:none; }
   #page-tournament.active ~ .footer,
@@ -1947,6 +1975,30 @@ body.chat-open > .m-nav { display:none !important; }
   }
   .shop-tabs { margin-bottom:16px; }
   .gs-tab { padding:12px 0 !important; }
+
+  /* 토너먼트 라벨 탭 - 모바일 (nav에 붙어있음) */
+  .tn-tabs {
+    padding:0 12px !important; gap:8px !important;
+    height:56px !important;
+    justify-content:flex-start !important;
+    overflow-x:auto !important;
+    top:116px !important;
+  }
+  .tn-tab {
+    flex:none !important; height:32px !important; padding:0 14px !important;
+    font-size:13px !important; font-weight:500 !important;
+    border:1px solid var(--border-color) !important; border-radius:16px !important;
+    background:rgba(255,255,255,0.04) !important; color:var(--text-muted) !important;
+  }
+  .tn-tab:hover { background:rgba(255,255,255,0.06) !important; }
+  .tn-tab.active {
+    color:#000 !important; background:#E0E0E0 !important;
+    border:1px solid #FEFEFE !important; font-weight:700 !important;
+    border-radius:16px !important; border-bottom:1px solid #FEFEFE !important;
+  }
+  .has-slider .tn-tab.active { border-bottom:1px solid #FEFEFE !important; }
+  .tn-tab-divider { display:inline-block; width:1px; height:20px; background:var(--border-color); flex-shrink:0; }
+  .tn-tabs .tab-slider { display:none !important; }
 
   /* --- Tournament detail: bottom bar fixed --- */
   .td-bottom-bar { position:fixed; bottom:0; left:0; right:0; max-width:none; padding:24px 16px calc(12px + env(safe-area-inset-bottom)); background:linear-gradient(to top, #0d0d18 70%, rgba(13,13,24,0.4) 90%, transparent); border-top:none; z-index:100; }
