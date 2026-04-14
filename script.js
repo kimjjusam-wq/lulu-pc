@@ -686,7 +686,7 @@ function mSyncNavTitle(page) {
     'account-edit': '회원정보 수정',
     terms: '이용약관', privacy: '개인정보처리방침',
     youth: '청소년 보호정책', rating: '게임등급분류',
-    company: '회사소개', faq: 'FAQ', contact: '문의하기'
+    company: '회사소개', faq: '자주묻는질문', contact: '문의하기'
   };
   var parentMap = {
     mailbox: 'my', chat: 'mailbox', myitems: 'my', transaction: 'my',
