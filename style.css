@@ -1000,8 +1000,15 @@ img.shop-tab-emoji { width:24px; height:24px; object-fit:contain; }
   #page-tournament.active ~ .footer,
   #page-tn-detail.active ~ .footer { display:none; }
 }
-@media (max-width:399px) {
+@media (max-width:412px) {
+  .login-btn { margin-top:0; }
+  .login-form { margin-bottom:16px; }
+  .login-divider { margin-bottom:16px; }
+  .social-btn { height:44px; padding-top:0; padding-bottom:0; }
+}
+@media (max-width:375px) {
   .login-divider { display:none; }
+  .login-form { margin-bottom:10px; }
 }
 @media (min-width:1024px) {
   .td-mobile-only { display:none; }
