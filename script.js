@@ -120,7 +120,7 @@ const i18n = {
     td_blind_interval: '블라인드 간격',
     td_allowed: '허용',
     td_not_allowed: '불가',
-    td_players_label: '참가자',
+    td_players_label: '남은 참가자',
     td_no_players: '아직 참가자가 없습니다',
     td_sec: '초',
     td_hands: '핸드 수',
@@ -1863,6 +1863,17 @@ function tdRenderDetail() {
   if (!item) return;
 
   // 요약 카드
+  var statusMap = {
+    registering: { label: t.tn_status_registering || '등록중', cls: 'registering' },
+    ongoing:     { label: t.tn_status_ongoing || '진행중', cls: 'ongoing' },
+    finished:    { label: t.tn_status_finished || '종료', cls: 'finished' },
+  };
+  var badgeEl = document.getElementById('tdStatusBadge');
+  if (badgeEl) {
+    var st = statusMap[item.status] || statusMap.registering;
+    badgeEl.textContent = st.label;
+    badgeEl.className = 'tn-badge ' + st.cls;
+  }
   var prizeEl = document.getElementById('tdPrizeValue');
   if (prizeEl) prizeEl.textContent = item.prize ? item.prize.replace(/G$/, '') : '-';
   var feeLabel0 = item.fee === 'free' ? (t.tn_fee_free || '무료') : item.fee;
@@ -1891,28 +1902,21 @@ function tdRenderDetail() {
   var bl = defaultBlindLevels[blindLv - 1] || defaultBlindLevels[0];
   var nextLv = blindLv + 1;
   var nextBl = defaultBlindLevels[blindLv] || defaultBlindLevels[defaultBlindLevels.length - 1];
-  document.getElementById('tdBlinds').textContent = 'Lv.' + blindLv + ' ' + bl.sb.toLocaleString() + '/' + bl.bb.toLocaleString() + '(' + bl.ante + ')' + '[-]';
-  document.getElementById('tdNext').textContent = 'Lv.' + nextLv + ' ' + nextBl.sb.toLocaleString() + '/' + nextBl.bb.toLocaleString() + '(' + nextBl.ante + ')';
-  document.getElementById('tdPlayersInfo').textContent = item.players + ' / ' + item.maxPlayers;
-  document.getElementById('tdUniqueReentry').textContent = (details.unique || item.players) + ' | ' + (details.reentry || 0);
-
-  // 자세히 탭 - 하단 설정
+  // 자세히 탭
   var feeLabel = item.fee === 'free' ? (t.tn_fee_free || '무료') : item.fee;
-  document.getElementById('tdBuyin').textContent = feeLabel;
   var startVal = item.startType === 'manual' ? (t.tn_manual_start || '호스트 수동시작') : item.startType;
-  document.getElementById('tdStartTime').textContent = startVal;
   var startChipsNum = parseInt(String(details.startChips || '10000').replace(/,/g, ''));
   var bbCount = Math.round(startChipsNum / bl.bb);
+  document.getElementById('tdStartTime').textContent = startVal;
   document.getElementById('tdStartChips').textContent = (startChipsNum >= 10000 ? (startChipsNum / 10000) + '만' : startChipsNum.toLocaleString()) + ' (' + bbCount + 'BB)';
   document.getElementById('tdLateReg').textContent = (details.lateRegLevel || 8) + (t.td_late_reg_suffix || '레벨 이전');
+  document.getElementById('tdBuyin').textContent = feeLabel;
   document.getElementById('tdTableType').textContent = (details.tableSize || item.maxPlayers) + (t.td_table_size_suffix || '인');
-  document.getElementById('tdRebuy').textContent = String(details.rebuyCount != null ? details.rebuyCount : 0);
-  document.getElementById('tdTimebank').textContent = (details.timebankSec || 10) + ' ' + (t.td_sec || '초');
-  document.getElementById('tdExtraTime').textContent = (details.extraTimeSec || 5) + ' ' + (t.td_sec || '초') + ' / ' + (details.extraTimeHands || 10) + ' ' + (t.td_hands || '핸드 수');
+  document.getElementById('tdReentry').textContent = String(details.reentry != null ? details.reentry : 0);
   document.getElementById('tdActionTime').textContent = (details.actionTimeSec || 15) + ' ' + (t.td_sec || '초');
-  document.getElementById('tdAnte').textContent = (details.anteRate || '0.1BB') + ' / ' + (details.anteType || 'All');
-  document.getElementById('tdCancelReg').textContent = details.cancelReg || (t.td_not_allowed || '불가');
+  document.getElementById('tdExtraTime').textContent = (details.extraTimeSec || 5) + ' ' + (t.td_sec || '초') + ' / ' + (details.extraTimeHands || 10) + ' ' + (t.td_hands || '핸드 수');
   document.getElementById('tdBlindInterval').textContent = (details.blindMin || 10) + ' / ' + (details.breakMin || 5);
+  document.getElementById('tdMaxEntry').textContent = item.maxPlayers;
 
   // 플레이어 탭
   var playersText = (t.td_players_label || '참가자') + ' ' + item.players + '/' + item.maxPlayers;
@@ -1943,6 +1947,17 @@ function tdRenderDetailInline(container) {
   if (backBtn) backBtn.style.display = 'none';
 
   // 요약 카드
+  var statusMap = {
+    registering: { label: t.tn_status_registering || '등록중', cls: 'registering' },
+    ongoing:     { label: t.tn_status_ongoing || '진행중', cls: 'ongoing' },
+    finished:    { label: t.tn_status_finished || '종료', cls: 'finished' },
+  };
+  var badgeEl = container.querySelector('#tdStatusBadge');
+  if (badgeEl) {
+    var st = statusMap[item.status] || statusMap.registering;
+    badgeEl.textContent = st.label;
+    badgeEl.className = 'tn-badge ' + st.cls;
+  }
   var prizeEl = container.querySelector('#tdPrizeValue');
   if (prizeEl) prizeEl.textContent = item.prize ? item.prize.replace(/G$/, '') : '-';
   var feeLabel = item.fee === 'free' ? (t.tn_fee_free || '무료') : item.fee;
@@ -1971,27 +1986,20 @@ function tdRenderDetailInline(container) {
   var bl = defaultBlindLevels[blindLv - 1] || defaultBlindLevels[0];
   var nextLv = blindLv + 1;
   var nextBl = defaultBlindLevels[blindLv] || defaultBlindLevels[defaultBlindLevels.length - 1];
-  container.querySelector('#tdBlinds').textContent = 'Lv.' + blindLv + ' ' + bl.sb.toLocaleString() + '/' + bl.bb.toLocaleString() + '(' + bl.ante + ')[-]';
-  container.querySelector('#tdNext').textContent = 'Lv.' + nextLv + ' ' + nextBl.sb.toLocaleString() + '/' + nextBl.bb.toLocaleString() + '(' + nextBl.ante + ')';
-  container.querySelector('#tdPlayersInfo').textContent = item.players + ' / ' + item.maxPlayers;
-  container.querySelector('#tdUniqueReentry').textContent = (details.unique || item.players) + ' | ' + (details.reentry || 0);
-
   var feeLabel = item.fee === 'free' ? (t.tn_fee_free || '무료') : item.fee;
-  container.querySelector('#tdBuyin').textContent = feeLabel;
   var startVal = item.startType === 'manual' ? (t.tn_manual_start || '호스트 수동시작') : item.startType;
-  container.querySelector('#tdStartTime').textContent = startVal;
   var startChipsNum = parseInt(String(details.startChips || '10000').replace(/,/g, ''));
   var bbCount = Math.round(startChipsNum / bl.bb);
+  container.querySelector('#tdStartTime').textContent = startVal;
   container.querySelector('#tdStartChips').textContent = (startChipsNum >= 10000 ? (startChipsNum / 10000) + '만' : startChipsNum.toLocaleString()) + ' (' + bbCount + 'BB)';
   container.querySelector('#tdLateReg').textContent = (details.lateRegLevel || 8) + (t.td_late_reg_suffix || '레벨 이전');
+  container.querySelector('#tdBuyin').textContent = feeLabel;
   container.querySelector('#tdTableType').textContent = (details.tableSize || item.maxPlayers) + (t.td_table_size_suffix || '인');
-  container.querySelector('#tdRebuy').textContent = String(details.rebuyCount != null ? details.rebuyCount : 0);
-  container.querySelector('#tdTimebank').textContent = (details.timebankSec || 10) + ' ' + (t.td_sec || '초');
-  container.querySelector('#tdExtraTime').textContent = (details.extraTimeSec || 5) + ' ' + (t.td_sec || '초') + ' / ' + (details.extraTimeHands || 10) + ' ' + (t.td_hands || '핸드 수');
+  container.querySelector('#tdReentry').textContent = String(details.reentry != null ? details.reentry : 0);
   container.querySelector('#tdActionTime').textContent = (details.actionTimeSec || 15) + ' ' + (t.td_sec || '초');
-  container.querySelector('#tdAnte').textContent = (details.anteRate || '0.1BB') + ' / ' + (details.anteType || 'All');
-  container.querySelector('#tdCancelReg').textContent = details.cancelReg || (t.td_not_allowed || '불가');
+  container.querySelector('#tdExtraTime').textContent = (details.extraTimeSec || 5) + ' ' + (t.td_sec || '초') + ' / ' + (details.extraTimeHands || 10) + ' ' + (t.td_hands || '핸드 수');
   container.querySelector('#tdBlindInterval').textContent = (details.blindMin || 10) + ' / ' + (details.breakMin || 5);
+  container.querySelector('#tdMaxEntry').textContent = item.maxPlayers;
 
   // 플레이어
   var playersText = (t.td_players_label || '참가자') + ' ' + item.players + '/' + item.maxPlayers;
@@ -2007,13 +2015,13 @@ function tdRenderDetailInline(container) {
       'CardShark99','AllInHero','ChipLeader','NightOwl','HighRoller_J','ProPlayer_X','SmartBet'];
     var demoPlayers = [];
     for (var i = 0; i < itm.players; i++) {
-      demoPlayers.push({ name: playerNames[i % playerNames.length], level: Math.floor(Math.random()*20)+5, chips: (Math.floor(Math.random()*50)+10)*1000 });
+      demoPlayers.push({ name: playerNames[i % playerNames.length], level: Math.floor(Math.random()*20)+5, chips: (Math.floor(Math.random()*50)+10)*1000, avatar: _avatarList[i % _avatarList.length] });
     }
     var list = ct.querySelector('#tdPlayerList');
     if (!list) return;
     if (demoPlayers.length === 0) { list.innerHTML = '<div class="tn-empty">' + (t.td_no_players || '아직 참가자가 없습니다') + '</div>'; return; }
     list.innerHTML = demoPlayers.map(function(p, idx) {
-      return '<div class="td-player-item"><div class="td-player-rank">'+(idx+1)+'</div><div class="td-player-avatar">👤</div><div class="td-player-info"><div class="td-player-name">'+p.name+'</div><div class="td-player-level">Lv.'+p.level+'</div></div><div class="td-player-chips">'+p.chips.toLocaleString()+'</div></div>';
+      return '<div class="td-player-item"><div class="td-player-rank">'+(idx+1)+'</div><img class="td-player-avatar" src="images/'+p.avatar+'.png" alt=""><div class="td-player-info"><div class="td-player-name">'+p.name+'</div><div class="td-player-level">Lv.'+p.level+'</div></div><div class="td-player-chips">'+p.chips.toLocaleString()+'</div></div>';
     }).join('');
   }
   function tdRenderBlindTableIn(ct) {
@@ -2069,6 +2077,8 @@ function switchTnDetailTab(tab) {
   document.getElementById('td-' + tab).classList.add('active');
 }
 
+var _avatarList = ['avatar_a','avatar_b','avatar_c','avatar_d','avatar_e','avatar_f','avatar_g','avatar_h','avatar_i','avatar_j','avatar_k','avatar_l','avatar_m','avatar_n','avatar_o','avatar_p'];
+
 function tdRenderPlayerList(item) {
   var t = i18n[currentLang] || i18n.ko;
   var playerNames = ['Player_Kim', 'LuckyAce77', 'PokerKing', 'BluffMaster', 'RoyalFlush',
@@ -2079,6 +2089,7 @@ function tdRenderPlayerList(item) {
       name: playerNames[i % playerNames.length],
       level: Math.floor(Math.random() * 20) + 5,
       chips: (Math.floor(Math.random() * 50) + 10) * 1000,
+      avatar: _avatarList[i % _avatarList.length],
     });
   }
 
@@ -2091,7 +2102,7 @@ function tdRenderPlayerList(item) {
   list.innerHTML = demoPlayers.map(function(p, idx) {
     return '<div class="td-player-item">' +
       '<div class="td-player-rank">' + (idx + 1) + '</div>' +
-      '<div class="td-player-avatar">👤</div>' +
+      '<img class="td-player-avatar" src="images/' + p.avatar + '.png" alt="">' +
       '<div class="td-player-info">' +
         '<div class="td-player-name">' + p.name + '</div>' +
         '<div class="td-player-level">Lv.' + p.level + '</div>' +

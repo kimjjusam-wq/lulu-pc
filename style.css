@@ -102,7 +102,7 @@ body {
 .section-more { font-size:13px; color:var(--text-muted); cursor:pointer; transition:color 0.2s; }
 .section-more:hover { color:var(--accent-orange); }
 .quick-banner { margin-bottom:40px; margin-left:16px; margin-right:16px; }
-.quick-banner-inner { display:flex; align-items:center; justify-content:space-between; padding:16px 24px; border-radius:12px; background:linear-gradient(135deg,#0a1530 0%,#1a3868 50%,#0a1530 100%) padding-box, linear-gradient(135deg,rgba(60,130,240,0.15),rgba(120,180,255,0.5),rgba(60,130,240,0.15)) border-box; border:1px solid transparent; transition:all 0.25s; position:relative; overflow:hidden; box-shadow:0 0 12px rgba(60,120,220,0.15); }
+.quick-banner-inner { display:flex; align-items:center; justify-content:space-between; padding:16px 24px; border-radius:6px; background:linear-gradient(135deg,#0a1530 0%,#1a3868 50%,#0a1530 100%) padding-box, linear-gradient(135deg,rgba(60,130,240,0.15),rgba(120,180,255,0.5),rgba(60,130,240,0.15)) border-box; border:1px solid transparent; transition:all 0.25s; position:relative; overflow:hidden; box-shadow:0 0 12px rgba(60,120,220,0.15); }
 .quick-banner-inner::before { display:none; }
 .quick-banner-inner:hover { transform:translateY(-1px); box-shadow:0 0 20px rgba(60,120,220,0.25); background:linear-gradient(135deg,#0a1530 0%,#1a3868 50%,#0a1530 100%) padding-box, linear-gradient(135deg,rgba(60,130,240,0.3),rgba(120,180,255,0.7),rgba(60,130,240,0.3)) border-box; }
 .quick-banner-left { display:flex; flex-direction:row; align-items:center; gap:8px; position:relative; z-index:1; }
@@ -1184,7 +1184,7 @@ img.shop-tab-emoji { width:24px; height:24px; object-fit:contain; }
 .td-player-item { display:flex; align-items:center; gap:12px; padding:12px 16px; background:rgba(255,255,255,0.02); border:1px solid var(--border-color); border-radius:6px; transition:all 0.2s; }
 .td-player-item:hover { border-color:rgba(249,98,23,0.2); background:var(--bg-card-hover); }
 .td-player-rank { width:28px; height:28px; border-radius:50%; background:rgba(255,255,255,0.06); display:flex; align-items:center; justify-content:center; font-size:12px; font-weight:700; color:var(--text-muted); flex-shrink:0; }
-.td-player-avatar { font-size:20px; flex-shrink:0; }
+.td-player-avatar { width:36px; height:36px; border-radius:50%; object-fit:cover; flex-shrink:0; background:#1e1e30; }
 .td-player-info { flex:1; display:flex; flex-direction:column; gap:2px; }
 .td-player-name { font-size:14px; font-weight:700; color:var(--text-primary); }
 .td-player-level { font-size:12px; color:var(--text-muted); }
@@ -1690,7 +1690,7 @@ body.chat-open > .m-nav { display:none !important; }
   .m-footer { display:block; }
   .game-modes { display:none; }
   .quick-banner { margin-bottom:20px; margin-left:8px; margin-right:8px; }
-  .quick-banner-inner { padding:8px 12px 8px 16px; border-radius:10px; }
+  .quick-banner-inner { padding:8px 12px 8px 16px; border-radius:6px; }
   .quick-banner-left { flex-direction:column; align-items:flex-start; gap:4px; }
   .quick-banner-top { font-size:12px; }
   .quick-banner-top::after { display:none; }
@@ -2026,7 +2026,7 @@ body.chat-open > .m-nav { display:none !important; }
     height:56px !important;
     justify-content:flex-start !important;
     overflow-x:auto !important;
-    top:116px !important;
+    top:116px;
     margin:-16px -16px 0 !important;
     scrollbar-width:none !important;
     -ms-overflow-style:none !important;
@@ -2074,6 +2074,7 @@ body.chat-open > .m-nav { display:none !important; }
   .pkg-bottom { flex-direction:column; gap:8px; padding-top:10px; }
   .pkg-price { display:none; }
   .pkg-buy-btn { width:100%; padding:10px 0; font-size:15px; font-weight:700; border-radius:8px; text-align:center; }
+  .pkg-buy-btn::after { content:none; }
 
   /* --- Gem / Avatar grid: 2 columns --- */
   .gem-grid { grid-template-columns:repeat(2,1fr); }
