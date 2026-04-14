@@ -2019,17 +2019,22 @@ function tdRenderDetailInline(container) {
     }
     var list = ct.querySelector('#tdPlayerList');
     if (!list) return;
-    if (demoPlayers.length === 0) { list.innerHTML = '<div class="tn-empty">' + (t.td_no_players || '아직 참가자가 없습니다') + '</div>'; return; }
+    if (demoPlayers.length === 0) { list.innerHTML = '<tr><td colspan="3" style="text-align:center;padding:32px 0;color:var(--text-muted);">' + (t.td_no_players || '아직 참가자가 없습니다') + '</td></tr>'; return; }
     list.innerHTML = demoPlayers.map(function(p, idx) {
-      return '<div class="td-player-item"><div class="td-player-rank">'+(idx+1)+'</div><img class="td-player-avatar" src="images/'+p.avatar+'.png" alt=""><div class="td-player-info"><div class="td-player-name">'+p.name+'</div><div class="td-player-level">Lv.'+p.level+'</div></div><div class="td-player-chips">'+p.chips.toLocaleString()+'</div></div>';
+      return '<tr><td>'+(idx+1)+'</td><td><div style="display:flex;align-items:center;gap:8px;"><img class="td-player-avatar" src="images/'+p.avatar+'.png" alt="">'+p.name+'</div></td><td style="color:var(--accent-gold);font-weight:600;">'+p.chips.toLocaleString()+'</td></tr>';
     }).join('');
   }
   function tdRenderBlindTableIn(ct) {
     var tbody = ct.querySelector('#tdBlindTableBody');
     if (!tbody) return;
-    tbody.innerHTML = defaultBlindLevels.map(function(row) {
-      return '<tr><td>'+row.lv+'</td><td>'+row.sb.toLocaleString()+' / '+row.bb.toLocaleString()+'</td><td>'+row.ante.toLocaleString()+'</td><td>'+row.time+'min</td></tr>';
-    }).join('');
+    var html = '';
+    defaultBlindLevels.forEach(function(row) {
+      html += '<tr><td>'+row.lv+'</td><td>'+row.sb.toLocaleString()+' / '+row.bb.toLocaleString()+'</td><td>'+row.ante.toLocaleString()+'</td><td>'+row.time+'min</td></tr>';
+      if (_blindBreaks[row.lv]) {
+        html += '<tr style="background:rgba(249,98,23,0.06);"><td colspan="4" style="text-align:center;color:var(--accent-orange);font-weight:700;font-size:12px;">휴식 '+_blindBreaks[row.lv]+'분</td></tr>';
+      }
+    });
+    tbody.innerHTML = html;
   }
   function tdRenderPayoutTableIn(ct, itm) {
     var totalEl = ct.querySelector('#tdPayoutTotal');
@@ -2095,33 +2100,36 @@ function tdRenderPlayerList(item) {
 
   var list = document.getElementById('tdPlayerList');
   if (demoPlayers.length === 0) {
-    list.innerHTML = '<div class="tn-empty">' + (t.td_no_players || '아직 참가자가 없습니다') + '</div>';
+    list.innerHTML = '<tr><td colspan="3" style="text-align:center;padding:32px 0;color:var(--text-muted);">' + (t.td_no_players || '아직 참가자가 없습니다') + '</td></tr>';
     return;
   }
 
   list.innerHTML = demoPlayers.map(function(p, idx) {
-    return '<div class="td-player-item">' +
-      '<div class="td-player-rank">' + (idx + 1) + '</div>' +
-      '<img class="td-player-avatar" src="images/' + p.avatar + '.png" alt="">' +
-      '<div class="td-player-info">' +
-        '<div class="td-player-name">' + p.name + '</div>' +
-        '<div class="td-player-level">Lv.' + p.level + '</div>' +
-      '</div>' +
-      '<div class="td-player-chips">' + p.chips.toLocaleString() + '</div>' +
-    '</div>';
+    return '<tr>' +
+      '<td>' + (idx + 1) + '</td>' +
+      '<td><div style="display:flex;align-items:center;gap:8px;"><img class="td-player-avatar" src="images/' + p.avatar + '.png" alt="">' + p.name + '</div></td>' +
+      '<td style="color:var(--accent-gold);font-weight:600;">' + p.chips.toLocaleString() + '</td>' +
+    '</tr>';
   }).join('');
 }
 
+var _blindBreaks = { 4: 10, 6: 10 };
+
 function tdRenderBlindTable() {
   var tbody = document.getElementById('tdBlindTableBody');
-  tbody.innerHTML = defaultBlindLevels.map(function(row) {
-    return '<tr>' +
+  var html = '';
+  defaultBlindLevels.forEach(function(row) {
+    html += '<tr>' +
       '<td>' + row.lv + '</td>' +
       '<td>' + row.sb.toLocaleString() + ' / ' + row.bb.toLocaleString() + '</td>' +
       '<td>' + row.ante.toLocaleString() + '</td>' +
       '<td>' + row.time + 'min</td>' +
     '</tr>';
-  }).join('');
+    if (_blindBreaks[row.lv]) {
+      html += '<tr style="background:rgba(249,98,23,0.06);"><td colspan="4" style="text-align:center;color:var(--accent-orange);font-weight:700;font-size:12px;">휴식 ' + _blindBreaks[row.lv] + '분</td></tr>';
+    }
+  });
+  tbody.innerHTML = html;
 }
 
 function tdRenderPayoutTable(item) {

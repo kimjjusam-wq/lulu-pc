@@ -1313,16 +1313,17 @@
       <button class="td-tab" data-td-tab="payout" onclick="switchTnDetailTab('payout')" data-i18n="td_tab_payout">상금</button>
       <button class="td-tab" data-td-tab="blinds" onclick="switchTnDetailTab('blinds')" data-i18n="td_tab_blinds">블라인드</button>
     </div>
+    <div class="td-summary-card">
+      <div class="td-summary-prize"><span class="td-summary-label">상금 풀</span><span class="td-summary-value" id="tdPrizeValue">500,000</span><span class="td-summary-unit">골드</span></div>
+      <div class="td-summary-row">
+        <div class="td-summary-item"><span class="tn-badge" id="tdStatusBadge">등록중</span><span class="td-summary-data" id="tdElapsed">00:00:00</span></div>
+        <div class="td-summary-item"><span class="td-summary-label">바이인</span><span class="td-summary-data" id="tdBuyinValue">무료</span></div>
+        <div class="td-summary-item"><span class="td-summary-label">남은 참가자</span><span class="td-summary-data" id="tdRemainPlayers">3/10</span></div>
+      </div>
+    </div>
+
     <!-- 자세히 탭 -->
     <div class="td-tab-content active" id="td-info">
-      <div class="td-summary-card">
-        <div class="td-summary-prize"><span class="td-summary-label">상금 풀</span><span class="td-summary-value" id="tdPrizeValue">500,000</span><span class="td-summary-unit">골드</span></div>
-        <div class="td-summary-row">
-          <div class="td-summary-item"><span class="tn-badge" id="tdStatusBadge">등록중</span><span class="td-summary-data" id="tdElapsed">00:00:00</span></div>
-          <div class="td-summary-item"><span class="td-summary-label">바이인</span><span class="td-summary-data" id="tdBuyinValue">무료</span></div>
-          <div class="td-summary-item"><span class="td-summary-label">남은 참가자</span><span class="td-summary-data" id="tdRemainPlayers">3/10</span></div>
-        </div>
-      </div>
       <div class="td-section">
         <div class="td-info-grid">
           <div class="td-info-row">
@@ -1375,7 +1376,18 @@
         <div class="td-players-header">
           <span class="td-players-count" id="tdPlayersCount"></span>
         </div>
-        <div class="td-player-list" id="tdPlayerList"></div>
+        <div class="td-blind-table-wrap">
+          <table class="td-blind-table">
+            <thead>
+              <tr>
+                <th>#</th>
+                <th>플레이어명</th>
+                <th>칩/상금</th>
+              </tr>
+            </thead>
+            <tbody id="tdPlayerList"></tbody>
+          </table>
+        </div>
       </div>
     </div>
 

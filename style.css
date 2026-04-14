@@ -945,8 +945,7 @@ img.shop-tab-emoji { width:24px; height:24px; object-fit:contain; }
   height:2px; background:var(--accent-orange); border-radius:1px;
 }
 .tn-split-detail .td-tab-content { max-width:none; }
-.tn-split-detail .td-section { background:transparent; border:none; }
-.tn-split-detail .td-summary-card { background:transparent; border:none; border-radius:0; border-bottom:1px solid var(--border-color); }
+.tn-split-detail .td-summary-card { padding:20px 0; }
 .tn-card-active { border-color:rgba(249,98,23,0.5); background:rgba(249,98,23,0.05); }
 .td-mobile-only { display:block; }
 
@@ -1150,7 +1149,7 @@ img.shop-tab-emoji { width:24px; height:24px; object-fit:contain; }
 /* ===================== */
 .td-header { padding:24px 0 16px; display:flex; align-items:center; justify-content:center; flex-wrap:wrap; gap:12px; text-align:center; }
 .td-header h2 { font-size:22px; font-weight:800; margin:0; text-align:center; }
-.td-summary-card { background:var(--bg-card); border:1px solid var(--border-color); border-radius:6px; padding:20px; margin-bottom:16px; text-align:center; }
+.td-summary-card { background:transparent; border:none; border-radius:0; border-bottom:1px solid var(--border-color); padding:20px; margin-bottom:16px; text-align:center; }
 .td-summary-prize { display:flex; align-items:baseline; justify-content:center; gap:6px; margin-bottom:16px; }
 .td-summary-prize .td-summary-label { font-size:13px; color:var(--text-muted); }
 .td-summary-prize .td-summary-value { font-size:28px; font-weight:800; color:var(--accent-gold); }
@@ -1168,7 +1167,7 @@ img.shop-tab-emoji { width:24px; height:24px; object-fit:contain; }
 .td-tab-content { display:none; max-width:700px; margin:0 auto; padding-bottom:0; }
 .td-tab-content.active { display:block; }
 
-.td-section { background:var(--bg-card); border:1px solid var(--border-color); border-radius:6px; padding:24px; margin-bottom:16px; }
+.td-section { background:transparent; border:none; border-radius:0; padding:14px; margin-bottom:16px; }
 .td-section-title { font-size:16px; font-weight:700; color:var(--text-primary); margin:0 0 16px 0; }
 
 .td-info-grid { display:flex; flex-direction:column; }
@@ -1180,17 +1179,21 @@ img.shop-tab-emoji { width:24px; height:24px; object-fit:contain; }
 
 .td-players-header { margin-bottom:16px; }
 .td-players-count { font-size:14px; font-weight:700; color:var(--text-secondary); }
+.td-player-list-header { display:flex; align-items:center; padding:10px 16px; font-size:12px; font-weight:600; color:var(--text-muted); background:rgba(255,255,255,0.03); border:1px solid var(--border-color); border-radius:6px; margin-bottom:8px; }
+.td-plh-rank { width:28px; flex-shrink:0; text-align:center; }
+.td-plh-name { flex:1; margin-left:48px; }
+.td-plh-chips { flex-shrink:0; }
 .td-player-list { display:flex; flex-direction:column; gap:8px; }
 .td-player-item { display:flex; align-items:center; gap:12px; padding:12px 16px; background:rgba(255,255,255,0.02); border:1px solid var(--border-color); border-radius:6px; transition:all 0.2s; }
 .td-player-item:hover { border-color:rgba(249,98,23,0.2); background:var(--bg-card-hover); }
 .td-player-rank { width:28px; height:28px; border-radius:50%; background:rgba(255,255,255,0.06); display:flex; align-items:center; justify-content:center; font-size:12px; font-weight:700; color:var(--text-muted); flex-shrink:0; }
-.td-player-avatar { width:36px; height:36px; border-radius:50%; object-fit:cover; flex-shrink:0; background:#1e1e30; }
+.td-player-avatar { width:18px; height:18px; border-radius:50%; object-fit:cover; flex-shrink:0; background:#1e1e30; }
 .td-player-info { flex:1; display:flex; flex-direction:column; gap:2px; }
 .td-player-name { font-size:14px; font-weight:700; color:var(--text-primary); }
 .td-player-level { font-size:12px; color:var(--text-muted); }
 .td-player-chips { font-size:13px; font-weight:600; color:var(--accent-gold,#f59e0b); }
 
-.td-blind-table-wrap { overflow-x:auto; border-radius:12px; border:1px solid var(--border-color); }
+.td-blind-table-wrap { overflow-x:auto; border-radius:6px; border:1px solid var(--border-color); }
 .td-blind-table { width:100%; border-collapse:collapse; font-size:13px; }
 .td-blind-table thead { background:rgba(255,255,255,0.04); }
 .td-blind-table th { padding:12px 16px; font-weight:700; color:var(--text-secondary); text-align:center; border-bottom:1px solid var(--border-color); font-size:12px; text-transform:uppercase; letter-spacing:0.5px; }
@@ -1202,7 +1205,7 @@ img.shop-tab-emoji { width:24px; height:24px; object-fit:contain; }
 .td-payout-total { display:flex; align-items:center; justify-content:space-between; padding:16px 20px; background:rgba(245,158,11,0.08); border:1px solid rgba(245,158,11,0.2); border-radius:6px; margin-bottom:16px; }
 .td-payout-total-label { font-size:14px; font-weight:600; color:var(--text-secondary); }
 .td-payout-total-value { font-size:20px; font-weight:800; color:var(--accent-gold,#f59e0b); }
-.td-payout-table-wrap { overflow-x:auto; border-radius:12px; border:1px solid var(--border-color); }
+.td-payout-table-wrap { overflow-x:auto; border-radius:6px; border:1px solid var(--border-color); }
 .td-payout-table { width:100%; border-collapse:collapse; font-size:13px; }
 .td-payout-table thead { background:rgba(255,255,255,0.04); }
 .td-payout-table th { padding:12px 16px; font-weight:700; color:var(--text-secondary); text-align:center; border-bottom:1px solid var(--border-color); font-size:12px; text-transform:uppercase; letter-spacing:0.5px; }
@@ -2051,6 +2054,7 @@ body.chat-open > .m-nav { display:none !important; }
   /* --- Tournament detail: bottom bar fixed --- */
   .td-bottom-bar { position:fixed; bottom:0; left:0; right:0; max-width:none; padding:24px 16px calc(12px + env(safe-area-inset-bottom)); background:linear-gradient(to top, #0d0d18 70%, rgba(13,13,24,0.4) 90%, transparent); border-top:none; z-index:100; }
   #page-tn-detail .content-wrapper { padding-bottom:64px; }
+  .td-section { padding:14px 0; }
 
   /* --- Lobby carousel mobile: 3 visible --- */
   .lobby-recommend { margin-bottom:24px; }
