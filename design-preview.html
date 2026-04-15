@@ -1,0 +1,937 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Poker Lulu Design System</title>
+<link rel="preconnect" href="https://cdn.jsdelivr.net">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Bebas+Neue&display=swap">
+<style>
+@font-face { font-family:'Isamanru'; src:url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-10@1.0/GongGothicBold.woff') format('woff'); font-weight:700; font-display:swap; }
+*{margin:0;padding:0;box-sizing:border-box;}
+:root{
+  --bg:#07070d;--bg-card:#14141f;--bg-card-hover:#1a1a2e;--bg-nav:#0d0d18;
+  --orange:#F96217;--orange-dark:#d4510f;--purple:#7c3aed;--violet:#8b5cf6;
+  --pink:#ec4899;--gold:#f59e0b;--emerald:#10b981;
+  --text-pri:#f1f1f7;--text-sec:#9ca3af;--text-mut:#6b7280;
+  --border:#1e1e30;--border-light:#2a2a44;
+  --glow:rgba(249,98,23,0.3);
+}
+body{font-family:'Pretendard Variable',Pretendard,-apple-system,sans-serif;background:var(--bg);color:var(--text-pri);min-height:100vh;}
+
+/* ===== TOP BAR ===== */
+.ds-topbar{position:sticky;top:0;z-index:100;background:rgba(13,13,24,0.92);backdrop-filter:blur(20px);border-bottom:1px solid var(--border);padding:0 32px;display:flex;align-items:center;justify-content:space-between;height:56px;}
+.ds-logo{font-size:16px;font-weight:800;letter-spacing:0.5px;display:flex;align-items:center;gap:10px;}
+.ds-logo-dot{width:8px;height:8px;border-radius:50%;background:var(--orange);}
+.ds-tabs{display:flex;background:#010104;border:1px solid #1a1a2a;border-radius:10px;padding:4px;gap:2px;}
+.ds-tab{padding:7px 20px;border-radius:8px;font-size:13px;font-weight:700;cursor:pointer;color:var(--text-mut);transition:all 0.2s;border:1px solid transparent;user-select:none;}
+.ds-tab.active{background:#1f1f35;color:#fff;border-color:var(--border-light);}
+.ds-tab:not(.active):hover{color:var(--text-sec);background:rgba(255,255,255,0.03);}
+
+/* ===== LAYOUT ===== */
+.ds-container{max-width:1080px;margin:0 auto;padding:40px 24px 80px;}
+.ds-view{display:none;}
+.ds-view.active{display:block;}
+
+/* ===== PREVIEW SECTIONS ===== */
+.ds-section{margin-bottom:56px;}
+.ds-section-title{font-size:22px;font-weight:800;letter-spacing:-0.5px;margin-bottom:8px;}
+.ds-section-sub{font-size:13px;color:var(--text-mut);margin-bottom:24px;}
+.ds-divider{height:1px;background:var(--border);margin:56px 0;}
+
+/* Color Swatches */
+.ds-color-group{margin-bottom:28px;}
+.ds-color-group-title{font-size:14px;font-weight:700;margin-bottom:12px;color:var(--text-sec);}
+.ds-colors{display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:12px;}
+.ds-color{border-radius:10px;overflow:hidden;background:var(--bg-card);border:1px solid var(--border);}
+.ds-color-swatch{height:64px;}
+.ds-color-info{padding:10px 12px;}
+.ds-color-name{font-size:12px;font-weight:600;margin-bottom:2px;}
+.ds-color-hex{font-size:11px;color:var(--text-mut);font-family:'Inter',monospace;}
+
+/* Typography */
+.ds-type-row{display:flex;align-items:baseline;gap:24px;padding:16px 0;border-bottom:1px solid var(--border);}
+.ds-type-meta{min-width:180px;flex-shrink:0;}
+.ds-type-label{font-size:12px;font-weight:700;color:var(--orange);margin-bottom:2px;}
+.ds-type-spec{font-size:11px;color:var(--text-mut);font-family:'Inter',monospace;}
+.ds-type-sample{flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
+
+/* Components */
+.ds-comp-grid{display:flex;flex-wrap:wrap;gap:16px;margin-bottom:24px;}
+.ds-comp-card{background:var(--bg-card);border:1px solid var(--border);border-radius:6px;padding:24px;flex:1;min-width:200px;}
+.ds-comp-label{font-size:11px;font-weight:700;color:var(--text-mut);text-transform:uppercase;letter-spacing:0.5px;margin-bottom:16px;}
+
+/* Buttons demo */
+.ds-btn-primary{background:linear-gradient(135deg,#F96217,#d4510f);color:#fff;border:none;padding:15px 24px 14px;border-radius:12px;font-size:15px;font-weight:700;cursor:pointer;transition:all 0.2s;font-family:inherit;}
+.ds-btn-primary:hover{box-shadow:0 4px 24px rgba(249,98,23,0.3);transform:translateY(-1px);}
+.ds-btn-standard{background:linear-gradient(135deg,#F96217,#d4510f);color:#fff;border:none;padding:11px 24px 10px;border-radius:12px;font-size:13px;font-weight:700;cursor:pointer;transition:all 0.2s;font-family:inherit;}
+.ds-btn-standard:hover{box-shadow:0 4px 20px rgba(249,98,23,0.3);transform:translateY(-1px);}
+.ds-btn-ghost{background:#23233a;color:var(--text-sec);border:1px solid var(--border);padding:11px 24px 10px;border-radius:12px;font-size:13px;font-weight:700;cursor:pointer;transition:all 0.2s;font-family:inherit;}
+.ds-btn-ghost:hover{border-color:rgba(249,98,23,0.3);color:var(--text-pri);}
+.ds-btn-join{background:linear-gradient(135deg,#F96217,#d4510f);color:#fff;border:none;padding:10px;border-radius:10px;font-size:13px;font-weight:700;cursor:pointer;transition:all 0.2s;width:100%;font-family:inherit;}
+.ds-btn-join:hover{box-shadow:0 4px 20px rgba(249,98,23,0.3);transform:translateY(-1px);}
+
+/* Card demo */
+.ds-demo-card{background:var(--bg-card);border:1px solid var(--border);border-radius:6px;padding:20px;transition:all 0.25s;cursor:pointer;max-width:280px;}
+.ds-demo-card:hover{border-color:rgba(249,98,23,0.3);transform:translateY(-2px);background:var(--bg-card-hover);}
+.ds-demo-card-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:14px;}
+.ds-demo-card-name{font-size:17px;font-weight:500;}
+.ds-demo-card-live{display:flex;align-items:center;gap:5px;font-size:10px;font-weight:800;color:var(--orange);letter-spacing:0.5px;}
+.ds-live-dot{width:6px;height:6px;border-radius:50%;background:var(--orange);animation:pulse 2s ease-out infinite;}
+@keyframes pulse{0%,100%{opacity:1;}50%{opacity:0.3;}}
+.ds-demo-card-meta{display:flex;flex-direction:column;gap:8px;margin-bottom:16px;}
+.ds-demo-card-row{display:flex;justify-content:space-between;font-size:13px;}
+.ds-demo-card-label{color:var(--text-mut);}
+.ds-demo-card-value{font-weight:600;color:var(--text-sec);}
+
+/* Input demo */
+.ds-demo-input{background:var(--bg-card);border:1px solid var(--border);border-radius:12px;padding:14px 18px;font-size:14px;color:var(--text-pri);width:100%;max-width:320px;outline:none;transition:border-color 0.2s;font-family:'Inter',sans-serif;}
+.ds-demo-input:focus{border-color:var(--orange);}
+.ds-demo-input::placeholder{color:var(--text-mut);}
+
+/* Badge demo */
+.ds-badges{display:flex;gap:10px;flex-wrap:wrap;align-items:center;}
+.ds-badge{font-size:11px;font-weight:700;padding:4px 10px;border-radius:6px;display:inline-block;}
+.ds-badge-reg{background:rgba(34,197,94,0.15);color:#22c55e;}
+.ds-badge-on{background:rgba(249,98,23,0.15);color:#F96217;}
+.ds-badge-fin{background:rgba(107,114,128,0.15);color:#6b7280;}
+.ds-badge-coming{font-size:13px;font-weight:700;color:#fff;background:linear-gradient(135deg,#A72FC5,#E040A0);padding:4px 12px;border-radius:9999px;position:relative;overflow:hidden;}
+.ds-badge-coming::after{content:'';position:absolute;top:0;left:-100%;width:100%;height:100%;background:linear-gradient(90deg,transparent,rgba(255,255,255,0.35),transparent);animation:shimmer 2.5s ease-in-out infinite;}
+@keyframes shimmer{0%{left:-100%}50%{left:100%}100%{left:100%}}
+
+/* Tabs demo */
+.ds-demo-tabs{display:inline-flex;background:#010104;border:1px solid #1a1a2a;border-radius:14px;padding:7px;gap:2px;}
+.ds-demo-tab{height:43px;padding:0 16px;display:flex;align-items:center;font-size:14px;font-weight:700;border-radius:10px;cursor:pointer;color:var(--text-mut);border:1px solid transparent;transition:all 0.2s;}
+.ds-demo-tab.active{background:#1f1f35;color:#fff;border-color:var(--border-light);}
+
+/* Toggle demo */
+.ds-toggle-wrap{display:flex;align-items:center;gap:12px;}
+.ds-toggle{position:relative;width:50px;height:28px;border-radius:28px;background:var(--border);cursor:pointer;transition:background 0.3s;}
+.ds-toggle.on{background:var(--orange);}
+.ds-toggle-thumb{position:absolute;top:3px;left:3px;width:22px;height:22px;border-radius:50%;background:#fff;transition:transform 0.3s;}
+.ds-toggle.on .ds-toggle-thumb{transform:translateX(22px);}
+
+/* Section headers demo */
+.ds-section-headers{display:flex;flex-direction:column;gap:8px;}
+.ds-sec-hdr{padding:10px 18px;font-size:15px;font-weight:800;border:1px solid rgba(255,255,255,0.05);border-radius:0;}
+.ds-sec-hdr-green{color:#4ade80;background:linear-gradient(90deg,rgba(34,197,94,0.12),rgba(34,197,94,0.03));}
+.ds-sec-hdr-purple{color:#a78bfa;background:linear-gradient(90deg,rgba(139,92,246,0.12),rgba(139,92,246,0.03));}
+.ds-sec-hdr-white{color:#e5e7eb;background:linear-gradient(90deg,rgba(255,255,255,0.06),rgba(255,255,255,0.01));}
+.ds-sec-hdr-gold{color:#fbbf24;background:linear-gradient(90deg,rgba(251,191,36,0.12),rgba(251,191,36,0.03));}
+.ds-sec-hdr-red{color:#f87171;background:linear-gradient(90deg,rgba(239,68,68,0.14),rgba(239,68,68,0.03));}
+
+/* Radius demo */
+.ds-radius-row{display:flex;gap:20px;flex-wrap:wrap;align-items:end;}
+.ds-radius-item{display:flex;flex-direction:column;align-items:center;gap:8px;}
+.ds-radius-box{background:var(--bg-card);border:1px solid var(--border);width:64px;height:64px;}
+.ds-radius-label{font-size:10px;color:var(--text-mut);font-weight:600;}
+
+/* Depth demo */
+.ds-depth-row{display:flex;gap:20px;flex-wrap:wrap;}
+.ds-depth-item{display:flex;flex-direction:column;align-items:center;gap:10px;text-align:center;}
+.ds-depth-box{width:120px;height:80px;border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:600;color:var(--text-sec);}
+.ds-depth-label{font-size:10px;color:var(--text-mut);font-weight:600;max-width:120px;}
+
+/* Spacing demo */
+.ds-spacing-row{display:flex;gap:8px;flex-wrap:wrap;align-items:end;}
+.ds-spacing-item{display:flex;flex-direction:column;align-items:center;gap:6px;}
+.ds-spacing-bar{width:32px;background:var(--orange);border-radius:3px;opacity:0.7;}
+.ds-spacing-val{font-size:10px;color:var(--text-mut);font-weight:600;font-family:'Inter',monospace;}
+
+/* Animation demo */
+.ds-anim-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:12px;}
+.ds-anim-box{background:var(--bg-card);border:1px solid var(--border);border-radius:10px;padding:16px;text-align:center;display:flex;flex-direction:column;align-items:center;gap:10px;}
+.ds-anim-dot{width:12px;height:12px;border-radius:50%;background:var(--orange);}
+.ds-anim-dot.pulse{animation:a-pulse 2s ease-out infinite;}
+@keyframes a-pulse{0%{opacity:1;transform:scale(1);}70%{opacity:0;transform:scale(2.2);}100%{opacity:0;transform:scale(2.2);}}
+.ds-anim-dot.blink{animation:a-blink 1.5s ease-in-out infinite;background:var(--emerald);}
+@keyframes a-blink{0%,100%{opacity:1;}50%{opacity:0.3;}}
+.ds-anim-bar{width:48px;height:6px;border-radius:3px;background:linear-gradient(135deg,#A72FC5,#E040A0);position:relative;overflow:hidden;}
+.ds-anim-bar::after{content:'';position:absolute;top:0;left:-100%;width:100%;height:100%;background:linear-gradient(90deg,transparent,rgba(255,255,255,0.4),transparent);animation:shimmer 2.5s ease-in-out infinite;}
+.ds-anim-card{width:48px;height:32px;background:var(--bg-card);border:1px solid var(--border);border-radius:6px;transition:all 0.25s;cursor:pointer;}
+.ds-anim-card:hover{border-color:rgba(249,98,23,0.3);transform:translateY(-3px);}
+.ds-anim-label{font-size:10px;color:var(--text-mut);font-weight:600;}
+
+/* ===== MARKDOWN VIEW ===== */
+.ds-md{font-size:15px;line-height:1.7;color:var(--text-pri);}
+.ds-md h1{font-size:32px;font-weight:800;margin:0 0 8px;letter-spacing:-0.5px;}
+.ds-md h2{font-size:22px;font-weight:800;margin:48px 0 8px;padding-bottom:10px;border-bottom:1px solid var(--border);letter-spacing:-0.3px;}
+.ds-md h3{font-size:17px;font-weight:700;margin:28px 0 8px;color:var(--text-sec);}
+.ds-md p{margin:0 0 16px;color:var(--text-sec);}
+.ds-md strong{color:var(--text-pri);font-weight:700;}
+.ds-md code{background:rgba(249,98,23,0.1);color:var(--orange);padding:2px 6px;border-radius:4px;font-size:13px;font-family:'Inter',monospace;}
+.ds-md pre{background:var(--bg-card);border:1px solid var(--border);border-radius:6px;padding:16px 20px;overflow-x:auto;margin:0 0 16px;}
+.ds-md pre code{background:none;padding:0;color:var(--text-sec);font-size:13px;}
+.ds-md ul,.ds-md ol{margin:0 0 16px;padding-left:24px;color:var(--text-sec);}
+.ds-md li{margin-bottom:6px;}
+.ds-md table{width:100%;border-collapse:collapse;margin:0 0 16px;font-size:13px;}
+.ds-md th{text-align:left;padding:10px 14px;background:rgba(255,255,255,0.04);font-weight:700;color:var(--text-sec);font-size:12px;border-bottom:1px solid var(--border);}
+.ds-md td{padding:8px 14px;border-bottom:1px solid var(--border);color:var(--text-sec);}
+.ds-md tr:hover td{background:rgba(255,255,255,0.02);}
+.ds-md hr{border:none;height:1px;background:var(--border);margin:32px 0;}
+.ds-md blockquote{border-left:3px solid var(--orange);padding:8px 16px;margin:0 0 16px;background:rgba(249,98,23,0.05);border-radius:0 6px 6px 0;}
+.ds-md blockquote p{color:var(--text-sec);margin:0;}
+
+/* Responsive */
+@media(max-width:768px){
+  .ds-topbar{padding:0 16px;}
+  .ds-container{padding:24px 16px 60px;}
+  .ds-type-row{flex-direction:column;gap:8px;}
+  .ds-type-meta{min-width:auto;}
+  .ds-comp-grid{flex-direction:column;}
+  .ds-comp-card{min-width:auto;}
+  .ds-colors{grid-template-columns:repeat(auto-fill,minmax(110px,1fr));}
+}
+</style>
+</head>
+<body>
+
+<!-- Top Bar -->
+<div class="ds-topbar">
+  <div class="ds-logo"><span class="ds-logo-dot"></span> POKER LULU Design System</div>
+  <div class="ds-tabs">
+    <div class="ds-tab active" data-view="preview">Preview</div>
+    <div class="ds-tab" data-view="markdown">DESIGN.md</div>
+  </div>
+</div>
+
+<!-- ========== PREVIEW VIEW ========== -->
+<div class="ds-container">
+<div class="ds-view active" id="view-preview">
+
+<!-- 1. Colors -->
+<div class="ds-section">
+  <div class="ds-section-title">Color Palette</div>
+  <div class="ds-section-sub">Primary, accent, background, text, border, and system colors used across the interface.</div>
+
+  <div class="ds-color-group">
+    <div class="ds-color-group-title">Primary & Accent</div>
+    <div class="ds-colors">
+      <div class="ds-color"><div class="ds-color-swatch" style="background:#F96217"></div><div class="ds-color-info"><div class="ds-color-name">Lulu Orange</div><div class="ds-color-hex">#F96217</div></div></div>
+      <div class="ds-color"><div class="ds-color-swatch" style="background:#d4510f"></div><div class="ds-color-info"><div class="ds-color-name">Orange Dark</div><div class="ds-color-hex">#d4510f</div></div></div>
+      <div class="ds-color"><div class="ds-color-swatch" style="background:#FF7C1D"></div><div class="ds-color-info"><div class="ds-color-name">Secondary</div><div class="ds-color-hex">#FF7C1D</div></div></div>
+      <div class="ds-color"><div class="ds-color-swatch" style="background:#7c3aed"></div><div class="ds-color-info"><div class="ds-color-name">Purple</div><div class="ds-color-hex">#7c3aed</div></div></div>
+      <div class="ds-color"><div class="ds-color-swatch" style="background:#8b5cf6"></div><div class="ds-color-info"><div class="ds-color-name">Violet</div><div class="ds-color-hex">#8b5cf6</div></div></div>
+      <div class="ds-color"><div class="ds-color-swatch" style="background:#ec4899"></div><div class="ds-color-info"><div class="ds-color-name">Pink</div><div class="ds-color-hex">#ec4899</div></div></div>
+      <div class="ds-color"><div class="ds-color-swatch" style="background:#f59e0b"></div><div class="ds-color-info"><div class="ds-color-name">Gold</div><div class="ds-color-hex">#f59e0b</div></div></div>
+      <div class="ds-color"><div class="ds-color-swatch" style="background:#10b981"></div><div class="ds-color-info"><div class="ds-color-name">Emerald</div><div class="ds-color-hex">#10b981</div></div></div>
+    </div>
+  </div>
+
+  <div class="ds-color-group">
+    <div class="ds-color-group-title">Backgrounds</div>
+    <div class="ds-colors">
+      <div class="ds-color"><div class="ds-color-swatch" style="background:#07070d"></div><div class="ds-color-info"><div class="ds-color-name">Body Dark</div><div class="ds-color-hex">#07070d</div></div></div>
+      <div class="ds-color"><div class="ds-color-swatch" style="background:#14141f"></div><div class="ds-color-info"><div class="ds-color-name">Card</div><div class="ds-color-hex">#14141f</div></div></div>
+      <div class="ds-color"><div class="ds-color-swatch" style="background:#1a1a2e"></div><div class="ds-color-info"><div class="ds-color-name">Card Hover</div><div class="ds-color-hex">#1a1a2e</div></div></div>
+      <div class="ds-color"><div class="ds-color-swatch" style="background:#0d0d18"></div><div class="ds-color-info"><div class="ds-color-name">Nav</div><div class="ds-color-hex">#0d0d18</div></div></div>
+      <div class="ds-color"><div class="ds-color-swatch" style="background:#212121"></div><div class="ds-color-info"><div class="ds-color-name">Depth 200</div><div class="ds-color-hex">#212121</div></div></div>
+      <div class="ds-color"><div class="ds-color-swatch" style="background:#171717"></div><div class="ds-color-info"><div class="ds-color-name">Depth 250</div><div class="ds-color-hex">#171717</div></div></div>
+      <div class="ds-color"><div class="ds-color-swatch" style="background:#292929"></div><div class="ds-color-info"><div class="ds-color-name">Depth 300</div><div class="ds-color-hex">#292929</div></div></div>
+      <div class="ds-color"><div class="ds-color-swatch" style="background:#343434"></div><div class="ds-color-info"><div class="ds-color-name">Depth 400</div><div class="ds-color-hex">#343434</div></div></div>
+    </div>
+  </div>
+
+  <div class="ds-color-group">
+    <div class="ds-color-group-title">Text</div>
+    <div class="ds-colors">
+      <div class="ds-color"><div class="ds-color-swatch" style="background:#f1f1f7"></div><div class="ds-color-info"><div class="ds-color-name">Primary</div><div class="ds-color-hex">#f1f1f7</div></div></div>
+      <div class="ds-color"><div class="ds-color-swatch" style="background:#9ca3af"></div><div class="ds-color-info"><div class="ds-color-name">Secondary</div><div class="ds-color-hex">#9ca3af</div></div></div>
+      <div class="ds-color"><div class="ds-color-swatch" style="background:#6b7280"></div><div class="ds-color-info"><div class="ds-color-name">Muted</div><div class="ds-color-hex">#6b7280</div></div></div>
+      <div class="ds-color"><div class="ds-color-swatch" style="background:#FEFEFE"></div><div class="ds-color-info"><div class="ds-color-name">Title</div><div class="ds-color-hex">#FEFEFE</div></div></div>
+      <div class="ds-color"><div class="ds-color-swatch" style="background:#FFD230"></div><div class="ds-color-info"><div class="ds-color-name">Gold</div><div class="ds-color-hex">#FFD230</div></div></div>
+    </div>
+  </div>
+
+  <div class="ds-color-group">
+    <div class="ds-color-group-title">Border</div>
+    <div class="ds-colors">
+      <div class="ds-color"><div class="ds-color-swatch" style="background:#1e1e30"></div><div class="ds-color-info"><div class="ds-color-name">Border</div><div class="ds-color-hex">#1e1e30</div></div></div>
+      <div class="ds-color"><div class="ds-color-swatch" style="background:#2a2a44"></div><div class="ds-color-info"><div class="ds-color-name">Border Light</div><div class="ds-color-hex">#2a2a44</div></div></div>
+      <div class="ds-color"><div class="ds-color-swatch" style="background:#1a1a2a"></div><div class="ds-color-info"><div class="ds-color-name">Border Subtle</div><div class="ds-color-hex">#1a1a2a</div></div></div>
+      <div class="ds-color"><div class="ds-color-swatch" style="background:#343434"></div><div class="ds-color-info"><div class="ds-color-name">Border 300</div><div class="ds-color-hex">#343434</div></div></div>
+      <div class="ds-color"><div class="ds-color-swatch" style="background:#404040"></div><div class="ds-color-info"><div class="ds-color-name">Border 400</div><div class="ds-color-hex">#404040</div></div></div>
+    </div>
+  </div>
+
+  <div class="ds-color-group">
+    <div class="ds-color-group-title">System (Semantic)</div>
+    <div class="ds-colors">
+      <div class="ds-color"><div class="ds-color-swatch" style="background:#CD0C0C"></div><div class="ds-color-info"><div class="ds-color-name">Error</div><div class="ds-color-hex">#CD0C0C</div></div></div>
+      <div class="ds-color"><div class="ds-color-swatch" style="background:#3363DB"></div><div class="ds-color-info"><div class="ds-color-name">Success</div><div class="ds-color-hex">#3363DB</div></div></div>
+      <div class="ds-color"><div class="ds-color-swatch" style="background:#48D481"></div><div class="ds-color-info"><div class="ds-color-name">Process</div><div class="ds-color-hex">#48D481</div></div></div>
+      <div class="ds-color"><div class="ds-color-swatch" style="background:#F7DF4E"></div><div class="ds-color-info"><div class="ds-color-name">Warning</div><div class="ds-color-hex">#F7DF4E</div></div></div>
+    </div>
+  </div>
+</div>
+
+<div class="ds-divider"></div>
+
+<!-- 2. Typography -->
+<div class="ds-section">
+  <div class="ds-section-title">Typography</div>
+  <div class="ds-section-sub">Pretendard Variable is the primary typeface. Isamanru/Bebas Neue for display only.</div>
+
+  <div class="ds-type-row">
+    <div class="ds-type-meta"><div class="ds-type-label">Display Hero</div><div class="ds-type-spec">56px / 900 / -1px</div></div>
+    <div class="ds-type-sample" style="font-family:'Isamanru','Bebas Neue',sans-serif;font-size:56px;font-weight:900;line-height:1.15;letter-spacing:-1px;">포커 룰루 시즌 오픈</div>
+  </div>
+  <div class="ds-type-row">
+    <div class="ds-type-meta"><div class="ds-type-label">Page Heading</div><div class="ds-type-spec">28px / 800</div></div>
+    <div class="ds-type-sample" style="font-size:28px;font-weight:800;line-height:1.2;">Welcome to Poker Lulu</div>
+  </div>
+  <div class="ds-type-row">
+    <div class="ds-type-meta"><div class="ds-type-label">Section Title</div><div class="ds-type-spec">22px / 800 / -0.5px</div></div>
+    <div class="ds-type-sample" style="font-size:22px;font-weight:800;line-height:1.2;letter-spacing:-0.5px;">Live Tables</div>
+  </div>
+  <div class="ds-type-row">
+    <div class="ds-type-meta"><div class="ds-type-label">Card Title</div><div class="ds-type-spec">18px / 800</div></div>
+    <div class="ds-type-sample" style="font-size:18px;font-weight:800;">Texas Hold'em</div>
+  </div>
+  <div class="ds-type-row">
+    <div class="ds-type-meta"><div class="ds-type-label">Modal Header</div><div class="ds-type-spec">18px / 700</div></div>
+    <div class="ds-type-sample" style="font-size:18px;font-weight:700;">Settings</div>
+  </div>
+  <div class="ds-type-row">
+    <div class="ds-type-meta"><div class="ds-type-label">Table Name</div><div class="ds-type-spec">17px / 500</div></div>
+    <div class="ds-type-sample" style="font-size:17px;font-weight:500;">Royal Flush Room</div>
+  </div>
+  <div class="ds-type-row">
+    <div class="ds-type-meta"><div class="ds-type-label">Nav Link</div><div class="ds-type-spec">14px / 500</div></div>
+    <div class="ds-type-sample" style="font-size:14px;font-weight:500;color:var(--text-sec);">Tournament</div>
+  </div>
+  <div class="ds-type-row">
+    <div class="ds-type-meta"><div class="ds-type-label">Body</div><div class="ds-type-spec">14px / 400 / lh 1.5</div></div>
+    <div class="ds-type-sample" style="font-size:14px;font-weight:400;line-height:1.5;color:var(--text-sec);white-space:normal;">Standard body text for descriptions and content. Optimized for comfortable reading.</div>
+  </div>
+  <div class="ds-type-row">
+    <div class="ds-type-meta"><div class="ds-type-label">Button Large</div><div class="ds-type-spec">15px / 700</div></div>
+    <div class="ds-type-sample" style="font-size:15px;font-weight:700;">Login</div>
+  </div>
+  <div class="ds-type-row">
+    <div class="ds-type-meta"><div class="ds-type-label">Button</div><div class="ds-type-spec">13px / 700</div></div>
+    <div class="ds-type-sample" style="font-size:13px;font-weight:700;">Join Table</div>
+  </div>
+  <div class="ds-type-row">
+    <div class="ds-type-meta"><div class="ds-type-label">Label</div><div class="ds-type-spec">13px / 600</div></div>
+    <div class="ds-type-sample" style="font-size:13px;font-weight:600;color:var(--text-sec);">Blinds</div>
+  </div>
+  <div class="ds-type-row">
+    <div class="ds-type-meta"><div class="ds-type-label">Caption</div><div class="ds-type-spec">12px / 600 / 0.5px</div></div>
+    <div class="ds-type-sample" style="font-size:12px;font-weight:600;letter-spacing:0.5px;color:var(--text-mut);text-transform:uppercase;">Table Header</div>
+  </div>
+  <div class="ds-type-row">
+    <div class="ds-type-meta"><div class="ds-type-label">Badge</div><div class="ds-type-spec">11px / 700</div></div>
+    <div class="ds-type-sample" style="font-size:11px;font-weight:700;color:var(--text-sec);">REGISTERING</div>
+  </div>
+  <div class="ds-type-row">
+    <div class="ds-type-meta"><div class="ds-type-label">Micro</div><div class="ds-type-spec">10px / 800 / 0.5px</div></div>
+    <div class="ds-type-sample" style="font-size:10px;font-weight:800;letter-spacing:0.5px;color:var(--orange);">LIVE 24</div>
+  </div>
+</div>
+
+<div class="ds-divider"></div>
+
+<!-- 3. Components -->
+<div class="ds-section">
+  <div class="ds-section-title">Components</div>
+  <div class="ds-section-sub">Interactive UI elements with their actual styles applied.</div>
+
+  <!-- Buttons -->
+  <div class="ds-comp-grid">
+    <div class="ds-comp-card" style="display:flex;flex-direction:column;gap:16px;">
+      <div class="ds-comp-label">Buttons</div>
+      <div><button class="ds-btn-primary">Primary CTA</button></div>
+      <div><button class="ds-btn-standard">Standard</button></div>
+      <div><button class="ds-btn-ghost">Ghost / Secondary</button></div>
+      <div style="max-width:200px;"><button class="ds-btn-join">Join Table</button></div>
+    </div>
+
+    <!-- Card -->
+    <div class="ds-comp-card">
+      <div class="ds-comp-label">Card</div>
+      <div class="ds-demo-card">
+        <div class="ds-demo-card-header">
+          <div class="ds-demo-card-name">Royal Room</div>
+          <div class="ds-demo-card-live"><span class="ds-live-dot"></span> LIVE 24</div>
+        </div>
+        <div class="ds-demo-card-meta">
+          <div class="ds-demo-card-row"><span class="ds-demo-card-label">Blinds</span><span class="ds-demo-card-value">500 / 1,000</span></div>
+          <div class="ds-demo-card-row"><span class="ds-demo-card-label">Buy-in</span><span class="ds-demo-card-value">50,000</span></div>
+          <div class="ds-demo-card-row"><span class="ds-demo-card-label">Players</span><span class="ds-demo-card-value">6 / 9</span></div>
+        </div>
+        <button class="ds-btn-join">Join Table</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Input -->
+  <div class="ds-comp-grid">
+    <div class="ds-comp-card">
+      <div class="ds-comp-label">Input</div>
+      <input class="ds-demo-input" type="text" placeholder="Enter your email">
+    </div>
+
+    <!-- Badges -->
+    <div class="ds-comp-card">
+      <div class="ds-comp-label">Badges & Tags</div>
+      <div class="ds-badges">
+        <span class="ds-badge ds-badge-reg">Registering</span>
+        <span class="ds-badge ds-badge-on">Ongoing</span>
+        <span class="ds-badge ds-badge-fin">Finished</span>
+        <span class="ds-badge-coming">COMING SOON</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Tabs -->
+  <div class="ds-comp-grid">
+    <div class="ds-comp-card">
+      <div class="ds-comp-label">Tabs</div>
+      <div class="ds-demo-tabs">
+        <div class="ds-demo-tab active">Info</div>
+        <div class="ds-demo-tab">Players</div>
+        <div class="ds-demo-tab">Prize</div>
+        <div class="ds-demo-tab">Blinds</div>
+      </div>
+    </div>
+
+    <!-- Toggle -->
+    <div class="ds-comp-card">
+      <div class="ds-comp-label">Toggle</div>
+      <div style="display:flex;flex-direction:column;gap:14px;">
+        <div class="ds-toggle-wrap">
+          <div class="ds-toggle on" onclick="this.classList.toggle('on')"><div class="ds-toggle-thumb"></div></div>
+          <span style="font-size:13px;color:var(--text-sec);">Sound Effects</span>
+        </div>
+        <div class="ds-toggle-wrap">
+          <div class="ds-toggle" onclick="this.classList.toggle('on')"><div class="ds-toggle-thumb"></div></div>
+          <span style="font-size:13px;color:var(--text-sec);">Notifications</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Section Headers -->
+  <div class="ds-comp-grid">
+    <div class="ds-comp-card" style="flex:2;">
+      <div class="ds-comp-label">Section Headers</div>
+      <div class="ds-section-headers">
+        <div class="ds-sec-hdr ds-sec-hdr-green">Beginner Tables</div>
+        <div class="ds-sec-hdr ds-sec-hdr-purple">VIP Tournament</div>
+        <div class="ds-sec-hdr ds-sec-hdr-white">Standard Tables</div>
+        <div class="ds-sec-hdr ds-sec-hdr-gold">Gold League</div>
+        <div class="ds-sec-hdr ds-sec-hdr-red">High Stakes</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="ds-divider"></div>
+
+<!-- 4. Border Radius -->
+<div class="ds-section">
+  <div class="ds-section-title">Border Radius</div>
+  <div class="ds-section-sub">Consistent radius scale from micro to full circle.</div>
+  <div class="ds-radius-row">
+    <div class="ds-radius-item"><div class="ds-radius-box" style="border-radius:3px;"></div><div class="ds-radius-label">3px Micro</div></div>
+    <div class="ds-radius-item"><div class="ds-radius-box" style="border-radius:6px;"></div><div class="ds-radius-label">6px Card</div></div>
+    <div class="ds-radius-item"><div class="ds-radius-box" style="border-radius:8px;"></div><div class="ds-radius-label">8px Nav</div></div>
+    <div class="ds-radius-item"><div class="ds-radius-box" style="border-radius:10px;"></div><div class="ds-radius-label">10px Tab</div></div>
+    <div class="ds-radius-item"><div class="ds-radius-box" style="border-radius:12px;"></div><div class="ds-radius-label">12px Button</div></div>
+    <div class="ds-radius-item"><div class="ds-radius-box" style="border-radius:14px;"></div><div class="ds-radius-label">14px Tab Wrap</div></div>
+    <div class="ds-radius-item"><div class="ds-radius-box" style="border-radius:20px;"></div><div class="ds-radius-label">20px Shop</div></div>
+    <div class="ds-radius-item"><div class="ds-radius-box" style="border-radius:50%;"></div><div class="ds-radius-label">50% Circle</div></div>
+  </div>
+</div>
+
+<div class="ds-divider"></div>
+
+<!-- 5. Spacing -->
+<div class="ds-section">
+  <div class="ds-section-title">Spacing Scale</div>
+  <div class="ds-section-sub">Base spacing tokens used for padding, margins, and gaps.</div>
+  <div class="ds-spacing-row">
+    <div class="ds-spacing-item"><div class="ds-spacing-bar" style="height:4px;"></div><div class="ds-spacing-val">4</div></div>
+    <div class="ds-spacing-item"><div class="ds-spacing-bar" style="height:6px;"></div><div class="ds-spacing-val">6</div></div>
+    <div class="ds-spacing-item"><div class="ds-spacing-bar" style="height:8px;"></div><div class="ds-spacing-val">8</div></div>
+    <div class="ds-spacing-item"><div class="ds-spacing-bar" style="height:10px;"></div><div class="ds-spacing-val">10</div></div>
+    <div class="ds-spacing-item"><div class="ds-spacing-bar" style="height:12px;"></div><div class="ds-spacing-val">12</div></div>
+    <div class="ds-spacing-item"><div class="ds-spacing-bar" style="height:14px;"></div><div class="ds-spacing-val">14</div></div>
+    <div class="ds-spacing-item"><div class="ds-spacing-bar" style="height:16px;"></div><div class="ds-spacing-val">16</div></div>
+    <div class="ds-spacing-item"><div class="ds-spacing-bar" style="height:20px;"></div><div class="ds-spacing-val">20</div></div>
+    <div class="ds-spacing-item"><div class="ds-spacing-bar" style="height:24px;"></div><div class="ds-spacing-val">24</div></div>
+    <div class="ds-spacing-item"><div class="ds-spacing-bar" style="height:32px;"></div><div class="ds-spacing-val">32</div></div>
+    <div class="ds-spacing-item"><div class="ds-spacing-bar" style="height:40px;"></div><div class="ds-spacing-val">40</div></div>
+    <div class="ds-spacing-item"><div class="ds-spacing-bar" style="height:48px;"></div><div class="ds-spacing-val">48</div></div>
+  </div>
+</div>
+
+<div class="ds-divider"></div>
+
+<!-- 6. Depth & Elevation -->
+<div class="ds-section">
+  <div class="ds-section-title">Depth & Elevation</div>
+  <div class="ds-section-sub">Elevation is communicated through background color, borders, and selective shadow.</div>
+  <div class="ds-depth-row">
+    <div class="ds-depth-item">
+      <div class="ds-depth-box" style="background:#14141f;border:1px solid #1e1e30;">Flat</div>
+      <div class="ds-depth-label">Level 0 — Card</div>
+    </div>
+    <div class="ds-depth-item">
+      <div class="ds-depth-box" style="background:rgba(13,13,24,0.92);backdrop-filter:blur(20px);border:1px solid #1e1e30;">Glass</div>
+      <div class="ds-depth-label">Nav Glass</div>
+    </div>
+    <div class="ds-depth-item">
+      <div class="ds-depth-box" style="background:#1a1a2e;border:1px solid rgba(249,98,23,0.3);transform:translateY(-2px);">Hover</div>
+      <div class="ds-depth-label">Card Hover</div>
+    </div>
+    <div class="ds-depth-item">
+      <div class="ds-depth-box" style="background:linear-gradient(135deg,#F96217,#d4510f);color:#fff;box-shadow:0 4px 20px rgba(249,98,23,0.3);border-radius:12px;">Glow</div>
+      <div class="ds-depth-label">Button Glow</div>
+    </div>
+    <div class="ds-depth-item">
+      <div class="ds-depth-box" style="background:#0f0f1a;border:1px solid #1e1e30;box-shadow:0 12px 40px rgba(0,0,0,0.6);">Modal</div>
+      <div class="ds-depth-label">Level 2 — Modal</div>
+    </div>
+  </div>
+</div>
+
+<div class="ds-divider"></div>
+
+<!-- 7. Animations -->
+<div class="ds-section">
+  <div class="ds-section-title">Animations</div>
+  <div class="ds-section-sub">Motion patterns used for interactive feedback and status indication.</div>
+  <div class="ds-anim-grid">
+    <div class="ds-anim-box">
+      <div style="position:relative;width:12px;height:12px;"><div class="ds-anim-dot pulse" style="position:absolute;inset:0;"></div><div style="width:12px;height:12px;border-radius:50%;background:var(--orange);position:relative;z-index:1;"></div></div>
+      <div class="ds-anim-label">Live Pulse</div>
+    </div>
+    <div class="ds-anim-box">
+      <div class="ds-anim-dot blink"></div>
+      <div class="ds-anim-label">Open Blink</div>
+    </div>
+    <div class="ds-anim-box">
+      <div class="ds-anim-bar"></div>
+      <div class="ds-anim-label">Badge Shimmer</div>
+    </div>
+    <div class="ds-anim-box">
+      <div class="ds-anim-card"></div>
+      <div class="ds-anim-label">Card Hover</div>
+    </div>
+  </div>
+</div>
+
+</div><!-- /preview -->
+
+<!-- ========== MARKDOWN VIEW ========== -->
+<div class="ds-view" id="view-markdown">
+  <div class="ds-md" id="mdContent"></div>
+</div>
+
+</div><!-- /container -->
+
+<script id="embeddedMd" type="text/plain">
+# Poker Lulu Design System
+
+## 1. Visual Theme & Atmosphere
+
+Poker Lulu is a social poker platform with a dark, immersive UI that evokes the atmosphere of a premium poker lounge. The interface is built on deep blacks and dark navy backgrounds, punctuated by a bold orange accent that serves as the brand's signature color. The overall feel is modern, game-centric, and mobile-first — designed to be comfortable during long gameplay sessions.
+
+The typography is anchored by Pretendard Variable, a Korean-optimized sans-serif that provides clean readability across all sizes. Display moments — like the main banner — use Isamanru and Bebas Neue for dramatic, gold-embossed headlines that contrast against the dark canvas. Inter is loaded as a secondary font for specific UI elements like login inputs.
+
+The color story is warm-on-dark. The primary background (`#07070d`) is a near-black with a subtle blue tint, layered with a radial gradient that adds depth without distraction. Cards and surfaces use progressively lighter dark tones (`#14141f`, `#1a1a2e`) to create elevation through color alone. The singular accent — Lulu Orange (`#F96217`) — is reserved for interactive elements: buttons, active states, and attention-grabbing indicators. This focused use of color ensures every interactive element is immediately identifiable.
+
+**Key Characteristics:**
+- Pretendard Variable as the primary typeface, with Isamanru/Bebas Neue for display moments
+- Dark immersive backgrounds with blue-tinted radial gradient
+- Single primary accent: Lulu Orange (`#F96217`) for all interactive elements
+- Card-based UI with subtle border separators (`#1e1e30`) rather than heavy shadows
+- Glassmorphism navigation with backdrop blur and semi-transparent backgrounds
+- Generous use of gradients on CTAs (orange gradient buttons)
+- Game-centric visual language: live dots, pulse animations, status badges
+- Mobile-first responsive design with dedicated mobile navigation and layout
+
+## 2. Color Palette & Roles
+
+### Primary & Accent
+- **Lulu Orange** (`#F96217`): Primary brand color, CTA buttons, active states, hover accents. The singular interactive color.
+- **Orange Dark** (`#d4510f`): Gradient endpoint for buttons, pressed states.
+- **Orange Secondary** (`#FF7C1D`): Lighter orange variant for secondary accents.
+- **Accent Purple** (`#7c3aed`): Secondary accent for special elements.
+- **Accent Violet** (`#8b5cf6`): Tournament section highlights, decorative use.
+- **Accent Pink** (`#ec4899`): Coming soon badges, promotional elements.
+- **Accent Gold** (`#f59e0b`): Currency display, coin indicators, VIP elements.
+- **Accent Emerald** (`#10b981`): Success states, open table indicators.
+
+### Backgrounds
+- **Body Dark** (`#07070d`): Page background base, deepest layer.
+- **Card** (`#14141f`): Standard card/surface background.
+- **Card Hover** (`#1a1a2e`): Elevated card state on hover.
+- **Nav** (`#0d0d18`): Navigation bar, footer background.
+- **Depth 200** (`#212121`): Secondary surface layer.
+- **Depth 250** (`#171717`): Alternate depth surface.
+- **Depth 300** (`#292929`): Elevated surface.
+- **Depth 400** (`#343434`): Highest dark surface.
+
+### Text
+- **Primary** (`#f1f1f7`): Main text on dark backgrounds. Slightly warm white.
+- **Secondary** (`#9ca3af`): Supporting text, meta values.
+- **Muted** (`#6b7280`): Labels, placeholders, tertiary text.
+- **Title** (`#FEFEFE`): Highest contrast text, near-pure white.
+- **Gold** (`#FFD230`): Special highlight text, currency values.
+
+### Border & Line
+- **Border Color** (`#1e1e30`): Primary border for cards, dividers, input fields.
+- **Border Light** (`#2a2a44`): Subtle borders on tabs, sliders.
+- **Border Subtle** (`#1a1a2a`): Lightest border treatment.
+- **Border 300** (`#343434`): Medium border on depth surfaces.
+- **Border 400** (`#404040`): Stronger border treatment.
+
+### System (Semantic)
+- **Error** (`#CD0C0C`): Error states, validation failures.
+- **Success** (`#3363DB`): Success confirmations.
+- **Process** (`#48D481`): Active/in-progress states, green indicators.
+- **Warning** (`#F7DF4E`): Warning notifications.
+
+### Glow & Overlay
+- **Glow Orange** (`rgba(249,98,23,0.3)`): Button hover glow, card hover accents.
+- **Modal Overlay** (`rgba(0,0,0,0.6)`): Modal backdrop with blur(4px).
+- **Nav Background** (`rgba(13,13,24,0.92)`): Semi-transparent navigation with blur(20px).
+
+## 3. Typography Rules
+
+### Font Family
+- **Primary**: `Pretendard Variable`, `Pretendard`, `-apple-system`, `sans-serif` — used for all UI text
+- **Display**: `Isamanru`, `Bebas Neue`, `sans-serif` — used for banner headlines with metallic gradient effects
+- **Input**: `Inter` (400-900) — used for specific form inputs
+
+### Hierarchy
+
+| Role | Font | Size | Weight | Line Height | Letter Spacing | Notes |
+|------|------|------|--------|-------------|----------------|-------|
+| Display Hero | Isamanru / Bebas Neue | 56px | 900 | 1.15 | -1px | Banner headlines with gold/silver gradient text effects |
+| Page Heading | Pretendard | 28px | 800 | 1.2 | — | Hero section titles |
+| Section Title | Pretendard | 22px | 800 | 1.2 | -0.5px | Section headers with tight tracking |
+| Stat Value | Pretendard | 22px | 800 | 1.2 | — | Large numeric displays |
+| Card Title | Pretendard | 18px | 800 | — | — | Game card names |
+| Modal Header | Pretendard | 18px | 700 | — | — | Modal dialog titles |
+| Table Name | Pretendard | 17px | 500 | — | — | Table/room names |
+| Banner Sub | Pretendard | 16px | 400 | — | — | Banner subtitle text |
+| Slide Menu | Pretendard | 15px | 500 | — | — | Mobile menu items |
+| Nav Link | Pretendard | 14px | 500 | — | — | Desktop navigation tabs |
+| Body | Pretendard | 14px | 400 | 1.5 | — | Standard reading text |
+| Button Large | Pretendard | 15px | 700 | 1 | — | Login button, primary CTAs |
+| Button | Pretendard | 13px | 700 | 1 | — | Standard buttons |
+| Social Button | Pretendard | 14px | 600 | 1 | — | Social login buttons |
+| Input | Inter | 14px | 400 | — | — | Form input fields |
+| Label | Pretendard | 13px | 600 | — | — | Form labels, field labels |
+| Caption | Pretendard | 12px | 600 | — | 0.5px | Table headers, secondary labels |
+| Badge | Pretendard | 11px | 700 | — | — | Status badges, tags |
+| Micro | Pretendard | 10px | 800 | — | 0.5px | Tiny tags, live indicators |
+| Footer | Pretendard | 12px-13px | — | — | — | Footer text and links |
+
+### Principles
+- **Weight as hierarchy**: The scale spans 400 (regular) to 900 (black). Headlines use 800-900 for maximum impact, body stays at 400, and interactive elements (buttons, labels) sit at 600-700.
+- **Tight tracking on headlines**: Section titles use -0.5px letter-spacing, banner titles use -1px. Body text uses default tracking.
+- **Compact line-heights**: Most UI elements use line-height: 1 for tight, controlled layouts. Body text opens to 1.5 for comfortable reading.
+- **Display font for drama only**: Isamanru/Bebas Neue appear exclusively in the hero banner with metallic gradient text effects. All other text uses Pretendard.
+
+## 4. Component Stylings
+
+### Buttons
+
+**Primary CTA (Orange Gradient)**
+- Background: `linear-gradient(135deg, #F96217, #d4510f)`
+- Text: `#ffffff`, 15px, weight 700
+- Padding: 15px 14px 14px
+- Radius: 12px
+- Border: none
+- Hover: `box-shadow: 0 4px 24px rgba(249,98,23,0.3)`, `translateY(-1px)`
+- Active: `scale(0.95)`
+- Use: Login, primary actions, "Buy" buttons
+
+**Standard Button (Orange Gradient)**
+- Background: `linear-gradient(135deg, #F96217, #d4510f)`
+- Text: `#ffffff`, 13px, weight 700
+- Padding: 11px 24px 10px (medium), 10px 12px (small)
+- Radius: 12px
+- Hover: `box-shadow: 0 4px 20px rgba(249,98,23,0.3)`, `translateY(-1px)`
+- Use: Table join, package buy, form submit
+
+**Secondary / Ghost Button**
+- Background: `#23233a`
+- Text: `var(--text-secondary)`
+- Border: 1px solid `var(--border-color)`
+- Radius: 12px
+- Use: Cancel, spectate, secondary actions
+
+**Table Join Button**
+- Background: `linear-gradient(135deg, #F96217, #d4510f)`
+- Text: `#ffffff`, 13px, weight 700
+- Padding: 10px
+- Radius: 10px
+- Full width within card
+- Hover: glow shadow + translateY(-1px)
+
+### Cards & Containers
+
+**Standard Card**
+- Background: `var(--bg-card)` (#14141f)
+- Border: 1px solid `var(--border-color)` (#1e1e30)
+- Radius: 6px
+- Padding: 16px-20px
+- Hover: `border-color: rgba(249,98,23,0.2-0.4)`, `transform: translateY(-2px)`, `background: var(--bg-card-hover)`
+
+**Game Card**
+- Background: none (transparent)
+- Radius: 16px
+- Padding: 12px 16px 16px
+- Text-align: center
+- Hover: `transform: translateY(-6px)`, icon scales to 1.08
+
+**Shop Card**
+- Background: `var(--bg-card)`
+- Radius: 20px
+- Overflow: hidden
+- Hover: `transform: translateY(-4px)`, `box-shadow: 0 8px 24px rgba(249,98,23,0.15)`
+
+### Input Fields
+- Background: `var(--bg-card)` (#14141f)
+- Border: 1px solid `var(--border-color)`
+- Radius: 12px
+- Padding: 14px 18px
+- Font: Inter, 14px, weight 400
+- Focus: `border-color: var(--accent-orange)`
+- Placeholder: `color: var(--text-muted)`
+
+### Modals
+- Overlay: `rgba(0,0,0,0.6)` with `backdrop-filter: blur(4px)`
+- Card: max-width 420px, max-height 85vh
+- Background: `#0f0f1a`
+- Border: 1px solid `var(--border-color)`
+- Radius: 6px
+- Shadow: `0 12px 40px rgba(0,0,0,0.6)`
+- Animation: 0.25s ease — opacity 0 to 1, scale(0.95) to scale(1), translateY(10px) to 0
+- Header: 18px, weight 700, padding 20px 24px 0
+- Content: padding 20px 24px 24px
+
+### Navigation (Desktop)
+- Height: 64px
+- Background: `rgba(13,13,24,0.92)` with `backdrop-filter: blur(20px)`
+- Border-bottom: 1px solid `var(--border-color)`
+- Position: sticky, top 0, z-index 100
+- Link style: 14px, weight 500, color `var(--text-secondary)`, padding 6px 12px, radius 8px
+- Active link: color `#000`, background `#E0E0E0`, weight 700
+- Tab slider: animated background that follows active tab (0.3s cubic-bezier)
+
+### Badges & Tags
+- **Status Badge**: 11px, weight 700, padding 4px 10px, radius 6px
+  - Registering: `rgba(34,197,94,0.15)` bg, `#22c55e` text
+  - Ongoing: `rgba(249,98,23,0.15)` bg, orange text
+  - Finished: `rgba(107,114,128,0.15)` bg, muted text
+- **Shop Tag**: 10px, weight 800, padding 3px 8px, radius 6px
+- **Coming Badge**: gradient `#A72FC5 to #E040A0`, pill shape, shimmer animation
+
+### Tabs
+- Container: background `#010104`, border 1px solid `#1a1a2a`, radius 14px, padding 7px
+- Tab item: height 43px, padding 0 16px, font 14px weight 700, radius 10px
+- Active: background `#1f1f35`, color `#fff`, border 1px solid `#2a2a44`
+- Inactive: color `var(--text-muted)`, transparent background
+
+### Toggle Switch
+- Track: width 50px, height 28px, radius 28px, background `var(--border-color)`
+- Thumb: width 22px, height 22px, circle, offset 3px
+- Active: track background `var(--accent-orange)`, thumb translateX(22px)
+- Transition: 0.3s
+
+### Tables
+- Border-collapse: collapse
+- Font: 13px
+- Header: background `rgba(255,255,255,0.04)`, font 12px weight 700, uppercase, letter-spacing 0.5px
+- Cell padding: 10px 16px
+- Row border: 1px solid `var(--border-color)` bottom
+- Row hover: `background: rgba(255,255,255,0.03)`
+
+### Tournament Section Headers
+- Padding: 10px 18px, font 15px weight 800
+- Border: 1px solid `rgba(255,255,255,0.05)`
+- Color variants with left-gradient backgrounds:
+  - Green: `#4ade80` / `rgba(34,197,94,0.12)`
+  - Purple: `#a78bfa` / `rgba(139,92,246,0.12)`
+  - White: `#e5e7eb` / `rgba(255,255,255,0.06)`
+  - Gold: `#fbbf24` / `rgba(251,191,36,0.12)`
+  - Red: `#f87171` / `rgba(239,68,68,0.14)`
+
+## 5. Layout Principles
+
+### Spacing System
+- Base scale: 4px, 6px, 8px, 10px, 12px, 14px, 16px, 20px, 24px, 32px, 40px, 48px
+- Card padding: 16px-24px
+- Section gap: 20px-40px margin-bottom
+- Grid gap: 12px-20px
+- Button padding: 10px-15px vertical, 12px-24px horizontal
+- Input padding: 14px 18px
+
+### Grid & Container
+- Max content width: 1080px (`--content-width`)
+- Content wrapper: `max-width: var(--content-width)`, margin 0 auto, padding 0 24px
+- Game modes: 5-column grid (`repeat(5, 1fr)`)
+- Live tables: 4-column grid (`repeat(4, 1fr)`)
+- Stats: 4-column grid (`repeat(4, 1fr)`)
+- Packages: 3-column grid (`repeat(3, 1fr)`)
+- Navigation: full-width sticky bar with padded inner container (0 48px)
+
+### Whitespace Philosophy
+- **Dark breathing room**: Sections are separated by 20px-48px margins. The dark background itself provides visual separation — lighter surface colors on dark canvas create natural groupings.
+- **Vertical rhythm through cards**: Rather than heavy whitespace, the card-based layout creates rhythm. Each card is a self-contained unit with consistent internal padding and border separation.
+- **Density in data, space in navigation**: Data-heavy areas (tables, stats) are compact with tight padding. Navigation and hero areas are spacious and open.
+
+### Border Radius Scale
+- Micro (3-4px): Checkboxes, progress bars
+- Small (6px): Standard cards, stat cards, table cards, badges
+- Medium (8px): Navigation links
+- Standard (10px): Tab items, join buttons, stepper values
+- Large (12px): Buttons, input fields
+- Extra Large (14px): Tab containers
+- Rounded (20px): Shop cards, banner badges, coin display, pills
+- Full Circle (50%): Avatars, toggle thumbs, stepper buttons
+
+## 6. Depth & Elevation
+
+| Level | Treatment | Use |
+|-------|-----------|-----|
+| Flat (Level 0) | Solid `var(--bg-card)`, 1px border | Standard cards, containers |
+| Nav Glass | `backdrop-filter: blur(20px)` on `rgba(13,13,24,0.92)` | Sticky navigation bar |
+| Card Hover (Level 1) | `border-color: rgba(249,98,23,0.2-0.4)`, `translateY(-2px)` | Card hover states |
+| Button Glow | `box-shadow: 0 4px 20px rgba(249,98,23,0.3)` | Button hover states |
+| Modal (Level 2) | `box-shadow: 0 12px 40px rgba(0,0,0,0.6)` on `#0f0f1a` | Modal dialogs |
+| Modal Overlay | `rgba(0,0,0,0.6)` + `backdrop-filter: blur(4px)` | Behind modals |
+| FAB | `box-shadow: 0 2px 12px rgba(0,0,0,0.3)` + `backdrop-filter: blur(12px)` | Floating action buttons |
+
+**Shadow Philosophy**: Poker Lulu uses shadow sparingly. Elevation is primarily communicated through background color shifts (darker to lighter) and border treatments rather than drop shadows. The orange glow (`rgba(249,98,23,0.3)`) on button hovers is the most prominent shadow effect — it reinforces the brand color while providing interactive feedback. Modal shadows are large and diffused to create clear layer separation against the dark interface.
+
+### Animations & Transitions
+- **Standard transition**: `all 0.2s` — buttons, cards, links
+- **Smooth transition**: `all 0.25s` — card hovers, nav items
+- **Cubic bezier**: `0.3s cubic-bezier(0.4,0,0.2,1)` — tab slider movement
+- **Banner crossfade**: `opacity 0.8s ease` — slide transitions
+- **Modal entrance**: `0.25s ease` — scale + opacity + translateY
+- **Live pulse**: `2s ease-out infinite` — opacity + scale animation for live indicators
+- **Open blink**: `1.5s ease-in-out infinite` — opacity blink for open table dots
+- **Badge shimmer**: `2.5s ease-in-out infinite` — horizontal light sweep on coming badges
+
+## 7. Do's and Don'ts
+
+### Do
+- Use Pretendard Variable for all UI text — it is the system font
+- Use Lulu Orange (`#F96217`) gradient buttons for all primary CTAs
+- Use `var(--bg-card)` (#14141f) for card backgrounds with 1px border
+- Apply `backdrop-filter: blur(20px)` on sticky navigation
+- Use 6px border-radius for standard cards, 12px for buttons and inputs
+- Keep cards interactive with hover: border-color shift + translateY(-2px)
+- Use the orange glow `rgba(249,98,23,0.3)` for button hover shadows
+- Alternate between card backgrounds and page background for visual grouping
+- Use weight 800 for section titles, 700 for buttons, 500-600 for labels
+
+### Don't
+- Don't introduce additional interactive accent colors — orange is the singular CTA color
+- Don't use heavy drop shadows on cards — borders and background color create elevation
+- Don't use Isamanru/Bebas Neue outside of the hero banner — they are display-only fonts
+- Don't use pure white (`#ffffff`) for body text — use `var(--text-primary)` (#f1f1f7) instead
+- Don't use border-radius larger than 20px on rectangular elements (except pills and circles)
+- Don't make navigation opaque — the glass blur effect is essential to the Poker Lulu UI
+- Don't use borders thicker than 1px on cards — keep them subtle
+- Don't set line-height above 1.5 for UI text — the interface is designed to be compact
+- Don't add textures or patterns — dark solid colors and subtle gradients only
+
+## 8. Responsive Behavior
+
+### Breakpoints
+| Name | Width | Key Changes |
+|------|-------|-------------|
+| Desktop | >768px | Full layout, 4-5 column grids, top-nav visible |
+| Tablet | 769-960px | Reduced nav coins, adjusted padding |
+| Mobile | <=768px | Mobile nav, 2-column grids, hidden game modes |
+| Small Mobile | <=412px | Compact login layout, reduced margins |
+| Extra Small | <=375px | Hidden dividers, minimal spacing |
+
+### Mobile Adaptations
+- Desktop top-nav hidden, replaced with mobile bottom tab bar (m-nav)
+- Footer hidden, replaced with mobile footer (m-footer)
+- Game modes grid: hidden on mobile
+- Tables grid: 4 columns to 2 columns
+- Package grid: 3 columns to 2 columns
+- Stats grid: 4 columns to 2x2
+- Banner height: 400px to 200px
+- Tabs: pill-style tabs become underline-style fixed below nav
+- Safe area support: `env(safe-area-inset-*)` for notched devices
+- Slide-out menu for navigation with glassmorphism background
+
+### Touch Targets
+- Primary buttons: minimum ~44px touch height (15px vertical padding)
+- Tab items: 43px height
+- Toggle: 50px x 28px
+- Navigation links: 6px 12px padding within 64px nav height
+- Game card icons: 100px x 100px touch area
+- Mobile tabbar: 94px height + safe area inset
+
+### Image Behavior
+- Banner images: `background-size: cover`, `background-position: center`
+- Game icons: 100px x 100px, `object-fit: contain`, scale(1.08) on hover
+- Avatars: circular crop with 2px orange-tinted border
+- Product images: constrained within card boundaries, `object-fit: contain`
+
+## 9. Agent Prompt Guide
+
+### Quick Color Reference
+- Primary CTA: Orange gradient (`#F96217` to `#d4510f`)
+- Page background: `#07070d` with radial gradient
+- Card background: `#14141f`
+- Card hover: `#1a1a2e`
+- Nav background: `rgba(13,13,24,0.92)` + blur(20px)
+- Text primary: `#f1f1f7`
+- Text secondary: `#9ca3af`
+- Text muted: `#6b7280`
+- Border: `#1e1e30`
+- Button glow: `rgba(249,98,23,0.3)`
+- Active tab: `#E0E0E0` background, `#000` text
+- Modal overlay: `rgba(0,0,0,0.6)` + blur(4px)
+
+### Example Component Prompts
+- "Create a card on dark background. Background `#14141f`, border 1px solid `#1e1e30`, border-radius 6px, padding 20px. Title at 17px Pretendard weight 500, color `#f1f1f7`. Meta labels at 13px color `#6b7280`, values at 13px weight 600 color `#9ca3af`. Full-width orange gradient button at bottom: `linear-gradient(135deg, #F96217, #d4510f)`, white text, 13px weight 700, radius 10px, padding 10px. Hover: border-color `rgba(249,98,23,0.3)`, translateY(-2px)."
+- "Design a modal dialog. Overlay: `rgba(0,0,0,0.6)` with backdrop-filter blur(4px). Card: max-width 420px, background `#0f0f1a`, border 1px solid `#1e1e30`, radius 6px. Header: 18px weight 700, padding 20px 24px 0. Content: padding 20px 24px 24px. Close button: 24px icon, color `#6b7280`. Animate in: 0.25s ease, scale(0.95) to 1, opacity 0 to 1."
+- "Build the navigation bar: sticky, 64px height, background `rgba(13,13,24,0.92)` with backdrop-filter blur(20px). Border-bottom 1px solid `#1e1e30`. Links at 14px Pretendard weight 500, color `#9ca3af`, padding 6px 12px, radius 8px. Active link: color `#000`, background `#E0E0E0`, weight 700 with animated tab slider."
+- "Create a tab container: background `#010104`, border 1px solid `#1a1a2a`, radius 14px, padding 7px. Tab items: height 43px, padding 0 16px, font 14px weight 700, radius 10px. Active tab: background `#1f1f35`, color white, border 1px solid `#2a2a44`. Inactive: color `#6b7280`."
+- "Design a status badge: 11px weight 700, padding 4px 10px, radius 6px. For 'registering' state: background `rgba(34,197,94,0.15)`, color `#22c55e`. For 'ongoing': background `rgba(249,98,23,0.15)`, color orange."
+
+### Iteration Guide
+1. Every interactive element uses Lulu Orange (`#F96217`) — no other accent for CTAs
+2. Cards use background color + border for elevation, not shadows
+3. Section titles are 22px weight 800 with -0.5px tracking
+4. Buttons always use the orange gradient with white text, radius 12px
+5. Navigation glass effect (translucent dark + blur) is non-negotiable
+6. Modals animate with scale + opacity + translateY over 0.25s
+7. Hover states combine border-color shift + translateY(-2px) + optional glow shadow
+8. The tab slider with cubic-bezier animation follows active tab on desktop nav
+</script>
+<script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+<script>
+// Tab switching
+document.querySelectorAll('.ds-tab').forEach(tab=>{
+  tab.addEventListener('click',()=>{
+    document.querySelectorAll('.ds-tab').forEach(t=>t.classList.remove('active'));
+    document.querySelectorAll('.ds-view').forEach(v=>v.classList.remove('active'));
+    tab.classList.add('active');
+    document.getElementById('view-'+tab.dataset.view).classList.add('active');
+  });
+});
+
+// Render embedded DESIGN.md
+const md=document.getElementById('embeddedMd').textContent;
+document.getElementById('mdContent').innerHTML=marked.parse(md);
+</script>
+</body>
+</html>
