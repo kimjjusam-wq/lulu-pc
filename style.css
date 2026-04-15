@@ -1651,7 +1651,7 @@ body.chat-open > .m-nav { display:none !important; }
 /* MOBILE FOOTER         */
 /* ===================== */
 .m-footer { display:none; margin-top:24px; padding:0 16px 16px; }
-.m-footer-toggle { display:flex; align-items:center; justify-content:center; gap:6px; padding:12px; cursor:pointer; color:rgba(120,180,255,0.8); font-size:13px; font-weight:600; border-radius:12px; background:linear-gradient(135deg,#0a1530 0%,#1a3868 50%,#0a1530 100%) padding-box, linear-gradient(135deg,rgba(60,130,240,0.15),rgba(120,180,255,0.5),rgba(60,130,240,0.15)) border-box; border:1px solid transparent; }
+.m-footer-toggle { display:flex; align-items:center; justify-content:center; gap:6px; padding:12px; cursor:pointer; color:var(--text-muted); font-size:13px; font-weight:600; border-radius:12px; background:transparent; border:1px solid rgba(255,255,255,0.15); }
 .m-footer-arrow { transition:transform 0.3s; }
 .m-footer.open .m-footer-arrow { transform:rotate(180deg); }
 .m-footer-content { max-height:0; overflow:hidden; transition:max-height 0.3s ease; }
