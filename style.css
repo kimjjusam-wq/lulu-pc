@@ -189,6 +189,7 @@ body {
 .footer-sep { color:var(--text-muted); font-size:11px; opacity:0.4; user-select:none; }
 .footer-link { font-size:13px; color:var(--text-muted); text-decoration:none; transition:color 0.2s; cursor:pointer; }
 .footer-link:hover { color:var(--accent-orange); }
+.footer-disclaimer { margin-top:20px; font-size:11px; color:var(--text-muted); text-align:center; line-height:1.6; opacity:0.55; }
 
 .page-container { display:none; }
 .page-container.active { display:block; }
@@ -1922,7 +1923,7 @@ body.chat-open > .m-nav { display:none !important; }
   .slide-menu-item {
     display:flex; align-items:center; gap:12px; padding:12px 20px;
     font-size:15px; font-weight:500; color:var(--text-primary); cursor:pointer;
-    transition:background 0.15s; -webkit-tap-highlight-color:transparent;
+    transition:background 0.15s; -webkit-tap-highlight-color:transparent; text-decoration:none;
   }
   .slide-menu-item:active { background:rgba(255,255,255,0.05); }
   .slide-menu-item-muted { color:var(--text-muted); font-size:13px; }
