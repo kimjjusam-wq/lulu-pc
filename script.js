@@ -862,7 +862,7 @@ function clearSession() {
 }
 
 function hideAllAuthSections() {
-  ['loginSection','findAccountSection','findAccountPassSection','findAccountCompleteSection','findAccountVerifySection','findAccountResetSection','signupStep2','signupStep3','signupStep4','signupStep5'].forEach(id => {
+  ['loginSection','findAccountSection','findAccountPassSection','findAccountCompleteSection','findAccountVerifySection','findAccountResetSection','findAccountDoneSection','signupStep2','signupStep3','signupStep4','signupStep5'].forEach(id => {
     const el = document.getElementById(id);
     if (el) el.style.display = 'none';
   });
@@ -1214,8 +1214,18 @@ function validateResetPw() {
 function submitResetPw() {
   var btn = document.getElementById('resetPwSubmit');
   if (btn.classList.contains('disabled')) return;
-  alert('비밀번호가 변경되었습니다. 새 비밀번호로 로그인해 주세요.');
-  showLogin();
+  showFindAccountDone();
+}
+function showFindAccountDone() {
+  hideAllAuthSections();
+  document.getElementById('findAccountDoneSection').style.display = '';
+  var title = document.getElementById('mNavTitle');
+  var logo = document.getElementById('mNavLogo');
+  if (title && logo) {
+    logo.style.display = 'none';
+    title.style.display = '';
+    title.innerHTML = '<span class="m-nav-title-text">비밀번호 재설정</span>';
+  }
 }
 function showSignup() {
   hideAllAuthSections();

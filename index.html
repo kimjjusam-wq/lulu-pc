@@ -1041,6 +1041,16 @@
         <button class="login-btn find-account-btn disabled" id="resetPwSubmit" onclick="submitResetPw()">변경</button>
       </div>
     </div>
+    <!-- 계정 찾기: 비밀번호 재설정 완료 -->
+    <div id="findAccountDoneSection" style="display:none;">
+      <div class="login-header">
+        <h2>비밀번호가<br>변경되었습니다</h2>
+        <p>보안을 위해 모든 기기에서 로그아웃되었습니다.<br>새 비밀번호로 다시 로그인해 주세요.</p>
+      </div>
+      <div class="login-card">
+        <button class="login-btn" onclick="showLogin()">로그인</button>
+      </div>
+    </div>
     <!-- 회원가입 Step1: 계정 정보 입력 -->
     <div id="signupStep2" style="display:none;">
       <div class="login-header">

@@ -554,7 +554,7 @@ img.shop-tab-emoji { width:24px; height:24px; object-fit:contain; }
   flex-direction: column;
   align-items: center;
 }
-#loginSection, #findAccountSection, #findAccountPassSection, #findAccountCompleteSection, #findAccountVerifySection, #findAccountResetSection, #signupStep1, #signupStep2, #signupStep3, #signupStep4, #signupStep5 { width:100%; display:flex; flex-direction:column; align-items:center; }
+#loginSection, #findAccountSection, #findAccountPassSection, #findAccountCompleteSection, #findAccountVerifySection, #findAccountResetSection, #findAccountDoneSection, #signupStep1, #signupStep2, #signupStep3, #signupStep4, #signupStep5 { width:100%; display:flex; flex-direction:column; align-items:center; }
 .login-back {
   width: 100%;
   padding: 14px 0;
@@ -758,6 +758,8 @@ img.shop-tab-emoji { width:24px; height:24px; object-fit:contain; }
 #findAccountCompleteSection .find-account-terms { margin-bottom:16px; }
 .find-account-variant-toggle { display:flex; gap:8px; justify-content:center; margin-top:16px; flex-wrap:wrap; }
 .find-account-variant-toggle .modal-link-btn.active { border-color:var(--accent-orange); color:var(--accent-orange); }
+#findAccountDoneSection { justify-content:center; min-height:calc(100vh - 120px); }
+#findAccountDoneSection .login-header p { display:block; }
 
 .pass-auth-info { font-size:13px; color:var(--text-muted); line-height:1.7; }
 .pass-auth-info-email { color:#fff; font-weight:700; }
