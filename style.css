@@ -153,7 +153,7 @@ body {
 .table-meta-row { display:flex; align-items:center; justify-content:space-between; font-size:13px; }
 .table-meta-label { color:var(--text-muted); }
 .table-meta-value { font-weight:600; color:var(--text-secondary); }
-.table-join-btn { margin-top:16px; width:100%; padding:10px; border:none; border-radius:10px; font-size:13px; font-weight:700; cursor:pointer; background:linear-gradient(135deg,var(--accent-orange),var(--accent-orange-dark)); color:#fff; transition:all 0.2s; line-height:1; }
+.table-join-btn { margin-top:16px; width:100%; padding:8px 20px; border:none; border-radius:8px; font-size:13px; font-weight:700; cursor:pointer; background:linear-gradient(135deg,var(--accent-orange),var(--accent-orange-dark)); color:#fff; transition:all 0.2s; line-height:1; }
 .table-join-btn:hover { box-shadow:0 4px 20px var(--glow-orange); transform:translateY(-1px); }
 
 .stats-section { margin-bottom:48px; }
@@ -423,10 +423,10 @@ img.shop-tab-emoji { width:24px; height:24px; object-fit:contain; }
   color: var(--accent-gold);
 }
 .pkg-buy-btn {
-  padding: 11px 24px 10px;
+  padding: 11px 28px 10px;
   border: none;
-  border-radius: 12px;
-  font-size: 13px;
+  border-radius: 10px;
+  font-size: 14px;
   font-weight: 700;
   cursor: pointer;
   background: linear-gradient(135deg, var(--accent-orange), var(--accent-orange-dark));
@@ -667,7 +667,8 @@ img.shop-tab-emoji { width:24px; height:24px; object-fit:contain; }
 }
 .social-btn {
   width: 100%;
-  padding: 13px 18px;
+  height: 52px;
+  padding: 0 18px;
   border-radius: 12px;
   border: 1px solid var(--border-color);
   font-size: 14px;
@@ -1016,7 +1017,7 @@ img.shop-tab-emoji { width:24px; height:24px; object-fit:contain; }
   .login-btn { margin-top:0; }
   .login-form { margin-bottom:10px; }
   .login-divider { margin-bottom:10px; }
-  .social-btn { height:44px; padding-top:0; padding-bottom:0; }
+  .social-btn { height:44px; }
 }
 @media (max-width:375px) {
   .login-divider { display:none; }
@@ -1985,7 +1986,7 @@ body.chat-open > .m-nav { display:none !important; }
   .table-card { padding:16px; border-radius:6px; }
   .table-name { font-size:15px; }
   .table-meta-row { font-size:12px; }
-  .table-join-btn { font-size:13px; padding:10px; border-radius:10px; line-height:1; }
+  .table-join-btn { font-size:13px; padding:8px 20px; border-radius:8px; line-height:1; }
 
   /* --- Stats: 2x2 grid --- */
   .stats-grid { grid-template-columns:1fr 1fr; gap:10px; }
