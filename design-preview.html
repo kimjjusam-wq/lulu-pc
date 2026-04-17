@@ -168,7 +168,8 @@ body{font-family:'Pretendard Variable',Pretendard,-apple-system,sans-serif;backg
 .ds-pnav-logo-icon{width:32px;height:32px;background:url('images/login_icon.svg') no-repeat center/contain;}
 .ds-pnav-links{display:flex;align-items:center;gap:2px;position:relative;}
 .ds-pnav-link{font-size:14px;font-weight:500;color:var(--text-sec);padding:6px 12px;border-radius:8px;border:1px solid transparent;white-space:nowrap;position:relative;z-index:1;cursor:pointer;transition:all 0.2s;}
-.ds-pnav-link.active{color:#000;background:#E0E0E0;border-color:#FEFEFE;font-weight:700;}
+.ds-pnav-link.active{color:#000;font-weight:700;background:transparent;border-color:transparent;}
+.ds-pnav-slider{position:absolute;background:#E0E0E0;border:1px solid #FEFEFE;border-radius:8px;transition:all 0.3s cubic-bezier(0.4,0,0.2,1);pointer-events:none;z-index:0;}
 .ds-pnav-right{margin-left:auto;display:flex;align-items:center;gap:12px;}
 .ds-pnav-coins{display:flex;align-items:center;gap:6px;background:rgba(245,158,11,0.1);border:1px solid rgba(245,158,11,0.2);padding:6px 14px;border-radius:20px;font-size:13px;font-weight:700;color:#f59e0b;}
 .ds-pnav-coins.diamond{background:rgba(96,165,250,0.1);border-color:rgba(96,165,250,0.2);color:#60a5fa;}
@@ -734,6 +735,7 @@ body{font-family:'Pretendard Variable',Pretendard,-apple-system,sans-serif;backg
               <div class="ds-pnav-link">상점</div>
               <div class="ds-pnav-link">통계</div>
               <div class="ds-pnav-link">MY 룰루</div>
+              <div class="ds-pnav-slider"></div>
             </div>
             <div class="ds-pnav-right">
               <div class="ds-pnav-coins"><img src="images/icon_gold.png" alt="gold" style="width:16px;height:16px;"> 125,000</div>
@@ -758,6 +760,7 @@ body{font-family:'Pretendard Variable',Pretendard,-apple-system,sans-serif;backg
               <div class="ds-pnav-link">상점</div>
               <div class="ds-pnav-link">통계</div>
               <div class="ds-pnav-link">MY 룰루</div>
+              <div class="ds-pnav-slider"></div>
             </div>
             <div class="ds-pnav-right">
               <button class="ds-pnav-login">로그인</button>
@@ -780,6 +783,7 @@ body{font-family:'Pretendard Variable',Pretendard,-apple-system,sans-serif;backg
               <div class="ds-pnav-link">상점</div>
               <div class="ds-pnav-link">통계</div>
               <div class="ds-pnav-link">MY 룰루</div>
+              <div class="ds-pnav-slider"></div>
             </div>
             <div class="ds-pnav-right">
               <div class="ds-pnav-avatar"><img src="images/avatar_o.png" alt="avatar"></div>
@@ -1474,16 +1478,29 @@ document.querySelectorAll('.ds-tab').forEach(tab=>{
 const md=document.getElementById('embeddedMd').textContent;
 document.getElementById('mdContent').innerHTML=marked.parse(md);
 
-// Nav demo — tab click switching
+// Nav demo — tab slider animation
 (function(){
   document.querySelectorAll('[data-nav-group]').forEach(group=>{
+    const slider=group.querySelector('.ds-pnav-slider');
     const items=group.querySelectorAll('.ds-pnav-link');
+    if(!slider||!items.length)return;
+    function move(el){
+      slider.style.width=el.offsetWidth+'px';
+      slider.style.height=el.offsetHeight+'px';
+      slider.style.left=el.offsetLeft+'px';
+      slider.style.top=el.offsetTop+'px';
+    }
     items.forEach(link=>{
       link.addEventListener('click',()=>{
         items.forEach(l=>l.classList.remove('active'));
         link.classList.add('active');
+        move(link);
       });
     });
+    const active=group.querySelector('.ds-pnav-link.active');
+    function init(){if(active)move(active);}
+    if(document.fonts&&document.fonts.ready){document.fonts.ready.then(init);}else{window.addEventListener('load',init);}
+    window.addEventListener('resize',()=>{const a=group.querySelector('.ds-pnav-link.active');if(a)move(a);});
   });
 })();
 </script>
