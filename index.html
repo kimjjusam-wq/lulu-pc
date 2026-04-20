@@ -1231,7 +1231,13 @@
   <div class="content-wrapper">
     <div class="gs-back" role="button" tabindex="0" onclick="switchPage('lobby')"><span>←</span> <span data-i18n="gs_back">돌아가기</span></div>
     <div class="gs-hero">
-      <h2 data-i18n="tn_title">토너먼트</h2>
+      <div class="gs-hero-title-row">
+        <h2 data-i18n="tn_title">토너먼트</h2>
+        <div class="tn-round-toggle" role="tablist" aria-label="토너먼트 회차">
+          <button class="tn-round-btn active" data-tn-round="1" onclick="switchTournamentRound('1')">1차</button>
+          <button class="tn-round-btn" data-tn-round="2" onclick="switchTournamentRound('2')">2차</button>
+        </div>
+      </div>
       <p data-i18n="tn_desc">다양한 토너먼트에 참가하고 보상을 획득하세요</p>
     </div>
     <div class="tn-split-layout">

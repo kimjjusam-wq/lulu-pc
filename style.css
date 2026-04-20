@@ -1144,18 +1144,29 @@ img.shop-tab-emoji { width:24px; height:24px; object-fit:contain; }
 .tn-section-title--white  { color:#e5e7eb; background:linear-gradient(90deg, rgba(255,255,255,0.06), rgba(255,255,255,0.01)); border-color:rgba(255,255,255,0.08); }
 .tn-section-title--gold   { color:#fbbf24; background:linear-gradient(90deg, rgba(251,191,36,0.12), rgba(251,191,36,0.03)); border-color:rgba(251,191,36,0.15); }
 .tn-section-title--red    { color:#f87171; background:linear-gradient(90deg, rgba(239,68,68,0.14), rgba(239,68,68,0.03)); border-color:rgba(239,68,68,0.18); }
+.tn-card-content { flex:1; display:flex; flex-direction:column; gap:8px; min-width:0; }
 .tn-card-left { flex:0 0 140px; display:flex; flex-direction:column; gap:4px; }
 .tn-badge { display:inline-flex; align-items:center; font-size:11px; font-weight:700; padding:4px 10px; border-radius:6px; width:fit-content; }
 .tn-badge.registering { background:rgba(34,197,94,0.15); color:#22c55e; }
 .tn-badge.ongoing { background:rgba(249,98,23,0.15); color:var(--accent-orange); }
 .tn-badge.finished { background:rgba(107,114,128,0.15); color:var(--text-muted); }
+.tn-badge-registered { background:rgba(96,165,250,0.15); color:#60a5fa; }
+.tn-status-row { display:flex; align-items:center; gap:8px; flex-wrap:nowrap; }
+.tn-remain-time { font-size:13px; font-weight:700; color:var(--text-secondary); font-variant-numeric:tabular-nums; letter-spacing:-0.2px; white-space:nowrap; }
 .tn-starts-label { font-size:11px; color:var(--text-muted); margin-top:4px; }
 .tn-starts-value { font-size:13px; color:var(--text-secondary); font-weight:600; }
-.tn-card-right { flex:1; display:flex; flex-direction:column; gap:6px; justify-content:center; }
+.tn-prize-row { display:flex; align-items:baseline; gap:8px; margin-top:4px; }
+.tn-prize-label { font-size:11px; color:var(--text-muted); }
+.tn-prize-value { font-size:15px; font-weight:800; color:var(--accent-gold); letter-spacing:-0.2px; }
+.tn-prize-unit { font-size:15px; font-weight:800; color:var(--accent-gold); margin-left:4px; }
+.tn-card-right { flex:1; display:flex; flex-direction:column; gap:6px; justify-content:center; min-width:0; }
 .tn-name { font-size:15px; font-weight:700; color:var(--text-primary); }
 .tn-meta { display:flex; gap:16px; align-items:center; flex-wrap:wrap; }
-.tn-meta-item { display:inline-flex; gap:4px; align-items:center; font-size:12px; color:var(--text-muted); }
+.tn-meta-item { display:inline-flex; gap:6px; align-items:baseline; font-size:12px; color:var(--text-secondary); }
 .tn-meta-item svg { opacity:0.6; }
+.tn-meta-label { font-size:11px; color:var(--text-muted); font-weight:500; }
+.tn-meta-value { font-size:13px; color:var(--text-secondary); font-weight:600; }
+.tn-card-third { flex:0 0 auto; display:flex; align-items:center; justify-content:flex-end; min-width:72px; }
 .tn-empty { text-align:center; padding:48px 0; color:var(--text-muted); font-size:14px; }
 
 /* ===================== */
@@ -1261,6 +1272,12 @@ img.shop-tab-emoji { width:24px; height:24px; object-fit:contain; }
 .gs-hero { padding:24px 0 16px; text-align:center; }
 .gs-hero h2 { font-size:28px; font-weight:800; margin-bottom:8px; }
 .gs-hero p { color:var(--text-secondary); font-size:14px; }
+.gs-hero-title-row { display:flex; align-items:center; justify-content:center; gap:16px; margin-bottom:8px; }
+.gs-hero-title-row h2 { margin-bottom:0; }
+.tn-round-toggle { display:inline-flex; background:#010104; border:1px solid #1a1a2a; border-radius:10px; padding:3px; }
+.tn-round-btn { padding:6px 14px; font-size:13px; font-weight:700; color:var(--text-muted); background:transparent; border:1px solid transparent; border-radius:7px; cursor:pointer; transition:color 0.2s, background 0.2s, border-color 0.2s; font-family:'Pretendard Variable',Pretendard,sans-serif; }
+.tn-round-btn:hover { color:var(--text-secondary); background:rgba(255,255,255,0.03); }
+.tn-round-btn.active { background:#1f1f35; color:#fff; border-color:#2a2a44; }
 
 /* Tabs */
 .gs-tabs { display:flex; gap:12px; max-width:700px; margin:0 auto 24px; background:#010104; border:1px solid #1a1a2a; border-radius:14px; padding:7px; align-items:center; position:relative; }
@@ -2049,6 +2066,20 @@ body.chat-open > .m-nav { display:none !important; }
     }
   }
 
+  /* 토너먼트 1차/2차 토글 - 모바일: 상단 nav 제목 옆에 인라인 배치 */
+  .m-nav-round-toggle {
+    display:inline-flex; background:rgba(255,255,255,0.05);
+    border:1px solid rgba(255,255,255,0.1); border-radius:8px;
+    padding:2px; flex-shrink:0;
+  }
+  .m-nav-round-btn {
+    padding:3px 8px; font-size:11px; font-weight:700; line-height:1.4;
+    color:var(--text-muted); background:transparent; border:none;
+    border-radius:5px; cursor:pointer;
+    font-family:'Pretendard Variable',Pretendard,sans-serif;
+  }
+  .m-nav-round-btn.active { background:#1f1f35; color:#fff; }
+
   /* 토너먼트 라벨 탭 - 모바일 (nav에 붙어있음) */
   .tn-tabs {
     padding:0 12px !important; gap:8px !important;
@@ -2129,10 +2160,19 @@ body.chat-open > .m-nav { display:none !important; }
   .my-menu-icon { width:36px; height:36px; font-size:16px; }
   .my-menu-text { font-size:14px; }
 
+  /* 1차 모드(탭 숨김) 시 상단 16px 공백 제거 */
+  #page-tournament.tn-hide-tabs .tn-list { margin-top:-16px !important; }
+
   /* --- Tournament cards mobile --- */
-  .tn-card { flex-direction:column; gap:10px; padding:14px 16px; }
-  .tn-card-left { flex:none; flex-direction:row; align-items:center; gap:10px; }
+  .tn-card { flex-direction:column; gap:8px; padding:14px 16px; position:relative; }
+  .tn-card-content { padding-right:72px; }
+  .tn-card-left { flex:none; flex-direction:row; align-items:center; flex-wrap:wrap; gap:6px 12px; padding-right:72px; }
+  .tn-card-left .tn-starts-label,
+  .tn-card-left .tn-prize-label { margin-top:0; }
+  .tn-prize-value { font-size:14px; }
+  .tn-card-third { position:absolute; top:50%; right:16px; transform:translateY(-50%); min-width:0; }
   .tn-name { font-size:14px; }
+  .tn-meta { gap:12px 16px; }
   /* --- Tournament section title mobile --- */
   .tn-section { gap:0; }
   .tn-section + .tn-section { margin-top:0; }

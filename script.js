@@ -627,7 +627,8 @@ function switchPage(p) {
   mSyncNavTitle(p);
   window.scrollTo({ top: 0, behavior: 'smooth' });
   if (p === 'game-setup') { gsInitDefaults(); }
-  if (p === 'tournament') { tnRenderList(); switchTournamentTab('all'); }
+  if (p === 'tournament') { tnRenderList(); switchTournamentTab('all'); tnApplyRoundVisibility(); tnStartCountdown(); }
+  else { if (typeof tnStopCountdown === 'function') tnStopCountdown(); }
   if (p === 'tn-history') { tnRenderHistory(); }
   if (p === 'ticket') { tkRenderList(); }
   if (p === 'account-edit') { aeInit(); }
@@ -696,12 +697,23 @@ function mSyncNavTitle(page) {
     logo.style.display = 'none';
     title.style.display = '';
     var isSub = mainTabs.indexOf(page) === -1;
+    var titleHtml;
     if (isSub) {
       var parent = parentMap[page] || 'lobby';
-      title.innerHTML = '<svg class="m-nav-back" onclick="switchPage(\'' + parent + '\')" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg><span class="m-nav-title-text">' + titles[page] + '</span>';
+      titleHtml = '<svg class="m-nav-back" onclick="switchPage(\'' + parent + '\')" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg><span class="m-nav-title-text">' + titles[page] + '</span>';
     } else {
-      title.textContent = titles[page];
+      titleHtml = '<span class="m-nav-title-text">' + titles[page] + '</span>';
     }
+    if (page === 'tournament') {
+      var activeRound = '1';
+      var activeBtn = document.querySelector('.tn-round-btn.active');
+      if (activeBtn) activeRound = activeBtn.getAttribute('data-tn-round') || '1';
+      titleHtml += '<span class="m-nav-round-toggle" role="tablist" aria-label="토너먼트 회차">' +
+        '<button class="m-nav-round-btn tn-round-btn' + (activeRound === '1' ? ' active' : '') + '" data-tn-round="1" onclick="event.stopPropagation();switchTournamentRound(\'1\')">1차</button>' +
+        '<button class="m-nav-round-btn tn-round-btn' + (activeRound === '2' ? ' active' : '') + '" data-tn-round="2" onclick="event.stopPropagation();switchTournamentRound(\'2\')">2차</button>' +
+        '</span>';
+    }
+    title.innerHTML = titleHtml;
   } else {
     logo.style.display = '';
     title.style.display = 'none';
@@ -1781,27 +1793,51 @@ const tnGroups = [
   { text:'바운티 헌터',          theme:'red',    ids:[4, 10, 18]        },
 ];
 const demoTournaments = [
-  { id:1,  event:'A', name:'POKER LULU Weekly Championship', status:'registering', startType:'manual', fee:'free', players:3, maxPlayers:10, prize:'500,000G', registered:true, details:{ blindLevel:1, unique:3, reentry:0, startChips:'10000', tableSize:8, rebuyCount:0, timebankSec:10, extraTimeSec:5, extraTimeHands:10, actionTimeSec:15, anteRate:'0.1BB', anteType:'All', cancelReg:'불가', lateRegLevel:8, blindMin:10, breakMin:5 } },
+  { id:1,  event:'A', name:'POKER LULU Weekly Championship', status:'registering', startType:'manual', fee:'free', players:3, maxPlayers:10, prize:'100,000,000G', registered:true, details:{ blindLevel:1, unique:3, reentry:0, startChips:'10000', tableSize:8, rebuyCount:0, timebankSec:10, extraTimeSec:5, extraTimeHands:10, actionTimeSec:15, anteRate:'0.1BB', anteType:'All', cancelReg:'불가', lateRegLevel:8, blindMin:10, breakMin:5 } },
   { id:2,  event:'A', name:'Friday Night Holdem', status:'registering', startType:'manual', fee:'free', players:1, maxPlayers:6, prize:'-', registered:false, details:{ blindLevel:1, unique:1, reentry:0, startChips:'5000', tableSize:6, rebuyCount:0, timebankSec:10, extraTimeSec:5, extraTimeHands:10, actionTimeSec:15, anteRate:'0.1BB', anteType:'All', cancelReg:'허용', lateRegLevel:6, blindMin:8, breakMin:4 } },
   { id:3,  event:'A', name:'POKER LULU User Custom Game', status:'registering', startType:'manual', fee:'free', players:0, maxPlayers:8, prize:'-', registered:false, details:{ blindLevel:1, unique:0, reentry:0, startChips:'10000', tableSize:8, rebuyCount:0, timebankSec:10, extraTimeSec:5, extraTimeHands:10, actionTimeSec:15, anteRate:'0.1BB', anteType:'All', cancelReg:'허용', lateRegLevel:8, blindMin:10, breakMin:5 } },
   { id:4,  event:'A', name:'High Roller Tournament', status:'ongoing', startType:'2025-02-24 20:00', fee:'10,000G', players:8, maxPlayers:10, prize:'1,000,000G', registered:true, details:{ blindLevel:5, unique:8, reentry:2, startChips:'50000', tableSize:9, rebuyCount:3, timebankSec:30, extraTimeSec:10, extraTimeHands:15, actionTimeSec:20, anteRate:'0.2BB', anteType:'All', cancelReg:'불가', lateRegLevel:5, blindMin:12, breakMin:5 } },
   { id:5,  event:'A', name:'Beginner Friendly Open', status:'registering', startType:'manual', fee:'free', players:5, maxPlayers:12, prize:'100,000G', registered:false, details:{ blindLevel:1, unique:5, reentry:0, startChips:'8000', tableSize:9, rebuyCount:0, timebankSec:15, extraTimeSec:5, extraTimeHands:10, actionTimeSec:15, anteRate:'0.1BB', anteType:'All', cancelReg:'허용', lateRegLevel:8, blindMin:10, breakMin:5 } },
   { id:6,  event:'B', name:'POKER LULU Daily Freeroll', status:'registering', startType:'2025-02-25 12:00', fee:'free', players:12, maxPlayers:50, prize:'200,000G', registered:true, details:{ blindLevel:1, unique:12, reentry:0, startChips:'10000', tableSize:9, rebuyCount:0, timebankSec:10, extraTimeSec:5, extraTimeHands:10, actionTimeSec:15, anteRate:'0.1BB', anteType:'All', cancelReg:'불가', lateRegLevel:10, blindMin:10, breakMin:5 } },
-  { id:7,  event:'B', name:'VIP Invitational', status:'ongoing', startType:'2025-02-24 19:00', fee:'50,000G', players:6, maxPlayers:6, prize:'5,000,000G', registered:false, details:{ blindLevel:7, unique:6, reentry:3, startChips:'100000', tableSize:6, rebuyCount:5, timebankSec:60, extraTimeSec:15, extraTimeHands:20, actionTimeSec:25, anteRate:'0.5BB', anteType:'All', cancelReg:'불가', lateRegLevel:4, blindMin:15, breakMin:5 } },
+  { id:7,  event:'B', name:'VIP Invitational', status:'ongoing', startType:'2025-02-24 19:00', fee:'50,000G', players:6, maxPlayers:6, prize:'500,000,000G', registered:false, details:{ blindLevel:7, unique:6, reentry:3, startChips:'100000', tableSize:6, rebuyCount:5, timebankSec:60, extraTimeSec:15, extraTimeHands:20, actionTimeSec:25, anteRate:'0.5BB', anteType:'All', cancelReg:'불가', lateRegLevel:4, blindMin:15, breakMin:5 } },
   { id:8,  event:'B', name:'POKER LULU User Custom Game', status:'registering', startType:'manual', fee:'free', players:2, maxPlayers:6, prize:'-', registered:false },
   { id:9,  event:'B', name:'Sunday Special MTT', status:'finished', startType:'2025-02-23 18:00', fee:'5,000G', players:20, maxPlayers:20, prize:'2,000,000G', registered:true },
-  { id:10, event:'B', name:'Turbo Knockout Bounty', status:'registering', startType:'2025-02-26 21:00', fee:'20,000G', players:0, maxPlayers:16, prize:'3,000,000G', registered:false },
+  { id:10, event:'B', name:'Turbo Knockout Bounty', status:'registering', startType:'2025-02-26 21:00', fee:'20,000G', players:0, maxPlayers:16, prize:'300,000,000G', registered:false },
   { id:11, event:'A', name:'Saturday Night Showdown', status:'finished', startType:'2025-02-22 20:00', fee:'10,000G', players:16, maxPlayers:16, prize:'1,500,000G', registered:true },
-  { id:12, event:'B', name:'POKER LULU Grand Prix #3', status:'finished', startType:'2025-02-20 19:00', fee:'25,000G', players:32, maxPlayers:32, prize:'8,000,000G', registered:false },
+  { id:12, event:'B', name:'POKER LULU Grand Prix #3', status:'finished', startType:'2025-02-20 19:00', fee:'25,000G', players:32, maxPlayers:32, prize:'1,000,000,000G', registered:false },
   { id:13, event:'A', name:'Mini Freeroll Championship', status:'finished', startType:'2025-02-19 12:00', fee:'free', players:50, maxPlayers:50, prize:'500,000G', registered:true },
-  { id:14, event:'B', name:'High Stakes Deep Stack', status:'finished', startType:'2025-02-18 21:00', fee:'50,000G', players:10, maxPlayers:10, prize:'5,000,000G', registered:false },
+  { id:14, event:'B', name:'High Stakes Deep Stack', status:'finished', startType:'2025-02-18 21:00', fee:'50,000G', players:10, maxPlayers:10, prize:'300,000,000G', registered:false },
   { id:15, event:'A', name:'Weekday Express Turbo', status:'finished', startType:'2025-02-17 18:00', fee:'3,000G', players:24, maxPlayers:24, prize:'600,000G', registered:true },
-  { id:16, event:'B', name:'POKER LULU Monthly Final', status:'finished', startType:'2025-02-15 19:00', fee:'100,000G', players:64, maxPlayers:64, prize:'20,000,000G', registered:false },
+  { id:16, event:'B', name:'POKER LULU Monthly Final', status:'finished', startType:'2025-02-15 19:00', fee:'100,000G', players:64, maxPlayers:64, prize:'1,000,000,000,000G', registered:false },
   { id:17, event:'C', name:'Spring Freeroll Series', status:'registering', startType:'2025-03-01 14:00', fee:'free', players:8, maxPlayers:30, prize:'300,000G', registered:false, details:{ blindLevel:1, unique:8, reentry:0, startChips:'8000', tableSize:9, rebuyCount:0, timebankSec:10, extraTimeSec:5, extraTimeHands:10, actionTimeSec:15, anteRate:'0.1BB', anteType:'All', cancelReg:'허용', lateRegLevel:8, blindMin:10, breakMin:5 } },
   { id:18, event:'C', name:'Midnight Madness', status:'ongoing', startType:'2025-02-28 23:00', fee:'5,000G', players:14, maxPlayers:20, prize:'1,500,000G', registered:true, details:{ blindLevel:4, unique:14, reentry:1, startChips:'20000', tableSize:8, rebuyCount:1, timebankSec:15, extraTimeSec:5, extraTimeHands:10, actionTimeSec:20, anteRate:'0.2BB', anteType:'All', cancelReg:'불가', lateRegLevel:6, blindMin:12, breakMin:5 } },
   { id:19, event:'C', name:'Rookie Challenge Cup', status:'registering', startType:'manual', fee:'free', players:2, maxPlayers:16, prize:'150,000G', registered:false, details:{ blindLevel:1, unique:2, reentry:0, startChips:'5000', tableSize:8, rebuyCount:0, timebankSec:10, extraTimeSec:5, extraTimeHands:10, actionTimeSec:15, anteRate:'0.1BB', anteType:'All', cancelReg:'허용', lateRegLevel:8, blindMin:8, breakMin:4 } },
-  { id:20, event:'C', name:'Diamond Bounty Hunter', status:'finished', startType:'2025-02-25 20:00', fee:'30,000G', players:24, maxPlayers:24, prize:'4,000,000G', registered:true },
+  { id:20, event:'C', name:'Diamond Bounty Hunter', status:'finished', startType:'2025-02-25 20:00', fee:'30,000G', players:24, maxPlayers:24, prize:'200,000,000G', registered:true },
 ];
+
+function switchTournamentRound(round) {
+  document.querySelectorAll('.tn-round-btn').forEach(function(b) {
+    if (b.getAttribute('data-tn-round') === round) b.classList.add('active');
+    else b.classList.remove('active');
+  });
+  tnApplyRoundVisibility();
+}
+
+function tnApplyRoundVisibility() {
+  var activeBtn = document.querySelector('.tn-round-btn.active');
+  var round = activeBtn ? activeBtn.getAttribute('data-tn-round') : '1';
+  var page = document.getElementById('page-tournament');
+  if (page) page.classList.toggle('tn-hide-tabs', round !== '2');
+  document.querySelectorAll('#page-tournament .tn-tabs').forEach(function(el) {
+    el.style.display = (round === '2') ? '' : 'none';
+  });
+  if (round !== '2') {
+    var allTab = document.querySelector('.tn-tab[data-tn-tab="all"]');
+    document.querySelectorAll('.tn-tab[data-tn-tab^="event"].active').forEach(function(e) { e.classList.remove('active'); });
+    if (allTab) allTab.classList.add('active');
+    if (typeof tnRenderFiltered === 'function') tnRenderFiltered();
+  }
+}
 
 function switchTournamentTab(tab) {
   var allTab = document.querySelector('.tn-tab[data-tn-tab="all"]');
@@ -1851,6 +1887,62 @@ function tnRenderFiltered() {
   el.innerHTML = html || '<div class="tn-empty">' + emptyMsg + '</div>';
 }
 
+function tnFormatPrizeNumber(prize) {
+  if (prize == null) return '-';
+  const raw = String(prize).replace(/[^0-9]/g, '');
+  if (!raw) return String(prize).replace(/G\s*$/i, '').trim() || '-';
+  const n = parseInt(raw, 10);
+  const fmt = (v) => (v % 1 === 0 ? v.toString() : v.toFixed(1).replace(/\.0$/, ''));
+  if (n >= 1e12) return fmt(n / 1e12) + '조';
+  if (n >= 1e8)  return fmt(n / 1e8)  + '억';
+  return n.toLocaleString();
+}
+
+const tnCountdownTargets = {};
+function tnGetCountdownTarget(item) {
+  if (tnCountdownTargets[item.id] != null) return tnCountdownTargets[item.id];
+  let target = NaN;
+  if (item.startType && item.startType !== 'manual') {
+    const parsed = Date.parse(String(item.startType).replace(' ', 'T'));
+    if (!isNaN(parsed)) target = parsed;
+  }
+  if (isNaN(target)) {
+    const h = 12 + (item.id * 7) % 48;
+    const m = (item.id * 13) % 60;
+    const sec = (item.id * 17) % 60;
+    target = Date.now() + (h * 3600 + m * 60 + sec) * 1000;
+  }
+  tnCountdownTargets[item.id] = target;
+  return target;
+}
+function tnFormatCountdown(ms) {
+  if (!(ms > 0)) return '00:00:00';
+  const total = Math.floor(ms / 1000);
+  const h = Math.floor(total / 3600);
+  const m = Math.floor((total % 3600) / 60);
+  const s = total % 60;
+  const pad = n => String(n).padStart(2, '0');
+  return `${pad(h)}:${pad(m)}:${pad(s)}`;
+}
+function tnUpdateCountdowns() {
+  document.querySelectorAll('.tn-remain-time[data-tn-id]').forEach(el => {
+    const id = parseInt(el.getAttribute('data-tn-id'), 10);
+    if (!id) return;
+    const target = tnCountdownTargets[id];
+    if (target == null) return;
+    el.textContent = tnFormatCountdown(target - Date.now());
+  });
+}
+let tnCountdownInterval = null;
+function tnStartCountdown() {
+  tnUpdateCountdowns();
+  if (tnCountdownInterval) return;
+  tnCountdownInterval = setInterval(tnUpdateCountdowns, 1000);
+}
+function tnStopCountdown() {
+  if (tnCountdownInterval) { clearInterval(tnCountdownInterval); tnCountdownInterval = null; }
+}
+
 function tnBuildCard(item) {
   const lang = currentLang || 'ko';
   const t = i18n[lang] || i18n.ko;
@@ -1860,25 +1952,42 @@ function tnBuildCard(item) {
     finished:    { label: t.tn_status_finished || '종료', cls: 'finished' },
   };
   const s = statusMap[item.status] || statusMap.registering;
-  const fee = item.fee === 'free' ? (t.tn_fee_free || '무료') : item.fee;
-  const startVal = item.startType === 'manual' ? (t.tn_manual_start || '수동 시작') : item.startType;
-  const startsLabel = t.tn_starts_in || 'Starts In';
+  const fee = item.fee === 'free'
+    ? (t.tn_fee_free || '무료')
+    : String(item.fee).replace(/G\s*$/i, ' 골드');
+  const prizeLabel = t.tn_prize || '상금';
+  const buyinLabel = t.tn_buyin || '바이인';
+  const playersLabel = t.tn_players || '참가인원';
+  const registeredLabel = t.tn_registered || '등록됨';
   const activeClass = (currentTnDetailId === item.id) ? ' tn-card-active' : '';
+  const registeredBadge = item.registered
+    ? `<span class="tn-badge tn-badge-registered">${registeredLabel}</span>`
+    : '';
+  const prizeDisplay = (!item.prize || item.prize === '-')
+    ? '-'
+    : `${tnFormatPrizeNumber(item.prize)}<span class="tn-prize-unit">골드</span>`;
+  const isFinished = item.status === 'finished';
+  const initialRemain = isFinished ? '' : tnFormatCountdown(tnGetCountdownTarget(item) - Date.now());
+  const remainSpan = isFinished
+    ? ''
+    : `<span class="tn-remain-time" data-tn-id="${item.id}">${initialRemain}</span>`;
   return `<div class="tn-card${activeClass}" onclick="openTnDetail(${item.id})">
-    <div class="tn-card-left">
-      <span class="tn-badge ${s.cls}">${s.label}</span>
-      <span class="tn-starts-label">${startsLabel}</span>
-      <span class="tn-starts-value">${startVal}</span>
-    </div>
-    <div class="tn-card-right">
+    <div class="tn-card-content">
       <div class="tn-name">${item.name}</div>
+      <div class="tn-status-row">
+        <span class="tn-badge ${s.cls}">${s.label}</span>
+        ${remainSpan}
+      </div>
       <div class="tn-meta">
-        <span class="tn-meta-item"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg></span>
-        <span class="tn-meta-item">${fee}</span>
-        <span class="tn-meta-item"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg> ${item.players}/${item.maxPlayers}</span>
-        <span class="tn-meta-item"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M6 9H4.5a2.5 2.5 0 0 1 0-5C7 4 7 7 7 7"/><path d="M18 9h1.5a2.5 2.5 0 0 0 0-5C17 4 17 7 17 7"/><path d="M4 22h16"/><path d="M10 14.66V17c0 .55-.47.98-.97 1.21C7.85 18.75 7 20.24 7 22"/><path d="M14 14.66V17c0 .55.47.98.97 1.21C16.15 18.75 17 20.24 17 22"/><path d="M18 2H6v7a6 6 0 0 0 12 0V2Z"/></svg> ${item.prize}</span>
+        <span class="tn-meta-item"><span class="tn-meta-label">${buyinLabel}</span><span class="tn-meta-value">${fee}</span></span>
+        <span class="tn-meta-item"><span class="tn-meta-label">${playersLabel}</span><span class="tn-meta-value">${item.players}/${item.maxPlayers}</span></span>
+      </div>
+      <div class="tn-prize-row">
+        <span class="tn-prize-label">${prizeLabel}</span>
+        <span class="tn-prize-value">${prizeDisplay}</span>
       </div>
     </div>
+    <div class="tn-card-third">${registeredBadge}</div>
   </div>`;
 }
 
@@ -1946,8 +2055,8 @@ function tdRenderDetail() {
     badgeEl.className = 'tn-badge ' + st.cls;
   }
   var prizeEl = document.getElementById('tdPrizeValue');
-  if (prizeEl) prizeEl.textContent = item.prize ? item.prize.replace(/G$/, '') : '-';
-  var feeLabel0 = item.fee === 'free' ? (t.tn_fee_free || '무료') : item.fee;
+  if (prizeEl) prizeEl.textContent = item.prize ? tnFormatPrizeNumber(item.prize) : '-';
+  var feeLabel0 = item.fee === 'free' ? (t.tn_fee_free || '무료') : String(item.fee).replace(/G\s*$/i, ' 골드');
   var buyinEl = document.getElementById('tdBuyinValue');
   if (buyinEl) buyinEl.textContent = feeLabel0;
   var remainEl = document.getElementById('tdRemainPlayers');
@@ -1955,13 +2064,9 @@ function tdRenderDetail() {
   if (window._tdElapsedTimer) clearInterval(window._tdElapsedTimer);
   var elapsedEl = document.getElementById('tdElapsed');
   if (elapsedEl) {
-    var _tdStartMs = Date.now();
+    var _tdTarget = tnGetCountdownTarget(item);
     function updateElapsed() {
-      var diff = Math.floor((Date.now() - _tdStartMs) / 1000);
-      var h = String(Math.floor(diff / 3600)).padStart(2, '0');
-      var m = String(Math.floor((diff % 3600) / 60)).padStart(2, '0');
-      var s2 = String(diff % 60).padStart(2, '0');
-      elapsedEl.textContent = h + ':' + m + ':' + s2;
+      elapsedEl.textContent = tnFormatCountdown(_tdTarget - Date.now());
     }
     updateElapsed();
     window._tdElapsedTimer = setInterval(updateElapsed, 1000);
@@ -1974,7 +2079,7 @@ function tdRenderDetail() {
   var nextLv = blindLv + 1;
   var nextBl = defaultBlindLevels[blindLv] || defaultBlindLevels[defaultBlindLevels.length - 1];
   // 자세히 탭
-  var feeLabel = item.fee === 'free' ? (t.tn_fee_free || '무료') : item.fee;
+  var feeLabel = item.fee === 'free' ? (t.tn_fee_free || '무료') : String(item.fee).replace(/G\s*$/i, ' 골드');
   var startVal = item.startType === 'manual' ? (t.tn_manual_start || '호스트 수동시작') : item.startType;
   var startChipsNum = parseInt(String(details.startChips || '10000').replace(/,/g, ''));
   var bbCount = Math.round(startChipsNum / bl.bb);
@@ -2030,23 +2135,19 @@ function tdRenderDetailInline(container) {
     badgeEl.className = 'tn-badge ' + st.cls;
   }
   var prizeEl = container.querySelector('#tdPrizeValue');
-  if (prizeEl) prizeEl.textContent = item.prize ? item.prize.replace(/G$/, '') : '-';
-  var feeLabel = item.fee === 'free' ? (t.tn_fee_free || '무료') : item.fee;
+  if (prizeEl) prizeEl.textContent = item.prize ? tnFormatPrizeNumber(item.prize) : '-';
+  var feeLabel = item.fee === 'free' ? (t.tn_fee_free || '무료') : String(item.fee).replace(/G\s*$/i, ' 골드');
   var buyinEl = container.querySelector('#tdBuyinValue');
   if (buyinEl) buyinEl.textContent = feeLabel;
   var remainEl = container.querySelector('#tdRemainPlayers');
   if (remainEl) remainEl.textContent = item.players + '/' + item.maxPlayers;
-  // 진행 타이머
+  // 카운트다운 (리스트와 동일한 타겟)
   if (window._tdElapsedTimer) clearInterval(window._tdElapsedTimer);
   var elapsedEl = container.querySelector('#tdElapsed');
   if (elapsedEl) {
-    var _tdStartMs = Date.now();
+    var _tdTarget = tnGetCountdownTarget(item);
     function updateElapsed() {
-      var diff = Math.floor((Date.now() - _tdStartMs) / 1000);
-      var h = String(Math.floor(diff / 3600)).padStart(2, '0');
-      var m = String(Math.floor((diff % 3600) / 60)).padStart(2, '0');
-      var s2 = String(diff % 60).padStart(2, '0');
-      elapsedEl.textContent = h + ':' + m + ':' + s2;
+      elapsedEl.textContent = tnFormatCountdown(_tdTarget - Date.now());
     }
     updateElapsed();
     window._tdElapsedTimer = setInterval(updateElapsed, 1000);
@@ -2057,7 +2158,7 @@ function tdRenderDetailInline(container) {
   var bl = defaultBlindLevels[blindLv - 1] || defaultBlindLevels[0];
   var nextLv = blindLv + 1;
   var nextBl = defaultBlindLevels[blindLv] || defaultBlindLevels[defaultBlindLevels.length - 1];
-  var feeLabel = item.fee === 'free' ? (t.tn_fee_free || '무료') : item.fee;
+  var feeLabel = item.fee === 'free' ? (t.tn_fee_free || '무료') : String(item.fee).replace(/G\s*$/i, ' 골드');
   var startVal = item.startType === 'manual' ? (t.tn_manual_start || '호스트 수동시작') : item.startType;
   var startChipsNum = parseInt(String(details.startChips || '10000').replace(/,/g, ''));
   var bbCount = Math.round(startChipsNum / bl.bb);
@@ -2109,12 +2210,12 @@ function tdRenderDetailInline(container) {
   }
   function tdRenderPayoutTableIn(ct, itm) {
     var totalEl = ct.querySelector('#tdPayoutTotal');
-    if (totalEl) totalEl.innerHTML = '<span class="td-payout-total-label">'+(t.td_total_prize||'총 상금')+'</span><span class="td-payout-total-value">'+itm.prize+'</span>';
+    if (totalEl) totalEl.innerHTML = '<span class="td-payout-total-label">'+(t.td_total_prize||'총 상금')+'</span><span class="td-payout-total-value">'+tnFormatPrizeNumber(itm.prize)+' 골드</span>';
     var payouts = [{rank:'1st',percent:50},{rank:'2nd',percent:30},{rank:'3rd',percent:20}];
     var prizeNum = parseInt(itm.prize.replace(/[^0-9]/g,''))||0;
     var tbody = ct.querySelector('#tdPayoutTableBody');
     if (tbody) tbody.innerHTML = payouts.map(function(p) {
-      return '<tr><td class="td-rank-cell">'+p.rank+'</td><td class="td-amount-cell">'+(prizeNum*p.percent/100).toLocaleString()+'G</td><td class="td-percent-cell">'+p.percent+'%</td></tr>';
+      return '<tr><td class="td-rank-cell">'+p.rank+'</td><td class="td-amount-cell">'+tnFormatPrizeNumber(prizeNum*p.percent/100)+' 골드</td><td class="td-percent-cell">'+p.percent+'%</td></tr>';
     }).join('');
   }
   function tdUpdateButtonsIn(ct, itm) {
@@ -2208,7 +2309,7 @@ function tdRenderPayoutTable(item) {
 
   document.getElementById('tdPayoutTotal').innerHTML =
     '<span class="td-payout-total-label">' + (t.td_total_prize || '총 상금') + '</span>' +
-    '<span class="td-payout-total-value">' + item.prize + '</span>';
+    '<span class="td-payout-total-value">' + tnFormatPrizeNumber(item.prize) + ' 골드</span>';
 
   var payouts = [
     { rank: '1st', percent: 50 },
@@ -2221,7 +2322,7 @@ function tdRenderPayoutTable(item) {
   tbody.innerHTML = payouts.map(function(p) {
     return '<tr>' +
       '<td class="td-rank-cell">' + p.rank + '</td>' +
-      '<td class="td-amount-cell">' + (prizeNum * p.percent / 100).toLocaleString() + 'G</td>' +
+      '<td class="td-amount-cell">' + tnFormatPrizeNumber(prizeNum * p.percent / 100) + ' 골드</td>' +
       '<td class="td-percent-cell">' + p.percent + '%</td>' +
     '</tr>';
   }).join('');
@@ -2292,7 +2393,7 @@ function openTdRegisterModal(item) {
   document.getElementById('tdrPaymentOption').textContent = t.tdr_balance || '밸런스';
 
   // 바이인
-  var feeLabel = item.fee === 'free' ? (t.tn_fee_free || '무료') : item.fee;
+  var feeLabel = item.fee === 'free' ? (t.tn_fee_free || '무료') : String(item.fee).replace(/G\s*$/i, ' 골드');
   document.getElementById('tdrFee').textContent = feeLabel;
 
   var scrollW = window.innerWidth - document.documentElement.clientWidth;
