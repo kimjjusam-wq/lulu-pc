@@ -2120,8 +2120,6 @@ function tdRenderDetail() {
   if (timerEl) timerEl.textContent = '00:' + String(details.blindMin || 10).padStart(2, '0') + ':00';
 
   // 플레이어 탭
-  var playersText = (t.td_players_label || '참가자') + ' ' + item.players + '/' + item.maxPlayers;
-  document.getElementById('tdPlayersCount').textContent = playersText;
   tdRenderPlayerList(item);
 
   // 블라인드 탭
@@ -2212,8 +2210,6 @@ function tdRenderDetailInline(container) {
   if (timerEl2) timerEl2.textContent = '00:' + String(details.blindMin || 10).padStart(2, '0') + ':00';
 
   // 플레이어
-  var playersText = (t.td_players_label || '참가자') + ' ' + item.players + '/' + item.maxPlayers;
-  container.querySelector('#tdPlayersCount').textContent = playersText;
   tdRenderPlayerListIn(container, item);
   tdRenderBlindTableIn(container);
   tdRenderPayoutTableIn(container, item);
@@ -2489,9 +2485,24 @@ function showAlert(opts) {
   if (!modal) return;
   document.getElementById('alertTitle').textContent = opts.title || '';
   document.getElementById('alertMessage').textContent = opts.message || '';
+  var warningEl = document.getElementById('alertWarning');
+  if (warningEl) {
+    if (opts.warning) {
+      warningEl.textContent = opts.warning;
+      warningEl.style.display = '';
+    } else {
+      warningEl.textContent = '';
+      warningEl.style.display = 'none';
+    }
+  }
   var cancelBtn = document.getElementById('alertCancelBtn');
   var confirmBtn = document.getElementById('alertConfirmBtn');
-  cancelBtn.textContent = opts.cancelText || '취소';
+  if (opts.cancelText === null || opts.cancelText === false) {
+    cancelBtn.style.display = 'none';
+  } else {
+    cancelBtn.style.display = '';
+    cancelBtn.textContent = opts.cancelText || '취소';
+  }
   confirmBtn.textContent = opts.confirmText || '확인';
   confirmBtn.classList.toggle('alert-btn-danger', opts.variant === 'danger');
   confirmBtn.onclick = function() {
@@ -2642,13 +2653,72 @@ function closeTdRegisterModal() {
 }
 
 function confirmTdRegister() {
+  closeTdRegisterModal();
+  openTdTestResultModal();
+}
+
+/* v3 테스트 팝업 — 등록 결과 시뮬레이션 (dev only) */
+function openTdTestResultModal() {
+  var modal = document.getElementById('tdTestResultModal');
+  if (!modal) return;
+  var scrollW = window.innerWidth - document.documentElement.clientWidth;
+  document.body.style.overflow = 'hidden';
+  document.body.style.paddingRight = scrollW + 'px';
+  modal.classList.add('active');
+}
+
+function closeTdTestResultModal() {
+  var modal = document.getElementById('tdTestResultModal');
+  if (!modal) return;
+  modal.classList.remove('active');
+  document.body.style.overflow = '';
+  document.body.style.paddingRight = '';
+}
+
+function tdTestResult(result) {
+  closeTdTestResultModal();
   var item = demoTournaments.find(function(tn) { return tn.id === currentTnDetailId; });
   if (!item) return;
 
-  item.registered = true;
-  item.players++;
-  closeTdRegisterModal();
-  tdRenderDetail();
+  if (result === 'success') {
+    item.registered = true;
+    item.players++;
+    if (tnIsPcSplit()) {
+      tdRenderDetailInline(document.getElementById('tnSplitDetail'));
+      tnRenderList();
+    } else {
+      tdRenderDetail();
+    }
+    showAlert({
+      title: '등록 성공',
+      message: '토너먼트에 정상적으로 등록되었습니다.',
+      cancelText: null,
+      confirmText: '확인',
+    });
+  } else if (result === 'failed') {
+    showAlert({
+      title: '등록 실패',
+      message: '등록 처리에 실패했습니다.\n잠시 후 다시 시도해주세요.',
+      cancelText: null,
+      confirmText: '확인',
+    });
+  } else if (result === 'dailyLimit') {
+    showAlert({
+      title: '일일 손실한도 초과',
+      message: '일일 손실 한도를 초과했습니다.\n(일일 손실한도: nnn억 골드)',
+      warning: '일일 손실 한도는 00:00를 기준으로 초기화됩니다.',
+      cancelText: null,
+      confirmText: '확인',
+    });
+  } else if (result === 'buyinLimit') {
+    showAlert({
+      title: '바이인 한도 초과',
+      message: '게임 바이인 한도를 초과했습니다.\n(바이인 한도: 350억 골드)',
+      warning: '일일 손실 한도는 00:00를 기준으로 초기화됩니다.',
+      cancelText: null,
+      confirmText: '확인',
+    });
+  }
 }
 
 var enterLiveTableSpectateMode = false;

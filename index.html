@@ -1346,9 +1346,6 @@
     <!-- 플레이어 탭 -->
     <div class="td-tab-content" id="td-players">
       <div class="td-section">
-        <div class="td-players-header">
-          <span class="td-players-count" id="tdPlayersCount"></span>
-        </div>
         <div class="td-blind-table-wrap">
           <table class="td-blind-table">
             <thead>
@@ -2942,12 +2939,32 @@
   </div>
 </div>
 
+<!-- v3 Test Result Modal (등록 결과 시뮬레이션) -->
+<div class="modal-overlay" id="tdTestResultModal">
+  <div class="modal-card" style="max-width:340px;">
+    <div class="modal-header">
+      <h3>v3 테스트 팝업</h3>
+      <button class="modal-close" onclick="closeTdTestResultModal()">✕</button>
+    </div>
+    <div class="sp-modal-body">
+      <p class="sp-pay-notice">어떤 결과로 테스트할까요?</p>
+      <div class="td-test-btns">
+        <button class="td-test-btn" onclick="tdTestResult('success')">등록 성공</button>
+        <button class="td-test-btn" onclick="tdTestResult('failed')">등록 실패</button>
+        <button class="td-test-btn" onclick="tdTestResult('dailyLimit')">일일 한도 초과</button>
+        <button class="td-test-btn" onclick="tdTestResult('buyinLimit')">바이인 한도 초과</button>
+      </div>
+    </div>
+  </div>
+</div>
+
 <!-- Alert Modal (범용 확인 다이얼로그) -->
 <div class="modal-overlay" id="alertModal">
   <div class="modal-card alert-card">
     <div class="alert-body">
       <h3 class="alert-title" id="alertTitle">제목</h3>
       <p class="alert-message" id="alertMessage">메시지</p>
+      <p class="alert-warning" id="alertWarning" style="display:none;"></p>
       <div class="alert-buttons">
         <button class="alert-btn alert-btn-cancel" id="alertCancelBtn" onclick="closeAlertModal()">돌아가기</button>
         <button class="alert-btn alert-btn-confirm" id="alertConfirmBtn">확인</button>

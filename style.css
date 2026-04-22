@@ -1628,11 +1628,17 @@ body.chat-open > .m-nav { display:none !important; }
 .sp-pay-notice { text-align:center; color:var(--color-text-secondary); font-size:14px; padding:16px 0; margin:0; }
 .shop-item { cursor:pointer; }
 
+/* v3 Test Result Modal (등록 결과 시뮬레이션 - dev only) */
+.td-test-btns { display:flex; flex-direction:column; gap:8px; margin-top:8px; }
+.td-test-btn { width:100%; padding:13px 16px; border:1px solid var(--color-border); border-radius:10px; background:rgba(255,255,255,0.03); color:var(--color-text-secondary); font-size:14px; font-weight:600; cursor:pointer; transition:all 0.2s; text-align:left; font-family:'Pretendard Variable',Pretendard,sans-serif; }
+.td-test-btn:hover { border-color:var(--color-primary); background:rgba(249,98,23,0.06); color:var(--color-text-primary); }
+
 /* Alert Modal (범용 확인 다이얼로그 — title + message + 취소/확인) */
 .alert-card { max-width:320px; border-radius:16px; }
 .alert-body { padding:24px 24px 20px; text-align:center; }
 .alert-title { font-size:18px; font-weight:700; color:var(--color-text-primary); margin:0 0 8px; }
 .alert-message { font-size:14px; color:var(--color-text-muted); line-height:1.5; margin:0 0 20px; white-space:pre-line; }
+.alert-warning { font-size:13px; color:var(--color-primary); font-weight:600; line-height:1.5; margin:-10px 0 20px; white-space:pre-line; }
 .alert-buttons { display:flex; gap:10px; }
 .alert-btn { flex:1; padding:13px 12px 12px; border:1px solid transparent; border-radius:12px; font-size:14px; font-weight:700; cursor:pointer; transition:all 0.2s; font-family:'Pretendard Variable',Pretendard,sans-serif; line-height:1; }
 .alert-btn-cancel { border-color:var(--color-border); background:#23233a; color:var(--color-text-secondary); }
