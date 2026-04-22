@@ -1889,6 +1889,11 @@ function tnRenderFiltered() {
   el.innerHTML = html || '<div class="tn-empty">' + emptyMsg + '</div>';
 }
 
+function tnGetMyRank(item) {
+  if (!item.registered || !item.players) return 0;
+  return ((item.id * 3) % item.players) + 1;
+}
+
 function tnFormatPrizeNumber(prize) {
   if (prize == null) return '-';
   const raw = String(prize).replace(/[^0-9]/g, '');
@@ -1964,7 +1969,7 @@ function tnBuildCard(item) {
   const registeredLabel = t.tn_registered || '등록됨';
   const activeClass = (currentTnDetailId === item.id) ? ' tn-card-active' : '';
   const registeredBadge = item.registered
-    ? `<span class="tn-badge tn-badge-registered">${registeredLabel}</span>`
+    ? `<span class="tn-badge tn-badge-registered"><span class="tn-registered-dot"></span>${registeredLabel}</span>`
     : '';
   const prizeDisplay = (!item.prize || item.prize === '-')
     ? '-'
@@ -1987,7 +1992,7 @@ function tnBuildCard(item) {
       </div>
       <div class="tn-meta">
         <span class="tn-meta-item"><span class="tn-meta-label">${buyinLabel}</span><span class="tn-meta-value">${fee}</span></span>
-        <span class="tn-meta-item"><span class="tn-meta-label">${playersLabel}</span><span class="tn-meta-value">${item.players}/${item.maxPlayers}</span></span>
+        <span class="tn-meta-item"><span class="tn-meta-label">${playersLabel}</span><span class="tn-meta-value">${item.maxPlayers}</span></span>
       </div>
       <div class="tn-prize-row">
         <span class="tn-prize-label">${prizeLabel}</span>
@@ -2212,6 +2217,21 @@ function tdRenderDetailInline(container) {
     list.innerHTML = demoPlayers.map(function(p, idx) {
       return '<tr><td>'+(idx+1)+'</td><td><div style="display:flex;align-items:center;gap:8px;"><img class="td-player-avatar" src="images/'+p.avatar+'.png" alt="">'+p.name+'</div></td><td style="color:var(--accent-gold);font-weight:600;">'+p.chips.toLocaleString()+'</td></tr>';
     }).join('');
+    var panel = ct.querySelector('#tdMyRankPanel');
+    if (panel) {
+      var myRank = tnGetMyRank(itm);
+      if (itm.registered && myRank) {
+        var myAvatar = _avatarList[itm.id % _avatarList.length];
+        var myChips = (((itm.id * 7) % 40) + 10) * 1000;
+        panel.innerHTML = '<span class="td-my-rank-col td-my-rank-col-rank">'+myRank+'</span>'+
+          '<span class="td-my-rank-col td-my-rank-col-name"><img class="td-player-avatar" src="images/'+myAvatar+'.png" alt="">나<span class="td-player-row-me-label">ME</span></span>'+
+          '<span class="td-my-rank-col td-my-rank-col-chips">'+myChips.toLocaleString()+'</span>';
+        panel.style.display = '';
+      } else {
+        panel.style.display = 'none';
+        panel.innerHTML = '';
+      }
+    }
   }
   function tdRenderBlindTableIn(ct) {
     var tbody = ct.querySelector('#tdBlindTableBody');
@@ -2305,6 +2325,22 @@ function tdRenderPlayerList(item) {
       '<td style="color:var(--accent-gold);font-weight:600;">' + p.chips.toLocaleString() + '</td>' +
     '</tr>';
   }).join('');
+
+  var panel = document.getElementById('tdMyRankPanel');
+  if (panel) {
+    var myRank = tnGetMyRank(item);
+    if (item.registered && myRank) {
+      var myAvatar = _avatarList[item.id % _avatarList.length];
+      var myChips = (((item.id * 7) % 40) + 10) * 1000;
+      panel.innerHTML = '<span class="td-my-rank-col td-my-rank-col-rank">' + myRank + '</span>' +
+        '<span class="td-my-rank-col td-my-rank-col-name"><img class="td-player-avatar" src="images/' + myAvatar + '.png" alt="">나<span class="td-player-row-me-label">ME</span></span>' +
+        '<span class="td-my-rank-col td-my-rank-col-chips">' + myChips.toLocaleString() + '</span>';
+      panel.style.display = '';
+    } else {
+      panel.style.display = 'none';
+      panel.innerHTML = '';
+    }
+  }
 }
 
 var _blindBreaks = { 4: 10, 6: 10 };
