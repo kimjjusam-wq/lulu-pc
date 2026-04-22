@@ -69,7 +69,7 @@
         <option value="ko">한국어</option><option value="en">English</option><option value="ja">日本語</option>
       </select>
       <div id="navAvatar" class="nav-avatar" role="button" tabindex="0" onclick="switchPage('mailbox')" style="display:none;"><img src="images/avatar_o.png" alt="MY" id="navAvatarImg"><span class="avatar-reddot" id="navAvatarDot" style="display:none;"></span></div>
-      <button id="navLoginBtn" data-i18n="nav_login" onclick="switchPage('login')" style="padding:7px 18px;border-radius:20px;border:none;background:linear-gradient(135deg,var(--accent-orange),var(--accent-orange-dark));color:#fff;font-size:13px;font-weight:700;cursor:pointer;">로그인</button>
+      <button id="navLoginBtn" class="nav-login-btn" data-i18n="nav_login" onclick="switchPage('login')">로그인</button>
     </div>
   </div>
 </nav>
@@ -208,7 +208,7 @@
 
 <div class="page-container" id="page-analytics">
   <div class="content-wrapper">
-    <div class="analytics-hero"><h2 data-i18n="analytics_title">내 통계</h2><p data-i18n="analytics_desc">게임 기록과 성과를 한눈에 확인하세요</p></div>
+    <div class="analytics-hero"><h2 data-i18n="analytics_title">내 통계</h2><!-- <p data-i18n="analytics_desc">게임 기록과 성과를 한눈에 확인하세요</p> --></div>
     <div class="chart-container" style="margin-bottom:24px"><div class="analytics-summary-header"><div class="chart-title" data-i18n="analytics_summary" style="margin-bottom:0;">내 통계 요약</div>
     <div class="date-range-fields">
       <div class="date-range-box" id="dateRangeBox" onclick="toggleCalendar(event)">
@@ -253,7 +253,7 @@
 
 <div class="page-container" id="page-shop">
   <div class="content-wrapper">
-    <div class="shop-hero"><h2 data-i18n="shop_title">상점</h2><p data-i18n="shop_desc">칩, 아이템, 스킨을 구매하세요</p></div>
+    <div class="shop-hero"><h2 data-i18n="shop_title">상점</h2><!-- <p data-i18n="shop_desc">칩, 아이템, 스킨을 구매하세요</p> --></div>
 
     <!-- 상점 탭 메뉴 -->
     <div class="shop-tabs">
@@ -829,7 +829,7 @@
 
 <div class="page-container" id="page-my">
   <div class="content-wrapper">
-    <div class="my-page-hero"><h2 data-i18n="my_title">MY 룰루</h2><p data-i18n="my_desc">내 프로필과 게임 정보를 관리하세요</p></div>
+    <div class="my-page-hero"><h2 data-i18n="my_title">MY 룰루</h2><!-- <p data-i18n="my_desc">내 프로필과 게임 정보를 관리하세요</p> --></div>
     <div class="my-profile-card"><div class="my-hero"><div class="my-avatar-wrap" role="button" tabindex="0" onclick="openAvatarModal()"><div class="my-avatar"><img loading="lazy" src="images/avatar_o.png" alt="Player Avatar"></div><div class="my-avatar-setting"><svg width="12" height="12" viewBox="0 0 16 16" fill="white"><path d="M9.405 1.05c-.413-1.4-2.397-1.4-2.81 0l-.1.34a1.464 1.464 0 0 1-2.105.872l-.31-.17c-1.283-.698-2.686.705-1.987 1.987l.169.311c.446.82.023 1.841-.872 2.105l-.34.1c-1.4.413-1.4 2.397 0 2.81l.34.1a1.464 1.464 0 0 1 .872 2.105l-.17.31c-.698 1.283.705 2.686 1.987 1.987l.311-.169a1.464 1.464 0 0 1 2.105.872l.1.34c.413 1.4 2.397 1.4 2.81 0l.1-.34a1.464 1.464 0 0 1 2.105-.872l.31.17c1.283.698 2.686-.705 1.987-1.987l-.169-.311a1.464 1.464 0 0 1 .872-2.105l.34-.1c1.4-.413 1.4-2.397 0-2.81l-.34-.1a1.464 1.464 0 0 1-.872-2.105l.17-.31c.698-1.283-.705-2.686-1.987-1.987l-.311.169a1.464 1.464 0 0 1-2.105-.872l-.1-.34zM8 10.93a2.929 2.929 0 1 1 0-5.86 2.929 2.929 0 0 1 0 5.858z"/></svg></div></div><div class="my-info"><div class="my-nickname"><h2 id="myNickname">두바이쫀득김치</h2><button class="my-nickname-edit" onclick="openNicknameModal()"><svg width="13" height="13" viewBox="0 0 16 16" fill="currentColor"><path d="M12.854.146a.5.5 0 0 0-.707 0L10.5 1.793 14.207 5.5l1.647-1.646a.5.5 0 0 0 0-.708l-3-3zm.646 6.061L9.793 2.5 3.293 9H3.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.293l6.5-6.5zm-8 9.646a.5.5 0 0 1-.233-.131L1.293 11.854a.5.5 0 0 1-.131-.232l-1 3.5a.5.5 0 0 0 .616.617l3.5-1z"/></svg></button></div><p class="my-email" id="myEmail"><img loading="lazy" src="images/google.svg" class="my-email-icon" alt="Google"> kimjjusam@teamlulu.ai</p><p id="myJoinInfo" data-i18n="my_info_sub">가입일: 2025.01.15 · 레벨 23</p></div></div></div>
     <div class="stats-grid" style="margin:24px 0;grid-template-columns:1fr 1fr">
       <div class="stat-card stat-card-link" role="button" tabindex="0" onclick="switchPage('ticket')"><div class="stat-icon"><img loading="lazy" src="images/stat_ticket.png" alt="ticket"></div><div class="stat-value">25 <span class="stat-shortcut">→</span></div><div class="stat-label" data-i18n="stat_chips">티켓</div></div>
@@ -1213,7 +1213,7 @@
     <div class="gs-back" role="button" tabindex="0" onclick="switchPage('my')"><span>←</span> <span data-i18n="gs_back">돌아가기</span></div>
     <div class="gs-hero">
       <h2 data-i18n="tk_title">티켓</h2>
-      <p data-i18n="tk_desc">보유 중인 티켓을 확인하세요</p>
+      <!-- <p data-i18n="tk_desc">보유 중인 티켓을 확인하세요</p> -->
     </div>
     <div class="tk-summary">
       <span class="tk-summary-icon">🎫</span>
@@ -1238,7 +1238,7 @@
           <button class="tn-round-btn" data-tn-round="2" onclick="switchTournamentRound('2')">2차</button>
         </div>
       </div>
-      <p data-i18n="tn_desc">다양한 토너먼트에 참가하고 보상을 획득하세요</p>
+      <!-- <p data-i18n="tn_desc">다양한 토너먼트에 참가하고 보상을 획득하세요</p> -->
     </div>
     <div class="tn-split-layout">
       <!-- 왼쪽: 탭 + 토너먼트 리스트 -->
@@ -1407,7 +1407,7 @@
     <div class="gs-back" role="button" tabindex="0" onclick="switchPage('my')"><span>←</span> <span data-i18n="gs_back">돌아가기</span></div>
     <div class="gs-hero">
       <h2 data-i18n="tnh_title">히스토리</h2>
-      <p data-i18n="tnh_desc">종료된 토너먼트 기록을 확인하세요</p>
+      <!-- <p data-i18n="tnh_desc">종료된 토너먼트 기록을 확인하세요</p> -->
     </div>
     <div class="tn-list" id="tnHistoryList" style="max-width:700px;margin:0 auto;"></div>
   </div>
@@ -1419,7 +1419,7 @@
     <div class="gs-back" role="button" tabindex="0" onclick="switchPage('my')"><span>←</span> <span data-i18n="gs_back">돌아가기</span></div>
     <div class="gs-hero">
       <h2 data-i18n="host_title">호스트</h2>
-      <p data-i18n="host_desc">내가 개설한 토너먼트를 관리하세요</p>
+      <!-- <p data-i18n="host_desc">내가 개설한 토너먼트를 관리하세요</p> -->
     </div>
     <div style="max-width:700px;margin:0 auto 20px;">
       <div class="signup-inline-row">
@@ -1440,7 +1440,7 @@
     <div class="gs-back" role="button" tabindex="0" onclick="switchPage('my')"><span>←</span> <span data-i18n="gs_back">돌아가기</span></div>
     <div class="gs-hero">
       <h2 data-i18n="tx_title">거래 내역</h2>
-      <p data-i18n="tx_desc">골드와 다이아의 충전·소모 내역을 확인하세요</p>
+      <!-- <p data-i18n="tx_desc">골드와 다이아의 충전·소모 내역을 확인하세요</p> -->
     </div>
     <div class="tx-tabs" style="max-width:700px;margin:0 auto 16px;">
       <button class="tx-tab active" data-filter="all" onclick="txSwitchTab('all')" data-i18n="tx_tab_all">전체</button>
@@ -1457,7 +1457,7 @@
     <div class="gs-back" role="button" tabindex="0" onclick="switchPage('my')"><span>←</span> <span data-i18n="gs_back">돌아가기</span></div>
     <div class="gs-hero">
       <h2 data-i18n="mi_title">내 아이템</h2>
-      <p data-i18n="mi_desc">구매한 아이템을 확인하고 장착하세요</p>
+      <!-- <p data-i18n="mi_desc">구매한 아이템을 확인하고 장착하세요</p> -->
     </div>
     <div class="mi-tabs" style="max-width:700px;margin:0 auto 16px;">
       <button class="mi-tab active" data-filter="all" onclick="miSwitchTab('all')" data-i18n="mi_tab_all">전체</button>
@@ -1475,7 +1475,7 @@
     <div class="gs-back" role="button" tabindex="0" onclick="switchPage('my')"><span>←</span> <span data-i18n="gs_back">돌아가기</span></div>
     <div class="gs-hero">
       <h2 data-i18n="mb_title">보관함</h2>
-      <p data-i18n="mb_desc">받은 알림과 메시지를 확인하세요</p>
+      <!-- <p data-i18n="mb_desc">받은 알림과 메시지를 확인하세요</p> -->
     </div>
     <div class="mb-split-layout">
       <div class="mb-split-left">
@@ -1552,7 +1552,7 @@
     <div class="gs-back" role="button" tabindex="0" onclick="switchPage('my')"><span>←</span> <span data-i18n="gs_back">돌아가기</span></div>
     <div class="gs-hero">
       <h2 data-i18n="ae_title">회원정보 수정</h2>
-      <p data-i18n="ae_desc">비밀번호를 변경할 수 있습니다</p>
+      <!-- <p data-i18n="ae_desc">비밀번호를 변경할 수 있습니다</p> -->
     </div>
     <div class="ae-form" style="max-width:500px;margin:0 auto;">
       <!-- 아이디 (고정) -->
@@ -1585,7 +1585,7 @@
 <div class="page-container" id="page-game-setup">
   <div class="content-wrapper">
     <div class="gs-back" role="button" tabindex="0" onclick="switchPage('lobby')"><span>←</span> <span data-i18n="gs_back">돌아가기</span></div>
-    <div class="gs-hero"><h2 data-i18n="gs_title">사용자 게임</h2><p data-i18n="gs_desc">나만의 룰로 방을 만들고, 친구를 초대하세요</p></div>
+    <div class="gs-hero"><h2 data-i18n="gs_title">사용자 게임</h2><!-- <p data-i18n="gs_desc">나만의 룰로 방을 만들고, 친구를 초대하세요</p> --></div>
     <div class="gs-tabs">
       <button class="gs-tab active" data-gs-tab="general" onclick="switchGameSetupTab('general')" data-i18n="gs_tab_general">일반설정</button>
       <button class="gs-tab" data-gs-tab="blinds" onclick="switchGameSetupTab('blinds')" data-i18n="gs_tab_blinds">블라인드</button>
@@ -2540,7 +2540,7 @@
     <div class="gs-back" role="button" tabindex="0" onclick="switchPage('lobby')"><span>←</span> <span data-i18n="gs_back">돌아가기</span></div>
     <div class="gs-hero">
       <h2 data-i18n="footer_contact">문의하기</h2>
-      <p data-i18n="contact_desc">궁금한 점이나 불편한 사항을 보내주세요.</p>
+      <!-- <p data-i18n="contact_desc">궁금한 점이나 불편한 사항을 보내주세요.</p> -->
     </div>
     <div class="contact-form">
       <div class="contact-field">

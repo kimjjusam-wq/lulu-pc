@@ -70,6 +70,8 @@ body {
 .nav-link:hover { color:var(--color-text-primary); background:rgba(255,255,255,0.06); }
 .nav-link.active { color:#000; background:#E0E0E0; border:1px solid var(--color-text-title); font-weight:700; position:relative; z-index:1; }
 .nav-right { display:flex; align-items:center; gap:12px; }
+.nav-login-btn { padding:8px 20px; border:none; border-radius:8px; background:linear-gradient(135deg,var(--color-primary),var(--color-primary-dark)); color:#fff; font-size:13px; font-weight:600; cursor:pointer; transition:all 0.2s; font-family:inherit; }
+.nav-login-btn:hover { box-shadow:0 4px 20px rgba(249,98,23,0.3); transform:translateY(-1px); }
 .nav-avatar { width:38px; height:38px; border-radius:50%; cursor:pointer; border:2px solid rgba(249,98,23,0.4); flex-shrink:0; position:relative; }
 .nav-avatar img { border-radius:50%; }
 .nav-avatar img { width:100%; height:100%; object-fit:cover; }
@@ -1184,7 +1186,7 @@ img.shop-tab-emoji { width:24px; height:24px; object-fit:contain; }
 .tn-starts-label { font-size:11px; color:var(--color-text-muted); margin-top:4px; }
 .tn-starts-value { font-size:13px; color:var(--color-text-secondary); font-weight:600; }
 .tn-prize-row { display:flex; align-items:baseline; gap:8px; margin-top:4px; }
-.tn-prize-label { font-size:11px; color:var(--color-text-muted); }
+.tn-prize-label { font-size:15px; font-weight:800; color:var(--color-accent-gold); }
 .tn-prize-value { font-size:15px; font-weight:800; color:var(--color-accent-gold); letter-spacing:-0.2px; }
 .tn-prize-unit { font-size:15px; font-weight:800; color:var(--color-accent-gold); margin-left:4px; }
 .tn-card-right { flex:1; display:flex; flex-direction:column; gap:6px; justify-content:center; min-width:0; }
@@ -2203,7 +2205,9 @@ body.chat-open > .m-nav { display:none !important; }
   .tn-card-left { flex:none; flex-direction:row; align-items:center; flex-wrap:wrap; gap:6px 12px; padding-right:72px; }
   .tn-card-left .tn-starts-label,
   .tn-card-left .tn-prize-label { margin-top:0; }
-  .tn-prize-value { font-size:14px; }
+  .tn-prize-label,
+  .tn-prize-value,
+  .tn-prize-unit { font-size:14px; }
   .tn-card-third { position:absolute; top:50%; right:16px; transform:translateY(-50%); min-width:0; }
   .tn-name { font-size:14px; }
   .tn-meta { gap:12px 16px; }
