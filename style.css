@@ -1904,6 +1904,7 @@ body.chat-open > .m-nav { display:none !important; }
   .m-nav-back { cursor:pointer; color:var(--color-text-secondary); -webkit-tap-highlight-color:transparent; flex-shrink:0; }
   .shop-hero, .my-page-hero, .gs-hero, .analytics-hero { display:none; }
   .gs-back, .login-back, .find-account-pc-header { display:none; }
+  #page-tn-history .content-wrapper { padding-top:0; }
   .find-account-header { padding-top:32px; border-top:none; }
   .shop-tab-emoji { display:none; }
   .m-nav-right { display:flex; align-items:center; gap:8px; }
