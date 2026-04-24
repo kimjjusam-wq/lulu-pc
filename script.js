@@ -167,7 +167,7 @@ const i18n = {
     stat_level: '레벨',
 
     // 통계 페이지
-    analytics_title: '내 통계',
+    analytics_title: '통계',
     analytics_desc: '게임 기록과 성과를 한눈에 확인하세요',
     analytics_summary: '내 통계 요약',
     date_range_label: '조회 기간',
