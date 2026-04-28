@@ -2016,7 +2016,9 @@ function tnRenderList() {
 }
 
 function tnIsPcSplit() {
-  return window.innerWidth >= 1024 && document.getElementById('tnSplitRight');
+  if (window.innerWidth < 1024) return false;
+  const split = document.getElementById('tnSplitRight');
+  return !!(split && split.offsetParent);
 }
 
 /* ========================
@@ -2853,39 +2855,9 @@ function tdSpectate() {
 function tnRenderHistory() {
   const lang = currentLang || 'ko';
   const t = i18n[lang] || i18n.ko;
-
-  const statusMap = {
-    finished: { label: t.tn_status_finished || '종료', cls: 'finished' },
-  };
-  const feeLabel = t.tn_fee_free || '무료';
-  const startsLabel = t.tn_starts_in || 'Starts In';
-  const manualLabel = t.tn_manual_start || '수동 시작';
-
-  function buildCard(item) {
-    const s = statusMap[item.status] || { label: '종료', cls: 'finished' };
-    const fee = item.fee === 'free' ? feeLabel : item.fee;
-    const startVal = item.startType === 'manual' ? manualLabel : item.startType;
-    return `<div class="tn-card" onclick="openTnDetail(${item.id})">
-      <div class="tn-card-left">
-        <span class="tn-badge ${s.cls}">${s.label}</span>
-        <span class="tn-starts-label">${startsLabel}</span>
-        <span class="tn-starts-value">${startVal}</span>
-      </div>
-      <div class="tn-card-right">
-        <div class="tn-name">${item.name}</div>
-        <div class="tn-meta">
-          <span class="tn-meta-item"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg></span>
-          <span class="tn-meta-item">${fee}</span>
-          <span class="tn-meta-item"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg> ${item.players}/${item.maxPlayers}</span>
-          <span class="tn-meta-item"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M6 9H4.5a2.5 2.5 0 0 1 0-5C7 4 7 7 7 7"/><path d="M18 9h1.5a2.5 2.5 0 0 0 0-5C17 4 17 7 17 7"/><path d="M4 22h16"/><path d="M10 14.66V17c0 .55-.47.98-.97 1.21C7.85 18.75 7 20.24 7 22"/><path d="M14 14.66V17c0 .55.47.98.97 1.21C16.15 18.75 17 20.24 17 22"/><path d="M18 2H6v7a6 6 0 0 0 12 0V2Z"/></svg> ${item.prize}</span>
-        </div>
-      </div>
-    </div>`;
-  }
-
   const historyItems = demoTournaments.filter(item => item.status === 'finished');
   const emptyMsg = t.tn_history_empty || '완료된 토너먼트가 없습니다';
-  const html = historyItems.length ? historyItems.map(buildCard).join('') : `<div class="tn-empty">${emptyMsg}</div>`;
+  const html = historyItems.length ? historyItems.map(tnBuildCard).join('') : `<div class="tn-empty">${emptyMsg}</div>`;
   document.getElementById('tnHistoryList').innerHTML = html;
 }
 
@@ -3647,38 +3619,6 @@ function mbRenderMessages() {
 function hostRenderList(keyword) {
   const lang = currentLang || 'ko';
   const t = i18n[lang] || i18n.ko;
-  const statusMap = {
-    registering: { label: t.tn_status_registering || '모집중', cls: 'registering' },
-    ready: { label: t.tn_status_ready || '준비중', cls: 'ready' },
-    playing: { label: t.tn_status_playing || '진행중', cls: 'playing' },
-    finished: { label: t.tn_status_finished || '종료', cls: 'finished' },
-  };
-  const feeLabel = t.tn_fee_free || '무료';
-  const startsLabel = t.tn_starts_in || 'Starts In';
-  const manualLabel = t.tn_manual_start || '수동 시작';
-
-  function buildCard(item) {
-    const s = statusMap[item.status] || statusMap.registering;
-    const fee = item.fee === 'free' ? feeLabel : item.fee;
-    const startVal = item.startType === 'manual' ? manualLabel : item.startType;
-    return '<div class="tn-card" onclick="openTnDetail(' + item.id + ')">' +
-      '<div class="tn-card-left">' +
-        '<span class="tn-badge ' + s.cls + '">' + s.label + '</span>' +
-        '<span class="tn-starts-label">' + startsLabel + '</span>' +
-        '<span class="tn-starts-value">' + startVal + '</span>' +
-      '</div>' +
-      '<div class="tn-card-right">' +
-        '<div class="tn-name">' + item.name + '</div>' +
-        '<div class="tn-meta">' +
-          '<span class="tn-meta-item"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg></span>' +
-          '<span class="tn-meta-item">' + fee + '</span>' +
-          '<span class="tn-meta-item"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg> ' + item.players + '/' + item.maxPlayers + '</span>' +
-          '<span class="tn-meta-item"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M6 9H4.5a2.5 2.5 0 0 1 0-5C7 4 7 7 7 7"/><path d="M18 9h1.5a2.5 2.5 0 0 0 0-5C17 4 17 7 17 7"/><path d="M4 22h16"/><path d="M10 14.66V17c0 .55-.47.98-.97 1.21C7.85 18.75 7 20.24 7 22"/><path d="M14 14.66V17c0 .55.47.98.97 1.21C16.15 18.75 17 20.24 17 22"/><path d="M18 2H6v7a6 6 0 0 0 12 0V2Z"/></svg> ' + item.prize + '</span>' +
-        '</div>' +
-      '</div>' +
-    '</div>';
-  }
-
   let items = demoTournaments.filter(item => item.registered);
   if (keyword) {
     const kw = keyword.toLowerCase();
@@ -3687,7 +3627,7 @@ function hostRenderList(keyword) {
   const el = document.getElementById('hostTnList');
   if (!el) return;
   const emptyMsg = t.host_empty || '개설한 토너먼트가 없습니다';
-  el.innerHTML = items.length ? items.map(buildCard).join('') : '<div class="tn-empty">' + emptyMsg + '</div>';
+  el.innerHTML = items.length ? items.map(tnBuildCard).join('') : '<div class="tn-empty">' + emptyMsg + '</div>';
 }
 
 function hostFilter() {
