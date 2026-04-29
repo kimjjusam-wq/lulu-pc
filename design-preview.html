@@ -132,6 +132,8 @@ body{font-family:'Pretendard Variable',Pretendard,-apple-system,sans-serif;backg
 .ds-badge-on{background:rgba(249,98,23,0.15);color:#F96217;}
 .ds-badge-late{background:rgba(239,68,68,0.18);color:#ef4444;}
 .ds-badge-fin{background:rgba(107,114,128,0.15);color:#6b7280;}
+.ds-badge-draft{background:rgba(247,223,78,0.18);color:#F7DF4E;}
+.ds-badge-cancel{background:rgba(205,12,12,0.18);color:#CD0C0C;}
 .ds-badge-registered{background:rgba(96,165,250,0.15);color:#60a5fa;display:inline-flex;align-items:center;gap:6px;font-size:11px;font-weight:700;padding:4px 10px;border-radius:6px;}
 .ds-badge-dot{position:relative;width:6px;height:6px;border-radius:50%;background:#60a5fa;flex-shrink:0;}
 .ds-badge-dot::after{content:'';position:absolute;inset:-3px;border-radius:50%;background:#60a5fa;opacity:0;animation:ds-live-pulse 2s ease-out infinite;}
@@ -458,7 +460,7 @@ body{font-family:'Pretendard Variable',Pretendard,-apple-system,sans-serif;backg
       <span style="color:#4ade80;">● Inputs — 8/9 동기화 완료 (Default · Focus · Filled · Error · Password · Date Picker · Email+Code · Disabled)</span>
       <span style="color:#f59e0b;">● Verification Code — 웹은 반응형 flex(aspect 1/1) / 프리뷰는 고정 48×48 — 모바일 가변 너비 대응 위한 의도적 차이</span>
       <span style="color:#4ade80;">● Alert Dialog — 동기화 완료 (default variant / showAlert() JS API / warning slot)</span>
-      <span style="color:#4ade80;">● Badges & Tags — 토너먼트 상태(등록중/진행중/추가등록/종료/등록됨+펄스) + 홀덤 태그(홀덤/오징어/72/6max/9max) 동기화 완료</span>
+      <span style="color:#4ade80;">● Badges & Tags — 토너먼트 상태(등록중/진행중/추가등록/종료/임시저장/취소/등록됨+펄스) + 홀덤 태그(홀덤/오징어/72/6max/9max) 동기화 완료</span>
     </div>
   </div>
 
@@ -700,6 +702,8 @@ body{font-family:'Pretendard Variable',Pretendard,-apple-system,sans-serif;backg
           <span class="ds-badge ds-badge-on">진행중</span>
           <span class="ds-badge ds-badge-late">추가등록</span>
           <span class="ds-badge ds-badge-fin">종료</span>
+          <span class="ds-badge ds-badge-draft">임시저장</span>
+          <span class="ds-badge ds-badge-cancel">취소</span>
         </div>
         <div style="font-size:11px;color:var(--text-mut);margin-top:8px;line-height:1.6;">
           11px / 700 / padding 4px 10px / radius 6px · bg alpha 15-18% / text solid color

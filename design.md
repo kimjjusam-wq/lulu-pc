@@ -285,6 +285,8 @@ Base: 11px / weight 700 / padding 4px 10px / radius 6px · background uses 15-18
 | `.tn-badge.ongoing` | 진행중 | `rgba(249,98,23,0.15)` | `#F96217` (primary orange) |
 | `.tn-badge.lateReg` | 추가등록 | `rgba(239,68,68,0.18)` | `#ef4444` (red) |
 | `.tn-badge.finished` | 종료 | `rgba(107,114,128,0.15)` | muted text |
+| `.tn-badge.draft` | 임시저장 | `rgba(247,223,78,0.18)` | `#F7DF4E` (warning yellow) |
+| `.tn-badge.canceled` | 취소 | `rgba(205,12,12,0.18)` | `#CD0C0C` (error red) |
 
 **Registered Badge** (`.tn-badge-registered`)
 카드 우측 상단에서 "내가 등록된 토너먼트"를 강조하는 배지. 동일한 Status Badge 스타일에 청색 배색 + **펄스 도트** 추가.

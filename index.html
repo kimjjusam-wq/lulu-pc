@@ -1241,6 +1241,14 @@
   </div>
 </div>
 
+<!-- Ticket Detail Page (참여 가능한 토너먼트 리스트) -->
+<div class="page-container" id="page-ticket-detail">
+  <div class="content-wrapper">
+    <div class="gs-back" role="button" tabindex="0" onclick="switchPage('ticket')"><span>←</span> <span data-i18n="gs_back">돌아가기</span></div>
+    <div class="tn-list" id="ticketDetailList" style="max-width:700px;margin:0 auto;"></div>
+  </div>
+</div>
+
 <!-- Tournament Page -->
 <div class="page-container" id="page-tournament">
   <div class="content-wrapper">
@@ -1422,7 +1430,7 @@
       </div>
       <div class="td-bottom-buttons">
         <button class="td-register-btn" id="tdRegisterBtn" onclick="tdRegister()" data-i18n="td_register">착석</button>
-        <button class="td-spectate-btn" id="tdSpectateBtn" onclick="tdSpectate()" data-i18n="td_spectate">관전</button>
+        <button class="td-spectate-btn" id="tdSpectateBtn" onclick="tdSpectate()" data-i18n="td_spectate" disabled>관전</button>
         <button class="td-cancel-btn" id="tdCancelBtn" onclick="tdCancelRegister()" style="display:none;" data-i18n="td_cancel_register">등록 취소</button>
       </div>
     </div>
@@ -3169,7 +3177,7 @@
         <li>아바타 게임 리소스는 v3 기준으로 업데이트</li>
         <li>마이 룰루 > 티켓에서 카드 클릭시 상세 페이지 제작</li>
         <li>사용자게임 테이블 버튼 UI 수정, 한글로 변경</li>
-        <li>마이페이지 계정삭제 팝업, 한도제한 팝업 제작 (V2 기준)</li>
+        <li><s>마이페이지 계정삭제 팝업, 한도제한 팝업 제작 (V2 기준)</s></li>
         <li>목표 : 5월 중순까지 개발 완료 후 약 2주간 QC 및 수정</li>
       </ul>
     </div>

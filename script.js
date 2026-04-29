@@ -85,6 +85,8 @@ const i18n = {
     tk_summary_label: '보유 티켓',
     tk_expire: '만료일',
     tk_days_left: '일 남음',
+    tkd_desc: '이 티켓으로 참여할 수 있는 토너먼트입니다.',
+    tkd_empty: '참여 가능한 토너먼트가 없습니다',
     tnh_title: '히스토리',
     tnh_desc: '종료된 토너먼트 기록을 확인하세요',
     tn_title: '토너먼트',
@@ -95,6 +97,8 @@ const i18n = {
     tn_status_registering: '등록중',
     tn_status_ongoing: '진행중',
     tn_status_finished: '종료',
+    tn_status_draft: '임시저장',
+    tn_status_canceled: '취소',
     tn_starts_in: 'Starts In',
     tn_manual_start: '수동 시작',
     tn_fee_free: '무료',
@@ -631,7 +635,7 @@ function switchPage(p) {
   const prevNav = navLinks && navLinks.querySelector('.nav-link.active');
   document.querySelectorAll('.nav-link').forEach(e => e.classList.remove('active'));
   var navPage = p;
-  var navParentMap = { mailbox:'my', chat:'my', myitems:'my', transaction:'my', host:'my', ticket:'my', 'account-edit':'my', 'tn-history':'my', 'tn-detail':'tournament', 'game-setup':'lobby' };
+  var navParentMap = { mailbox:'my', chat:'my', myitems:'my', transaction:'my', host:'my', ticket:'my', 'ticket-detail':'my', 'account-edit':'my', 'tn-history':'my', 'tn-detail':'tournament', 'game-setup':'lobby' };
   if (!document.querySelector('.nav-link[data-page="' + navPage + '"]') && navParentMap[navPage]) { navPage = navParentMap[navPage]; }
   const navLink = document.querySelector('.nav-link[data-page="' + navPage + '"]');
   if (navLink) { navLink.classList.add('active'); moveSlider(navLinks, navLink, prevNav); }
@@ -650,6 +654,7 @@ function switchPage(p) {
   if (p === 'holdem') { hdRenderList(); }
   if (p === 'tn-history') { tnRenderHistory(); }
   if (p === 'ticket') { tkRenderList(); }
+  if (p === 'ticket-detail') { ticketDetailRender(); }
   if (p === 'account-edit') { aeInit(); }
   if (p === 'mailbox') { mbRenderList(); }
   if (p === 'host') { hostRenderList(); }
@@ -696,7 +701,7 @@ function mSyncNavTitle(page) {
     shop: '상점', my: 'MY 룰루', analytics: '통계',
     mailbox: '보관함', chat: '채팅', myitems: '내 아이템',
     transaction: '거래 내역', host: '호스트',
-    ticket: '티켓', tournament: '토너먼트', holdem: '홀덤',
+    ticket: '티켓', 'ticket-detail': '티켓 상세', tournament: '토너먼트', holdem: '홀덤',
     'tn-history': '히스토리', 'tn-detail': '토너먼트',
     'game-setup': '사용자 게임', login: '로그인',
     'account-edit': '회원정보 수정',
@@ -706,7 +711,7 @@ function mSyncNavTitle(page) {
   };
   var parentMap = {
     mailbox: 'my', chat: 'mailbox', myitems: 'my', transaction: 'my',
-    host: 'my', ticket: 'my', 'account-edit': 'my',
+    host: 'my', ticket: 'my', 'ticket-detail': 'ticket', 'account-edit': 'my',
     tournament: 'lobby', 'tn-history': 'my',
     'tn-detail': 'tournament', 'game-setup': 'lobby',
     terms: 'lobby', privacy: 'lobby', youth: 'lobby',
@@ -1871,26 +1876,29 @@ const tnGroups = [
   { text:'바운티 헌터',          theme:'red',    ids:[4, 10, 18]        },
 ];
 const demoTournaments = [
-  { id:1,  event:'A', name:'POKER LULU Weekly Championship', status:'registering', startType:'manual', fee:'free', players:3, maxPlayers:10, prize:'100,000,000G', registered:true, details:{ blindLevel:1, unique:3, reentry:0, startChips:'10000', tableSize:8, rebuyCount:0, timebankSec:10, extraTimeSec:5, extraTimeHands:10, actionTimeSec:15, anteRate:'0.1BB', anteType:'All', cancelReg:'불가', lateRegLevel:8, blindMin:10, breakMin:5 } },
-  { id:2,  event:'A', name:'Friday Night Holdem', status:'registering', startType:'manual', fee:'free', players:1, maxPlayers:6, prize:'-', registered:false, details:{ blindLevel:1, unique:1, reentry:0, startChips:'5000', tableSize:6, rebuyCount:0, timebankSec:10, extraTimeSec:5, extraTimeHands:10, actionTimeSec:15, anteRate:'0.1BB', anteType:'All', cancelReg:'허용', lateRegLevel:6, blindMin:8, breakMin:4 } },
-  { id:3,  event:'A', name:'POKER LULU User Custom Game', status:'registering', startType:'manual', fee:'free', players:0, maxPlayers:8, prize:'-', registered:false, details:{ blindLevel:1, unique:0, reentry:0, startChips:'10000', tableSize:8, rebuyCount:0, timebankSec:10, extraTimeSec:5, extraTimeHands:10, actionTimeSec:15, anteRate:'0.1BB', anteType:'All', cancelReg:'허용', lateRegLevel:8, blindMin:10, breakMin:5 } },
-  { id:4,  event:'A', name:'High Roller Tournament', status:'lateReg', startType:'2025-02-24 20:00', fee:'10,000G', players:8, maxPlayers:10, prize:'1,000,000G', registered:true, details:{ blindLevel:5, unique:8, reentry:2, startChips:'50000', tableSize:9, rebuyCount:3, timebankSec:30, extraTimeSec:10, extraTimeHands:15, actionTimeSec:20, anteRate:'0.2BB', anteType:'All', cancelReg:'불가', lateRegLevel:5, blindMin:12, breakMin:5 } },
-  { id:5,  event:'A', name:'Beginner Friendly Open', status:'registering', startType:'manual', fee:'free', players:12, maxPlayers:12, prize:'100,000G', registered:false, details:{ blindLevel:1, unique:5, reentry:0, startChips:'8000', tableSize:9, rebuyCount:0, timebankSec:15, extraTimeSec:5, extraTimeHands:10, actionTimeSec:15, anteRate:'0.1BB', anteType:'All', cancelReg:'허용', lateRegLevel:8, blindMin:10, breakMin:5 } },
-  { id:6,  event:'B', name:'POKER LULU Daily Freeroll', status:'registering', startType:'2025-02-25 12:00', fee:'free', players:12, maxPlayers:50, prize:'200,000G', registered:true, details:{ blindLevel:1, unique:12, reentry:0, startChips:'10000', tableSize:9, rebuyCount:0, timebankSec:10, extraTimeSec:5, extraTimeHands:10, actionTimeSec:15, anteRate:'0.1BB', anteType:'All', cancelReg:'불가', lateRegLevel:10, blindMin:10, breakMin:5 } },
+  { id:1,  event:'A', name:'POKER LULU Weekly Championship', status:'registering', startType:'manual', fee:'free', players:3, maxPlayers:10, prize:'100,000,000G', registered:true, requiredTicketSeries:'Series A', details:{ blindLevel:1, unique:3, reentry:0, startChips:'10000', tableSize:8, rebuyCount:0, timebankSec:10, extraTimeSec:5, extraTimeHands:10, actionTimeSec:15, anteRate:'0.1BB', anteType:'All', cancelReg:'불가', lateRegLevel:8, blindMin:10, breakMin:5 } },
+  { id:2,  event:'A', name:'Friday Night Holdem', status:'registering', startType:'manual', fee:'free', players:1, maxPlayers:6, prize:'-', registered:false, requiredTicketSeries:'Series A', details:{ blindLevel:1, unique:1, reentry:0, startChips:'5000', tableSize:6, rebuyCount:0, timebankSec:10, extraTimeSec:5, extraTimeHands:10, actionTimeSec:15, anteRate:'0.1BB', anteType:'All', cancelReg:'허용', lateRegLevel:6, blindMin:8, breakMin:4 } },
+  { id:3,  event:'A', name:'POKER LULU User Custom Game', status:'registering', startType:'manual', fee:'free', players:0, maxPlayers:8, prize:'-', registered:false, requiredTicketSeries:'Series B', details:{ blindLevel:1, unique:0, reentry:0, startChips:'10000', tableSize:8, rebuyCount:0, timebankSec:10, extraTimeSec:5, extraTimeHands:10, actionTimeSec:15, anteRate:'0.1BB', anteType:'All', cancelReg:'허용', lateRegLevel:8, blindMin:10, breakMin:5 } },
+  { id:4,  event:'A', name:'High Roller Tournament', status:'lateReg', startType:'2025-02-24 20:00', fee:'10,000G', players:8, maxPlayers:10, prize:'1,000,000G', registered:true, requiredTicketSeries:'Series B', details:{ blindLevel:5, unique:8, reentry:2, startChips:'50000', tableSize:9, rebuyCount:3, timebankSec:30, extraTimeSec:10, extraTimeHands:15, actionTimeSec:20, anteRate:'0.2BB', anteType:'All', cancelReg:'불가', lateRegLevel:5, blindMin:12, breakMin:5 } },
+  { id:5,  event:'A', name:'Beginner Friendly Open', status:'registering', startType:'manual', fee:'free', players:12, maxPlayers:12, prize:'100,000G', registered:false, requiredTicketSeries:'Series C', details:{ blindLevel:1, unique:5, reentry:0, startChips:'8000', tableSize:9, rebuyCount:0, timebankSec:15, extraTimeSec:5, extraTimeHands:10, actionTimeSec:15, anteRate:'0.1BB', anteType:'All', cancelReg:'허용', lateRegLevel:8, blindMin:10, breakMin:5 } },
+  { id:6,  event:'B', name:'POKER LULU Daily Freeroll', status:'registering', startType:'2025-02-25 12:00', fee:'free', players:12, maxPlayers:50, prize:'200,000G', registered:true, requiredTicketSeries:'Series C', details:{ blindLevel:1, unique:12, reentry:0, startChips:'10000', tableSize:9, rebuyCount:0, timebankSec:10, extraTimeSec:5, extraTimeHands:10, actionTimeSec:15, anteRate:'0.1BB', anteType:'All', cancelReg:'불가', lateRegLevel:10, blindMin:10, breakMin:5 } },
   { id:7,  event:'B', name:'VIP Invitational', status:'ongoing', startType:'2025-02-24 19:00', fee:'50,000G', players:6, maxPlayers:6, prize:'500,000,000G', registered:false, details:{ blindLevel:7, unique:6, reentry:3, startChips:'100000', tableSize:6, rebuyCount:5, timebankSec:60, extraTimeSec:15, extraTimeHands:20, actionTimeSec:25, anteRate:'0.5BB', anteType:'All', cancelReg:'불가', lateRegLevel:4, blindMin:15, breakMin:5 } },
-  { id:8,  event:'B', name:'POKER LULU User Custom Game', status:'registering', startType:'manual', fee:'free', players:2, maxPlayers:6, prize:'-', registered:false },
-  { id:9,  event:'B', name:'Sunday Special MTT', status:'finished', startType:'2025-02-23 18:00', fee:'5,000G', players:20, maxPlayers:20, prize:'2,000,000G', registered:true },
-  { id:10, event:'B', name:'Turbo Knockout Bounty', status:'registering', startType:'2025-02-26 21:00', fee:'20,000G', players:0, maxPlayers:16, prize:'300,000,000G', registered:false },
-  { id:11, event:'A', name:'Saturday Night Showdown', status:'finished', startType:'2025-02-22 20:00', fee:'10,000G', players:16, maxPlayers:16, prize:'1,500,000G', registered:true },
-  { id:12, event:'B', name:'POKER LULU Grand Prix #3', status:'finished', startType:'2025-02-20 19:00', fee:'25,000G', players:32, maxPlayers:32, prize:'1,000,000,000G', registered:false },
-  { id:13, event:'A', name:'Mini Freeroll Championship', status:'finished', startType:'2025-02-19 12:00', fee:'free', players:50, maxPlayers:50, prize:'500,000G', registered:true },
-  { id:14, event:'B', name:'High Stakes Deep Stack', status:'finished', startType:'2025-02-18 21:00', fee:'50,000G', players:10, maxPlayers:10, prize:'300,000,000G', registered:false },
-  { id:15, event:'A', name:'Weekday Express Turbo', status:'finished', startType:'2025-02-17 18:00', fee:'3,000G', players:24, maxPlayers:24, prize:'600,000G', registered:true },
-  { id:16, event:'B', name:'POKER LULU Monthly Final', status:'finished', startType:'2025-02-15 19:00', fee:'100,000G', players:64, maxPlayers:64, prize:'1,000,000,000,000G', registered:false },
-  { id:17, event:'C', name:'Spring Freeroll Series', status:'registering', startType:'2025-03-01 14:00', fee:'free', players:8, maxPlayers:30, prize:'300,000G', registered:false, details:{ blindLevel:1, unique:8, reentry:0, startChips:'8000', tableSize:9, rebuyCount:0, timebankSec:10, extraTimeSec:5, extraTimeHands:10, actionTimeSec:15, anteRate:'0.1BB', anteType:'All', cancelReg:'허용', lateRegLevel:8, blindMin:10, breakMin:5 } },
+  { id:8,  event:'B', name:'POKER LULU User Custom Game', status:'registering', startType:'manual', fee:'free', players:2, maxPlayers:6, prize:'-', registered:false, requiredTicketSeries:'Series D' },
+  { id:9,  event:'B', name:'Sunday Special MTT', status:'finished', startType:'2025-02-23 18:00', fee:'5,000G', players:20, maxPlayers:20, prize:'2,000,000G', registered:true, requiredTicketSeries:'Series A' },
+  { id:10, event:'B', name:'Turbo Knockout Bounty', status:'registering', startType:'2025-02-26 21:00', fee:'20,000G', players:0, maxPlayers:16, prize:'300,000,000G', registered:false, requiredTicketSeries:'Satellite A' },
+  { id:11, event:'A', name:'Saturday Night Showdown', status:'finished', startType:'2025-02-22 20:00', fee:'10,000G', players:16, maxPlayers:16, prize:'1,500,000G', registered:true, requiredTicketSeries:'Series A' },
+  { id:12, event:'B', name:'POKER LULU Grand Prix #3', status:'finished', startType:'2025-02-20 19:00', fee:'25,000G', players:32, maxPlayers:32, prize:'1,000,000,000G', registered:false, requiredTicketSeries:'Series B' },
+  { id:13, event:'A', name:'Mini Freeroll Championship', status:'finished', startType:'2025-02-19 12:00', fee:'free', players:50, maxPlayers:50, prize:'500,000G', registered:true, requiredTicketSeries:'Series B' },
+  { id:14, event:'B', name:'High Stakes Deep Stack', status:'finished', startType:'2025-02-18 21:00', fee:'50,000G', players:10, maxPlayers:10, prize:'300,000,000G', registered:false, requiredTicketSeries:'Series C' },
+  { id:15, event:'A', name:'Weekday Express Turbo', status:'finished', startType:'2025-02-17 18:00', fee:'3,000G', players:24, maxPlayers:24, prize:'600,000G', registered:true, requiredTicketSeries:'Series D' },
+  { id:16, event:'B', name:'POKER LULU Monthly Final', status:'finished', startType:'2025-02-15 19:00', fee:'100,000G', players:64, maxPlayers:64, prize:'1,000,000,000,000G', registered:false, requiredTicketSeries:'Satellite A' },
+  { id:17, event:'C', name:'Spring Freeroll Series', status:'registering', startType:'2025-03-01 14:00', fee:'free', players:8, maxPlayers:30, prize:'300,000G', registered:false, requiredTicketSeries:'Satellite B', details:{ blindLevel:1, unique:8, reentry:0, startChips:'8000', tableSize:9, rebuyCount:0, timebankSec:10, extraTimeSec:5, extraTimeHands:10, actionTimeSec:15, anteRate:'0.1BB', anteType:'All', cancelReg:'허용', lateRegLevel:8, blindMin:10, breakMin:5 } },
   { id:18, event:'C', name:'Midnight Madness', status:'ongoing', startType:'2025-02-28 23:00', fee:'5,000G', players:14, maxPlayers:20, prize:'1,500,000G', registered:true, details:{ blindLevel:4, unique:14, reentry:1, startChips:'20000', tableSize:8, rebuyCount:1, timebankSec:15, extraTimeSec:5, extraTimeHands:10, actionTimeSec:20, anteRate:'0.2BB', anteType:'All', cancelReg:'불가', lateRegLevel:6, blindMin:12, breakMin:5 } },
-  { id:19, event:'C', name:'Rookie Challenge Cup', status:'registering', startType:'manual', fee:'free', players:2, maxPlayers:16, prize:'150,000G', registered:false, details:{ blindLevel:1, unique:2, reentry:0, startChips:'5000', tableSize:8, rebuyCount:0, timebankSec:10, extraTimeSec:5, extraTimeHands:10, actionTimeSec:15, anteRate:'0.1BB', anteType:'All', cancelReg:'허용', lateRegLevel:8, blindMin:8, breakMin:4 } },
-  { id:20, event:'C', name:'Diamond Bounty Hunter', status:'finished', startType:'2025-02-25 20:00', fee:'30,000G', players:24, maxPlayers:24, prize:'200,000,000G', registered:true },
+  { id:19, event:'C', name:'Rookie Challenge Cup', status:'registering', startType:'manual', fee:'free', players:2, maxPlayers:16, prize:'150,000G', registered:false, requiredTicketSeries:'Satellite D', details:{ blindLevel:1, unique:2, reentry:0, startChips:'5000', tableSize:8, rebuyCount:0, timebankSec:10, extraTimeSec:5, extraTimeHands:10, actionTimeSec:15, anteRate:'0.1BB', anteType:'All', cancelReg:'허용', lateRegLevel:8, blindMin:8, breakMin:4 } },
+  { id:20, event:'C', name:'Diamond Bounty Hunter', status:'finished', startType:'2025-02-25 20:00', fee:'30,000G', players:24, maxPlayers:24, prize:'200,000,000G', registered:true, requiredTicketSeries:'Satellite C' },
+  { id:21, event:'A', name:'My Custom Tournament', status:'draft', startType:'manual', fee:'free', players:0, maxPlayers:8, prize:'-', registered:true },
+  { id:22, event:'B', name:'Weekend Cash Battle', status:'draft', startType:'2025-03-08 19:00', fee:'5,000G', players:0, maxPlayers:12, prize:'500,000G', registered:true },
+  { id:23, event:'A', name:'Postponed Spring Event', status:'canceled', startType:'2025-02-28 20:00', fee:'10,000G', players:0, maxPlayers:20, prize:'1,000,000G', registered:true, requiredTicketSeries:'Satellite D' },
 ];
 
 function switchTournamentRound(round) {
@@ -2034,6 +2042,8 @@ function tnBuildCard(item) {
     ongoing:     { label: t.tn_status_ongoing || '진행중', cls: 'ongoing' },
     lateReg:     { label: t.tn_status_late_reg || '추가등록', cls: 'lateReg' },
     finished:    { label: t.tn_status_finished || '종료', cls: 'finished' },
+    draft:       { label: t.tn_status_draft || '임시저장', cls: 'draft' },
+    canceled:    { label: t.tn_status_canceled || '취소', cls: 'canceled' },
   };
   const s = statusMap[item.status] || statusMap.registering;
   const fee = item.fee === 'free'
@@ -2052,10 +2062,11 @@ function tnBuildCard(item) {
     : `${tnFormatPrizeNumber(item.prize)}<span class="tn-prize-unit">골드</span>`;
   const isFinished = item.status === 'finished';
   const isLateReg = item.status === 'lateReg';
+  const hideRemain = isFinished || item.status === 'draft' || item.status === 'canceled';
   let remainSpan = '';
   if (isLateReg) {
     remainSpan = '<span class="tn-remain-time">00:00:00</span>';
-  } else if (!isFinished) {
+  } else if (!hideRemain) {
     const initialRemain = tnFormatCountdown(tnGetCountdownTarget(item) - Date.now());
     remainSpan = `<span class="tn-remain-time" data-tn-id="${item.id}">${initialRemain}</span>`;
   }
@@ -2225,6 +2236,8 @@ function tdRenderDetail() {
     ongoing:     { label: t.tn_status_ongoing || '진행중', cls: 'ongoing' },
     lateReg:     { label: t.tn_status_late_reg || '추가등록', cls: 'lateReg' },
     finished:    { label: t.tn_status_finished || '종료', cls: 'finished' },
+    draft:       { label: t.tn_status_draft || '임시저장', cls: 'draft' },
+    canceled:    { label: t.tn_status_canceled || '취소', cls: 'canceled' },
   };
   var badgeEl = document.getElementById('tdStatusBadge');
   if (badgeEl) {
@@ -2316,6 +2329,8 @@ function tdRenderDetailInline(container) {
     ongoing:     { label: t.tn_status_ongoing || '진행중', cls: 'ongoing' },
     lateReg:     { label: t.tn_status_late_reg || '추가등록', cls: 'lateReg' },
     finished:    { label: t.tn_status_finished || '종료', cls: 'finished' },
+    draft:       { label: t.tn_status_draft || '임시저장', cls: 'draft' },
+    canceled:    { label: t.tn_status_canceled || '취소', cls: 'canceled' },
   };
   var badgeEl = container.querySelector('#tdStatusBadge');
   if (badgeEl) {
@@ -2975,7 +2990,8 @@ function tkRenderList() {
     const expDate = new Date(tk.expire);
     const diff = Math.ceil((expDate - today) / (1000 * 60 * 60 * 24));
     const daysLeft = diff > 0 ? diff : 0;
-    return `<div class="tk-item">
+    const safeSeries = tk.series.replace(/'/g, "\\'");
+    return `<div class="tk-item" role="button" tabindex="0" onclick="openTicketDetail('${safeSeries}')">
       <span class="tk-item-icon">🎫</span>
       <div class="tk-item-info">
         <span class="tk-item-name">${tk.series}</span>
@@ -2986,6 +3002,34 @@ function tkRenderList() {
   }).join('');
 
   document.getElementById('tkTicketList').innerHTML = html;
+}
+
+// === TICKET DETAIL PAGE ===
+
+var currentTicketSeries = null;
+
+function openTicketDetail(series) {
+  currentTicketSeries = series;
+  switchPage('ticket-detail');
+}
+
+function ticketDetailRender() {
+  var lang = currentLang || 'ko';
+  var t = i18n[lang] || i18n.ko;
+  var series = currentTicketSeries;
+  var listEl = document.getElementById('ticketDetailList');
+  if (!listEl) return;
+  if (!series) { listEl.innerHTML = ''; return; }
+  var items = demoTournaments.filter(function(tn) {
+    return tn.requiredTicketSeries === series && (tn.status === 'finished' || tn.status === 'canceled');
+  });
+  var emptyMsg = t.tkd_empty || '참여 가능한 토너먼트가 없습니다';
+  listEl.innerHTML = items.length
+    ? items.map(function(item, idx) {
+        var displayName = items.length > 1 ? series + ' #' + (idx + 1) : series;
+        return tnBuildCard(Object.assign({}, item, { name: displayName }));
+      }).join('')
+    : '<div class="tn-empty">' + emptyMsg + '</div>';
 }
 
 // === GAME SETUP ===
@@ -3687,7 +3731,7 @@ function mbRenderMessages() {
 function hostRenderList(keyword) {
   const lang = currentLang || 'ko';
   const t = i18n[lang] || i18n.ko;
-  let items = demoTournaments.filter(item => item.registered);
+  let items = demoTournaments.filter(item => item.status === 'draft' || item.status === 'canceled');
   if (keyword) {
     const kw = keyword.toLowerCase();
     items = items.filter(item => item.name.toLowerCase().includes(kw));
