@@ -1262,7 +1262,8 @@ img.shop-tab-emoji { width:24px; height:24px; object-fit:contain; }
 .host-card-info-value.is-none { color:var(--color-primary); }
 /* 호스트 리스트 — 카드 그룹화 (첫 카드 상단 / 마지막 카드 하단만 radius, 사이는 보더 1줄로 연결) */
 #hostTnList .host-card { border-radius:0; }
-#hostTnList .host-card + .host-card { border-top:none; }
+#hostTnList .host-card + .host-card { margin-top:-1px; }
+#hostTnList .host-card:hover { z-index:1; }
 #hostTnList .host-card:first-child { border-top-left-radius:6px; border-top-right-radius:6px; }
 #hostTnList .host-card:last-child { border-bottom-left-radius:6px; border-bottom-right-radius:6px; }
 
