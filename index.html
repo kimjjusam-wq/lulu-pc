@@ -1485,6 +1485,79 @@
   </div>
 </div>
 
+<!-- Tournament History Detail Page -->
+<div class="page-container" id="page-tn-history-detail">
+  <div class="content-wrapper" style="max-width:700px;margin:0 auto;">
+    <div class="gs-back" role="button" tabindex="0" onclick="switchPage('tn-history')"><span>←</span> <span data-i18n="gs_back">돌아가기</span></div>
+    <div class="hd-summary">
+      <div class="hd-summary-name" id="thdName"></div>
+      <div class="hd-summary-meta">
+        <span id="thdDate"></span>
+        <span class="hd-summary-divider">|</span>
+        <span id="thdType">토너먼트</span>
+      </div>
+      <a class="hd-summary-link" id="thdMoreLink" role="button" tabindex="0">자세히보기 ›</a>
+    </div>
+    <div class="td-info-grid hd-stats">
+      <div class="td-info-row"><span class="td-info-label">총 참가자 수</span><span class="td-info-value" id="thdParticipants"></span></div>
+      <div class="td-info-row"><span class="td-info-label">플레이 시간</span><span class="td-info-value" id="thdPlayTime"></span></div>
+      <div class="td-info-row"><span class="td-info-label">내 등수</span><span class="td-info-value" id="thdRank"></span></div>
+      <div class="td-info-row"><span class="td-info-label">내 리워드</span><span class="td-info-value hd-reward-value" id="thdReward"></span></div>
+      <div class="td-info-row"><span class="td-info-label">내 바운티</span><span class="td-info-value" id="thdBounty"></span></div>
+    </div>
+    <div class="hd-style-card">
+      <div class="hd-style-header">
+        <div class="hd-style-title">플레이 스타일</div>
+        <div class="hd-style-hands"><span id="thdHands"></span> 핸드 수</div>
+      </div>
+      <div class="hd-style-gauges">
+        <div class="hd-gauge" data-key="vpip">
+          <svg class="hd-gauge-svg" viewBox="0 0 36 36"><circle class="hd-gauge-track" cx="18" cy="18" r="16"></circle><circle class="hd-gauge-fill hd-gauge-vpip" cx="18" cy="18" r="16"></circle></svg>
+          <span class="hd-gauge-percent" id="thdVpip"></span>
+          <span class="hd-gauge-label">VPIP</span>
+        </div>
+        <div class="hd-gauge" data-key="pfr">
+          <svg class="hd-gauge-svg" viewBox="0 0 36 36"><circle class="hd-gauge-track" cx="18" cy="18" r="16"></circle><circle class="hd-gauge-fill hd-gauge-pfr" cx="18" cy="18" r="16"></circle></svg>
+          <span class="hd-gauge-percent" id="thdPfr"></span>
+          <span class="hd-gauge-label">PFR</span>
+        </div>
+        <div class="hd-gauge" data-key="threeBet">
+          <svg class="hd-gauge-svg" viewBox="0 0 36 36"><circle class="hd-gauge-track" cx="18" cy="18" r="16"></circle><circle class="hd-gauge-fill hd-gauge-3bet" cx="18" cy="18" r="16"></circle></svg>
+          <span class="hd-gauge-percent" id="thdThreeBet"></span>
+          <span class="hd-gauge-label">3BET</span>
+        </div>
+        <div class="hd-gauge" data-key="cb">
+          <svg class="hd-gauge-svg" viewBox="0 0 36 36"><circle class="hd-gauge-track" cx="18" cy="18" r="16"></circle><circle class="hd-gauge-fill hd-gauge-cb" cx="18" cy="18" r="16"></circle></svg>
+          <span class="hd-gauge-percent" id="thdCb"></span>
+          <span class="hd-gauge-label">CB</span>
+        </div>
+      </div>
+    </div>
+    <div class="hd-bounty-card">
+      <div class="hd-bounty-header">
+        <div class="hd-bounty-title">바운티</div>
+        <div class="hd-bounty-toggle" role="tablist">
+          <button type="button" class="hd-bounty-toggle-btn active" data-bmode="acquired" onclick="thdSwitchBounty('acquired')">총 획득</button>
+          <button type="button" class="hd-bounty-toggle-btn" data-bmode="cumulative" onclick="thdSwitchBounty('cumulative')">총 누적</button>
+        </div>
+      </div>
+      <div class="hd-bounty-summary">
+        <span class="hd-bounty-summary-label" id="thdBountySummaryLabel">총 획득 바운티</span>
+        <span class="hd-bounty-summary-value" id="thdBountySummaryValue">0</span>
+      </div>
+      <div class="hd-bounty-table">
+        <div class="hd-bounty-table-head">
+          <div>닉네임</div>
+          <div>획득 시각</div>
+          <div>바운티</div>
+          <div>수익</div>
+        </div>
+        <div class="hd-bounty-table-body" id="thdBountyTableBody"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
 <!-- Host Page -->
 <div class="page-container" id="page-host">
   <div class="content-wrapper">
@@ -3174,7 +3247,7 @@
         <li>만약 더 캐주얼로 변경될 경우 라이트 모드 추가 진행</li>
         <li>상점 관련 모달은 v2 기준으로 제작</li>
         <li><s>마이 룰루 > 호스트 상세 페이지 제작</s></li>
-        <li>마이 룰루 > 히스토리 상세 페이지 수정</li>
+        <li><s>마이 룰루 > 히스토리 상세 페이지 수정</s></li>
         <li>홀덤(링게임) 상세 페이지 및 관련 모달 추가</li>
         <li>상점 아이템 콘텐츠 전반 수정</li>
         <li>1차/2차 디자인은 토글 버튼으로 구분 가능한 기능 추가</li>

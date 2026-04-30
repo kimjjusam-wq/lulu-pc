@@ -635,7 +635,7 @@ function switchPage(p) {
   const prevNav = navLinks && navLinks.querySelector('.nav-link.active');
   document.querySelectorAll('.nav-link').forEach(e => e.classList.remove('active'));
   var navPage = p;
-  var navParentMap = { mailbox:'my', chat:'my', myitems:'my', transaction:'my', host:'my', ticket:'my', 'ticket-detail':'my', 'account-edit':'my', 'tn-history':'my', 'tn-detail':'tournament', 'game-setup':'lobby' };
+  var navParentMap = { mailbox:'my', chat:'my', myitems:'my', transaction:'my', host:'my', ticket:'my', 'ticket-detail':'my', 'account-edit':'my', 'tn-history':'my', 'tn-history-detail':'my', 'tn-detail':'tournament', 'game-setup':'lobby' };
   if (!document.querySelector('.nav-link[data-page="' + navPage + '"]') && navParentMap[navPage]) { navPage = navParentMap[navPage]; }
   const navLink = document.querySelector('.nav-link[data-page="' + navPage + '"]');
   if (navLink) { navLink.classList.add('active'); moveSlider(navLinks, navLink, prevNav); }
@@ -653,6 +653,7 @@ function switchPage(p) {
   else { if (typeof tnStopCountdown === 'function') tnStopCountdown(); }
   if (p === 'holdem') { hdRenderList(); }
   if (p === 'tn-history') { tnRenderHistory(); }
+  if (p === 'tn-history-detail') { thdRenderDetail(); }
   if (p === 'ticket') { tkRenderList(); }
   if (p === 'ticket-detail') { ticketDetailRender(); }
   if (p === 'account-edit') { aeInit(); }
@@ -3041,8 +3042,176 @@ function tnRenderHistory() {
   const t = i18n[lang] || i18n.ko;
   const historyItems = demoTournaments.filter(item => item.status === 'finished');
   const emptyMsg = t.tn_history_empty || '완료된 토너먼트가 없습니다';
-  const html = historyItems.length ? historyItems.map(tnBuildCard).join('') : `<div class="tn-empty">${emptyMsg}</div>`;
+  const html = historyItems.length ? historyItems.map(function(item) { return hostBuildCard(item, 'history'); }).join('') : `<div class="tn-empty">${emptyMsg}</div>`;
   document.getElementById('tnHistoryList').innerHTML = html;
+}
+
+// === HISTORY DETAIL PAGE ===
+
+var currentHistoryDetailId = null;
+
+function thdSeed(id) {
+  // id 기반 결정론적 의사난수 — 같은 토너먼트는 항상 동일한 stats
+  var x = (id * 9301 + 49297) % 233280;
+  return x / 233280;
+}
+function thdRange(id, salt, min, max) {
+  var v = thdSeed(id * 31 + salt);
+  return Math.floor(min + v * (max - min + 1));
+}
+
+function thdGetStats(item) {
+  if (item.historyStats) return item.historyStats;
+  var id = item.id || 1;
+  var participants = item.maxPlayers || thdRange(id, 1, 8, 64);
+  var myRank = thdRange(id, 2, 1, participants);
+  var hours = thdRange(id, 3, 0, 2);
+  var mins = thdRange(id, 4, 5, 59);
+  var secs = thdRange(id, 5, 0, 59);
+  var pad = function(n) { return String(n).padStart(2, '0'); };
+  var playTime = pad(hours) + 'h ' + pad(mins) + 'm ' + pad(secs) + 's';
+  var hands = thdRange(id, 6, 12, 80);
+  // VPIP > PFR 일반적으로 (포커 통계 상식)
+  var vpip = thdRange(id, 7, 18, 85);
+  var pfr = thdRange(id, 8, 8, Math.max(8, vpip - 5));
+  var threeBet = thdRange(id, 9, 0, 18);
+  var cb = thdRange(id, 10, 0, 75);
+  // 등수 1위는 리워드 큼, 그 외는 작거나 0
+  var prizeNum = parseInt(String(item.prize || '0').replace(/[^0-9]/g, '')) || 0;
+  var myReward = 0;
+  if (myRank === 1) myReward = Math.round(prizeNum * 0.5);
+  else if (myRank === 2) myReward = Math.round(prizeNum * 0.3);
+  else if (myRank === 3) myReward = Math.round(prizeNum * 0.2);
+  var myBounty = thdRange(id, 11, 0, 1) ? thdRange(id, 12, 0, 5) : 0;
+  // 바운티 행 생성: myBounty 만큼 KO한 사람 목록
+  var bountyNames = ['LuckyAce77','PokerKing','BluffMaster','RoyalFlush','CardShark99','AllInHero','ChipLeader','NightOwl','HighRoller_J','ProPlayer_X','SmartBet','River_Rat'];
+  var bountyRows = [];
+  var profitRunning = 0;
+  for (var k = 0; k < myBounty; k++) {
+    var bv = thdRange(id, 100 + k, 1, 8);
+    profitRunning += bv;
+    var hh = thdRange(id, 200 + k, 0, hours);
+    var mm = thdRange(id, 300 + k, 0, 59);
+    var ss = thdRange(id, 400 + k, 0, 59);
+    bountyRows.push({
+      name: bountyNames[(id + k) % bountyNames.length],
+      time: pad(hh) + ':' + pad(mm) + ':' + pad(ss),
+      bounty: bv,
+      profit: profitRunning,
+    });
+  }
+  // 누적 바운티: 과거 모든 토너먼트 합 (시뮬레이션)
+  var bountyCumulative = thdRange(id, 13, 50, 500);
+  return {
+    participants: participants,
+    playTime: playTime,
+    myRank: myRank,
+    myReward: myReward,
+    myBounty: myBounty,
+    hands: hands,
+    vpip: vpip,
+    pfr: pfr,
+    threeBet: threeBet,
+    cb: cb,
+    bountyAcquired: myBounty,
+    bountyCumulative: bountyCumulative,
+    bountyRows: bountyRows,
+  };
+}
+
+function thdFormatDateLong(s) {
+  if (!s || typeof s !== 'string') return '';
+  var m = s.match(/^(\d{4})-(\d{2})-(\d{2})\s+(\d{2}):(\d{2})$/);
+  if (!m) return s;
+  var days = ['일','월','화','수','목','금','토'];
+  var wd = days[new Date(+m[1], +m[2]-1, +m[3]).getDay()];
+  return m[1] + '.' + m[2] + '.' + m[3] + '(' + wd + ') ' + m[4] + ':' + m[5];
+}
+
+function openHistoryDetail(tournamentId) {
+  currentHistoryDetailId = tournamentId;
+  switchPage('tn-history-detail');
+}
+
+function thdSetGauge(svgSelector, percent) {
+  var el = document.querySelector(svgSelector);
+  if (!el) return;
+  var pct = Math.max(0, Math.min(100, percent));
+  el.setAttribute('stroke-dasharray', pct + ' ' + (100 - pct));
+}
+
+var currentBountyMode = 'acquired';
+
+function thdRenderBounty(stats) {
+  var labelEl = document.getElementById('thdBountySummaryLabel');
+  var valueEl = document.getElementById('thdBountySummaryValue');
+  var bodyEl = document.getElementById('thdBountyTableBody');
+  if (!labelEl || !valueEl || !bodyEl) return;
+  if (currentBountyMode === 'cumulative') {
+    labelEl.textContent = '총 누적 바운티';
+    valueEl.textContent = stats.bountyCumulative.toLocaleString();
+  } else {
+    labelEl.textContent = '총 획득 바운티';
+    valueEl.textContent = stats.bountyAcquired;
+  }
+  if (!stats.bountyRows.length) {
+    bodyEl.innerHTML = '<div class="hd-bounty-empty">획득한 바운티가 없습니다</div>';
+    return;
+  }
+  bodyEl.innerHTML = stats.bountyRows.map(function(r) {
+    return '<div class="hd-bounty-row">' +
+      '<div>' + r.name + '</div>' +
+      '<div>' + r.time + '</div>' +
+      '<div>' + r.bounty + '</div>' +
+      '<div class="hd-bounty-profit">+' + r.profit + '</div>' +
+    '</div>';
+  }).join('');
+}
+
+function thdSwitchBounty(mode) {
+  currentBountyMode = mode;
+  document.querySelectorAll('.hd-bounty-toggle-btn').forEach(function(b) {
+    b.classList.toggle('active', b.getAttribute('data-bmode') === mode);
+  });
+  var item = demoTournaments.find(function(tn) { return tn.id === currentHistoryDetailId; });
+  if (!item) return;
+  thdRenderBounty(thdGetStats(item));
+}
+
+function thdRenderDetail() {
+  var item = demoTournaments.find(function(tn) { return tn.id === currentHistoryDetailId; });
+  if (!item) return;
+  var stats = thdGetStats(item);
+  document.getElementById('thdName').textContent = item.name;
+  document.getElementById('thdDate').textContent = thdFormatDateLong(item.startType);
+  document.getElementById('thdParticipants').textContent = stats.participants;
+  document.getElementById('thdPlayTime').textContent = stats.playTime;
+  document.getElementById('thdRank').textContent = stats.myRank + ' / ' + stats.participants;
+  document.getElementById('thdReward').textContent = stats.myReward > 0 ? stats.myReward.toLocaleString() : '0';
+  document.getElementById('thdBounty').textContent = stats.myBounty;
+  document.getElementById('thdHands').textContent = stats.hands;
+  document.getElementById('thdVpip').textContent = stats.vpip + '%';
+  document.getElementById('thdPfr').textContent = stats.pfr + '%';
+  document.getElementById('thdThreeBet').textContent = stats.threeBet + '%';
+  document.getElementById('thdCb').textContent = stats.cb + '%';
+  // 게이지 채우기 (다음 프레임에 적용 — transition 활성화)
+  requestAnimationFrame(function() {
+    thdSetGauge('.hd-gauge-vpip', stats.vpip);
+    thdSetGauge('.hd-gauge-pfr', stats.pfr);
+    thdSetGauge('.hd-gauge-3bet', stats.threeBet);
+    thdSetGauge('.hd-gauge-cb', stats.cb);
+  });
+  // 바운티 섹션
+  currentBountyMode = 'acquired';
+  document.querySelectorAll('.hd-bounty-toggle-btn').forEach(function(b) {
+    b.classList.toggle('active', b.getAttribute('data-bmode') === 'acquired');
+  });
+  thdRenderBounty(stats);
+  // "자세히보기" 링크 → 기존 토너먼트 상세
+  var moreLink = document.getElementById('thdMoreLink');
+  if (moreLink) {
+    moreLink.onclick = function() { openTnDetail(item.id); };
+  }
 }
 
 // === TICKET PAGE ===
@@ -3850,12 +4019,14 @@ function hostFormatDate(s) {
   return m[2] + '.' + m[3] + '(' + wd + ') ' + m[4] + ':' + m[5];
 }
 
-function hostBuildCard(item) {
+function hostBuildCard(item, context) {
   const lang = currentLang || 'ko';
   const t = i18n[lang] || i18n.ko;
   const statusMap = {
     draft:       { label: t.tn_status_draft || '임시저장', cls: 'draft' },
     registering: { label: t.tn_status_registering || '등록중', cls: 'registering' },
+    ongoing:     { label: t.tn_status_ongoing || '진행중', cls: 'ongoing' },
+    lateReg:     { label: t.tn_status_late_reg || '추가등록', cls: 'lateReg' },
     canceled:    { label: t.tn_status_canceled || '취소', cls: 'canceled' },
     finished:    { label: t.tn_status_finished || '종료', cls: 'finished' },
   };
@@ -3868,7 +4039,15 @@ function hostBuildCard(item) {
   const buyinValue = (item.fee === 'free' || !item.fee) ? 'Free' : hostFormatAmount(item.fee);
   const prizeValue = (!item.prize || item.prize === '-') ? 'None' : hostFormatAmount(item.prize);
   const prizeIsNone = prizeValue === 'None';
-  return '<div class="tn-card host-card" onclick="openTnDetail(' + item.id + ', \'host\')">' +
+  let onClickAttr;
+  if (context === 'history') {
+    onClickAttr = 'openHistoryDetail(' + item.id + ')';
+  } else if (context === 'host') {
+    onClickAttr = "openTnDetail(" + item.id + ", 'host')";
+  } else {
+    onClickAttr = 'openTnDetail(' + item.id + ')';
+  }
+  return '<div class="tn-card host-card" onclick="' + onClickAttr + '">' +
     '<div class="host-card-main">' +
       '<span class="tn-badge ' + s.cls + '">' + s.label + '</span>' +
       '<div class="host-card-title">' + item.name + '</div>' +
@@ -3893,7 +4072,7 @@ function hostRenderList(keyword) {
   const el = document.getElementById('hostTnList');
   if (!el) return;
   const emptyMsg = t.host_empty || '개설한 토너먼트가 없습니다';
-  el.innerHTML = items.length ? items.map(hostBuildCard).join('') : '<div class="tn-empty">' + emptyMsg + '</div>';
+  el.innerHTML = items.length ? items.map(function(item) { return hostBuildCard(item, 'host'); }).join('') : '<div class="tn-empty">' + emptyMsg + '</div>';
 }
 
 function hostFilter() {
