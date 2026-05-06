@@ -1583,12 +1583,13 @@ img.shop-tab-emoji { width:24px; height:24px; object-fit:contain; }
 .gs-blind-table td .gs-sb-bb { display:flex; align-items:center; justify-content:center; gap:4px; }
 .gs-blind-table td .gs-sb-bb input { max-width:55px; }
 
-/* Blind Actions */
-.gs-blind-actions { display:flex; gap:8px; margin-top:12px; justify-content:center; }
-.gs-blind-action-btn { padding:8px 20px; border-radius:8px; border:1px solid var(--color-border); background:#23233a; color:var(--color-text-secondary); font-size:13px; font-weight:600; cursor:pointer; transition:all 0.2s; font-family:'Pretendard Variable',Pretendard,sans-serif; }
-.gs-blind-action-btn:hover { border-color:rgba(249,98,23,0.4); color:var(--color-primary); }
-.gs-blind-action-btn.delete { border-color:rgba(239,68,68,0.3); color:#f87171; }
-.gs-blind-action-btn.delete:hover { background:rgba(239,68,68,0.1); border-color:rgba(239,68,68,0.5); }
+/* Blind Actions — SM(h32) Ghost per design system */
+.gs-blind-table tbody tr.gs-blind-actions-row { cursor:default; background:rgba(249,98,23,0.04); }
+.gs-blind-table tbody tr.gs-blind-actions-row:hover { background:rgba(249,98,23,0.04); }
+.gs-blind-table tbody tr.gs-blind-actions-row td { padding:12px 8px; }
+.gs-blind-actions-inner { display:flex; gap:8px; justify-content:center; }
+.gs-blind-action-btn { padding:8px 20px; border-radius:8px; border:1px solid var(--color-border); background:#23233a; color:var(--color-text-secondary); font-size:13px; font-weight:600; cursor:pointer; transition:all 0.2s; font-family:'Pretendard Variable',Pretendard,sans-serif; line-height:1; }
+.gs-blind-action-btn:hover { border-color:rgba(249,98,23,0.3); color:var(--color-text-primary); box-shadow:none; }
 
 /* Create Button */
 .gs-create-wrap { max-width:700px; margin:32px auto 48px; }

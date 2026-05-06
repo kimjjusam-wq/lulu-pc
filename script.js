@@ -410,8 +410,10 @@ const i18n = {
     gs_blind_turbo: '터보',
     gs_blind_normal: '보통',
     gs_blind_slow: '느리게',
-    gs_th_ante: 'ALL Ante',
-    gs_th_time: 'Time',
+    gs_th_lv: '레벨',
+    gs_th_blind: '블라인드',
+    gs_th_ante: 'ALL 앤티',
+    gs_th_time: '시간',
     gs_blind_delete: '삭제',
     gs_blind_add: '블라인드',
     gs_blind_break: '브레이크',
@@ -3619,6 +3621,14 @@ function gsSelectSegment(groupId, btn) {
   const group = document.getElementById(groupId);
   group.querySelectorAll('.gs-segment-btn').forEach(b => b.classList.remove('active'));
   btn.classList.add('active');
+  if (groupId === 'gsAnte') gsUpdateAnteHeader(btn.dataset.value);
+}
+
+function gsUpdateAnteHeader(value) {
+  const th = document.getElementById('gsAnteTh');
+  if (!th) return;
+  const labels = { none: '앤티', all: 'ALL 앤티', bb: 'BB 앤티' };
+  th.textContent = labels[value] || '앤티';
 }
 
 // Blind Table
@@ -3642,25 +3652,55 @@ function gsRenderBlindTable() {
   tbody.innerHTML = '';
   gsBlindData.forEach((row, idx) => {
     const tr = document.createElement('tr');
+    const inputAttrs = ' onclick="event.stopPropagation()" onfocus="gsFocusBlindRow(' + idx + ')"';
     if (row.isBreak) {
       tr.className = 'break-row';
-      tr.innerHTML = '<td>-</td><td colspan="2" style="font-style:italic;color:var(--text-muted)">BREAK</td><td><input type="number" value="' + row.time + '" onchange="gsUpdateBlind(' + idx + ',\'time\',this.value)" onclick="event.stopPropagation()"></td>';
+      tr.innerHTML = '<td>-</td><td colspan="2" style="font-style:italic;color:var(--text-muted)">BREAK</td><td><input type="number" value="' + row.time + '" onchange="gsUpdateBlind(' + idx + ',\'time\',this.value)"' + inputAttrs + '></td>';
     } else {
-      tr.innerHTML = '<td>' + row.lv + '</td><td><div class="gs-sb-bb"><input type="number" value="' + row.sb + '" onchange="gsUpdateBlind(' + idx + ',\'sb\',this.value)" onclick="event.stopPropagation()"> / <input type="number" value="' + row.bb + '" onchange="gsUpdateBlind(' + idx + ',\'bb\',this.value)" onclick="event.stopPropagation()"></div></td><td><input type="number" value="' + row.ante + '" onchange="gsUpdateBlind(' + idx + ',\'ante\',this.value)" onclick="event.stopPropagation()"></td><td><input type="number" value="' + row.time + '" onchange="gsUpdateBlind(' + idx + ',\'time\',this.value)" onclick="event.stopPropagation()"></td>';
+      tr.innerHTML = '<td>' + row.lv + '</td><td><div class="gs-sb-bb"><input type="number" value="' + row.sb + '" onchange="gsUpdateBlind(' + idx + ',\'sb\',this.value)"' + inputAttrs + '> / <input type="number" value="' + row.bb + '" onchange="gsUpdateBlind(' + idx + ',\'bb\',this.value)"' + inputAttrs + '></div></td><td><input type="number" value="' + row.ante + '" onchange="gsUpdateBlind(' + idx + ',\'ante\',this.value)"' + inputAttrs + '></td><td><input type="number" value="' + row.time + '" onchange="gsUpdateBlind(' + idx + ',\'time\',this.value)"' + inputAttrs + '></td>';
     }
-    if (idx === gsSelectedRow) tr.classList.add('selected');
     tr.addEventListener('click', function(e) {
       if (e.target.tagName === 'INPUT') return;
       gsSelectBlindRow(idx);
     });
     tbody.appendChild(tr);
   });
+  gsApplyRowSelection();
+}
+
+function gsBuildActionRow() {
+  const tr = document.createElement('tr');
+  tr.className = 'gs-blind-actions-row';
+  tr.innerHTML = '<td colspan="4"><div class="gs-blind-actions-inner">' +
+    '<button class="gs-blind-action-btn" onclick="gsDeleteBlindRow()">삭제</button>' +
+    '<button class="gs-blind-action-btn" onclick="gsAddBlindRow()">블라인드</button>' +
+    '<button class="gs-blind-action-btn" onclick="gsAddBreakRow()">브레이크</button>' +
+    '</div></td>';
+  return tr;
+}
+
+function gsApplyRowSelection() {
+  const tbody = document.getElementById('gsBlindTableBody');
+  if (!tbody) return;
+  const oldActionRow = tbody.querySelector('.gs-blind-actions-row');
+  if (oldActionRow) oldActionRow.remove();
+  const dataRows = Array.from(tbody.children);
+  dataRows.forEach((tr, i) => {
+    tr.classList.toggle('selected', i === gsSelectedRow);
+  });
+  if (gsSelectedRow < 0 || gsSelectedRow >= dataRows.length) return;
+  dataRows[gsSelectedRow].after(gsBuildActionRow());
+}
+
+function gsFocusBlindRow(idx) {
+  if (gsSelectedRow === idx) return;
+  gsSelectedRow = idx;
+  gsApplyRowSelection();
 }
 
 function gsSelectBlindRow(idx) {
   gsSelectedRow = gsSelectedRow === idx ? -1 : idx;
-  document.getElementById('gsBlindActions').style.display = gsSelectedRow >= 0 ? 'flex' : 'none';
-  gsRenderBlindTable();
+  gsApplyRowSelection();
 }
 
 function gsUpdateBlind(idx, field, value) {
@@ -3677,7 +3717,6 @@ function gsDeleteBlindRow() {
   gsBlindData.splice(gsSelectedRow, 1);
   gsRenumberLevels();
   gsSelectedRow = -1;
-  document.getElementById('gsBlindActions').style.display = 'none';
   gsRenderBlindTable();
 }
 
@@ -3690,7 +3729,6 @@ function gsAddBlindRow() {
   });
   gsRenumberLevels();
   gsSelectedRow = -1;
-  document.getElementById('gsBlindActions').style.display = 'none';
   gsRenderBlindTable();
 }
 
@@ -3698,7 +3736,6 @@ function gsAddBreakRow() {
   const insertAt = gsSelectedRow >= 0 ? gsSelectedRow + 1 : gsBlindData.length;
   gsBlindData.splice(insertAt, 0, { isBreak: true, time: 5 });
   gsSelectedRow = -1;
-  document.getElementById('gsBlindActions').style.display = 'none';
   gsRenderBlindTable();
 }
 
@@ -3714,6 +3751,8 @@ function gsInitDefaults() {
   gsBlindData = JSON.parse(JSON.stringify(defaultBlindLevels));
   gsSelectedRow = -1;
   gsRenderBlindTable();
+  const activeAnte = document.querySelector('#gsAnte .gs-segment-btn.active');
+  if (activeAnte) gsUpdateAnteHeader(activeAnte.dataset.value);
   // 첫번째 탭으로 리셋
   switchGameSetupTab('general');
 }
