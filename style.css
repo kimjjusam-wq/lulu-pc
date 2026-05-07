@@ -1668,16 +1668,16 @@ img.shop-tab-emoji { width:24px; height:24px; object-fit:contain; }
 .gs-blind-table-wrap::-webkit-scrollbar { width:6px; height:6px; }
 .gs-blind-table-wrap::-webkit-scrollbar-thumb { background:var(--color-overlay-strong); border-radius:4px; }
 .gs-blind-table-wrap::-webkit-scrollbar-track { background:transparent; }
-.gs-blind-table { width:100%; border-collapse:collapse; font-size:13px; }
+.gs-blind-table { width:100%; border-collapse:collapse; font-size:12px; letter-spacing:-0.2px; }
 .gs-blind-table thead { background:linear-gradient(var(--color-overlay-soft),var(--color-overlay-soft)),var(--color-bg-card); position:sticky; top:0; z-index:1; }
 .gs-blind-table tbody tr { height:44px; }
-.gs-blind-table th { padding:12px 16px; font-weight:700; color:var(--color-text-secondary); text-align:center; border-bottom:1px solid var(--color-border); font-size:12px; text-transform:uppercase; letter-spacing:0.5px; }
+.gs-blind-table th { padding:12px 16px; font-weight:700; color:var(--color-text-secondary); text-align:center; border-bottom:1px solid var(--color-border); font-size:11px; text-transform:uppercase; letter-spacing:0.2px; }
 .gs-blind-table td { padding:8px 10px; text-align:center; border-bottom:1px solid var(--color-border); vertical-align:middle; }
 .gs-blind-table tbody tr { cursor:pointer; transition:background 0.15s; }
 .gs-blind-table tbody tr:hover { background:var(--color-overlay-soft); }
 .gs-blind-table tbody tr.selected { background:rgba(249,98,23,0.08); outline:1px solid rgba(249,98,23,0.3); outline-offset:-1px; }
 .gs-blind-table tbody tr.break-row { background:rgba(107,114,128,0.08); color:var(--color-text-muted); font-style:italic; }
-.gs-blind-table td input { width:100%; max-width:80px; padding:6px 8px; border-radius:6px; border:1px solid var(--color-border); background:var(--color-bg-body); color:var(--color-text-primary); font-size:13px; text-align:center; font-family:'Pretendard Variable',Pretendard,sans-serif; outline:none; -moz-appearance:textfield; appearance:textfield; }
+.gs-blind-table td input { width:100%; max-width:60px; padding:6px 8px; border-radius:6px; border:1px solid var(--color-border); background:var(--color-bg-body); color:var(--color-text-primary); font-size:12px; letter-spacing:-0.2px; text-align:center; font-family:'Pretendard Variable',Pretendard,sans-serif; outline:none; -moz-appearance:textfield; appearance:textfield; }
 .gs-blind-table td input::-webkit-outer-spin-button,
 .gs-blind-table td input::-webkit-inner-spin-button { -webkit-appearance:none; margin:0; }
 .login-input[type=number] { -moz-appearance:textfield; appearance:textfield; }
@@ -1685,7 +1685,7 @@ img.shop-tab-emoji { width:24px; height:24px; object-fit:contain; }
 .login-input[type=number]::-webkit-inner-spin-button { -webkit-appearance:none; margin:0; }
 .gs-blind-table td input:focus { border-color:var(--color-primary); }
 .gs-blind-table td .gs-sb-bb { display:flex; align-items:center; justify-content:center; gap:4px; }
-.gs-blind-table td .gs-sb-bb input { max-width:55px; }
+.gs-blind-table td .gs-sb-bb input { max-width:80px; }
 
 /* Blind Actions — SM(h32) Ghost per design system */
 .gs-blind-table tbody tr.gs-blind-actions-row { cursor:default; background:rgba(249,98,23,0.04); }

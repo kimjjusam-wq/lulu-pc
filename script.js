@@ -410,7 +410,7 @@ const i18n = {
     gs_blind_turbo: '터보',
     gs_blind_normal: '보통',
     gs_blind_slow: '느리게',
-    gs_th_lv: '레벨',
+    gs_th_lv: 'Lv',
     gs_th_blind: '블라인드',
     gs_th_ante: 'ALL 앤티',
     gs_th_time: '시간',
