@@ -664,7 +664,11 @@ function switchPage(p) {
   if (p === 'transaction') { txRenderList(); }
   if (p === 'myitems') { miRenderList(); }
   if (p === 'tn-detail') { tdRenderDetail(); }
-  if (p === 'my') { updateMyMailBadge(); }
+  if (p === 'my') {
+    updateMyMailBadge();
+    var dmCb = document.getElementById('darkModeToggle');
+    if (dmCb) dmCb.checked = document.documentElement.getAttribute('data-theme') !== 'light';
+  }
 }
 
 function updateMyMailBadge() {
@@ -4907,6 +4911,14 @@ document.addEventListener('keydown', function(e) {
 function toggleTheme() {
   var current = document.documentElement.getAttribute('data-theme') === 'light' ? 'light' : 'dark';
   var next = current === 'light' ? 'dark' : 'light';
+  document.documentElement.setAttribute('data-theme', next);
+  try { localStorage.setItem('lulu-theme', next); } catch(e) {}
+  var cb = document.getElementById('darkModeToggle');
+  if (cb) cb.checked = next === 'dark';
+}
+
+function setThemeFromToggle(isDark) {
+  var next = isDark ? 'dark' : 'light';
   document.documentElement.setAttribute('data-theme', next);
   try { localStorage.setItem('lulu-theme', next); } catch(e) {}
 }

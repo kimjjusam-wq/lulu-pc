@@ -207,13 +207,7 @@
           <a class="m-footer-link" onclick="switchPage('contact')" data-i18n="footer_contact">문의하기</a>
         </div>
         <div class="m-footer-notice">19세 이상 전용 (유료 구매 포함). 현금 도박/경품 미제공.<br>소셜 게임의 성공이 실제 도박 성공을 보장하지 않음. (중독 상담: 1336)</div>
-        <div class="m-footer-bottom">
-          <button class="theme-toggle" onclick="toggleTheme()" aria-label="테마 변경" title="다크/라이트 모드">
-            <svg class="theme-icon-sun" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/></svg>
-            <svg class="theme-icon-moon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
-          </button>
-          <div class="m-footer-copy">© 2026 Poker Lulu. All rights reserved.</div>
-        </div>
+        <div class="m-footer-copy">© 2026 Poker Lulu. All rights reserved.</div>
       </div>
     </div>
 
@@ -870,6 +864,16 @@
       <div class="my-menu-item" role="button" tabindex="0" onclick="switchPage('tn-history')"><div class="my-menu-left"><div class="my-menu-icon" style="background:rgba(20,184,166,0.15)"><img loading="lazy" src="images/menu_terms.png" alt="히스토리"></div><span class="my-menu-text" data-i18n="my_tn_history">히스토리</span></div><span class="my-menu-arrow">›</span></div>
       <div class="my-menu-item" role="button" tabindex="0" onclick="switchPage('transaction')"><div class="my-menu-left"><div class="my-menu-icon" style="background:rgba(245,158,11,0.15)"><img loading="lazy" src="images/my_transaction.png" alt="거래내역"></div><span class="my-menu-text" data-i18n="my_history">거래 내역</span></div><span class="my-menu-arrow">›</span></div>
       <div class="my-menu-item" role="button" tabindex="0" onclick="switchPage('account-edit')"><div class="my-menu-left"><div class="my-menu-icon" style="background:rgba(249,98,23,0.15)"><img loading="lazy" src="images/menu_my.png" alt="회원정보 수정"></div><span class="my-menu-text" data-i18n="my_profile">회원정보 수정</span></div><span class="my-menu-arrow">›</span></div>
+      <label class="my-menu-item my-menu-item-toggle">
+        <div class="my-menu-left">
+          <div class="my-menu-icon" style="background:rgba(99,102,241,0.15)"><img loading="lazy" src="images/my_darkmode.svg" alt="다크 모드"></div>
+          <span class="my-menu-text">다크 모드</span>
+        </div>
+        <span class="gs-toggle">
+          <input type="checkbox" id="darkModeToggle" onchange="setThemeFromToggle(this.checked)">
+          <span class="gs-toggle-slider"></span>
+        </span>
+      </label>
     </div>
     <button class="login-btn" onclick="handleLogout()" style="width:100%;max-width:500px;margin:0 auto 32px;display:block;">로그아웃</button>
   </div>
