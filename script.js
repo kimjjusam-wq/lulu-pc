@@ -4825,6 +4825,38 @@ function closeWelcomePopup(){
   }
 })();
 
+/* ===== Custom Select (cs) ===== */
+function csToggle(triggerEl) {
+  var cs = triggerEl.closest('.cs');
+  var wasOpen = cs.classList.contains('open');
+  document.querySelectorAll('.cs.open').forEach(function(el) { el.classList.remove('open'); });
+  if (!wasOpen) cs.classList.add('open');
+}
+
+function csSelect(liEl) {
+  var cs = liEl.closest('.cs');
+  var input = cs.querySelector('input[type="hidden"]');
+  var text = cs.querySelector('.cs-trigger-text');
+  input.value = liEl.dataset.value;
+  text.textContent = liEl.textContent;
+  cs.querySelectorAll('.cs-list li').forEach(function(el) { el.classList.remove('cs-active'); });
+  liEl.classList.add('cs-active');
+  cs.classList.remove('open');
+  input.dispatchEvent(new Event('change', { bubbles: true }));
+}
+
+document.addEventListener('click', function(e) {
+  if (!e.target.closest('.cs')) {
+    document.querySelectorAll('.cs.open').forEach(function(el) { el.classList.remove('open'); });
+  }
+});
+
+document.addEventListener('keydown', function(e) {
+  if (e.key === 'Escape') {
+    document.querySelectorAll('.cs.open').forEach(function(el) { el.classList.remove('open'); });
+  }
+});
+
 /* ===== Theme Toggle ===== */
 (function(){
   try {

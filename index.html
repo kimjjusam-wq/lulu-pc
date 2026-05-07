@@ -1818,14 +1818,21 @@
     <div class="gs-tab-content" id="gs-blinds">
       <div class="gs-section">
         <label class="gs-label" data-i18n="gs_label_level">Level</label>
-        <select class="login-input" id="gsBlindLevel">
-          <option value="5">Level 5</option>
-          <option value="6">Level 6</option>
-          <option value="7" selected>Level 7</option>
-          <option value="8">Level 8</option>
-          <option value="9">Level 9</option>
-          <option value="10">Level 10</option>
-        </select>
+        <div class="cs">
+          <input type="hidden" id="gsBlindLevel" value="7">
+          <button type="button" class="cs-trigger" onclick="csToggle(this)">
+            <span class="cs-trigger-text">Level 7</span>
+            <svg class="cs-trigger-arrow" width="12" height="12" viewBox="0 0 16 16" fill="currentColor"><path d="M7.247 11.14 2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z"/></svg>
+          </button>
+          <ul class="cs-list" role="listbox">
+            <li data-value="5" onclick="csSelect(this)">Level 5</li>
+            <li data-value="6" onclick="csSelect(this)">Level 6</li>
+            <li data-value="7" class="cs-active" onclick="csSelect(this)">Level 7</li>
+            <li data-value="8" onclick="csSelect(this)">Level 8</li>
+            <li data-value="9" onclick="csSelect(this)">Level 9</li>
+            <li data-value="10" onclick="csSelect(this)">Level 10</li>
+          </ul>
+        </div>
       </div>
       <div class="gs-divider"></div>
       <div class="gs-section">
@@ -1899,23 +1906,37 @@
         <div class="gs-divider"></div>
         <div class="gs-section">
           <label class="gs-label" data-i18n="gs_label_initial_timebank">초기 타임 뱅크</label>
-          <select class="login-input" id="gsInitialTimeBank">
-            <option value="5">5 초</option>
-            <option value="10" selected>10 초</option>
-            <option value="15">15 초</option>
-            <option value="20">20 초</option>
-            <option value="30">30 초</option>
-          </select>
+          <div class="cs">
+            <input type="hidden" id="gsInitialTimeBank" value="10">
+            <button type="button" class="cs-trigger" onclick="csToggle(this)">
+              <span class="cs-trigger-text">10 초</span>
+              <svg class="cs-trigger-arrow" width="12" height="12" viewBox="0 0 16 16" fill="currentColor"><path d="M7.247 11.14 2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z"/></svg>
+            </button>
+            <ul class="cs-list" role="listbox">
+              <li data-value="5" onclick="csSelect(this)">5 초</li>
+              <li data-value="10" class="cs-active" onclick="csSelect(this)">10 초</li>
+              <li data-value="15" onclick="csSelect(this)">15 초</li>
+              <li data-value="20" onclick="csSelect(this)">20 초</li>
+              <li data-value="30" onclick="csSelect(this)">30 초</li>
+            </ul>
+          </div>
         </div>
         <div class="gs-divider"></div>
         <div class="gs-section">
           <label class="gs-label" data-i18n="gs_label_extra_time">추가 시간</label>
-          <select class="login-input" id="gsExtraTime">
-            <option value="10-5" selected>10 핸드 수 / 5 초</option>
-            <option value="10-10">10 핸드 수 / 10 초</option>
-            <option value="20-5">20 핸드 수 / 5 초</option>
-            <option value="20-10">20 핸드 수 / 10 초</option>
-          </select>
+          <div class="cs">
+            <input type="hidden" id="gsExtraTime" value="10-5">
+            <button type="button" class="cs-trigger" onclick="csToggle(this)">
+              <span class="cs-trigger-text">10 핸드 수 / 5 초</span>
+              <svg class="cs-trigger-arrow" width="12" height="12" viewBox="0 0 16 16" fill="currentColor"><path d="M7.247 11.14 2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z"/></svg>
+            </button>
+            <ul class="cs-list" role="listbox">
+              <li data-value="10-5" class="cs-active" onclick="csSelect(this)">10 핸드 수 / 5 초</li>
+              <li data-value="10-10" onclick="csSelect(this)">10 핸드 수 / 10 초</li>
+              <li data-value="20-5" onclick="csSelect(this)">20 핸드 수 / 5 초</li>
+              <li data-value="20-10" onclick="csSelect(this)">20 핸드 수 / 10 초</li>
+            </ul>
+          </div>
         </div>
       </div>
     </div>
