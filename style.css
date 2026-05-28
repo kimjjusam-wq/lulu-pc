@@ -1672,6 +1672,10 @@ label.my-menu-item-toggle { user-select:none; -webkit-tap-highlight-color:transp
 .gs-hero p { color:var(--color-text-secondary); font-size:14px; }
 .gs-hero-title-row { display:flex; align-items:center; justify-content:center; gap:16px; margin-bottom:8px; }
 .gs-hero-title-row h2 { margin-bottom:0; }
+/* 제목은 정중앙, 우측에 셀렉트 — 빈 1fr / h2 / 1fr 의 3-컬럼 그리드 */
+.gs-hero-title-row.spread { display:grid; grid-template-columns:1fr auto 1fr; align-items:center; }
+.gs-hero-title-row.spread > h2 { grid-column:2; }
+.gs-hero-title-row.spread > .cs { grid-column:3; justify-self:end; }
 .tn-round-toggle { display:inline-flex; background:var(--color-surface-deep); border:1px solid var(--color-border-subtle); border-radius:10px; padding:3px; }
 .tn-round-btn { padding:6px 14px; font-size:13px; font-weight:700; color:var(--color-text-muted); background:transparent; border:1px solid transparent; border-radius:7px; cursor:pointer; transition:color 0.2s, background 0.2s, border-color 0.2s; font-family:'Pretendard Variable',Pretendard,sans-serif; }
 .tn-round-btn:hover { color:var(--color-text-secondary); background:var(--color-overlay-soft); }
@@ -1789,6 +1793,11 @@ label.my-menu-item-toggle { user-select:none; -webkit-tap-highlight-color:transp
 .cs-list li { padding:10px 14px; border-radius:8px; cursor:pointer; font-size:14px; color:var(--color-text-secondary); transition:background 0.15s, color 0.15s; }
 .cs-list li:hover { background:var(--color-overlay-light); color:var(--color-text-primary); }
 .cs-list li.cs-active { color:var(--color-primary); font-weight:600; }
+/* 날짜 선택용 컴팩트 변형 (이용약관 시행일자) */
+.cs-date { flex-shrink:0; }
+.cs-date .cs-trigger { width:auto; padding:8px 13px; font-size:13px; font-weight:600; }
+.cs-date .cs-trigger-arrow { margin-left:6px; }
+.cs-date .cs-list { left:auto; right:0; min-width:170px; }
 /* ===== DateTimePicker (dtp) ===== */
 .dtp-trigger { display:flex; align-items:center; justify-content:space-between; cursor:pointer; user-select:none; }
 .dtp-icon { font-size:16px; opacity:0.6; }
@@ -2323,6 +2332,9 @@ body.chat-open > .m-nav { display:none !important; }
   .m-nav-logo img { height:36px; width:auto; }
   .m-nav-title { font-size:20px; font-weight:800; color:var(--color-text-primary); letter-spacing:-0.3px; display:flex; align-items:center; gap:8px; min-width:0; overflow:hidden; }
   .m-nav-title-text { overflow:hidden; white-space:nowrap; text-overflow:ellipsis; min-width:0; }
+  /* 날짜 셀렉트가 들어간 타이틀은 드롭다운이 잘리지 않도록 overflow 해제 */
+  .m-nav-title:has(.cs) { overflow:visible; }
+  .m-nav-title .cs-date .cs-trigger { padding:5px 10px; font-size:12px; }
   .m-nav-back { cursor:pointer; color:var(--color-text-secondary); -webkit-tap-highlight-color:transparent; flex-shrink:0; }
   .shop-hero, .my-page-hero, .gs-hero, .analytics-hero, .td-hero { display:none; }
   .gs-back, .login-back, .find-account-pc-header { display:none; }

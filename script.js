@@ -704,6 +704,32 @@ function mSyncTabbar(page) {
   });
 }
 
+// 이용약관 시행일자 커스텀 셀렉트 마크업 (PC hero 마크업과 옵션 동일)
+function termsDateSelectHtml() {
+  var dates = [
+    { v: '2026-01-15', label: '2026년 1월 15일' },
+    { v: '2025-10-01', label: '2025년 10월 1일' },
+    { v: '2025-07-01', label: '2025년 7월 1일' },
+    { v: '2025-04-01', label: '2025년 4월 1일' },
+    { v: '2025-01-02', label: '2025년 1월 2일' },
+    { v: '2024-09-15', label: '2024년 9월 15일' },
+    { v: '2024-06-01', label: '2024년 6월 1일' },
+    { v: '2024-01-10', label: '2024년 1월 10일' }
+  ];
+  var lis = dates.map(function(d, i) {
+    return '<li data-value="' + d.v + '"' + (i === 0 ? ' class="cs-active"' : '') +
+      ' onclick="csSelect(this)">' + d.label + '</li>';
+  }).join('');
+  return '<div class="cs cs-date">' +
+    '<input type="hidden" value="' + dates[0].v + '">' +
+    '<button type="button" class="cs-trigger" onclick="csToggle(this)" aria-label="약관 시행일자 선택">' +
+    '<span class="cs-trigger-text">' + dates[0].label + '</span>' +
+    '<svg class="cs-trigger-arrow" width="12" height="12" viewBox="0 0 16 16" fill="currentColor"><path d="M7.247 11.14 2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z"/></svg>' +
+    '</button>' +
+    '<ul class="cs-list" role="listbox">' + lis + '</ul>' +
+    '</div>';
+}
+
 // 모바일 nav 로고/타이틀 전환
 function mSyncNavTitle(page) {
   var logo = document.getElementById('mNavLogo');
@@ -754,6 +780,8 @@ function mSyncNavTitle(page) {
         '<button class="m-nav-round-btn tn-round-btn hd-round-btn' + (currentHdRound === '1' ? ' active' : '') + '" data-hd-round="1" onclick="event.stopPropagation();switchHoldemRound(\'1\')">1차</button>' +
         '<button class="m-nav-round-btn tn-round-btn hd-round-btn' + (currentHdRound === '2' ? ' active' : '') + '" data-hd-round="2" onclick="event.stopPropagation();switchHoldemRound(\'2\')">2차</button>' +
         '</span>';
+    } else if (page === 'terms') {
+      titleHtml += termsDateSelectHtml();
     }
     title.innerHTML = titleHtml;
   } else {
