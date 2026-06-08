@@ -2216,21 +2216,24 @@ const hdTypeMap = {
 
 function hdBuildCard(item) {
   var type = hdTypeMap[item.event] || hdTypeMap.A;
-  var fee2Html = item.fee2 ? '<div class="hd-card-fee2">참가비 <strong>' + item.fee2 + '</strong></div>' : '';
+  var maxCls = item.maxType === '9max' ? 'hd-tag-max9' : 'hd-tag-max6';
+  var feeVal = item.fee2 || Math.round(hdParseBuyin(item.buyin) * 0.24).toLocaleString();
+  var feeHtml = '<div class="hd-card-buyin">참가비 <strong>' + feeVal + '</strong></div>';
   var activeClass = (currentHdDetailId === item.id) ? ' tn-card-active' : '';
   return '<div class="tn-card hd-card' + activeClass + '" onclick="openHdDetail(\'' + item.id + '\')">' +
     '<div class="hd-card-main">' +
-      '<div class="hd-card-title">' + type.name + ' ' + item.blinds +
-        '<span class="hd-card-participants">참가인원 ' + item.participants + '</span>' +
+      '<div class="hd-card-title">' + type.name + ' ' + item.blinds + '</div>' +
+      '<div class="hd-card-sub tn-meta">' +
+        '<span class="tn-meta-item"><span class="tn-meta-label">바이인</span><span class="tn-meta-value">' + item.buyin + '</span></span>' +
+        '<span class="tn-meta-item"><span class="tn-meta-label">참가인원</span><span class="tn-meta-value">' + item.participants + '</span></span>' +
       '</div>' +
       '<div class="hd-card-tags">' +
         '<span class="hd-tag ' + type.cls + '">' + type.name + '</span>' +
-        '<span class="hd-tag hd-tag-max">' + item.maxType + '</span>' +
+        '<span class="hd-tag ' + maxCls + '">' + item.maxType + '</span>' +
       '</div>' +
     '</div>' +
     '<div class="hd-card-price">' +
-      '<div class="hd-card-buyin">바이인 <strong>' + item.buyin + '</strong></div>' +
-      fee2Html +
+      feeHtml +
     '</div>' +
   '</div>';
 }
@@ -2238,6 +2241,15 @@ function hdBuildCard(item) {
 function hdFormatNumber(n) {
   if (n >= 10000 && n % 10000 === 0) return (n / 10000) + '만';
   return n.toLocaleString();
+}
+
+function hdParseBuyin(s) {
+  var m = String(s).match(/^([\d.]+)(만|천)?$/);
+  if (!m) return 0;
+  var n = parseFloat(m[1]);
+  if (m[2] === '만') n *= 10000;
+  else if (m[2] === '천') n *= 1000;
+  return n;
 }
 
 function hdGetDetails(item) {
@@ -2285,7 +2297,7 @@ function hdBuildDetailHTML(item, mode) {
       '<div class="hd-detail-title">' + d.typeFullName.replace('텍사스 ', '') + ' ' + item.blinds + '</div>' +
       '<div class="hd-detail-tags">' +
         '<span class="hd-tag ' + d.type.cls + '">' + d.type.name + '</span>' +
-        '<span class="hd-tag hd-tag-max">' + item.maxType + '</span>' +
+        '<span class="hd-tag ' + (item.maxType === '9max' ? 'hd-tag-max9' : 'hd-tag-max6') + '">' + item.maxType + '</span>' +
       '</div>' +
     '</div>';
   var tabsHtml =

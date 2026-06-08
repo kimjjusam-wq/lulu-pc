@@ -1364,7 +1364,6 @@ label.my-menu-item-toggle { user-select:none; -webkit-tap-highlight-color:transp
 .hd-card { flex-direction:row !important; align-items:center !important; gap:16px !important; padding:14px 18px !important; }
 .hd-card-main { flex:1; display:flex; flex-direction:column; gap:10px; min-width:0; }
 .hd-card-title { font-size:15px; font-weight:700; color:var(--color-text-primary); }
-.hd-card-participants { font-size:12px; font-weight:500; color:var(--color-text-muted); margin-left:10px; }
 .hd-card-price { flex-shrink:0; display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center; min-width:90px; gap:4px; }
 .hd-card-buyin { font-size:13px; color:var(--color-text-muted); font-weight:500; white-space:nowrap; }
 .hd-card-buyin strong { color:var(--color-text-primary); font-size:15px; font-weight:800; margin-left:4px; }
@@ -1376,6 +1375,8 @@ label.my-menu-item-toggle { user-select:none; -webkit-tap-highlight-color:transp
 .hd-tag-squid { background:rgba(232,90,139,0.18); color:#e85a8b; }
 .hd-tag-72 { background:rgba(74,222,128,0.18); color:#4ade80; }
 .hd-tag-max { background:rgba(245,166,35,0.18); color:#f5a623; }
+.hd-tag-max6 { background:rgba(245,166,35,0.18); color:#f5a623; }
+.hd-tag-max9 { background:rgba(240,122,53,0.18); color:#f07a35; }
 
 /* ==== Holdem Detail (PC: split-right inline / Mobile: page-holdem-detail) ==== */
 .hd-detail-header { padding:24px 24px 16px; display:flex; flex-direction:column; gap:10px; flex-shrink:0; }
